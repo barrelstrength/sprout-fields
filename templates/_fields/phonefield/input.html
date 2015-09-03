@@ -1,0 +1,21 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.text({
+	id: name,
+	name: name,
+	class: 'sprout-phone-field',
+	value: (value is defined) ? value : '',
+	placeholder: (settings.mask) ? settings.mask : ''
+}) }}
+
+{# @todo - add link to call phone when phone pattern validates
+<span class="sprout-tel-button {{ id }}"></span> #}
+
+
+{% set inputMask = (settings.inputMask ? 'checked' : '') %}
+
+{% set js %}
+  new Craft.PhoneInputMask("{{ id }}","{{ settings.mask }}","{{ inputMask }}", "{{ settings.default }}");
+{% endset %}
+
+{% includeJs js %}

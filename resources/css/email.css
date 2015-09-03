@@ -1,0 +1,15 @@
+.sprout-email-button {
+	background-color: #fff;
+	display: inline-block;
+	opacity: 0;
+	padding: 5px 4px 3px 10px;
+	position: absolute;
+	right: 2px;
+	margin-top: -28px;
+	transition: opacity .15s ease-in-out;
+	-moz-transition: opacity .15s ease-in-out;
+	-webkit-transition: opacity .15s ease-in-out;
+}
+.fade {
+	opacity: 1;
+}

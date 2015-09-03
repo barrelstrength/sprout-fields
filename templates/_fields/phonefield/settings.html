@@ -1,0 +1,20 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+	label: 'Validation Pattern'|t,
+	instructions: 'The pattern your phone numbers should validate to. Defaults to: ###-###-####'|t,
+	required: true,
+	name: 'mask',
+	value: settings.mask ? settings.mask : '###-###-####'
+}) }}
+
+{% if craft.request.getSegment(1) != 'sproutforms' %}
+	{{ forms.lightswitchField({
+		label: "Display Pattern Mask?"|t,
+		instructions: 'Display a mask of your chosen pattern as the user types.'|t,
+		warning: '',
+		id: 'inputMask',
+		name: 'inputMask',
+		on: settings.inputMask,
+	}) }}
+{% endif %}

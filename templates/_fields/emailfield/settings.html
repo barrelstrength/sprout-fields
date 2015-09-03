@@ -1,0 +1,34 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.checkboxField({
+	label: "Emails for this field have a custom validation pattern"|t,
+	name: 'customPatternToggle',
+	checked: (settings.customPattern != '' ? true : false),
+	toggle: 'sproutemailfield-custom-validation-pattern'
+}) }}
+
+<div id="sproutemailfield-custom-validation-pattern">
+	{{ forms.textField({
+		label: 'Custom Validation Pattern'|t,
+		instructions: 'A regular expression pattern that emails should use to validate. Example: (.*)@example.com$'|t,
+		name: 'customPattern',
+		value: settings.customPattern
+	}) }}
+
+	{{ forms.textField({
+		label: 'Custom Pattern Error Message'|t,
+		instructions: 'The error message that will display if the field fails validation.'|t,
+		name: 'customPatternErrorMessage',
+		value: settings.customPatternErrorMessage
+	}) }}
+</div>
+
+<hr>
+
+{{ forms.lightswitchField ({
+	label: "Require email address to be unique"|t,
+	instructions: "An email address can only be submitted once to this Sprout Email Field."|t,
+	name: 'uniqueEmail',
+	id: 'single-validation',
+	on: settings.uniqueEmail,
+}) }}

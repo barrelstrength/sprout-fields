@@ -5,7 +5,7 @@ namespace Craft;
 /**
  *
  */
-class SproutPhoneField_Phone_SproutFormsFieldType extends BaseSproutFormsFieldType
+class SproutFields_Phone_SproutFormsFieldType extends BaseSproutFormsFieldType
 {
 	private $mask;
 	/**
@@ -15,7 +15,7 @@ class SproutPhoneField_Phone_SproutFormsFieldType extends BaseSproutFormsFieldTy
 	 * @param mixed $value
 	 * @return string
 	 */
-	public function getInputHtml($field, $value, $settings)
+	public function getInputHtml($field, $value, $settings, $renderingOptions = null)
 	{
 
 		$name = $field->handle;

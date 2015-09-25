@@ -57,7 +57,7 @@ class SproutFields_LinkFieldType extends BaseFieldType
 	 * @return string Return our fields input template
 	 */
 	public function getInputHtml($name, $value)
-	{   
+	{
 		$inputId = craft()->templates->formatInputId($name);
 		$namespaceInputId = craft()->templates->namespaceInputId($inputId);
 
@@ -69,7 +69,7 @@ class SproutFields_LinkFieldType extends BaseFieldType
 	}
 
 	/**
-	 * Validates our fields submitted value beyond the checks 
+	 * Validates our fields submitted value beyond the checks
 	 * that were assumed based on the content attribute.
 	 *
 	 * Returns 'true' or any custom validation errors.
@@ -81,7 +81,7 @@ class SproutFields_LinkFieldType extends BaseFieldType
 	{
 		$settings = $this->model->settings;
 
-		if (!craft()->sproutFields_LinkField->validate($value, $this->model))
+		if (!craft()->sproutFields_linkField->validate($value, $this->model))
 		{
 			if ($settings['customPattern'] && $settings['customPatternErrorMessage'])
 			{

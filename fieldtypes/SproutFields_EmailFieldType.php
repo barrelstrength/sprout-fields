@@ -80,6 +80,6 @@ class SproutFields_EmailFieldType extends BaseFieldType
 	 */
 	public function validate($value)
 	{
-		return craft()->sproutFields_EmailField->validate($value, $this->element, $this->model);
+		return craft()->sproutFields_emailField->validate($value, $this->element, $this->model);
 	}
 }

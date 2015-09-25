@@ -84,7 +84,7 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 			$settings['mask'] = $this->default;
 		}
 
-		if (!craft()->sproutFields_PhoneField->validate($value, $settings))
+		if (!craft()->sproutFields_phoneField->validate($value, $settings))
 		{
 			return Craft::t($this->model->name . ' is invalid. Required format: ' . $settings['mask']);
 		}

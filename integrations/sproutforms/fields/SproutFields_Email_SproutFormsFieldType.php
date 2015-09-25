@@ -1,7 +1,7 @@
 <?php
 namespace Craft;
 
-class SproutEmailField_Email_SproutFormsFieldType extends BaseSproutFormsFieldType
+class SproutFields_Email_SproutFormsFieldType extends BaseSproutFormsFieldType
 {
 	/**
 	 * Returns the field's input HTML.
@@ -10,7 +10,7 @@ class SproutEmailField_Email_SproutFormsFieldType extends BaseSproutFormsFieldTy
 	 * @param mixed  $value
 	 * @return string
 	 */
-	public function getInputHtml($field, $value, $settings)
+	public function getInputHtml($field, $value, $settings, $render = null)
 	{
 		return craft()->templates->render('fields/sproutemailfield_email/input', array(
 			'name'  => $field->handle,

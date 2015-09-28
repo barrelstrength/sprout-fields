@@ -26,18 +26,32 @@ class SproutFieldsPlugin extends BasePlugin
 	public function init()
 	{
 		Craft::import('plugins.sproutfields.integrations.sproutforms.fields.*');
-		//Craft::import('plugins.sprouttokens.integrations.sprouttokens.*');
+		Craft::import('plugins.sproutfields.contracts.SproutFieldsSproutFormsBaseField');
 	}
 
-//	/**
-//	 * Register a Sprout Field for support in dynamic forms
-//	 *
-//	 * @return string  Name of FieldType
-//	 */
-	public function registerSproutField()
+
+	/**
+	 * Register a Sprout Field for support in dynamic forms
+	 *
+	 * @return string  Name of FieldType
+	 */
+	public function registerSproutFormsFields()
 	{
-		//return 'SproutPhoneField_Phone';
-		//return 'SproutLinkField_Phone';
-		return array('SproutFields_Phone', 'SproutFields_Email', 'SproutFields_Link');
+		return array(
+			new SproutFields_Phone(),
+			new SproutFields_Link(),
+			new SproutFields_Email(),
+			new SproutFields_Address()
+		);
+	}
+
+	public function registerCpRoutes()
+	{
+
+		return array(
+			'sproutaddressfield/form' => array(
+				'action' => 'sproutFields/sproutAddress'
+			)
+		);
 	}
 }

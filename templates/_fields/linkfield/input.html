@@ -1,0 +1,28 @@
+{% import "_includes/forms" as forms %}
+
+{# Setup our field #}
+{{ forms.text({
+	id: name,
+  name: name,
+  value: (value is defined) ? value : ''
+}) }}
+
+<span class="sprout-link-button {{ id }}"></span>
+
+{# Add our CSS and Javascript #}
+{% includeCssResource "sproutfields/css/link.css" %}
+{% includeJsResource "sproutfields/js/link.js" %}
+
+{% set myJs %}
+
+(function() {
+	checkSproutLinkField("{{ id }}", "{{ name }}");
+})();
+
+$('input#{{ id }}').on('input', function () {
+	checkSproutLinkField("{{ id }}", "{{ name }}");
+});
+
+{% endset %}
+
+{% includeJs myJs %}

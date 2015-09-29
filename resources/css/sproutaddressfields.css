@@ -1,0 +1,62 @@
+.fieldgroup-box {
+	background-color: #f5f5f5;
+	border:1px solid #ebebeb;
+	padding:20px;
+}
+
+.sproutaddressfield-box br:nth-child(1), .sproutaddressfield-box br:nth-child(2)
+{
+	display: none
+}
+
+.sproutaddressfield-box .field {
+	display: inline-block;
+	*display: inline;
+	margin: 10px 0;
+	margin-right: 5px;
+	width: 25%;
+}
+
+.sproutaddressfield-box .field input {
+	width: 98%;
+	padding: 6px 1%;
+}
+.sproutaddressfield-box .field select {
+	padding: 6px 7px;
+	width: 100%
+}
+
+.sproutaddressfield-box .comma {
+	margin-right: 10px;
+	font-size: 20px;
+}
+@media only screen and (max-width: 499px) {
+	.city, .state, .zip {
+		margin: 24px 0;
+	}
+}
+
+@media only screen and (min-width: 500px) {
+
+	.address1 {
+		margin-bottom: -12px;
+	}
+
+	.row {
+		overflow: hidden;
+	}
+   .city, .state, .zip {
+	   float: left;
+   }
+   .city {
+	   width: 50%;
+	   margin-right: 2%;
+   }
+   .state {
+	   width: 20%;
+	   margin-right: 2%;
+   }
+   .zip {
+	   width: 26%;
+   }
+}

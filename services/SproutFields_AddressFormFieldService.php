@@ -17,14 +17,16 @@ class SproutFields_AddressFormFieldService extends BaseApplicationComponent
 
 	private $name;
 	private $addressField;
-
+	private $namespaceInputName;
 	protected $countryCode;
 
-	public function setParams($countryCode, $name, $addressField)
+	public function setParams($countryCode, $name, $addressField, $namespaceInputName)
 	{
+
 		$this->name = $name;
 		$this->addressField = $addressField;
 		$this->countryCode = $countryCode;
+		$this->namespaceInputName = $namespaceInputName;
 	}
 
 	public function setForm($ajax = false)
@@ -34,8 +36,7 @@ class SproutFields_AddressFormFieldService extends BaseApplicationComponent
 		// add fields prefix when calling external ajax
 		if($ajax)
 		{
-			$name = $this->name;
-			$this->name = 'fields[' . $name . ']';
+			$this->name = $this->namespaceInputName;
 		}
 
 		$output = '';
@@ -72,7 +73,7 @@ class SproutFields_AddressFormFieldService extends BaseApplicationComponent
 		$output = '';
 		$output.= $this->renderHeading('Country');
 		$countryCode = $this->countryCode;
-		$output.= "<select class='sproutAddressCountry' name='" . $this->name . "[countryCode]'>";
+		$output.= " <select class='sproutAddressCountry' name='" . $this->name . "[countryCode]'>";
 		foreach($countries as $ck => $cv)
 		{
 			$selected = ($ck == $countryCode) ? "selected='selected'" : '';

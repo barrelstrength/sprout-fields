@@ -5,6 +5,11 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 {
 	private $mask;
 
+	public function getDefaultMask()
+	{
+		return "###-###-####";
+	}
+
 	/**
 	 * Validate phone input using validation pattern
 	 *
@@ -12,9 +17,9 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 	 * @param $settings
 	 * @return bool
 	 */
-	public function validate($value, $settings)
+	public function validate($value, $mask)
 	{
-		$phonePattern = $this->convertMaskToRegEx($settings['mask']);
+		$phonePattern = $this->convertMaskToRegEx($mask);
 
 		if (preg_match($phonePattern, $value))
 		{

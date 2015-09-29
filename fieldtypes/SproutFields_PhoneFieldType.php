@@ -3,7 +3,7 @@ namespace Craft;
 
 class SproutFields_PhoneFieldType extends BaseFieldType
 {
-	protected $default = "###-###-####";
+
 
 	public function getName()
 	{
@@ -12,13 +12,10 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 
 	protected function defineSettings()
 	{
-		// @todo - the default values set here don't seem to be respected when a field type is saved
-		// @todo - can probably combine behavior of 'mask' and 'default' throughout using models
-		// and logic instead of additional settings
+		$default = craft()->sproutFields_phoneField->getDefaultMask();
 		return array(
 			'inputMask' => AttributeType::Bool,
-			'mask'      => array(AttributeType::String, 'default' => $this->default),
-			'default'   => array(AttributeType::String, 'default' => $this->default),
+			'mask'      => array(AttributeType::String, 'default' => $default),
 		);
 	}
 
@@ -51,7 +48,6 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 		$namespaceInputId = craft()->templates->namespaceInputId($inputId);
 
 		$settings = $this->getSettings();
-		$settings['default'] = $this->default;
 
 		craft()->templates->includeJsResource('sproutfields/js/inputmask.js');
 		craft()->templates->includeJsResource('sproutfields/js/jquery.inputmask.js');
@@ -81,10 +77,10 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 
 		if ($settings['mask'] == "")
 		{
-			$settings['mask'] = $this->default;
+			$settings['mask'] = craft()->sproutFields_phoneField->getDefaultMask();
 		}
 
-		if (!craft()->sproutFields_phoneField->validate($value, $settings))
+		if (!craft()->sproutFields_phoneField->validate($value, $settings['mask']))
 		{
 			return Craft::t($this->model->name . ' is invalid. Required format: ' . $settings['mask']);
 		}

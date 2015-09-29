@@ -44,14 +44,4 @@ class SproutFieldsPlugin extends BasePlugin
 			new SproutFields_Address()
 		);
 	}
-
-	public function registerCpRoutes()
-	{
-
-		return array(
-			'sproutaddressfield/form' => array(
-				'action' => 'sproutFields/sproutAddress'
-			)
-		);
-	}
 }

@@ -22,6 +22,7 @@
 					"autoUnmask": true, // removes characters and accept digits only
 					"oncomplete": function (res) {
 						var phoneNumber = res.target.value;
+
 						$(sproutPhoneFieldId).addClass('complete');
 						showCallText(phoneNumber, this);
 
@@ -74,13 +75,31 @@
 			{
 				// @todo - this should be updated to validate phone pattern before displaying the call phone buttom
 				$(sproutPhoneFieldId).blur(function() {
-						var phoneNumber = $(this).val();
-						showCallText(phoneNumber, this)
+					var phoneNumber = $(this).val();
+					var currentDom = this;
+					var data = {
+						'mask' 		 : mask,
+						'value' : phoneNumber
+					}
+
+					Craft.postActionRequest('sproutFields/phoneValidate', data, function(response) {
+						if (response)
+						{
+							showCallText(phoneNumber, currentDom)
+						}
+						else
+						{
+							$(sproutPhoneButtonClass).html('');
+						}
+					})
+
+
 				})
 			}
 
 			// Show Call Phone Text
 			function showCallText(phoneNumber, sproutPhoneFieldElement) {
+
 				if (phoneNumber == '') return;
 				$(sproutPhoneFieldElement).next('.sprout-tel-button').addClass('fade');
 

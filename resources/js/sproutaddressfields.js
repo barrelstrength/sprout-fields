@@ -1,12 +1,14 @@
 jQuery(document).ready(function($) {
-	jQuery('select.sproutAddressCountry').change(function() {
 
+	jQuery('select.sproutAddressCountry').change(function() {
+		alert('sadf');
 		var countryCode = $(this).val();
 
-		$.post('/' + cpTrigger + "/sproutaddressfield/form",
+		var sproutAddresBox = $(this).parents('.sproutaddressfield-box').children('.format-box');
+		Craft.postActionRequest("sproutFields/sproutAddress",
 			{ sproutAddressName: sproutAddressName, sproutAddress: sproutAddress, countryCode: countryCode },
 			function(data) {
-			$(".sproutaddressfield-box .format-box").html(data);
+				sproutAddresBox.html(data);
 		});
 	})
 });

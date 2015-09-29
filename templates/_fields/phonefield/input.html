@@ -8,14 +8,14 @@
 	placeholder: (settings.mask) ? settings.mask : ''
 }) }}
 
-{# @todo - add link to call phone when phone pattern validates
-<span class="sprout-tel-button {{ id }}"></span> #}
+{# @todo - add link to call phone when phone pattern validates #}
+<span class="sprout-tel-button {{ id }}"></span>
 
 
 {% set inputMask = (settings.inputMask ? 'checked' : '') %}
 
 {% set js %}
-  new Craft.PhoneInputMask("{{ id }}","{{ settings.mask }}","{{ inputMask }}", "{{ settings.default }}");
+  new Craft.PhoneInputMask("{{ id }}","{{ settings.mask }}","{{ inputMask }}", "{{ settings.mask }}");
 {% endset %}
 
 {% includeJs js %}

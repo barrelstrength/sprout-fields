@@ -14,25 +14,18 @@ class SproutFields_Address extends SproutFieldsSproutFormsBaseField
 		$inputId = craft()->templates->formatInputId($name);
 		$namespaceInputId = craft()->templates->namespaceInputId($inputId);
 
-		$addressField = craft()->sproutFields_addressField->getAddress($this);
+		$addressField = new SproutFields_AddressModel;
 		//$addressField = $value;
 
 		// Convert to array to pass to JS
-		$elementId = $this->element->id;
-		$fieldId   = $this->model->id;
+		$elementId = null;
+		$fieldId   = null;
 
 		$addressFieldArray = array('elementId' => $elementId, 'fieldId' => $fieldId);
 
-		$output = "<div class='fieldgroup-box sproutaddressfield-box'>";
-		$countryCode = (($addressField->countryCode != null) ?  $addressField->countryCode : $this->defaultCountryCode);
+		$output = "<div class='fieldgroup-box sproutaddressfield-box container-$namespaceInputId'>";
+		$countryCode = (($addressField->countryCode != null) ?  $addressField->countryCode : 'US');
 
-
-
-
-		if($this->model->hasErrors() && craft()->request->getPost()['fields'][$name]['countryCode'])
-		{
-			$countryCode = craft()->request->getPost()['fields'][$name]['countryCode'];
-		}
 		craft()->sproutFields_addressFormField->setParams($countryCode, $name, $addressField);
 		$output.= craft()->sproutFields_addressFormField->countryInput();
 		$output.="<div class='format-box'>";
@@ -45,10 +38,12 @@ class SproutFields_Address extends SproutFieldsSproutFormsBaseField
 
 		// Pass cp url to call ajax url
 		craft()->templates->includeJs("var cpTrigger = '" . craft()->config->get('cpTrigger') . "'");
+		craft()->templates->includeJs("var sproutAddressId = '" . $namespaceInputId . "'");
+		craft()->templates->includeJs("var sproutAddressInputId = '" . $inputId . "'");
 		craft()->templates->includeJs("var sproutAddress = " . json_encode($addressFieldArray, JSON_PRETTY_PRINT));
 		craft()->templates->includeJs("var sproutAddressName = '" . $name . "'");
 		craft()->templates->includeJsResource('sproutfields/js/sproutaddressfields.js');
-		$rendered = $ouput;
+		$rendered = $output;
 		$this->endRendering();
 
 		return TemplateHelper::getRaw($rendered);

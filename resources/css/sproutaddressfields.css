@@ -18,10 +18,12 @@
 }
 
 .sproutaddressfield-box .field input {
-	width: 100%;
+	width: 98%;
+	padding: 6px 1%;
 }
 .sproutaddressfield-box .field select {
 	padding: 6px 7px;
+	width: 100%
 }
 
 .sproutaddressfield-box .comma {

@@ -15,12 +15,12 @@ class SproutFields_Link extends SproutFieldsSproutFormsBaseField
 	 */
 	public function getInputHtml($field, $value, $settings, array $renderingOptions = null)
 	{
-
 		$this->beginRendering();
 
 		$rendered = craft()->templates->render('fields/sproutlinkfield/input', array(
 			'name'  => $field->handle,
-			'value'=> $value,
+			'value' => $value,
+			'field' => $field,
 			'renderingOptions' => $renderingOptions
 		));
 

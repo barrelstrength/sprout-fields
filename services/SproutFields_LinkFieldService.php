@@ -6,8 +6,9 @@ class SproutFields_LinkFieldService extends BaseApplicationComponent
 	public function validate($value, $field)
 	{
 		$customPattern = $field->settings['customPattern'];
+		$checkPattern  = $field->settings['customPatternToggle'];
 
-		if ($customPattern)
+		if ($customPattern && $checkPattern)
 		{
 			// Use backticks as delimiters as they are invalid characters for emails
 			$customPattern = "`" . $customPattern . "`";
@@ -26,5 +27,5 @@ class SproutFields_LinkFieldService extends BaseApplicationComponent
 		}
 
 		return false;
-	}		
+	}
 }

@@ -30,10 +30,11 @@ class SproutFields_Phone extends SproutFieldsSproutFormsBaseField
 		craft()->templates->includeCssResource('sproutfields/css/phone.css');
 
 		$rendered = craft()->templates->render('fields/sproutphonefield_phone/input', array(
-			'name' => $name,
-			'value' => $value,
+			'name'     => $name,
+			'value'    => $value,
 			'settings' => $settings,
-			'mask' => $settings['mask'],
+			'field'    => $field,
+			'mask'     => $settings['mask'],
 			'namespaceInputId' => $namespaceInputId,
 			'renderingOptions' => $renderingOptions
 		));

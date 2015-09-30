@@ -55,9 +55,9 @@ class SproutFields_AddressFieldType extends BaseFieldType
 		$output = "<div class='fieldgroup-box sproutaddressfield-box container-$namespaceInputId'>";
 		$countryCode = (($addressField->countryCode != null) ?  $addressField->countryCode : $this->defaultCountryCode);
 
-		if($this->model->hasErrors() && craft()->request->getPost()['fields'][$name]['countryCode'])
+		if($this->model->hasErrors() && craft()->request->getPost('fields')->{$name}->countryCode)
 		{
-			$countryCode = craft()->request->getPost()['fields'][$name]['countryCode'];
+			$countryCode = craft()->request->getPost('fields')->{$name}->countryCode;
 		}
 		craft()->sproutFields_addressFormField->setParams($countryCode, $name, $addressField, $namespaceInputName);
 		$output.= craft()->sproutFields_addressFormField->countryInput();

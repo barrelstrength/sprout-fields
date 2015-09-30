@@ -1,1 +1,13 @@
-<input type="text" id="{{ name }}" name="{{ name }}" autocomplete="off" value="{{ (value is defined) ? value : '' }}">
+{%- set opts = renderingOptions is defined ? renderingOptions : {} -%}
+{%- set data = (opts.data is defined ? opts.data : null) %}
+<input
+	type="text"
+	id="{{ name }}"
+	name="{{ name }}"
+	autocomplete="off"
+	value="{{ (value is defined) ? value : '' }}"
+	{{ field.required is defined and field.required ? 'required' }}
+	{% for key,dataValue in data %}
+		{{ 'data-'~key~'='~dataValue }}
+	{% endfor %}
+	>

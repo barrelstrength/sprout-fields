@@ -17,7 +17,9 @@ class SproutFields_Email extends SproutFieldsSproutFormsBaseField
 
 		$rendered = craft()->templates->render('fields/sproutemailfield_email/input', array(
 			'name'  => $field->handle,
-			'value'=> $value,
+			'value' => $value,
+			'field' => $field,
+			'renderingOptions' => $renderingOptions
 		));
 
 		$this->endRendering();

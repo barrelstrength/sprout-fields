@@ -1,9 +1,16 @@
-{% import "forms" as forms %}
-
-{{ forms.text({
-	id: name,
-  name: name,
-  value: (value is defined) ? value : ''
-}) }}
-
+{%- set opts  = renderingOptions is defined ? renderingOptions : {} -%}
+{%- set data  = (opts.data is defined ? opts.data : null) %}
+{%- set class = opts.class is defined ? opts.class : 'sproutfield-phone' %}
+<input
+    type="text"
+    id="{{ opts.id is defined ? opts.id : name }}"
+    name="{{ name }}"
+    autocomplete="off"
+    class="{{ class }}"
+    value="{{ (value is defined) ? value : '' }}"
+    {{ field.required is defined and field.required ? 'required' }}
+    {% for key,dataValue in data %}
+      {{ 'data-'~key~'='~dataValue }}
+    {% endfor %}
+    >
 <span class="sprout-link-button"></span>

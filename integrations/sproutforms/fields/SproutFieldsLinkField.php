@@ -2,11 +2,11 @@
 namespace Craft;
 
 /**
- * Class SproutFieldLinkField
+ * Class SproutFieldsLinkField
  *
  * @package Craft
  */
-class SproutFieldLinkField extends SproutFieldsBaseField
+class SproutFieldsLinkField extends SproutFieldsBaseField
 {
 	/**
 	 * @return string

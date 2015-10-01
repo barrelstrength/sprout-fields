@@ -52,23 +52,9 @@ class SproutFieldsPlugin extends BasePlugin
 	public function registerSproutFormsFields()
 	{
 		return array(
-			new PhoneField(),
-			new LinkField(),
-			new EmailField(),
-		);
-	}
-
-	/**
-	 * User for address front end integration
-	 * @return array
-	 */
-	public function registerCpRoutes()
-	{
-
-		return array(
-			'sproutaddressfield/form' => array(
-				'action' => 'sproutFields/sproutAddress'
-			)
+			new SproutFieldsPhoneField(),
+			new SproutFieldsLinkField(),
+			new SproutFieldsEmailField(),
 		);
 	}
 }

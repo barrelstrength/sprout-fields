@@ -21,32 +21,17 @@ class SproutFieldsController extends BaseController
 
 	}
 
-	public function actionSproutAddress()
-	{
-
-		$countryCode = craft()->request->getPost('countryCode');
-
-		$sproutAddressName = craft()->request->getPost('sproutAddressName');
-		$sproutAddress = craft()->request->getPost('sproutAddress');
-		$sproutAddressNamespaceInputName = craft()->request->getPost('sproutAddressNamespaceInputName');
-
-		$addressField = craft()->sproutFields_addressField->getAddress($sproutAddress);
-
-		craft()->sproutFields_addressFormField->setParams($countryCode, $sproutAddressName, $addressField, $sproutAddressNamespaceInputName);
-		echo craft()->sproutFields_addressFormField->setForm(true);
-		exit;
-	}
-
 	public function actionEmailValidate()
 	{
 		$this->requirePostRequest();
 		$this->requireAjaxRequest();
 
-		$value       = craft()->request->getRequiredPost('value');
-		$fieldHandle = craft()->request->getRequiredPost('fieldHandle');
-		$field       = craft()->fields->getFieldByHandle($fieldHandle);
+		$value         = craft()->request->getRequiredPost('value');
+		$fieldHandle   = craft()->request->getRequiredPost('fieldHandle');
+		$field         = craft()->fields->getFieldByHandle($fieldHandle);
 		$customPattern = false;
-		if(isset($field->settings['customPattern']))
+
+		if (isset($field->settings['customPattern']))
 		{
 			$customPattern = $field->settings['customPattern'];
 		}
@@ -68,7 +53,7 @@ class SproutFieldsController extends BaseController
 		$value = craft()->request->getRequiredPost('value');
 		$mask  = craft()->request->getRequiredPost('mask');
 
-		if(!craft()->sproutFields_phoneField->validate($value, $mask))
+		if (!craft()->sproutFields_phoneField->validate($value, $mask))
 		{
 			$this->returnJson(false);
 		}

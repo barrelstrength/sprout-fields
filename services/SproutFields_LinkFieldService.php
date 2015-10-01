@@ -1,8 +1,19 @@
 <?php
 namespace Craft;
 
+/**
+ * Class SproutFields_LinkFieldService
+ *
+ * @package Craft
+ */
 class SproutFields_LinkFieldService extends BaseApplicationComponent
 {
+	/**
+	 * @param $value
+	 * @param $field
+	 *
+	 * @return bool
+	 */
 	public function validate($value, $field)
 	{
 		$customPattern = $field->settings['customPattern'];

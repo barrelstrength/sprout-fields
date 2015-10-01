@@ -1,20 +1,32 @@
 <?php
 namespace Craft;
 
+/**
+ * Class SproutFields_PhoneFieldService
+ *
+ * @package Craft
+ */
 class SproutFields_PhoneFieldService extends BaseApplicationComponent
 {
-	private $mask;
+	/**
+	 * @var string
+	 */
+	protected $mask;
 
+	/**
+	 * @return string
+	 */
 	public function getDefaultMask()
 	{
 		return "###-###-####";
 	}
 
 	/**
-	 * Validate phone input using validation pattern
+	 * Validates a phone number against a given mask/pattern
 	 *
 	 * @param $value
-	 * @param $settings
+	 * @param $mask
+	 *
 	 * @return bool
 	 */
 	public function validate($value, $mask)
@@ -30,9 +42,10 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 	}
 
 	/**
-	 * Convert a pattern mask into a regular expression
+	 * Converts a pattern mask into a regular expression
 	 *
 	 * @param $mask
+	 *
 	 * @return string
 	 */
 	protected function convertMaskToRegEx($mask)
@@ -62,14 +75,17 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 		// Organize for regex replacement
 		if ($hashes)
 		{
+			$i            = 0;
 			$hashPatterns = array();
-			$i = 0;
-			foreach($hashes as $hash)
+
+			foreach ($hashes as $hash)
 			{
 				$len = strlen($hash);
-				$hashPatterns[$i]['pattern'] = "([0-9]{" . $len . "})";
-				$hashPatterns[$i]['hash'] = $hash;
-				$hashPatterns[$i]['preg_replace'] = "([#]{" . $len . "})";
+
+				$hashPatterns[$i]['pattern']      = "([0-9]{".$len."})";
+				$hashPatterns[$i]['hash']         = $hash;
+				$hashPatterns[$i]['preg_replace'] = "([#]{".$len."})";
+
 				$i++;
 			}
 
@@ -78,28 +94,29 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 	}
 
 	/**
-	 * Process mask info and return a regular expression
+	 * Processes mask info and returns a regular expression
 	 *
 	 * @param $hashPatterns
+	 *
 	 * @return string
 	 */
 	protected function getRegEx($hashPatterns)
 	{
 		$mask = $this->mask;
 
-		if($hashPatterns)
+		if ($hashPatterns)
 		{
 			$mask = preg_quote($mask);
 
-			foreach($hashPatterns as $hashPattern)
+			foreach ($hashPatterns as $hashPattern)
 			{
-				$pattern = $hashPattern['pattern'];
+				$pattern      = $hashPattern['pattern'];
 				$preg_replace = $hashPattern['preg_replace'];
 
 				// Add fourth parameter for non-greedy matching
 				$mask = preg_replace($preg_replace, $pattern, $mask, 1);
 			}
-			$regEx = '/^' . $mask . '$/';
+			$regEx = '/^'.$mask.'$/';
 
 			return $regEx;
 		}

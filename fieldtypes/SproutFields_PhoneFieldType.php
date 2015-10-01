@@ -3,16 +3,21 @@ namespace Craft;
 
 class SproutFields_PhoneFieldType extends BaseFieldType
 {
-
-
+	/**
+	 * @return string
+	 */
 	public function getName()
 	{
 		return Craft::t('Phone Number');
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function defineSettings()
 	{
-		$default = craft()->sproutFields_phoneField->getDefaultMask();
+		$default = sproutFields()->phone->getDefaultMask();
+
 		return array(
 			'inputMask' => AttributeType::Bool,
 			'mask'      => array(AttributeType::String, 'default' => $default),
@@ -21,26 +26,16 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 
 	public function getSettingsHtml()
 	{
-		return craft()->templates->render('sproutfields/_fields/phonefield/settings', array(
+		return craft()->templates->render('sproutfields/_fieldtypes/phone/settings', array(
 			'settings' => $this->getSettings()
 		));
 	}
 
 	/**
-	 * Define database column
+	 * @param string $name
+	 * @param mixed  $value
 	 *
-	 * @return AttributeType::String
-	 */
-	public function defineContentAttribute()
-	{
-		return array(AttributeType::String);
-	}
-
-	/**
-	 * Display our fieldtype
-	 *
-	 * @param string $name Our fieldtype handle
-	 * @return string Return our fields input template
+	 * @return string
 	 */
 	public function getInputHtml($name, $value)
 	{
@@ -54,7 +49,7 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 		craft()->templates->includeJsResource('sproutfields/js/PhoneInputMask.js');
 		craft()->templates->includeCssResource('sproutfields/css/phone.css');
 
-		return craft()->templates->render('sproutfields/_fields/phonefield/input', array(
+		return craft()->templates->render('sproutfields/_fieldtypes/phone/input', array(
 			'id' => $namespaceInputId,
 			'name' => $name,
 			'value' => $value,

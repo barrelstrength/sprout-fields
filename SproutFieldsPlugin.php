@@ -1,47 +1,60 @@
 <?php
 namespace Craft;
 
+/**
+ * Class SproutFieldsPlugin
+ *
+ * @package Craft
+ */
 class SproutFieldsPlugin extends BasePlugin
 {
+	public function init()
+	{
+		Craft::import('plugins.sproutfields.contracts.SproutFieldsBaseField');
+		Craft::import('plugins.sproutfields.integrations.sproutforms.fields.*');
+	}
+
+	/**
+	 * @return string
+	 */
 	public function getName()
 	{
 		return 'Sprout Fields';
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getVersion()
 	{
 		return '1.0.0';
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getDeveloper()
 	{
 		return 'Barrel Strength Design';
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getDeveloperUrl()
 	{
 		return 'http://barrelstrengthdesign.com';
 	}
 
-	public function init()
-	{
-		Craft::import('plugins.sproutfields.integrations.sproutforms.fields.*');
-		Craft::import('plugins.sproutfields.contracts.SproutFieldsSproutFormsBaseField');
-	}
-
-
 	/**
-	 * Register a Sprout Field for support in dynamic forms
-	 *
-	 * @return string  Name of FieldType
+	 * @return array
 	 */
 	public function registerSproutFormsFields()
 	{
 		return array(
-			new SproutFields_Phone(),
-			new SproutFields_Link(),
-			new SproutFields_Email(),
-			new SproutFields_Address()
+			new PhoneField(),
+			new LinkField(),
+			new EmailField(),
 		);
 	}
 
@@ -58,4 +71,12 @@ class SproutFieldsPlugin extends BasePlugin
 			)
 		);
 	}
+}
+
+/**
+ * @return SproutFieldsService
+ */
+function sproutFields()
+{
+	return Craft::app()->getComponent('sproutForms');
 }

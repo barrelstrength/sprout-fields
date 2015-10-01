@@ -1,8 +1,20 @@
 <?php
 namespace Craft;
 
+/**
+ * Class SproutFields_EmailFieldService
+ *
+ * @package Craft
+ */
 class SproutFields_EmailFieldService extends BaseApplicationComponent
 {
+	/**
+	 * @param $value
+	 * @param $element
+	 * @param $field
+	 *
+	 * @return bool|null|string
+	 */
 	public function validate($value, $element, $field)
 	{
 		$customPattern = $field->settings['customPattern'];
@@ -14,14 +26,14 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 				return Craft::t($field->settings['customPatternErrorMessage']);
 			}
 
-			return Craft::t($field->name . ' must be a valid email.');
+			return Craft::t($field->name.' must be a valid email.');
 		}
 
 		$uniqueEmail = $field->settings['uniqueEmail'];
 
 		if ($uniqueEmail && !$this->validateUniqueEmailAddress($value, $element, $field))
 		{
-			return Craft::t($field->name . ' must be a unique email.');
+			return Craft::t($field->name.' must be a unique email.');
 		}
 
 		return true;
@@ -29,6 +41,7 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 
 	/**
 	 * @param $value
+	 *
 	 * @return bool
 	 */
 	public function validateEmailAddress($value, $customPattern = false)
@@ -36,9 +49,9 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 		if ($customPattern)
 		{
 			// Use backticks as delimiters as they are invalid characters for emails
-			$customPattern = "`" . $customPattern . "`";
+			$customPattern = "`".$customPattern."`";
 
-			if(preg_match($customPattern, $value))
+			if (preg_match($customPattern, $value))
 			{
 				return true;
 			}
@@ -58,20 +71,23 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 	 * @param $value
 	 * @param $element
 	 * @param $field
+	 *
 	 * @return bool
 	 */
 	public function validateUniqueEmailAddress($value, $element, $field)
 	{
-		$fieldHandle  = $element->fieldColumnPrefix . $field->handle;
+		$fieldHandle  = $element->fieldColumnPrefix.$field->handle;
 		$contentTable = $element->contentTable;
 		$elementId    = $element->id;
 
 		$emailExists = craft()->db->createCommand()
 			->select($fieldHandle)
 			->from($contentTable)
-			->where(array(
-				$fieldHandle => $value,
-			))
+			->where(
+				array(
+					$fieldHandle => $value,
+				)
+			)
 			->andWhere(array('not in', 'elementId', $elementId))
 			->queryScalar();
 

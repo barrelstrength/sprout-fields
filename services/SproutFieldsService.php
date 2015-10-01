@@ -22,8 +22,8 @@ class SproutFieldsService extends BaseApplicationComponent
 	{
 		parent::init();
 
-		$this->link        = Craft::app()->getComponent('sproutForms_linkField');
-		$this->email       = Craft::app()->getComponent('sproutForms_emailField');
-		$this->phone       = Craft::app()->getComponent('sproutForms_phoneField');
+		$this->link        = Craft::app()->getComponent('sproutFields_linkField');
+		$this->email       = Craft::app()->getComponent('sproutFields_emailField');
+		$this->phone       = Craft::app()->getComponent('sproutFields_phoneField');
 	}
 }

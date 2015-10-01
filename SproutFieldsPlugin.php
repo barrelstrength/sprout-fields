@@ -64,5 +64,5 @@ class SproutFieldsPlugin extends BasePlugin
  */
 function sproutFields()
 {
-	return Craft::app()->getComponent('sproutForms');
+	return Craft::app()->getComponent('sproutFields');
 }

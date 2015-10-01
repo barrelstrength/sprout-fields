@@ -45,8 +45,12 @@ class SproutFieldsController extends BaseController
 		$value       = craft()->request->getRequiredPost('value');
 		$fieldHandle = craft()->request->getRequiredPost('fieldHandle');
 		$field       = craft()->fields->getFieldByHandle($fieldHandle);
+		$customPattern = false;
+		if(isset($field->settings['customPattern']))
+		{
+			$customPattern = $field->settings['customPattern'];
+		}
 
-		$customPattern = $field->settings['customPattern'];
 
 		if (!craft()->sproutFields_emailField->validateEmailAddress($value, $customPattern))
 		{

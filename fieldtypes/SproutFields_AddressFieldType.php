@@ -55,13 +55,13 @@ class SproutFields_AddressFieldType extends BaseFieldType
 		$output = "<div class='fieldgroup-box sproutaddressfield-box container-$namespaceInputId'>";
 		$countryCode = (($addressField->countryCode != null) ?  $addressField->countryCode : $this->defaultCountryCode);
 
-		if($this->model->hasErrors() && craft()->request->getPost('fields')->{$name}->countryCode)
+		if($this->model->hasErrors() && isset(craft()->request->getPost('fields')[$name]))
 		{
-			$countryCode = craft()->request->getPost('fields')->{$name}->countryCode;
+			$countryCode = craft()->request->getPost('fields')[$name]['countryCode'];
 		}
 		craft()->sproutFields_addressFormField->setParams($countryCode, $name, $addressField, $namespaceInputName);
 		$output.= craft()->sproutFields_addressFormField->countryInput();
-		//$output.= $namespaceInputName;
+
 		$output.="<div class='format-box'>";
 
 		$form = craft()->sproutFields_addressFormField->setForm();
@@ -71,12 +71,6 @@ class SproutFields_AddressFieldType extends BaseFieldType
 		$output.= "</div>";
 		craft()->templates->includeCssResource('sproutfields/css/sproutaddressfields.css');
 
-		// Pass cp url to call ajax url
-		//$output.= $this->returnJs("var cpTrigger = '" . craft()->config->get('cpTrigger') . "'");
-		//$output.= $this->returnJs("var sproutAddressId = '" . $namespaceInputId . "'");
-		//$output.= $this->returnJs("var sproutAddressInputId = '" . $inputId . "'");
-		//$output.= $this->returnJs("var sproutAddress = " . $sproutAddress);
-		//$output.= $this->returnJs("var sproutAddressName = '" . $name . "'");
 		$sproutAddress = json_encode($addressFieldArray, JSON_PRETTY_PRINT);
 
 		craft()->templates->includeJsResource('sproutfields/js/SproutAddressField.js');

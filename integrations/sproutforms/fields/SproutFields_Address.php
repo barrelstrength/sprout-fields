@@ -13,6 +13,7 @@ class SproutFields_Address extends SproutFieldsSproutFormsBaseField
 
 		$inputId = craft()->templates->formatInputId($name);
 		$namespaceInputId = craft()->templates->namespaceInputId($inputId);
+		$namespaceInputName = craft()->templates->namespaceInputName($inputId);
 
 		$addressField = new SproutFields_AddressModel;
 		//$addressField = $value;
@@ -26,7 +27,7 @@ class SproutFields_Address extends SproutFieldsSproutFormsBaseField
 		$output = "<div class='fieldgroup-box sproutaddressfield-box container-$namespaceInputId'>";
 		$countryCode = (($addressField->countryCode != null) ?  $addressField->countryCode : 'US');
 
-		craft()->sproutFields_addressFormField->setParams($countryCode, $name, $addressField);
+		craft()->sproutFields_addressFormField->setParams($countryCode, $name, $addressField, $namespaceInputId);
 		$output.= craft()->sproutFields_addressFormField->countryInput();
 		$output.="<div class='format-box'>";
 		$form = craft()->sproutFields_addressFormField->setForm();
@@ -39,6 +40,7 @@ class SproutFields_Address extends SproutFieldsSproutFormsBaseField
 		// Pass cp url to call ajax url
 		craft()->templates->includeJs("var cpTrigger = '" . craft()->config->get('cpTrigger') . "'");
 		craft()->templates->includeJs("var sproutAddressId = '" . $namespaceInputId . "'");
+		craft()->templates->includeJs("var sproutAddressNamespaceInputName = 'fields[$name]'");
 		craft()->templates->includeJs("var sproutAddressInputId = '" . $inputId . "'");
 		craft()->templates->includeJs("var sproutAddress = " . json_encode($addressFieldArray, JSON_PRETTY_PRINT));
 		craft()->templates->includeJs("var sproutAddressName = '" . $name . "'");

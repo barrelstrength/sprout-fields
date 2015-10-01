@@ -1,10 +1,12 @@
 {%- set opts = renderingOptions is defined ? renderingOptions : {} -%}
 {%- set data = (opts.data is defined ? opts.data : null) %}
+{%- set class = opts.class is defined ? opts.class : 'sproutfields-email' %}
 <input
 	type="text"
 	id="{{ opts.id is defined ? opts.id : name }}"
 	name="{{ name }}"
 	autocomplete="off"
+	class="{{ class }}"
 	value="{{ (value is defined) ? value : '' }}"
 	{{ field.required is defined and field.required ? 'required' }}
 	{% for key,dataValue in data %}

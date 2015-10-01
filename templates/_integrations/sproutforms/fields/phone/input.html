@@ -3,7 +3,7 @@
 {%- set class = opts.class is defined ? opts.class : 'sproutfield-phone' %}
 <input
 	type="text"
-	id="{{ name }}"
+	id="{{ opts.id is defined ? opts.id : name }}"
 	name="{{ name }}"
 	autocomplete="off"
 	class="{{ class }}"

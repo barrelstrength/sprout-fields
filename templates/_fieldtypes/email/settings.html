@@ -3,7 +3,7 @@
 {{ forms.checkboxField({
 	label: "Emails for this field have a custom validation pattern"|t,
 	name: 'customPatternToggle',
-	checked: (settings.customPattern != '' ? true : false),
+	checked: settings.customPatternToggle,
 	toggle: 'sproutemailfield-custom-validation-pattern'
 }) }}
 

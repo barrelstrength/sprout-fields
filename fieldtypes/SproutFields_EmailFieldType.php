@@ -18,6 +18,7 @@ class SproutFields_EmailFieldType extends BaseFieldType
 	{
 		return array(
 			'customPattern'             => array(AttributeType::String),
+			'customPatternToggle'       => array(AttributeType::Bool),
 			'customPatternErrorMessage' => array(AttributeType::String),
 			'uniqueEmail'               => array(AttributeType::Bool, 'default' => false),
 		);

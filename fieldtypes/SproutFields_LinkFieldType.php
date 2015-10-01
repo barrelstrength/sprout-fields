@@ -18,7 +18,8 @@ class SproutFields_LinkFieldType extends BaseFieldType
 	{
 		return array(
 			'customPattern'             => array(AttributeType::String),
-			'customPatternErrorMessage' => array(AttributeType::String)
+			'customPatternErrorMessage' => array(AttributeType::String),
+			'customPatternToggle'       => array(AttributeType::Bool),
 		);
 	}
 

@@ -18,8 +18,9 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 	public function validate($value, $element, $field)
 	{
 		$customPattern = $field->settings['customPattern'];
+		$checkPattern  = $field->settings['customPatternToggle'];
 
-		if (!$this->validateEmailAddress($value, $customPattern))
+		if (!$this->validateEmailAddress($value, $customPattern, $checkPattern))
 		{
 			if ($customPattern && $field->settings['customPatternErrorMessage'])
 			{
@@ -40,13 +41,15 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 	}
 
 	/**
-	 * @param $value
+	 * @param $value string current email to valdite
+	 * @param $customPattern string regular expression
+	 * @param $checkPattern bool
 	 *
 	 * @return bool
 	 */
-	public function validateEmailAddress($value, $customPattern = false)
+	public function validateEmailAddress($value, $customPattern, $checkPattern = false)
 	{
-		if ($customPattern)
+		if ($checkPattern)
 		{
 			// Use backticks as delimiters as they are invalid characters for emails
 			$customPattern = "`".$customPattern."`";

@@ -1,0 +1,8 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.password({
+	id: id,
+	name: name,
+	disabled: true,
+	value: value is defined ? value : ''
+}) }}

@@ -1,0 +1,9 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+	label: 'Invisible Field Value'|t,
+	name: 'value',
+	instructions: 'Value to set when the field is saved/sent. Twig syntax is supported.'|t,
+	placeholder: '{{ entry.id is defined ? entry.id : siteUrl }}',
+	value: settings.value
+}) }}

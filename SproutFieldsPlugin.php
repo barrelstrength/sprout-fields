@@ -56,6 +56,7 @@ class SproutFieldsPlugin extends BasePlugin
 			new SproutFieldsEmailField(),
 			new SproutFieldsPhoneField(),
 			new SproutFieldsHiddenField(),
+			new SproutFieldsInvisibleField(),
 		);
 	}
 }

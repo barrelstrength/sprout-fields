@@ -52,9 +52,10 @@ class SproutFieldsPlugin extends BasePlugin
 	public function registerSproutFormsFields()
 	{
 		return array(
-			new SproutFieldsPhoneField(),
 			new SproutFieldsLinkField(),
 			new SproutFieldsEmailField(),
+			new SproutFieldsPhoneField(),
+			new SproutFieldsHiddenField(),
 		);
 	}
 }

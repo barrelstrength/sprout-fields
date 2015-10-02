@@ -1,19 +1,30 @@
 <?php
+
 namespace Craft;
 
 /**
- * Class SproutFieldsEmailField
+ * Class SproutFieldsHiddenField
  *
  * @package Craft
  */
-class SproutFieldsEmailField extends SproutFieldsBaseField
+class SproutFieldsHiddenField extends SproutFieldsBaseField
 {
 	/**
 	 * @return string
 	 */
 	public function getType()
 	{
-		return 'SproutFields_Email';
+		return 'SproutFields_Hidden';
+	}
+
+	public function isPlainInput()
+	{
+		return true;
+	}
+
+	public function needsGlobalContext()
+	{
+		return true;
 	}
 
 	/**
@@ -28,8 +39,17 @@ class SproutFieldsEmailField extends SproutFieldsBaseField
 	{
 		$this->beginRendering();
 
+		try
+		{
+			$value = craft()->templates->renderObjectTemplate($settings['value'], $this->getContext());
+		}
+		catch (\Exception $e)
+		{
+			SproutFieldsPlugin::log($e->getMessage(), LogLevel::Error);
+		}
+
 		$rendered = craft()->templates->render(
-			'email/input',
+			'hidden/input',
 			array(
 				'name'             => $field->handle,
 				'value'            => $value,

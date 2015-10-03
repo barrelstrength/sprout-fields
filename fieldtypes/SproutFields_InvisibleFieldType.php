@@ -19,6 +19,8 @@ class SproutFields_InvisibleFieldType extends BaseFieldType
 	protected function defineSettings()
 	{
 		return array(
+			'allowUpdates' => array(AttributeType::Bool),
+			'hideValue' => array(AttributeType::Bool),
 			'value' => array(AttributeType::String),
 		);
 	}

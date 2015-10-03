@@ -3,6 +3,6 @@
 {{ forms.text({
 	id: name,
 	name: name,
-	disabled: true,
+	disabled: (not settings.allowUpdates),
 	value: (value is defined) ? value : ''
 }) }}

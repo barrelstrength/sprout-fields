@@ -12,14 +12,26 @@ class SproutFields_HiddenFieldType extends BaseFieldType
 	}
 
 	/**
+	 * @return array
+	 */
+	public function defineSettings()
+	{
+		return array(
+			'allowUpdates' => array(AttributeType::Bool),
+			'value' => array(AttributeType::String),
+		);
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getInputHtml($name, $value)
 	{
 		$vars = array(
-			'id'    => $name,
-			'name'  => $name,
-			'value' => $value,
+			'id'       => $name,
+			'name'     => $name,
+			'value'    => $value,
+			'settings' => $this->getSettings()
 		);
 
 		return craft()->templates->render('sproutfields/_fieldtypes/hidden/input', $vars);
@@ -35,15 +47,5 @@ class SproutFields_HiddenFieldType extends BaseFieldType
 		);
 
 		return craft()->templates->render('sproutfields/_fieldtypes/hidden/settings', $vars);
-	}
-
-	/**
-	 * @return array
-	 */
-	public function defineSettings()
-	{
-		return array(
-			'value' => AttributeType::String,
-		);
 	}
 }

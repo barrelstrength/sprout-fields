@@ -10,3 +10,10 @@
 	warning: (isSproutFormsSettingsPage ? null : "This field is designed to be used with Sprout Forms front-end forms."|t),
 	value: settings.value
 }) }}
+
+{{ forms.lightswitchField ({
+	label: "Allow updates"|t,
+	instructions: "Allow Hidden field value to be edited in the Control Panel."|t,
+	name: 'allowUpdates',
+	on: settings.allowUpdates,
+}) }}

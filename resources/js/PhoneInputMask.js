@@ -101,9 +101,9 @@
 			function showCallText(phoneNumber, sproutPhoneFieldElement) {
 
 				if (phoneNumber == '') return;
-				$(sproutPhoneFieldElement).next('.sprout-tel-button').addClass('fade');
+				$(sproutPhoneFieldElement).next('.sprout-phone-button').addClass('fade');
 
-				$(sproutPhoneFieldElement).next('.sprout-tel-button').html('<a href="tel:' + phoneNumber +
+				$(sproutPhoneFieldElement).next('.sprout-phone-button').html('<a href="tel:' + phoneNumber +
 				'" target="_blank">Call Phone &rarr;</a>');
 
 				$(sproutPhoneFieldElement).addClass('complete');

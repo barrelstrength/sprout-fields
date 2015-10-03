@@ -55,9 +55,10 @@ class SproutFields_EmailFieldType extends BaseFieldType
 		return craft()->templates->render(
 			'sproutfields/_fieldtypes/email/input',
 			array(
-				'id'    => $namespaceInputId,
-				'name'  => $name,
-				'value' => $value
+				'id'           => $namespaceInputId,
+				'name'         => $name,
+				'value'        => $value,
+				'fieldContext' => $this->element->getFieldContext()
 			)
 		);
 	}

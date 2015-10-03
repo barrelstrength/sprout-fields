@@ -1,4 +1,4 @@
-function checkSproutLinkField(id, fieldHandle) {
+function checkSproutLinkField(id, fieldHandle, fieldContext) {
 
 	var sproutLinkFieldId = '#' + id;
 	var sproutLinkButtonClass = '.' + id;
@@ -9,6 +9,7 @@ function checkSproutLinkField(id, fieldHandle) {
 		// Set up data for the controller.
 		var data = {
 			'fieldHandle': fieldHandle,
+			'fieldContext': fieldContext,
 			'value': $(sproutLinkFieldId).val()
 		};
 

@@ -8,9 +8,17 @@ class SproutFieldsController extends BaseController
 		$this->requirePostRequest();
 		$this->requireAjaxRequest();
 
-		$value       = craft()->request->getRequiredPost('value');
-		$fieldHandle = craft()->request->getRequiredPost('fieldHandle');
-		$field       = craft()->fields->getFieldByHandle($fieldHandle);
+		$value        = craft()->request->getRequiredPost('value');
+		$fieldContext = craft()->request->getRequiredPost('fieldContext');
+		$fieldHandle  = craft()->request->getRequiredPost('fieldHandle');
+		$field = craft()->fields->getFieldByHandle($fieldHandle);
+
+		$oldFieldContext = craft()->content->fieldContext;
+		craft()->content->fieldContext = $fieldContext;
+
+		$field = craft()->fields->getFieldByHandle($fieldHandle);
+		
+		craft()->content->fieldContext = $oldFieldContext;
 
 		if (!craft()->sproutFields_linkField->validate($value, $field))
 		{
@@ -18,7 +26,6 @@ class SproutFieldsController extends BaseController
 		}
 
 		$this->returnJson(true);
-
 	}
 
 	public function actionEmailValidate()
@@ -27,15 +34,22 @@ class SproutFieldsController extends BaseController
 		$this->requireAjaxRequest();
 
 		$value         = craft()->request->getRequiredPost('value');
+		$fieldContext  = craft()->request->getRequiredPost('fieldContext');
 		$fieldHandle   = craft()->request->getRequiredPost('fieldHandle');
-		$field         = craft()->fields->getFieldByHandle($fieldHandle);
+		
+		$oldFieldContext = craft()->content->fieldContext;
+		craft()->content->fieldContext = $fieldContext;
+
+		$field = craft()->fields->getFieldByHandle($fieldHandle);
+		
+		craft()->content->fieldContext = $oldFieldContext;
+		
 		$customPattern = false;
 
 		if (isset($field->settings['customPattern']))
 		{
 			$customPattern = $field->settings['customPattern'];
 		}
-
 
 		if (!craft()->sproutFields_emailField->validateEmailAddress($value, $customPattern))
 		{

@@ -1,5 +1,6 @@
 {% import "_includes/forms" as forms %}
 
+
 {{ forms.text({
 	id: name,
   name: name,
@@ -8,18 +9,17 @@
 
 <span class="sprout-email-button {{ id }}"></span>
 
-
 {% includeCssResource "sproutfields/css/email.css" %}
 {% includeJsResource "sproutfields/js/email.js" %}
 
 {% set myJs %}
 
 (function() {
-	checkSproutEmailField("{{ id }}", "{{ name }}");
+	checkSproutEmailField("{{ id }}", "{{ name }}", "{{ fieldContext }}");
 })();
 
 $('input.{{ id }}').on('input', function () {
-	checkSproutEmailField("{{ id }}", "{{ name }}");
+	checkSproutEmailField("{{ id }}", "{{ name }}", "{{ fieldContext }}");
 });
 
 {% endset %}

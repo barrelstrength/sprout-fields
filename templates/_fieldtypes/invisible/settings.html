@@ -4,6 +4,6 @@
 	label: 'Invisible Field Value'|t,
 	name: 'value',
 	instructions: 'Value to set when the field is saved/sent. Twig syntax is supported.'|t,
-	placeholder: '{{ entry.id is defined ? entry.id : siteUrl }}',
+	placeholder: '{{ entry.id is defined ? entry.id : null }}',
 	value: settings.value
 }) }}

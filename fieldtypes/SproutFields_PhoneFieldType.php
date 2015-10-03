@@ -19,6 +19,7 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 		$default = sproutFields()->phone->getDefaultMask();
 
 		return array(
+			'customPatternToggle'       => array(AttributeType::Bool),
 			'inputMask' => AttributeType::Bool,
 			'mask'      => array(AttributeType::String, 'default' => $default),
 		);

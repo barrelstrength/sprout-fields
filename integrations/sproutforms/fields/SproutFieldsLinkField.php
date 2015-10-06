@@ -28,12 +28,17 @@ class SproutFieldsLinkField extends SproutFieldsBaseField
 	{
 		$this->beginRendering();
 
+		$attributes = $field->getAttributes();
+		$errorMessage = craft()->sproutFields_linkField->getErrorMessage($attributes['name'], $settings);
+
 		$rendered = craft()->templates->render(
 			'link/input',
 			array(
 				'name'             => $field->handle,
 				'value'            => $value,
 				'field'            => $field,
+				'pattern'          => $settings['customPattern'],
+				'errorMessage'     => $errorMessage,
 				'renderingOptions' => $renderingOptions
 			)
 		);

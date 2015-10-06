@@ -37,10 +37,11 @@ class SproutFieldsPhoneField extends SproutFieldsBaseField
 		$name             = $field->handle;
 		$namespaceInputId = $this->getNamespace().'-'.$name;
 
-		craft()->templates->includeJsResource('sproutfields/js/jquery.js');
-		craft()->templates->includeJsResource('sproutfields/js/inputmask.js');
-		craft()->templates->includeJsResource('sproutfields/js/jquery.inputmask.js');
-		craft()->templates->includeCssResource('sproutfields/css/phone.css');
+		$pattern = craft()->sproutFields_phoneField->convertMaskToRegEx($settings['mask']);
+		$pattern = trim($pattern, '/');
+
+		$attributes = $field->getAttributes();
+		$errorMessage = craft()->sproutFields_phoneField->getErrorMessage($attributes['name'], $settings);
 
 		$rendered = craft()->templates->render(
 			'phone/input',
@@ -50,6 +51,8 @@ class SproutFieldsPhoneField extends SproutFieldsBaseField
 				'settings'         => $settings,
 				'field'            => $field,
 				'mask'             => $settings['mask'],
+				'pattern'          => $pattern,
+				'errorMessage'     => $errorMessage,
 				'namespaceInputId' => $namespaceInputId,
 				'renderingOptions' => $renderingOptions
 			)

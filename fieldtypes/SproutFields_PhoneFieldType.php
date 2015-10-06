@@ -19,9 +19,10 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 		$default = sproutFields()->phone->getDefaultMask();
 
 		return array(
+			'customPatternErrorMessage' => array(AttributeType::String),
 			'customPatternToggle'       => array(AttributeType::Bool),
-			'inputMask' => AttributeType::Bool,
-			'mask'      => array(AttributeType::String, 'default' => $default),
+			'inputMask'                 => array(AttributeType::Bool),
+			'mask'                      => array(AttributeType::String, 'default' => $default),
 		);
 	}
 
@@ -78,7 +79,7 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 
 		if (!craft()->sproutFields_phoneField->validate($value, $settings['mask']))
 		{
-			return Craft::t($this->model->name . ' is invalid. Required format: ' . $settings['mask']);
+			return craft()->sproutFields_phoneField->getErrorMessage($this->model->name, $settings);
 		}
 
 		return true;

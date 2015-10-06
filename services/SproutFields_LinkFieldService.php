@@ -39,4 +39,22 @@ class SproutFields_LinkFieldService extends BaseApplicationComponent
 
 		return false;
 	}
+
+	/**
+	 * Return error message
+	 * 
+	 * @param  string $fieldName
+	 * @param  array $settings
+	 * 
+	 * @return string
+	 */
+	public function getErrorMessage($fieldName, $settings)
+	{
+		if ($settings['customPattern'] && $settings['customPatternErrorMessage'])
+		{
+			return Craft::t($settings['customPatternErrorMessage']);
+		}
+
+		return Craft::t($fieldName . ' must be a valid link.');
+	}
 }

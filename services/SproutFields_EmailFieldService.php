@@ -22,12 +22,7 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 
 		if (!$this->validateEmailAddress($value, $customPattern, $checkPattern))
 		{
-			if ($customPattern && $field->settings['customPatternErrorMessage'])
-			{
-				return Craft::t($field->settings['customPatternErrorMessage']);
-			}
-
-			return Craft::t($field->name.' must be a valid email.');
+			return $this->getErrorMessage($field->name, $field->settings);
 		}
 
 		$uniqueEmail = $field->settings['uniqueEmail'];
@@ -100,5 +95,23 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 		}
 
 		return true;
+	}
+
+	/**
+	 * Return error message
+	 * 
+	 * @param  string $fieldName
+	 * @param  array $settings
+	 * 
+	 * @return string
+	 */
+	public function getErrorMessage($fieldName, $settings)
+	{
+		if ($settings['customPattern'] && $settings['customPatternErrorMessage'])
+		{
+			return Craft::t($settings['customPatternErrorMessage']);
+		}
+
+		return Craft::t($fieldName.' must be a valid email.');
 	}
 }

@@ -28,12 +28,17 @@ class SproutFieldsEmailField extends SproutFieldsBaseField
 	{
 		$this->beginRendering();
 
+		$attributes = $field->getAttributes();
+		$errorMessage = craft()->sproutFields_emailField->getErrorMessage($attributes['name'], $settings);
+
 		$rendered = craft()->templates->render(
 			'email/input',
 			array(
 				'name'             => $field->handle,
 				'value'            => $value,
 				'field'            => $field,
+				'pattern'          => $settings['customPattern'],
+				'errorMessage'     => $errorMessage,
 				'renderingOptions' => $renderingOptions
 			)
 		);

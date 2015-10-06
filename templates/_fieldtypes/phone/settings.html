@@ -16,6 +16,14 @@
 		placeholder: '###-###-####',
 		value: settings.mask ? settings.mask : '###-###-####'
 	}) }}
+
+	{{ forms.textField({
+		label: 'Error Message'|t,
+		instructions: 'Display this error message when a phone number is invalid.'|t,
+		name: 'customPatternErrorMessage',
+		placeholder: 'Phone number must match the format: ###-###-####',
+		value: settings.customPatternErrorMessage
+	}) }}
 </div>
 
 {% if craft.request.getSegment(1) != 'sproutforms' %}

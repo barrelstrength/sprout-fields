@@ -48,7 +48,7 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 	 *
 	 * @return string
 	 */
-	protected function convertMaskToRegEx($mask)
+	public function convertMaskToRegEx($mask)
 	{
 		$this->mask = $mask;
 
@@ -120,5 +120,23 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 
 			return $regEx;
 		}
+	}
+
+	/**
+	 * Return error message
+	 * 
+	 * @param  string $fieldName
+	 * @param  array $settings
+	 * 
+	 * @return string
+	 */
+	public function getErrorMessage($fieldName, $settings)
+	{
+		if ($settings['customPatternErrorMessage'] != "")
+		{
+			 return Craft::t($settings['customPatternErrorMessage']);
+		}
+
+		return Craft::t($fieldName . ' is invalid. Required format: ' . $settings['mask']);
 	}
 }

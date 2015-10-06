@@ -74,12 +74,7 @@ class SproutFields_LinkFieldType extends BaseFieldType
 
 		if (!sproutFields()->link->validate($value, $this->model))
 		{
-			if ($settings['customPattern'] && $settings['customPatternErrorMessage'])
-			{
-				return Craft::t($settings['customPatternErrorMessage']);
-			}
-
-			return Craft::t($this->model->name.' must be a valid link.');
+			return craft()->sproutFields_linkField->getErrorMessage($this->model->name, $settings);
 		}
 
 		return true;

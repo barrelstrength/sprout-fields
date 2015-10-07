@@ -99,15 +99,15 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 
 	/**
 	 * Return error message
-	 * 
+	 *
 	 * @param  string $fieldName
 	 * @param  array $settings
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getErrorMessage($fieldName, $settings)
 	{
-		if ($settings['customPattern'] && $settings['customPatternErrorMessage'])
+		if (isset($settings['customPattern']) && isset($settings['customPatternErrorMessage']))
 		{
 			return Craft::t($settings['customPatternErrorMessage']);
 		}

@@ -124,15 +124,15 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 
 	/**
 	 * Return error message
-	 * 
+	 *
 	 * @param  string $fieldName
 	 * @param  array $settings
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getErrorMessage($fieldName, $settings)
 	{
-		if ($settings['customPatternErrorMessage'] != "")
+		if (isset($settings['customPatternErrorMessage']))
 		{
 			 return Craft::t($settings['customPatternErrorMessage']);
 		}

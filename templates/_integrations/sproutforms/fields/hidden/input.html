@@ -1,8 +1,8 @@
-{%- set options = renderingOptions is defined ? renderingOptions : {} %}
-{%- set data = (options.data is defined ? options.data : null) %}
-{%- set class = options.class is defined ? options.class : 'sproutfields-hidden' -%}
-{%- set id = options.id is defined ? options.id : name %}
-{%- set value = value is defined ? value : '' %}
+{%- set type     = field.type|lower %}
+{%- set data     = renderingOptions.data is defined ? renderingOptions.data : null %}
+{%- set id       = renderingOptions.id is defined ? renderingOptions.id : type %}
+{%- set class    = renderingOptions.class is defined ? renderingOptions.class : type %}
+{%- set value    = value is defined ? value : null %}
 {%- set required = field.required is defined and field.required ? " required" %}
 
 {%- set dataAttributes = null %}
@@ -10,4 +10,11 @@
 	{%- set dataAttributes = dataAttributes ~ ' data-'~key~'='~dataValue %}
 {% endfor -%}
 
-<input type="hidden" id="{{ id }}" class="{{ class }}" name="{{ name }}" value="{{ value }}" {{- required -}} {{- dataAttributes -}} >
+<input type="hidden"
+	{%- if id %} id="{{ id }}"{% endif -%}
+	{%- if class %} class="{{ class }}"{% endif -%}
+	{%- if name %} name="{{ name }}"{% endif -%}
+	{%- if value %} value="{{ value }}"{% endif -%}
+	{{- required -}}
+	{{- dataAttributes -}}
+	>

@@ -17,7 +17,7 @@ class SproutFields_HiddenFieldType extends BaseFieldType
 	public function defineSettings()
 	{
 		return array(
-			'allowUpdates' => array(AttributeType::Bool),
+			'allowEdits' => array(AttributeType::Bool),
 			'value' => array(AttributeType::String),
 		);
 	}

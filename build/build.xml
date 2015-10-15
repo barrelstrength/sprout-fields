@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Sprout Forms" default="release">
+
+    <property name="pluginFileName" value="SproutFields" />
+    <property name="pluginName" value="sproutfields" />
+    <property name="pluginVersion" value="1.0.0" />
+
+    <target name="release">
+        <echo msg="Preparing release distro..." />
+        <zip destfile="${pluginFileName}-${pluginVersion}.zip">
+            <fileset dir="../../">
+                <include name="${pluginName}/" />
+                <exclude name="${pluginName}/.git/" />
+                <exclude name="${pluginName}/.gitignore" />
+                <exclude name="${pluginName}/.idea/" />
+                <exclude name="${pluginName}/composer.json" />
+                <exclude name="${pluginName}/phpunit.xml" />
+                <exclude name="${pluginName}/sync.sh" />
+                <exclude name="${pluginName}/build/" />
+                <exclude name="${pluginName}/tests/" />
+                <exclude name="${pluginName}/docs/" />
+            </fileset>
+        </zip>
+        <echo msg="Release for (${pluginName}) has been created!" />
+    </target>
+</project>

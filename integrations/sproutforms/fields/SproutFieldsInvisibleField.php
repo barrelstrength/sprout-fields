@@ -46,7 +46,7 @@ class SproutFieldsInvisibleField extends SproutFormsBaseField
 	{
 		try
 		{
-			$value = craft()->templates->renderObjectTemplate($settings['value'], $this->getContext());
+			$value = craft()->templates->renderObjectTemplate($settings['value'], parent::getFieldVariables());
 		}
 		catch (\Exception $e)
 		{

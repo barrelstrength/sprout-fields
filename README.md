@@ -1,34 +1,30 @@
 Sprout Fields!
 
 - Email Field
+- Hidden Field
+- Invisible Field
 - Link Field
 - Phone Field
 
 Here are some online resources you might find useful:
 
-
 Sprout Fields Docs
 ------------------------------------------------------------
 Code examples, tags, common questions:
-http://sprout.barrelstrengthdesign.com/craft-plugins/email-field
+http://sprout.barrelstrengthdesign.com/craft-plugins/fields
 
 
 Sprout Fields Updates
 ------------------------------------------------------------
-http://sprout.barrelstrengthdesign.com/craft-plugins/email-field/updates
+http://sprout.barrelstrengthdesign.com/craft-plugins/fields/updates
 
 
-Sprout Fields Email Field
+Sprout Fields Support
 ------------------------------------------------------------
-
-Via Craft Stack Exchange: Tag your questions with `plugin-sproutemailfield`:
-https://craftcms.stackexchange.com/
-
-Via Email:
-Send us a note at: sprout@barrelstrengthdesign.com
+http://sprout.barrelstrengthdesign.com/craft-plugins/request/support
 
 
 Sprout Fields License Terms
 ------------------------------------------------------------
-Use of Sprout Email Field is subject to the license agreement available here:
+Use of Sprout Fields is subject to the license agreement available here:
 http://sprout.barrelstrengthdesign.com/license

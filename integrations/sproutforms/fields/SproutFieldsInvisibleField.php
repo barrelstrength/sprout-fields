@@ -24,11 +24,6 @@ class SproutFieldsInvisibleField extends SproutFormsBaseField
 		return true;
 	}
 
-	public function needsGlobalContext()
-	{
-		return true;
-	}
-
 	/**
 	 * I'm invisible, I don't need to show up on the front end
 	 * I do need to save my value to session to retrieve it via prepValueFromPost()

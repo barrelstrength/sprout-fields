@@ -22,11 +22,6 @@ class SproutFieldsHiddenField extends SproutFieldsBaseField
 		return true;
 	}
 
-	public function needsGlobalContext()
-	{
-		return true;
-	}
-
 	/**
 	 * @param FieldModel $field
 	 * @param mixed      $value

@@ -15,28 +15,30 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 	 *
 	 * @return bool|null|string
 	 */
-	public function validate($value, $element, $field)
+	public function validate($value, $elementId, $field)
 	{
 		$customPattern = $field->settings['customPattern'];
 		$checkPattern  = $field->settings['customPatternToggle'];
 
 		if (!$this->validateEmailAddress($value, $customPattern, $checkPattern))
 		{
-			return $this->getErrorMessage($field->name, $field->settings);
+			//$this->getErrorMessage($field->name, $field->settings);
+			return false;
 		}
 
 		$uniqueEmail = $field->settings['uniqueEmail'];
 
-		if ($uniqueEmail && !$this->validateUniqueEmailAddress($value, $element, $field))
+		if ($uniqueEmail && !$this->validateUniqueEmailAddress($value, $elementId, $field))
 		{
-			return Craft::t($field->name.' must be a unique email.');
+			//Craft::t($field->name.' must be a unique email.');
+			return false;
 		}
 
 		return true;
 	}
 
 	/**
-	 * @param $value string current email to valdite
+	 * @param $value string current email to validate
 	 * @param $customPattern string regular expression
 	 * @param $checkPattern bool
 	 *
@@ -72,11 +74,11 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 	 *
 	 * @return bool
 	 */
-	public function validateUniqueEmailAddress($value, $element, $field)
+	public function validateUniqueEmailAddress($value, $elementId, $field)
 	{
+		$element = craft()->elements->getElementById($elementId);
 		$fieldHandle  = $element->fieldColumnPrefix.$field->handle;
 		$contentTable = $element->contentTable;
-		$elementId    = $element->id;
 
 		$emailExists = craft()->db->createCommand()
 			->select($fieldHandle)

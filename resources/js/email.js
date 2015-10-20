@@ -1,4 +1,4 @@
-function checkSproutEmailField(id, fieldHandle, fieldContext) {
+function checkSproutEmailField(id, elementId, fieldHandle, fieldContext) {
 
 	var sproutEmailFieldId = '#' + id;
 	var sproutEmailButtonClass = '.' + id;
@@ -8,8 +8,9 @@ function checkSproutEmailField(id, fieldHandle, fieldContext) {
 	{
 		// Set up data for the controller.
 		var data = {
-			'fieldHandle': fieldHandle,
+			'elementId': elementId,
 			'fieldContext': fieldContext,
+			'fieldHandle': fieldHandle,
 			'value': $(sproutEmailFieldId).val()
 		};
 

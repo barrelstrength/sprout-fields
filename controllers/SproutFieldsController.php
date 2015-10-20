@@ -34,6 +34,7 @@ class SproutFieldsController extends BaseController
 		$this->requireAjaxRequest();
 
 		$value         = craft()->request->getRequiredPost('value');
+		$elementId     = craft()->request->getRequiredPost('elementId');
 		$fieldContext  = craft()->request->getRequiredPost('fieldContext');
 		$fieldHandle   = craft()->request->getRequiredPost('fieldHandle');
 		
@@ -43,15 +44,8 @@ class SproutFieldsController extends BaseController
 		$field = craft()->fields->getFieldByHandle($fieldHandle);
 		
 		craft()->content->fieldContext = $oldFieldContext;
-		
-		$customPattern = false;
 
-		if (isset($field->settings['customPattern']))
-		{
-			$customPattern = $field->settings['customPattern'];
-		}
-
-		if (!craft()->sproutFields_emailField->validateEmailAddress($value, $customPattern))
+		if (!craft()->sproutFields_emailField->validate($value, $elementId, $field))
 		{
 			$this->returnJson(false);
 		}

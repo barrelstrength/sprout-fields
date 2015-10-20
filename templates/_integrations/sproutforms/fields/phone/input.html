@@ -18,7 +18,7 @@
 	{%- if value is not empty %} value="{{ value }}"{% endif %}
 	{%- if pattern is not null %} oninvalid="setCustomValidity('{{ errorMessage|e('js') }}')"{% endif %}
 	{%- if pattern is not null %} oninput="setCustomValidity('')"{% endif %}
-	{%- if pattern is not null %} pattern={{ pattern }}{% endif %}
+	{%- if pattern is not null %} pattern="{{ pattern }}"{% endif %}
 	{{- required -}}
 	{{- dataAttributes -}}
 	>

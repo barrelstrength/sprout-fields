@@ -58,6 +58,7 @@ class SproutFields_EmailFieldType extends BaseFieldType
 				'id'           => $namespaceInputId,
 				'name'         => $name,
 				'value'        => $value,
+				'elementId'    => $this->element->id,
 				'fieldContext' => $this->element->getFieldContext()
 			)
 		);
@@ -75,6 +76,27 @@ class SproutFields_EmailFieldType extends BaseFieldType
 	 */
 	public function validate($value)
 	{
-		return sproutFields()->email->validate($value, $this->element, $this->model);
+		// @TODO - we can improve how this works
+		// inline ajax requests need to return true/false
+		// the CP needs to return true/ErrorMessage
+		// Right now, we have some duplicate code as we didn't plan for that
+
+		$customPattern = $this->model->settings['customPattern'];
+		$checkPattern  = $this->model->settings['customPatternToggle'];
+
+		if (!sproutFields()->email->validateEmailAddress($value, $customPattern, $checkPattern))
+		{
+			return sproutFields()->email->getErrorMessage($this->model->name, $this->model->settings);;
+		}
+
+		$uniqueEmail = $this->model->settings['uniqueEmail'];
+
+		if ($uniqueEmail && !sproutFields()->email->validateUniqueEmailAddress($value, $this->element->id,
+				$this->model))
+		{
+			return Craft::t($this->model->name.' must be a unique email.');
+		}
+
+		return true;
 	}
 }

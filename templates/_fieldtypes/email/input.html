@@ -1,6 +1,5 @@
 {% import "_includes/forms" as forms %}
 
-
 {{ forms.text({
 	id: name,
   name: name,
@@ -15,11 +14,11 @@
 {% set myJs %}
 
 (function() {
-	checkSproutEmailField("{{ id }}", "{{ name }}", "{{ fieldContext }}");
+	checkSproutEmailField("{{ id }}", "{{ elementId }}", "{{ name }}", "{{ fieldContext }}");
 })();
 
-$('input.{{ id }}').on('input', function () {
-	checkSproutEmailField("{{ id }}", "{{ name }}", "{{ fieldContext }}");
+$('input#{{ id }}').on('input', function() {
+	checkSproutEmailField("{{ id }}", "{{ elementId }}", "{{ name }}", "{{ fieldContext }}");
 });
 
 {% endset %}

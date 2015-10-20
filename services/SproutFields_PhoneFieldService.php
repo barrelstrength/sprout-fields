@@ -80,11 +80,11 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 
 			foreach ($hashes as $hash)
 			{
-				$len = strlen($hash);
+				$length = strlen($hash);
 
-				$hashPatterns[$i]['pattern']      = "([0-9]{".$len."})";
+				$hashPatterns[$i]['pattern']      = "([0-9]{".$length."})";
 				$hashPatterns[$i]['hash']         = $hash;
-				$hashPatterns[$i]['preg_replace'] = "([#]{".$len."})";
+				$hashPatterns[$i]['preg_replace'] = "([#]{".$length."})";
 
 				$i++;
 			}
@@ -107,7 +107,7 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 		if ($hashPatterns)
 		{
 			$mask = preg_quote($mask);
-
+			
 			foreach ($hashPatterns as $hashPattern)
 			{
 				$pattern      = $hashPattern['pattern'];
@@ -116,6 +116,7 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 				// Add fourth parameter for non-greedy matching
 				$mask = preg_replace($preg_replace, $pattern, $mask, 1);
 			}
+
 			$regEx = '/^'.$mask.'$/';
 
 			return $regEx;

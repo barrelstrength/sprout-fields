@@ -59,6 +59,14 @@ class SproutFieldsPlugin extends BasePlugin
 			new SproutFieldsInvisibleField(),
 		);
 	}
+
+	public function onAfterInstall()
+	{
+		Craft::import('plugins.sproutfields.helpers.SproutFieldsInstallHelper');
+
+		$helper = new SproutFieldsInstallHelper();
+		$helper->migrateSproutFields();
+	}
 }
 
 /**

@@ -99,4 +99,15 @@ class SproutFields_EmailFieldType extends BaseFieldType
 
 		return true;
 	}
+
+	public function prepSettings($settings)
+	{
+		// Clear input when checkbox is uncheck
+		if(empty($settings['customPatternToggle']))
+		{
+			$settings['customPattern'] = '';
+			$settings['customPatternErrorMessage'] = '';
+		}
+		return $settings;
+	}
 }

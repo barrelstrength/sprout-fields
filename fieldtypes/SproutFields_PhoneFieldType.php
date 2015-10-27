@@ -90,6 +90,11 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 		// Clear input message when checkbox is uncheck
 		if(empty($settings['customPatternToggle']))
 		{
+			// Set mask back to default when uncheck
+			$default = sproutFields()->phone->getDefaultMask();
+
+			$settings['mask'] = $default;
+
 			$settings['customPatternErrorMessage'] = '';
 		}
 		return $settings;

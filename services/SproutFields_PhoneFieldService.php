@@ -133,7 +133,8 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 	 */
 	public function getErrorMessage($fieldName, $settings)
 	{
-		if (isset($settings['customPatternErrorMessage']))
+		// Change empty condition to show default message when toggle settings is unchecked
+		if (!empty($settings['customPatternErrorMessage']))
 		{
 			 return Craft::t($settings['customPatternErrorMessage']);
 		}

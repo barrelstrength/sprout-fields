@@ -68,4 +68,20 @@ class SproutFieldsController extends BaseController
 
 		$this->returnJson(true);
 	}
+
+	public function actionSproutAddress()
+	{
+
+		$countryCode = craft()->request->getPost('countryCode');
+
+		$sproutAddressName = craft()->request->getPost('sproutAddressName');
+		$sproutAddress = craft()->request->getPost('sproutAddress');
+		$sproutAddressNamespaceInputName = craft()->request->getPost('sproutAddressNamespaceInputName');
+
+		$addressField = craft()->sproutFields_addressField->getAddress($sproutAddress);
+
+		craft()->sproutFields_addressFormField->setParams($countryCode, $sproutAddressName, $addressField, $sproutAddressNamespaceInputName);
+		echo craft()->sproutFields_addressFormField->setForm(true);
+		exit;
+	}
 }

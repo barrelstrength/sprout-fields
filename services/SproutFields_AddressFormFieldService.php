@@ -59,6 +59,10 @@ class SproutFields_AddressFormFieldService extends BaseApplicationComponent
 		$format = preg_replace('/%addressLine2/', $this->addressLine('address2'), $format);
 		$format = preg_replace('/%dependentLocality/', $this->dependentLocality(), $format);
 		$format = preg_replace('/%locality/', $this->locality(), $format);
+		if(preg_match('/%sortingCode/', $format))
+		{
+			$format = preg_replace('/%sortingCode/', $this->sortingCode(), $format);
+		}
 		$format = preg_replace('/%administrativeArea/', $this->administrativeArea(), $format);
 		$format = preg_replace('/%postalCode/', $this->postalCode(), $format);
 		$output.= $format;
@@ -98,6 +102,18 @@ class SproutFields_AddressFormFieldService extends BaseApplicationComponent
 
 
 		return $this->renderOutput($output);
+	}
+
+	private function sortingCode()
+	{
+		$output = '';
+		$output .= $this->renderHeading(Craft::t('Sorting Code'));
+		$value = $this->addressField->sortingCode;
+		$output .= "<div class='input'>
+				<input class='text' type='text' name='" . $this->name . "[sortingCode]' value='$value' />
+				</div>";
+
+		return $output;
 	}
 
 	private function locality()

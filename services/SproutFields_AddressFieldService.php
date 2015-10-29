@@ -124,4 +124,38 @@ class SproutFields_AddressFieldService extends BaseApplicationComponent
 		return $record->deleteByPk($id);
 
 	}
+
+	public function getArrayByKey($key, $array)
+	{
+		if(!empty($array))
+		{
+			foreach($array as $arrayKey => $arrayValue)
+			{
+				if($arrayKey == $key)
+				{
+					return $arrayValue;
+				}
+			}
+		}
+	}
+
+	/** Use this to get value of Post request
+	 * @param $fieldPost
+	 * @param $key
+	 * @param $namespace
+	 */
+	public function getMatrixFieldByPost($fieldPost, $namespace, $fieldName)
+	{
+		$namespaceFormat = craft()->templates->formatInputId($namespace);
+		$nameKeys = explode('-', $namespaceFormat);
+
+		$blocks = (array) $fieldPost[$nameKeys[0]][$nameKeys[1]];
+		$intId = (int) $nameKeys[2];
+
+		$arrayValue = (array) craft()->sproutFields_addressField->getArrayByKey($intId, $blocks);
+		$fields = (array) craft()->sproutFields_addressField->getArrayByKey('fields', $arrayValue);
+		$field = (array) craft()->sproutFields_addressField->getArrayByKey($fieldName, $fields);
+
+		return $field;
+	}
 }

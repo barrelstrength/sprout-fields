@@ -57,7 +57,7 @@ class SproutFieldsPlugin extends BasePlugin
 			new SproutFieldsPhoneField(),
 			new SproutFieldsHiddenField(),
 			new SproutFieldsInvisibleField(),
-			new SproutFieldsAddress()
+			new SproutFieldsAddressField()
 		);
 	}
 
@@ -69,19 +69,6 @@ class SproutFieldsPlugin extends BasePlugin
 		$helper->migrateSproutFields();
 	}
 
-	/**
-	 * User for address front end integration
-	 * @return array
-	 */
-	public function registerCpRoutes()
-	{
-
-		return array(
-			'sproutaddressfield/form' => array(
-				'action' => 'sproutFields/sproutAddress'
-			)
-		);
-	}
 }
 
 /**

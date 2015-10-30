@@ -77,7 +77,7 @@ class SproutFields_AddressFormFieldService extends BaseApplicationComponent
 		$output = '';
 		$output.= $this->renderHeading('Country');
 		$countryCode = $this->countryCode;
-		$output.= " <select class='sproutAddressCountry' name='" . $this->name . "[countryCode]'>";
+		$output.= " <select class='sproutAddressCountry' data-namespace='" . $this->namespaceInputName . "' name='" . $this->name . "[countryCode]'>";
 		foreach($countries as $ck => $cv)
 		{
 			$selected = ($ck == $countryCode) ? "selected='selected'" : '';
@@ -235,23 +235,22 @@ class SproutFields_AddressFormFieldService extends BaseApplicationComponent
 		$addressObj = $addressFormatRepository->get($countryCode);
 
 		$postalName = $addressObj->getPostalCodeType();
-
+		$errors = array();
 		if($addressObj->getPostalCodePattern() != null)
 		{
 			$pattern = $addressObj->getPostalCodePattern();
 
 			if (preg_match("/^" . $pattern . "$/", $value['postalCode']))
 			{
-				return "true";
+				return true;
 			} else {
-				return Craft::t(ucwords($postalName)  . ' is invalid.');
+				$errors[] = Craft::t(ucwords($postalName)  . ' is invalid.');
 			}
 		}
-		else
-		{
-			return true;
-		}
 
+		if(!empty($errors)) return $errors;
+
+		return true;
 	}
 
 	private function getCountries()

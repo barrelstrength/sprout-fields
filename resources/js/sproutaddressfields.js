@@ -5,7 +5,7 @@ jQuery(document).ready(function($) {
 		var countryCode = $(this).val();
 
 		var sproutAddresBox = $(this).parents('.sproutaddressfield-box').children('.format-box');
-		$.post('/' + cpTrigger + '/sproutaddressfield/form',
+		$.post("actions/sproutFields/sproutAddress",
 			{ sproutAddressName: sproutAddressName, sproutAddress: sproutAddress, countryCode: countryCode, sproutAddressNamespaceInputName: sproutAddressNamespaceInputName },
 			function(data) {
 				sproutAddresBox.html(data);

@@ -56,7 +56,7 @@ class SproutFields_AddressFieldType extends BaseFieldType
 		$output = "<div class='fieldgroup-box sproutaddressfield-box container-$namespaceInputId'>";
 		$countryCode = (($addressField->countryCode != null) ?  $addressField->countryCode : $this->defaultCountryCode);
 
-		if($this->model->hasErrors() && !empty(craft()->request->getPost()))
+		if(is_array($this->validate($value)) && !empty(craft()->request->getPost()))
 		{
 			// Populate model if submitted data has error
 			$fieldPost = craft()->request->getPost();
@@ -64,7 +64,6 @@ class SproutFields_AddressFieldType extends BaseFieldType
 			{
 				$fields = craft()->sproutFields_addressField->getMatrixFieldByPost($fieldPost, $namespace, $name);
 				$countryCode = craft()->sproutFields_addressField->getArrayByKey('countryCode', $fields);
-
 				$addressField = SproutFields_AddressModel::populateModel($fields);
 			}
 			else
@@ -155,17 +154,17 @@ class SproutFields_AddressFieldType extends BaseFieldType
 
 	public function validate($value)
 	{
-
-		if(craft()->sproutFields_addressFormField->validate($value) == "true")
+		if(is_array(craft()->sproutFields_addressFormField->validate($value)))
 		{
-			return true;
+			return craft()->sproutFields_addressFormField->validate($value);
 		}
 		else
 		{
-
-			$error = craft()->sproutFields_addressFormField->validate($value);
-			$this->model->addError('sproutAddress', $error);
-			return $error;
+			return true;
+//			$error = craft()->sproutFields_addressFormField->validate($value);
+//			$this->model->addError('sproutAddress', $error);
+//			$errorMessage = craft()->sproutFields_addressField->getErrorMessage($this->model->name, $this->model->settings, 'Zip');
+//			return array($errorMessage);
 		}
 	}
 

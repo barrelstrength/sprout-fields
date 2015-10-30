@@ -158,4 +158,5 @@ class SproutFields_AddressFieldService extends BaseApplicationComponent
 
 		return $field;
 	}
+
 }

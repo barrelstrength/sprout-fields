@@ -3,7 +3,7 @@
 namespace Craft;
 
 
-class SproutFieldsAddress extends SproutFieldsBaseField
+class SproutFieldsAddressField extends SproutFieldsBaseField
 {
 
 	/**
@@ -25,7 +25,7 @@ class SproutFieldsAddress extends SproutFieldsBaseField
 		$namespaceInputName = craft()->templates->namespaceInputName($inputId);
 
 		$addressField = new SproutFields_AddressModel;
-		//$addressField = $value;
+
 
 		// Convert to array to pass to JS
 		$elementId = null;

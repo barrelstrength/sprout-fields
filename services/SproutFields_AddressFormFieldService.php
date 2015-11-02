@@ -19,14 +19,16 @@ class SproutFields_AddressFormFieldService extends BaseApplicationComponent
 	private $addressField;
 	private $namespaceInputName;
 	protected $countryCode;
+	private $sproutAddress;
 
-	public function setParams($countryCode, $name, $addressField, $namespaceInputName)
+	public function setParams($countryCode, $name, $sproutAddress, $addressField, $namespaceInputName)
 	{
 
 		$this->name = $name;
+		$this->namespaceInputName = $namespaceInputName;
 		$this->addressField = $addressField;
 		$this->countryCode = $countryCode;
-		$this->namespaceInputName = $namespaceInputName;
+		$this->sproutAddress = $sproutAddress;
 	}
 
 	public function setForm($ajax = false)
@@ -38,7 +40,6 @@ class SproutFields_AddressFormFieldService extends BaseApplicationComponent
 		{
 			$this->name = $this->namespaceInputName;
 		}
-
 		$output = '';
 		$addressRepo = new AddressFormatRepository;
 		$this->subdivisonObj = new SubdivisionRepository;
@@ -77,7 +78,7 @@ class SproutFields_AddressFormFieldService extends BaseApplicationComponent
 		$output = '';
 		$output.= $this->renderHeading('Country');
 		$countryCode = $this->countryCode;
-		$output.= " <select class='sproutAddressCountry' data-namespace='" . $this->namespaceInputName . "' name='" . $this->name . "[countryCode]'>";
+		$output.= " <select class='sproutAddressCountry' data-address='" . $this->sproutAddress . "' data-namespace='" . $this->namespaceInputName . "' name='" . $this->name . "[countryCode]'>";
 		foreach($countries as $ck => $cv)
 		{
 			$selected = ($ck == $countryCode) ? "selected='selected'" : '';
@@ -225,7 +226,10 @@ class SproutFields_AddressFormFieldService extends BaseApplicationComponent
 
 	public function validate($value)
 	{
+		if(!isset($value['countryCode'])) return true;
+
 		$countryCode = $value['countryCode'];
+
 		if(empty($value['postalCode']))
 		{
 			return true;

@@ -79,13 +79,12 @@ class SproutFieldsController extends BaseController
 
 		$countryCode = craft()->request->getPost('countryCode');
 
-		$sproutAddressName = craft()->request->getPost('sproutAddressName');
 		$sproutAddress = craft()->request->getPost('sproutAddress');
-		$sproutAddressNamespaceInputName = craft()->request->getPost('sproutAddressNamespaceInputName');
-		;
+		$namespaceName = craft()->request->getPost('sproutAddressNamespaceInputName');
+
 		$addressField = craft()->sproutFields_addressField->getAddress($sproutAddress);
 
-		craft()->sproutFields_addressFormField->setParams($countryCode, $sproutAddressName, $addressField, $sproutAddressNamespaceInputName);
+		craft()->sproutFields_addressFormField->setParams($countryCode, '', $sproutAddress, $addressField, $namespaceName);
 		echo craft()->sproutFields_addressFormField->setForm(true);
 		exit;
 	}

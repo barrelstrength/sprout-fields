@@ -40,8 +40,8 @@ class SproutFields_AddressFieldType extends BaseFieldType
 	public function getInputHtml($name, $value)
 	{
 		$inputId = craft()->templates->formatInputId($name);
-		$namespaceInputId = craft()->templates->namespaceInputId($inputId);
 		$namespaceInputName = craft()->templates->namespaceInputName($inputId);
+		$namespaceInputId = craft()->templates->namespaceInputId($inputId);
 		$namespace = craft()->templates->getNamespace();
 
 		$addressField = craft()->sproutFields_addressField->getAddress($this);
@@ -52,30 +52,35 @@ class SproutFields_AddressFieldType extends BaseFieldType
 		$fieldId   = $this->model->id;
 
 		$addressFieldArray = array('elementId' => $elementId, 'fieldId' => $fieldId);
+		$sproutAddress = json_encode($addressFieldArray, JSON_PRETTY_PRINT);
 
 		$output = "<div class='fieldgroup-box sproutaddressfield-box container-$namespaceInputId'>";
 		$countryCode = (($addressField->countryCode != null) ?  $addressField->countryCode : $this->defaultCountryCode);
 
-		if(is_array($this->validate($value)) && !empty(craft()->request->getPost()))
+		if(!empty(craft()->request->getPost()))
 		{
-			// Populate model if submitted data has error
 			$fieldPost = craft()->request->getPost();
+
+			// Populate model if submitted data has error
 			if($this->element->getElementType() == 'MatrixBlock')
 			{
 				$fields = craft()->sproutFields_addressField->getMatrixFieldByPost($fieldPost, $namespace, $name);
 				$countryCode = craft()->sproutFields_addressField->getArrayByKey('countryCode', $fields);
-				$addressField = SproutFields_AddressModel::populateModel($fields);
 			}
 			else
 			{
 				$countryCode = $fieldPost['fields'][$name]['countryCode'];
 				$fields = $fieldPost['fields'][$name];
-				$addressField = SproutFields_AddressModel::populateModel($fields);
 			}
 
 
+			if(is_array($this->validate($fields)))
+			{
+				$addressField = SproutFields_AddressModel::populateModel($fields);
+			}
+
 		}
-		craft()->sproutFields_addressFormField->setParams($countryCode, $name, $addressField, $namespaceInputName);
+		craft()->sproutFields_addressFormField->setParams($countryCode, $name, $sproutAddress, $addressField, $namespaceInputName);
 		$output.= craft()->sproutFields_addressFormField->countryInput();
 
 		$output.="<div class='format-box'>";
@@ -88,13 +93,13 @@ class SproutFields_AddressFieldType extends BaseFieldType
 		$output.= "</div>";
 		craft()->templates->includeCssResource('sproutfields/css/sproutaddressfields.css');
 
-		$sproutAddress = json_encode($addressFieldArray, JSON_PRETTY_PRINT);
+
 
 		craft()->templates->includeJsResource('sproutfields/js/SproutAddressField.js');
 		craft()->templates->includeJs("var sproutAddress = " . $sproutAddress);
 		craft()->templates->includeJs("var sproutAddressNamespaceInputName = '" . $namespaceInputName . "'");
 		craft()->templates->includeJs("
-			  new Craft.SproutAddressField(sproutAddress, '$name', sproutAddressNamespaceInputName)
+			  new Craft.SproutAddressField(sproutAddress)
 		");
 		return $output;
 	}

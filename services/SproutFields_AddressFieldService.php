@@ -118,9 +118,7 @@ class SproutFields_AddressFieldService extends BaseApplicationComponent
 	public function deleteAddressById($id = null)
 	{
 		$record = new SproutFields_AddressRecord;
-			
-		// @TODO is this the right way to do this?  
-		// Would this actually return true or false?
+
 		return $record->deleteByPk($id);
 
 	}

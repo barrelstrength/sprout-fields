@@ -35,7 +35,7 @@ class SproutFieldsAddressField extends SproutFieldsBaseField
 		$output = "<div class='fieldgroup-box sproutaddressfield-box container-$name'>";
 		$countryCode = (($addressField->countryCode != null) ?  $addressField->countryCode : 'US');
 
-		if(!empty(craft()->request->getPost()))
+		if(!empty($_POST))
 		{
 			$fieldPost = craft()->request->getPost();
 

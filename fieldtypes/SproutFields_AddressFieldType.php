@@ -57,7 +57,7 @@ class SproutFields_AddressFieldType extends BaseFieldType
 		$output = "<div class='fieldgroup-box sproutaddressfield-box container-$namespaceInputId'>";
 		$countryCode = (($addressField->countryCode != null) ?  $addressField->countryCode : $this->defaultCountryCode);
 
-		if(!empty(craft()->request->getPost()))
+		if(!empty($_POST))
 		{
 			$fieldPost = craft()->request->getPost();
 
@@ -130,11 +130,11 @@ class SproutFields_AddressFieldType extends BaseFieldType
 		$values      = $content->getAttribute($fieldHandle);
 
 		// Make sure we are actually submitting our field
-		if ( ! $values ) return;
+		if ( ! $values )
+		{
+			return;
+		}
 
-		// @TODO
-		// If a field is submitted and all the data is blank, should we
-		// remove the corresponding address record?
 
 		// Add the entry ID to the field data we will submit for One SEO
 		$attributes['elementId'] = $elementId;

@@ -117,7 +117,7 @@ class GenerateAddressFieldsSubscriber implements EventSubscriberInterface
      */
     protected function getFormFields(AddressFormatInterface $addressFormat, $subdivisions)
     {
-        // @todo Add support for having multiple fields in the same line.
+
         $fields = [];
         $labels = $this->getFieldLabels($addressFormat);
         $requiredFields = $addressFormat->getRequiredFields();
@@ -133,7 +133,7 @@ class GenerateAddressFieldsSubscriber implements EventSubscriberInterface
 
         // Add choices for predefined subdivisions.
         foreach ($subdivisions as $field => $parentId) {
-            // @todo Pass the form locale to get the translated values.
+
             $children = $this->subdivisionRepository->getList($addressFormat->getCountryCode(), $parentId);
             if ($children) {
                 $fields[$field]['choices'] = $children;

@@ -76,10 +76,6 @@ class SproutFields_EmailFieldType extends BaseFieldType
 	 */
 	public function validate($value)
 	{
-		// @TODO - we can improve how this works
-		// inline ajax requests need to return true/false
-		// the CP needs to return true/ErrorMessage
-		// Right now, we have some duplicate code as we didn't plan for that
 
 		$customPattern = $this->model->settings['customPattern'];
 		$checkPattern  = $this->model->settings['customPatternToggle'];

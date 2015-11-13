@@ -73,7 +73,7 @@
 			}
 			else
 			{
-				// @todo - this should be updated to validate phone pattern before displaying the call phone buttom
+
 				$(sproutPhoneFieldId).blur(function() {
 					var phoneNumber = $(this).val();
 					var currentDom = this;

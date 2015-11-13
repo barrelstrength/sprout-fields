@@ -57,7 +57,8 @@ class SproutFieldsPlugin extends BasePlugin
 			new SproutFieldsPhoneField(),
 			new SproutFieldsHiddenField(),
 			new SproutFieldsInvisibleField(),
-			new SproutFieldsEmailSelectField()
+			new SproutFieldsEmailSelectField(),
+			new SproutFieldsAddressField()
 		);
 	}
 
@@ -68,6 +69,7 @@ class SproutFieldsPlugin extends BasePlugin
 		$helper = new SproutFieldsInstallHelper();
 		$helper->migrateSproutFields();
 	}
+
 }
 
 /**

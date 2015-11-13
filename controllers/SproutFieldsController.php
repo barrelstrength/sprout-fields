@@ -3,6 +3,9 @@ namespace Craft;
 
 class SproutFieldsController extends BaseController
 {
+
+	protected $allowAnonymous = array('actionSproutAddress');
+
 	public function actionLinkValidate()
 	{
 		$this->requirePostRequest();
@@ -67,5 +70,22 @@ class SproutFieldsController extends BaseController
 		}
 
 		$this->returnJson(true);
+	}
+
+	public function actionSproutAddress()
+	{
+		$this->requirePostRequest();
+		$this->requireAjaxRequest();
+
+		$countryCode = craft()->request->getPost('countryCode');
+
+		$sproutAddress = craft()->request->getPost('sproutAddress');
+		$namespaceName = craft()->request->getPost('sproutAddressNamespaceInputName');
+
+		$addressField = craft()->sproutFields_addressField->getAddress($sproutAddress);
+
+		craft()->sproutFields_addressFormField->setParams($countryCode, '', $sproutAddress, $addressField, $namespaceName);
+		echo craft()->sproutFields_addressFormField->setForm(true);
+		exit;
 	}
 }

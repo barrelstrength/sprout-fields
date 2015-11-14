@@ -83,7 +83,7 @@ class SproutFields_AddressFieldService extends BaseApplicationComponent
 
 		$query = craft()->db->createCommand()
 			->select('*')
-			->from('SproutFields_address')
+			->from('sproutfields_address')
 			->where(
 				array(
 					'AND',
@@ -102,13 +102,13 @@ class SproutFields_AddressFieldService extends BaseApplicationComponent
 	public function createAddressField($attributes)
 	{
 		craft()->db->createCommand()
-						 ->insert('SproutFields_address', $attributes);
+						 ->insert('sproutfields_address', $attributes);
 	}
 
 	public function updateAddressField($id, $attributes)
 	{
 		craft()->db->createCommand()
-		->update('SproutFields_address',
+		->update('sproutfields_address',
 			$attributes,
 			'id = :id', array(':id' => $id)
 		);

@@ -25,19 +25,14 @@ class SproutFieldsEmailSelectField extends SproutFieldsBaseField
 
 		$options = $field->settings['options'];
 
-		// Set template to cpanel to get macro form
-		$oldPath = craft()->path->getTemplatesPath();
-		$newPath = craft()->path->getCpTemplatesPath();
+		$options = craft()->sproutFields_emailSelectField->obfuscateEmailAddresses($options);
 
-		craft()->path->setTemplatesPath($newPath);
-		
-		$rendered = craft()->templates->render('_includes/forms/select', array(
+		$rendered = craft()->templates->render('emailselect/input', array(
 			'name'  => $field->handle,
 			'value'=> $value,
 			'options' => $options,
 		));
 
-		craft()->path->setTemplatesPath($oldPath);
 		$this->endRendering();
 
 		return TemplateHelper::getRaw($rendered);

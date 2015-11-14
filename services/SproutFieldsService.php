@@ -14,6 +14,11 @@ class SproutFieldsService extends BaseApplicationComponent
 	public $email;
 
 	/**
+	 * @var SproutFields_EmailSelectFieldService
+	 */
+	public $emailSelect;
+
+	/**
 	 * @var SproutFields_PhoneFieldService
 	 */
 	public $phone;
@@ -24,6 +29,7 @@ class SproutFieldsService extends BaseApplicationComponent
 
 		$this->link        = Craft::app()->getComponent('sproutFields_linkField');
 		$this->email       = Craft::app()->getComponent('sproutFields_emailField');
+		$this->emailSelect = Craft::app()->getComponent('sproutFields_emailSelectField');
 		$this->phone       = Craft::app()->getComponent('sproutFields_phoneField');
 	}
 }

@@ -1,0 +1,97 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.selectField({
+	id: 'output',
+	name: 'output',
+	label: 'Output As',
+	options: options.output,
+	value: settings.output
+}) }}
+
+
+{{ forms.textareaField({
+	label: 'More Info Instructions',
+	name: 'instructions',
+	class: 'sproutmoreinfo',
+	value: settings.instructions
+}) }}
+
+{{ forms.selectField({
+	id: 'style',
+	name: 'style',
+	label: 'Select Style',
+	instructions: 'Select the style you wish your info field to be.  Create your own styles in the <a href="/admin/settings/plugins/sproutmoreinfo">plugin settings</a>.',
+	options: options.style,
+	value: settings.style
+}) }}
+
+
+<style type="text/css">
+textarea.sproutmoreinfo {
+	min-height: 300px;
+}
+
+{# 
+
+If we do this we need to dynamically add it back when we switch 
+away from this fieldtype, otherwise it remains hidden
+
+#instructions-field {
+	display: none;
+}
+
+#}
+</style>
+
+{#
+	Need Output As field to dynamically update field type to Rich Text when selected.
+	
+	Perhaps also convert Markup to Rich Text when moved from Markup Output As?
+	
+#}
+
+{% includeCssResource "lib/redactor/redactor.css" %}
+
+{% includeJsResource "lib/redactor/redactor.js" %}
+{% includeJsResource "js/RichTextInput.js" %}
+
+{% set redactorScript %}
+$(document).ready(function() {
+	if($("option[value|='richText']").is(":selected")) {
+		$('.sproutmoreinfo').redactor({
+			buttons: ['bold', 'italic', '|', 'unorderedlist', 'orderedlist'],
+			toolbar: true
+		});
+		
+		if ($('.sproutmoreinfo').hasClass('redactor')){
+		} else {
+			$('.sproutmoreinfo').addClass('redactor');
+		}
+	}
+	
+	$('#types-SproutMoreInfo_MoreInfo-output').click(function(){
+		if($("option[value|='richText']").is(":selected")) {
+			$('.sproutmoreinfo').redactor({
+				buttons: ['bold', 'italic', '|', 'unorderedlist', 'orderedlist'],
+				toolbar: true
+			});
+			
+			if ($('.sproutmoreinfo').hasClass('redactor')){
+			} else {
+				$('.sproutmoreinfo').addClass('redactor');
+			}
+		} else if($("option[value|='html']").is(":selected")) {
+			if($('.sproutmoreinfo').hasClass('redactor')) {
+				$('.sproutmoreinfo').redactor('core.destroy').removeClass('redactor');
+			}
+		} else {
+			if($('.sproutmoreinfo').hasClass('redactor')) {
+				$('.sproutmoreinfo').redactor('core.destroy').removeClass('redactor');
+			}
+			$('.sproutmoreinfo').val($('.sproutmoreinfo').text());
+		}
+	});
+});
+{% endset %}
+
+{% includeJs redactorScript %}

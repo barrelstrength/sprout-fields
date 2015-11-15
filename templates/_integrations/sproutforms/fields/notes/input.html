@@ -1,7 +1,7 @@
 {% if settings.output == "html" or settings.output == "richText" %}
-	{{ settings.moreInfoInstructions | raw }}
+	{{ settings.instructions  | raw }}
 {% else %}
-	{{ settings.moreInfoInstructions | markdown }}    
+	{{ settings.instructions | markdown }}
 {% endif %}
 
 {% set css %}

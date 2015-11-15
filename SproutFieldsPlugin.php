@@ -29,7 +29,7 @@ class SproutFieldsPlugin extends BasePlugin
 	 */
 	public function getVersion()
 	{
-		return '1.0.0';
+		return '1.0.1';
 	}
 
 	/**
@@ -51,16 +51,39 @@ class SproutFieldsPlugin extends BasePlugin
 	/**
 	 * @return array
 	 */
+	protected function defineSettings()
+	{
+		return array(
+			'infoPrimaryDocumentation'      => AttributeType::String,
+			'infoSecondaryDocumentation'    => AttributeType::String,
+			'warningDocumentation'          => AttributeType::String,
+			'dangerDocumentation'           => AttributeType::String,
+			'highlightDocumentation'        => AttributeType::String
+		);
+	}
+
+
+	public function getSettingsHtml()
+	{ 
+		return craft()->templates->render('sproutfields/_cp/settings', array(
+			'settings' => $this->getSettings()
+		));
+	}
+
+	/**
+	 * @return array
+	 */
 	public function registerSproutFormsFields()
 	{
 		return array(
-			new SproutFieldsLinkField(),
+			new SproutFieldsAddressField(),
 			new SproutFieldsEmailField(),
-			new SproutFieldsPhoneField(),
+			new SproutFieldsEmailSelectField(),
 			new SproutFieldsHiddenField(),
 			new SproutFieldsInvisibleField(),
-			new SproutFieldsEmailSelectField(),
-			new SproutFieldsAddressField()
+			new SproutFieldsLinkField(),
+			new SproutFieldsPhoneField(),
+			new SproutFieldsNotesField()
 		);
 	}
 
@@ -70,8 +93,8 @@ class SproutFieldsPlugin extends BasePlugin
 
 		$helper = new SproutFieldsInstallHelper();
 		$helper->migrateSproutFields();
+		$helper->installDefaultNotesStyles();
 	}
-
 }
 
 /**

@@ -92,6 +92,7 @@ class SproutFields_NotesFieldType extends BaseFieldType
         }
 
         return craft()->templates->render('sproutfields/_fieldtypes/notes/input', array(
+            'name' => $name,
             'settings' => $settings,
             'selectedStyleCss' => $selectedStyleCss
         ));

@@ -13,24 +13,38 @@
 	available for this in the defaults blocks font icons?
 #}
 {% set css %}
-
+	
 	{{ selectedStyleCss }}
 
 {% endset %}
 
 
-{#  
-	@TODO - allow field to be expanded and collapsed in future 
-#}
 {% set js %}
 
-	{#
-	$('{{ infoFieldCssId }}').on('click', function() {
-		$('{{ infoFieldCssId }}').slideUp('slow', function() {
-		// Animation complete.
+	var notesToggleStatus = localStorage.getItem('fields-{{ name }}-field');
+
+	if (notesToggleStatus == 'hidden')
+	{
+		$('#fields-{{ name }}-field .input').css('display', 'none');
+	}
+
+	$('#fields-{{ name }}-field label').on('click', function() {
+		$('#fields-{{ name }}-field .input').slideToggle('fast', function(test) {
+
+			var visibility = $('#fields-{{ name }}-field .input:hidden');
+
+			if (visibility.length == 0)
+			{
+				localStorage.setItem('fields-{{ name }}-field', 'visible');
+			}
+			else
+			{
+				localStorage.setItem('fields-{{ name }}-field', 'hidden');
+			}
 		});
+
+
 	});
-	#}
 	
 {% endset %}
 

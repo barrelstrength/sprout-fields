@@ -91,11 +91,11 @@ class SproutFields_AddressFieldType extends BaseFieldType
 		$output.="</div>";
 
 		$output.= "</div>";
-		craft()->templates->includeCssResource('sproutfields/css/sproutaddressfields.css');
+		craft()->templates->includeCssResource('sproutfields/css/sproutaddressfield.css');
 
 
 
-		craft()->templates->includeJsResource('sproutfields/js/SproutAddressField.js');
+		craft()->templates->includeJsResource('sproutfields/js/sproutaddressfield.js');
 		craft()->templates->includeJs("var sproutAddress = " . $sproutAddress);
 		craft()->templates->includeJs("var sproutAddressNamespaceInputName = '" . $namespaceInputName . "'");
 		craft()->templates->includeJs("

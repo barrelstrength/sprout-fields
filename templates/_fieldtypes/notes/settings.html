@@ -8,11 +8,12 @@
 	value: settings.output
 }) }}
 
-
 {{ forms.textareaField({
-	label: 'More Info Instructions',
+	label: 'Notes'|t,
+	instructions: 'Add your field notes below. Note: The name of your Notes field above will be used as the first line of
+	your notes.'|t,
 	name: 'instructions',
-	class: 'sproutmoreinfo',
+	class: 'sproutnotes',
 	value: settings.instructions
 }) }}
 
@@ -20,15 +21,15 @@
 	id: 'style',
 	name: 'style',
 	label: 'Select Style',
-	instructions: 'Select the style you wish your info field to be.  Create your own styles in the <a href="/admin/settings/plugins/sproutmoreinfo">plugin settings</a>.',
+	instructions: 'Select the style you wish your info field to be.  Create your own styles in the <a href="/admin/settings/plugins/sproutfields">plugin settings</a>.',
 	options: options.style,
 	value: settings.style
 }) }}
 
 
 <style type="text/css">
-textarea.sproutmoreinfo {
-	min-height: 300px;
+textarea.sproutnotes {
+	min-height: 125px;
 }
 
 {# 
@@ -51,47 +52,52 @@ away from this fieldtype, otherwise it remains hidden
 #}
 
 {% includeCssResource "lib/redactor/redactor.css" %}
-
 {% includeJsResource "lib/redactor/redactor.js" %}
 {% includeJsResource "js/RichTextInput.js" %}
 
-{% set redactorScript %}
+{% set js %}
+
 $(document).ready(function() {
+
 	if($("option[value|='richText']").is(":selected")) {
-		$('.sproutmoreinfo').redactor({
+		$('.sproutnotes').redactor({
 			buttons: ['bold', 'italic', '|', 'unorderedlist', 'orderedlist'],
 			toolbar: true
 		});
-		
-		if ($('.sproutmoreinfo').hasClass('redactor')){
-		} else {
-			$('.sproutmoreinfo').addClass('redactor');
-		}
+
+		$('.sproutnotes').toggleClass('redactor');
 	}
 	
-	$('#types-SproutMoreInfo_MoreInfo-output').click(function(){
+	$('#types-SproutFields_Notes-output-field').on('change', function() {
+
 		if($("option[value|='richText']").is(":selected")) {
-			$('.sproutmoreinfo').redactor({
+
+			$('.sproutnotes').redactor({
 				buttons: ['bold', 'italic', '|', 'unorderedlist', 'orderedlist'],
 				toolbar: true
 			});
-			
-			if ($('.sproutmoreinfo').hasClass('redactor')){
-			} else {
-				$('.sproutmoreinfo').addClass('redactor');
+
+			$('.sproutnotes').toggleClass('redactor');
+		}
+		else if ($("option[value|='html']").is(":selected"))
+		{
+			if($('.sproutnotes').hasClass('redactor'))
+			{
+				$('.sproutnotes').redactor('core.destroy').removeClass('redactor');
 			}
-		} else if($("option[value|='html']").is(":selected")) {
-			if($('.sproutmoreinfo').hasClass('redactor')) {
-				$('.sproutmoreinfo').redactor('core.destroy').removeClass('redactor');
+		}
+		else
+		{
+			if($('.sproutnotes').hasClass('redactor'))
+			{
+				$('.sproutnotes').redactor('core.destroy').removeClass('redactor');
 			}
-		} else {
-			if($('.sproutmoreinfo').hasClass('redactor')) {
-				$('.sproutmoreinfo').redactor('core.destroy').removeClass('redactor');
-			}
-			$('.sproutmoreinfo').val($('.sproutmoreinfo').text());
+
+			$('.sproutnotes').val($('.sproutnotes').text());
 		}
 	});
 });
+
 {% endset %}
 
-{% includeJs redactorScript %}
+{% includeJs js %}

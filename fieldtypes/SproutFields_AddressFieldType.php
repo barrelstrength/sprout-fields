@@ -97,7 +97,6 @@ class SproutFields_AddressFieldType extends BaseFieldType
 
 		craft()->templates->includeJsResource('sproutfields/js/SproutAddressField.js');
 		craft()->templates->includeJs("var sproutAddress = " . $sproutAddress);
-		craft()->templates->includeJs("var sproutAddressNamespaceInputName = '" . $namespaceInputName . "'");
 		craft()->templates->includeJs("
 			  new Craft.SproutAddressField(sproutAddress)
 		");
@@ -166,10 +165,6 @@ class SproutFields_AddressFieldType extends BaseFieldType
 		else
 		{
 			return true;
-//			$error = craft()->sproutFields_addressFormField->validate($value);
-//			$this->model->addError('sproutAddress', $error);
-//			$errorMessage = craft()->sproutFields_addressField->getErrorMessage($this->model->name, $this->model->settings, 'Zip');
-//			return array($errorMessage);
 		}
 	}
 

@@ -1,0 +1,103 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.selectField({
+	id: 'output',
+	name: 'output',
+	label: 'Output As',
+	options: options.output,
+	value: settings.output
+}) }}
+
+{{ forms.textareaField({
+	label: 'Notes'|t,
+	instructions: 'Add your field notes below. Note: The name of your Notes field above will be used as the first line of
+	your notes.'|t,
+	name: 'instructions',
+	class: 'sproutnotes',
+	value: settings.instructions
+}) }}
+
+{{ forms.selectField({
+	id: 'style',
+	name: 'style',
+	label: 'Select Style',
+	instructions: 'Select the style you wish your info field to be.  Create your own styles in the <a href="/admin/settings/plugins/sproutfields">plugin settings</a>.',
+	options: options.style,
+	value: settings.style
+}) }}
+
+
+<style type="text/css">
+textarea.sproutnotes {
+	min-height: 125px;
+}
+
+{# 
+
+If we do this we need to dynamically add it back when we switch 
+away from this fieldtype, otherwise it remains hidden
+
+#instructions-field {
+	display: none;
+}
+
+#}
+</style>
+
+{#
+	Need Output As field to dynamically update field type to Rich Text when selected.
+	
+	Perhaps also convert Markup to Rich Text when moved from Markup Output As?
+	
+#}
+
+{% includeCssResource "lib/redactor/redactor.css" %}
+{% includeJsResource "lib/redactor/redactor.js" %}
+{% includeJsResource "js/RichTextInput.js" %}
+
+{% set js %}
+
+$(document).ready(function() {
+
+	if($("option[value|='richText']").is(":selected")) {
+		$('.sproutnotes').redactor({
+			buttons: ['bold', 'italic', '|', 'unorderedlist', 'orderedlist'],
+			toolbar: true
+		});
+
+		$('.sproutnotes').toggleClass('redactor');
+	}
+	
+	$('#types-SproutFields_Notes-output-field').on('change', function() {
+
+		if($("option[value|='richText']").is(":selected")) {
+
+			$('.sproutnotes').redactor({
+				buttons: ['bold', 'italic', '|', 'unorderedlist', 'orderedlist'],
+				toolbar: true
+			});
+
+			$('.sproutnotes').toggleClass('redactor');
+		}
+		else if ($("option[value|='html']").is(":selected"))
+		{
+			if($('.sproutnotes').hasClass('redactor'))
+			{
+				$('.sproutnotes').redactor('core.destroy').removeClass('redactor');
+			}
+		}
+		else
+		{
+			if($('.sproutnotes').hasClass('redactor'))
+			{
+				$('.sproutnotes').redactor('core.destroy').removeClass('redactor');
+			}
+
+			$('.sproutnotes').val($('.sproutnotes').text());
+		}
+	});
+});
+
+{% endset %}
+
+{% includeJs js %}

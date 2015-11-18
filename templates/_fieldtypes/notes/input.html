@@ -1,0 +1,52 @@
+{% if settings.output == "html" or settings.output == "richText" %}
+	{{ settings.instructions | raw }}
+{% else %}
+	{{ settings.instructions | markdown }}
+{% endif %}
+
+
+{# 
+	Pull in the styles from our settings 
+
+	@TODO - Consider adding small images in the styles to 
+	call out the field headers (i), (!)...  Our there icons
+	available for this in the defaults blocks font icons?
+#}
+{% set css %}
+	
+	{{ selectedStyleCss }}
+
+{% endset %}
+
+
+{% set js %}
+
+	var notesToggleStatus = localStorage.getItem('fields-{{ name }}-field');
+
+	if (notesToggleStatus == 'hidden')
+	{
+		$('#fields-{{ name }}-field .input').css('display', 'none');
+	}
+
+	$('#fields-{{ name }}-field label').on('click', function() {
+		$('#fields-{{ name }}-field .input').slideToggle('fast', function(test) {
+
+			var visibility = $('#fields-{{ name }}-field .input:hidden');
+
+			if (visibility.length == 0)
+			{
+				localStorage.setItem('fields-{{ name }}-field', 'visible');
+			}
+			else
+			{
+				localStorage.setItem('fields-{{ name }}-field', 'hidden');
+			}
+		});
+
+
+	});
+	
+{% endset %}
+
+{% includeCss css %}
+{% includeJs js %}

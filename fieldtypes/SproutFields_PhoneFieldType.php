@@ -49,7 +49,7 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 		craft()->templates->includeJsResource('sproutfields/js/inputmask.js');
 		craft()->templates->includeJsResource('sproutfields/js/jquery.inputmask.js');
 		craft()->templates->includeJsResource('sproutfields/js/PhoneInputMask.js');
-		craft()->templates->includeCssResource('sproutfields/css/phone.css');
+		craft()->templates->includeCssResource('sproutfields/css/sproutphonefield.css');
 
 		return craft()->templates->render('sproutfields/_fieldtypes/phone/input', array(
 			'id' => $namespaceInputId,

@@ -13,31 +13,26 @@ class SproutFieldsEmailSelectField extends SproutFieldsBaseField
 	}
 
 	/**
-	 * Returns the field's input HTML.
+	 * @param FieldModel $field
+	 * @param mixed      $value
+	 * @param mixed      $settings
+	 * @param array|null $renderingOptions
 	 *
-	 * @param string $name
-	 * @param mixed  $value
-	 * @return string
+	 * @return \Twig_Markup
 	 */
 	public function getInputHtml($field, $value, $settings, array $renderingOptions = null)
 	{
 		$this->beginRendering();
 
-		$options = $field->settings['options'];
+		$rendered = craft()->templates->render(
+			'emailselect/input',
+			array(
+				'name'    => $field->handle,
+				'value'   => $value,
+				'options' => $field->settings['maskedOptions'],
+			)
+		);
 
-		// Set template to cpanel to get macro form
-		$oldPath = craft()->path->getTemplatesPath();
-		$newPath = craft()->path->getCpTemplatesPath();
-
-		craft()->path->setTemplatesPath($newPath);
-		
-		$rendered = craft()->templates->render('_includes/forms/select', array(
-			'name'  => $field->handle,
-			'value'=> $value,
-			'options' => $options,
-		));
-
-		craft()->path->setTemplatesPath($oldPath);
 		$this->endRendering();
 
 		return TemplateHelper::getRaw($rendered);

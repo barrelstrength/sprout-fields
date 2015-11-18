@@ -1,0 +1,13 @@
+{% if settings.output == "html" or settings.output == "richText" %}
+	{{ settings.instructions  | raw }}
+{% else %}
+	{{ settings.instructions | markdown }}
+{% endif %}
+
+{% set css %}
+
+	{{ selectedStyleCss }}
+
+{% endset %}
+
+{% includeCss css %}

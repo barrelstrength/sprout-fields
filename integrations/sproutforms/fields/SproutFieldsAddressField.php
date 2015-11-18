@@ -56,11 +56,11 @@ class SproutFieldsAddressField extends SproutFieldsBaseField
 		$output.="</div>";
 
 		$output.= "</div>";
-		craft()->templates->includeCssResource('sproutfields/css/sproutaddressfields.css');
+		craft()->templates->includeCssResource('sproutfields/css/sproutaddressfield.css');
 
 		// Front end ajax
 
-		craft()->templates->includeJsResource('sproutfields/js/sproutaddressfields.js');
+		craft()->templates->includeJsResource('sproutfields/js/sproutaddressfield.js');
 		$rendered = $output;
 		$this->endRendering();
 

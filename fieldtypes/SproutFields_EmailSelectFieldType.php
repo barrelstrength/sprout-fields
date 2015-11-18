@@ -1,14 +1,14 @@
 <?php
 namespace Craft;
 
+/**
+ * Class SproutFields_EmailSelectFieldType
+ *
+ * @package Craft
+ */
 class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 {
-	// Public Methods
-	// =========================================================================
-
 	/**
-	 * @inheritDoc IComponentType::getName()
-	 *
 	 * @return string
 	 */
 	public function getName()
@@ -17,8 +17,6 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 	}
 
 	/**
-	 * @inheritDoc IFieldType::defineContentAttribute()
-	 *
 	 * @return mixed
 	 */
 	public function defineContentAttribute()
@@ -27,8 +25,6 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 	}
 
 	/**
-	 * @inheritDoc IFieldType::getInputHtml()
-	 *
 	 * @param string $name
 	 * @param mixed  $value
 	 *
@@ -44,17 +40,17 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 			$value = $this->getDefaultValue();
 		}
 
-		return craft()->templates->render('_includes/forms/select', array(
+		return craft()->templates->render(
+			'_includes/forms/select', array(
 			'name'    => $name,
 			'value'   => $value,
 			'options' => $options
-		));
+		)
+		);
 	}
 
-		/**
-	 * @inheritDoc BaseElementFieldType::getSettingsHtml()
-	 *
-	 * @return string|null
+	/**
+	 * @return string
 	 */
 	public function getSettingsHtml()
 	{
@@ -62,11 +58,11 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 
 		if (!$options)
 		{
-			// Give it a default row
 			$options = array(array('label' => '', 'value' => ''));
 		}
 
-		return craft()->templates->renderMacro('_includes/forms', 'editableTableField', array(
+		return craft()->templates->renderMacro(
+			'_includes/forms', 'editableTableField', array(
 			array(
 				'label'        => $this->getOptionsSettingsLabel(),
 				'instructions' => Craft::t('Define the available options.'),
@@ -74,50 +70,99 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 				'name'         => 'options',
 				'addRowLabel'  => Craft::t('Add an option'),
 				'cols'         => array(
-					'label' => array(
+					'label'   => array(
 						'heading'      => Craft::t('Name'),
 						'type'         => 'singleline',
 						'autopopulate' => 'value'
 					),
-					'value' => array(
-						'heading'      => Craft::t('Email'),
-						'type'         => 'singleline',
-						'class'        => 'code'
+					'value'   => array(
+						'heading' => Craft::t('Email'),
+						'type'    => 'singleline',
+						'class'   => 'code'
 					),
 					'default' => array(
-						'heading'      => Craft::t('Default?'),
-						'type'         => 'checkbox',
-						'class'        => 'thin'
+						'heading' => Craft::t('Default?'),
+						'type'    => 'checkbox',
+						'class'   => 'thin'
 					),
 				),
-				'rows' => $options
+				'rows'         => $options
 			)
-		));
+		)
+		);
 	}
 
-	// Protected Methods
-	// =========================================================================
+	/**
+	 * @param mixed $value
+	 *
+	 * @return bool|string
+	 */
+	public function validate($value)
+	{
+		if (!filter_var($value, FILTER_VALIDATE_EMAIL))
+		{
+			return "Email does not validate";
+		}
+
+		return true;
+	}
 
 	/**
-	 * @inheritDoc BaseOptionsFieldType::getOptionsSettingsLabel()
+	 * Creates a copy of model.settings.options with all values replaced with indices in model.settings.maskedOptions
 	 *
+	 * @see prepValueFromPost()
+	 *
+	 * @param mixed $value
+	 *
+	 * @return mixed
+	 */
+	public function prepValue($value)
+	{
+		$settings = array();
+
+		foreach ($this->model->settings['options'] as $index => $option)
+		{
+			// Replaces the value in a given option with its index inside settings
+			$option['value'] = $index;
+
+			// Adds the updated/masked option to the masked options list
+			$settings['maskedOptions'][$index] = $option;
+		}
+
+		// Combines default options and masked options inside settings for later retrieval
+		$this->model->setAttribute('settings', array_merge($this->model->settings, $settings));
+
+		unset($settings);
+
+		return $value;
+	}
+
+	/**
+	 * Returns the value inside the model.settings.options identified by the index submitted in $value
+	 *
+	 * @see prepValue()
+	 *
+	 * @param int $value The email address index due to masking on form rendering
+	 *
+	 * @throws Exception
+	 * @return mixed
+	 */
+	public function prepValueFromPost($value)
+	{
+		if (!array_key_exists($value, $this->model->settings['options']))
+		{
+			throw new Exception(Craft::t('Email selection not allowed'));
+		}
+
+		return $this->model->settings['options'][$value]['value'];
+	}
+
+	/**
 	 * @return string
 	 */
 	protected function getOptionsSettingsLabel()
 	{
 		return Craft::t('Dropdown Options');
-	}
-
-
-	public function validate($value)
-	{
-		if(!filter_var($value, FILTER_VALIDATE_EMAIL))
-		{
-			return "Email does not validate";
-		}
-
-		// Return
-		return true;
 	}
 }
 

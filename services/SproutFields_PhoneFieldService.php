@@ -148,16 +148,22 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 			 return Craft::t($settings['customPatternErrorMessage']);
 		}
 
-		return Craft::t($fieldName . ' is invalid. Required format: ' . $settings['mask']);
+		$vars = array('field' => $fieldName, 'format' => $settings['mask']);
+
+		return Craft::t('{field} is invalid. Required format: {format}', $vars);
 	}
 
-
+	/**
+	 * @param string $regex
+	 *
+	 * @return bool
+	 */
 	public function isRegex($regex)
 	{
-		$subject  = "Testing";
-		$response = @preg_match($regex,$subject);
+		$subject  = 'Test String';
+		$response = @preg_match($regex, $subject);
 
-		if($response===False)
+		if ($response === false)
 		{
 			return false;
 		}

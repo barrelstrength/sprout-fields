@@ -13,25 +13,25 @@ class SproutFieldsEmailSelectField extends SproutFieldsBaseField
 	}
 
 	/**
-	 * Returns the field's input HTML.
+	 * @param FieldModel $field
+	 * @param mixed      $value
+	 * @param mixed      $settings
+	 * @param array|null $renderingOptions
 	 *
-	 * @param string $name
-	 * @param mixed  $value
-	 * @return string
+	 * @return \Twig_Markup
 	 */
 	public function getInputHtml($field, $value, $settings, array $renderingOptions = null)
 	{
 		$this->beginRendering();
 
-		$options = $field->settings['options'];
-
-		$options = craft()->sproutFields_emailSelectField->obfuscateEmailAddresses($options);
-
-		$rendered = craft()->templates->render('emailselect/input', array(
-			'name'  => $field->handle,
-			'value'=> $value,
-			'options' => $options,
-		));
+		$rendered = craft()->templates->render(
+			'emailselect/input',
+			array(
+				'name'    => $field->handle,
+				'value'   => $value,
+				'options' => $field->settings['maskedOptions'],
+			)
+		);
 
 		$this->endRendering();
 

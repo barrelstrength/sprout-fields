@@ -9,11 +9,11 @@ namespace Craft;
 class SproutFields_EmailFieldService extends BaseApplicationComponent
 {
 	/**
-	 * @param $value
-	 * @param $element
-	 * @param $field
+	 * @param string     $value
+	 * @param int        $elementId
+	 * @param FieldModel $field
 	 *
-	 * @return bool|null|string
+	 * @return bool
 	 */
 	public function validate($value, $elementId, $field)
 	{
@@ -22,15 +22,11 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 
 		if (!$this->validateEmailAddress($value, $customPattern, $checkPattern))
 		{
-			//$this->getErrorMessage($field->name, $field->settings);
 			return false;
 		}
 
-		$uniqueEmail = $field->settings['uniqueEmail'];
-
-		if ($uniqueEmail && !$this->validateUniqueEmailAddress($value, $elementId, $field))
+		if ($field->settings['uniqueEmail'] && !$this->validateUniqueEmailAddress($value, $elementId, $field))
 		{
-			//Craft::t($field->name.' must be a unique email.');
 			return false;
 		}
 
@@ -38,9 +34,9 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 	}
 
 	/**
-	 * @param $value string current email to validate
+	 * @param $value         string current email to validate
 	 * @param $customPattern string regular expression
-	 * @param $checkPattern bool
+	 * @param $checkPattern  bool
 	 *
 	 * @return bool
 	 */
@@ -68,15 +64,15 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 	}
 
 	/**
-	 * @param $value
-	 * @param $element
-	 * @param $field
+	 * @param string     $value
+	 * @param int        $elementId
+	 * @param FieldModel $field
 	 *
 	 * @return bool
 	 */
 	public function validateUniqueEmailAddress($value, $elementId, $field)
 	{
-		$element = craft()->elements->getElementById($elementId);
+		$element      = craft()->elements->getElementById($elementId);
 		$fieldHandle  = $element->fieldColumnPrefix.$field->handle;
 		$contentTable = $element->contentTable;
 
@@ -100,10 +96,8 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 	}
 
 	/**
-	 * Return error message
-	 *
 	 * @param  string $fieldName
-	 * @param  array $settings
+	 * @param  array  $settings
 	 *
 	 * @return string
 	 */

@@ -31,6 +31,15 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 	 */
 	public function validate($value, $mask)
 	{
+		// Check first if the $mask is a regular expression
+		if ($this->isRegex($mask))
+		{
+			if (preg_match($mask, $value))
+			{
+				return true;
+			}
+		}
+
 		$phonePattern = $this->convertMaskToRegEx($mask);
 
 		if (preg_match($phonePattern, $value))
@@ -107,7 +116,7 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 		if ($hashPatterns)
 		{
 			$mask = preg_quote($mask);
-			
+
 			foreach ($hashPatterns as $hashPattern)
 			{
 				$pattern      = $hashPattern['pattern'];
@@ -141,4 +150,19 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 
 		return Craft::t($fieldName . ' is invalid. Required format: ' . $settings['mask']);
 	}
+
+
+	public function isRegex($regex)
+	{
+		$subject  = "Testing";
+		$response = @preg_match($regex,$subject);
+
+		if($response===False)
+		{
+			return false;
+		}
+
+		return true;
+	}
+
 }

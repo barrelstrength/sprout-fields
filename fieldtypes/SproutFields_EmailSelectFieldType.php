@@ -32,16 +32,14 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 	 */
 	public function getInputHtml($name, $value)
 	{
-		$options = $this->getTranslatedOptions();
+		$options = $this->model->settings['maskedOptions'];
 
 		// If this is a new entry, look for a default option
 		if ($this->isFresh())
 		{
 			$value = $this->getDefaultValue();
 		}
-
-		return craft()->templates->render(
-			'_includes/forms/select', array(
+		return craft()->templates->render('sproutfields/_fieldtypes/emailselect/input', array(
 			'name'    => $name,
 			'value'   => $value,
 			'options' => $options
@@ -134,7 +132,7 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 
 		unset($settings);
 
-		return $value;
+		return $option['value'];
 	}
 
 	/**

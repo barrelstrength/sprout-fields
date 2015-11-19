@@ -74,7 +74,6 @@ class SproutFieldsPlugin extends BasePlugin
 	public function registerSproutFormsFields()
 	{
 		return array(
-			new SproutFieldsAddressField(),
 			new SproutFieldsEmailField(),
 			new SproutFieldsEmailSelectField(),
 			new SproutFieldsHiddenField(),

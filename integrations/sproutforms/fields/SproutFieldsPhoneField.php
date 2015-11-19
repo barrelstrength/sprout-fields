@@ -37,12 +37,7 @@ class SproutFieldsPhoneField extends SproutFieldsBaseField
 		$name             = $field->handle;
 		$namespaceInputId = $this->getNamespace().'-'.$name;
 
-		$pattern = $settings['mask'];
-
-		if(!craft()->sproutFields_phoneField->isRegex($pattern))
-		{
-			$pattern = craft()->sproutFields_phoneField->convertMaskToRegEx($settings['mask']);
-		}
+		$pattern = craft()->sproutFields_phoneField->convertMaskToRegEx($settings['mask']);
 
 		$pattern = trim($pattern, '/');
 

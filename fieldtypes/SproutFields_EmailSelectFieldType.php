@@ -32,19 +32,19 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 	 */
 	public function getInputHtml($name, $value)
 	{
-		$options = $this->model->settings['maskedOptions'];
-
 		// If this is a new entry, look for a default option
 		if ($this->isFresh())
 		{
 			$value = $this->getDefaultValue();
 		}
+
+		$options = $this->model->settings['maskedOptions'];
+
 		return craft()->templates->render('sproutfields/_fieldtypes/emailselect/input', array(
 			'name'    => $name,
 			'value'   => $value,
 			'options' => $options
-		)
-		);
+		));
 	}
 
 	/**
@@ -116,11 +116,16 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 	 */
 	public function prepValue($value)
 	{
+		$maskedValue = $value;
 		$settings = array();
 
 		foreach ($this->model->settings['options'] as $index => $option)
 		{
-			// Replaces the value in a given option with its index inside settings
+			if ($value == $option['value'])
+			{
+				$maskedValue = $index;
+			}
+
 			$option['value'] = $index;
 
 			// Adds the updated/masked option to the masked options list
@@ -130,9 +135,7 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 		// Combines default options and masked options inside settings for later retrieval
 		$this->model->setAttribute('settings', array_merge($this->model->settings, $settings));
 
-		unset($settings);
-
-		return $option['value'];
+		return $maskedValue;
 	}
 
 	/**
@@ -152,7 +155,9 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 			throw new Exception(Craft::t('Email selection not allowed'));
 		}
 
-		return $this->model->settings['options'][$value]['value'];
+		$selectedValue = $this->model->settings['options'][$value]['value'];
+
+		return $selectedValue;
 	}
 
 	/**

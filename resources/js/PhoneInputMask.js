@@ -4,14 +4,21 @@
 	{
 		init: function (id, mask, inputMask, inputDefault) {
 
-			sproutPhoneFieldId = '#' + id;
-			sproutPhoneButtonClass = '.' + id;
+			var sproutPhoneFieldId = '#' + id;
+			var sproutPhoneButtonClass = '.' + id;
 
 			// We use setTimeout to make sure our function works every time
 			setTimeout(function () {
-				// Show call text on initial load if not empty
+
 				var phoneNumber = $(sproutPhoneFieldId).val();
-				showCallText(phoneNumber, sproutPhoneFieldId)
+
+				var data = {
+					'mask'  : mask,
+					'value' : phoneNumber
+				}
+
+				// Determine if we should show Phone link on initial load
+				validatePhoneNumber($(sproutPhoneFieldId), phoneNumber, data);
 			}, 500);
 
 			var maskOptions = {
@@ -71,42 +78,50 @@
 				var maskingOption = maskOptions.checked;
 				$(sproutPhoneFieldId).inputmask(maskingOption);
 			}
-			else
-			{
 
-				$(sproutPhoneFieldId).blur(function() {
-					var phoneNumber = $(this).val();
-					var currentDom = this;
-					var data = {
-						'mask' 		 : mask,
-						'value' : phoneNumber
+			$(sproutPhoneFieldId).on('input', function() {
+				var currentPhoneField = this;
+				var phoneNumber = $(this).val();
+				var data = {
+					'mask'  : mask,
+					'value' : phoneNumber
+				}
+				validatePhoneNumber(currentPhoneField, phoneNumber, data);
+			});
+
+			function validatePhoneNumber(currentPhoneField, phoneNumber, data) {
+
+				Craft.postActionRequest('sproutFields/phoneValidate', data, function(response) {
+					if (response)
+					{
+						console.log('yay');
+						console.log(currentPhoneField);
+						console.log(phoneNumber);
+						console.log(data);
+						showCallText(phoneNumber, currentPhoneField);
 					}
-
-					Craft.postActionRequest('sproutFields/phoneValidate', data, function(response) {
-						if (response)
-						{
-							showCallText(phoneNumber, currentDom)
-						}
-						else
-						{
-							$(sproutPhoneButtonClass).html('');
-						}
-					})
-
-
+					else
+					{
+						console.log('nay');
+						$(currentPhoneField).next('.sprout-phone-button').html('');
+					}
 				})
 			}
 
 			// Show Call Phone Text
-			function showCallText(phoneNumber, sproutPhoneFieldElement) {
+			function showCallText(phoneNumber, currentPhoneField) {
 
-				if (phoneNumber == '') return;
-				$(sproutPhoneFieldElement).next('.sprout-phone-button').addClass('fade');
+				if (phoneNumber == '')
+				{
+					return;
+				}
 
-				$(sproutPhoneFieldElement).next('.sprout-phone-button').html('<a href="tel:' + phoneNumber +
+				$(currentPhoneField).next('.sprout-phone-button').addClass('fade');
+
+				$(currentPhoneField).next('.sprout-phone-button').html('<a href="tel:' + phoneNumber +
 				'" target="_blank">Call Phone &rarr;</a>');
 
-				$(sproutPhoneFieldElement).addClass('complete');
+				$(currentPhoneField).addClass('complete');
 			}
 		}
 	});

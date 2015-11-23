@@ -76,19 +76,17 @@ class SproutFields_EmailFieldType extends BaseFieldType
 	 */
 	public function validate($value)
 	{
-
 		$customPattern = $this->model->settings['customPattern'];
 		$checkPattern  = $this->model->settings['customPatternToggle'];
 
 		if (!sproutFields()->email->validateEmailAddress($value, $customPattern, $checkPattern))
 		{
-			return sproutFields()->email->getErrorMessage($this->model->name, $this->model->settings);;
+			return sproutFields()->email->getErrorMessage($this->model->name, $this->model->settings);
 		}
 
 		$uniqueEmail = $this->model->settings['uniqueEmail'];
 
-		if ($uniqueEmail && !sproutFields()->email->validateUniqueEmailAddress($value, $this->element->id,
-				$this->model))
+		if ($uniqueEmail && !sproutFields()->email->validateUniqueEmailAddress($value, $this->element, $this->model))
 		{
 			return Craft::t($this->model->name.' must be a unique email.');
 		}

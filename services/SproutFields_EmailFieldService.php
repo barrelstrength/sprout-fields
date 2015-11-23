@@ -9,8 +9,8 @@ namespace Craft;
 class SproutFields_EmailFieldService extends BaseApplicationComponent
 {
 	/**
-	 * @param string     $value
-	 * @param int        $elementId
+	 * @param string $value
+	 * @param int $elementId
 	 * @param FieldModel $field
 	 *
 	 * @return bool
@@ -25,7 +25,9 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 			return false;
 		}
 
-		if ($field->settings['uniqueEmail'] && !$this->validateUniqueEmailAddress($value, $elementId, $field))
+		$element = craft()->elements->getElementById($elementId);
+		
+		if ($field->settings['uniqueEmail'] && !$this->validateUniqueEmailAddress($value, $element, $field))
 		{
 			return false;
 		}
@@ -45,7 +47,7 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 		if ($checkPattern)
 		{
 			// Use backticks as delimiters as they are invalid characters for emails
-			$customPattern = "`".$customPattern."`";
+			$customPattern = "`" . $customPattern . "`";
 
 			if (preg_match($customPattern, $value))
 			{
@@ -64,28 +66,29 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 	}
 
 	/**
-	 * @param string     $value
-	 * @param int        $elementId
+	 * @param string $value
+	 * @param int $elementId
 	 * @param FieldModel $field
 	 *
 	 * @return bool
 	 */
-	public function validateUniqueEmailAddress($value, $elementId, $field)
+	public function validateUniqueEmailAddress($value, $element, $field)
 	{
-		$element      = craft()->elements->getElementById($elementId);
-		$fieldHandle  = $element->fieldColumnPrefix.$field->handle;
+		$fieldHandle  = $element->fieldColumnPrefix . $field->handle;
 		$contentTable = $element->contentTable;
 
-		$emailExists = craft()->db->createCommand()
+		$query = craft()->db->createCommand()
 			->select($fieldHandle)
 			->from($contentTable)
-			->where(
-				array(
-					$fieldHandle => $value,
-				)
-			)
-			->andWhere(array('not in', 'elementId', $elementId))
-			->queryScalar();
+			->where(array($fieldHandle => $value));
+
+		if (is_numeric($element->id))
+		{
+			// Exclude current elementId from our results
+			$query->andWhere(array('not in', 'elementId', $element->id));
+		}
+
+		$emailExists = $query->queryScalar();
 
 		if ($emailExists)
 		{
@@ -97,7 +100,7 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 
 	/**
 	 * @param  string $fieldName
-	 * @param  array  $settings
+	 * @param  array $settings
 	 *
 	 * @return string
 	 */
@@ -108,6 +111,6 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 			return Craft::t($settings['customPatternErrorMessage']);
 		}
 
-		return Craft::t($fieldName.' must be a valid email.');
+		return Craft::t($fieldName . ' must be a valid email.');
 	}
 }

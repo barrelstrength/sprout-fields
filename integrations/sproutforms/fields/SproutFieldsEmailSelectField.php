@@ -30,6 +30,7 @@ class SproutFieldsEmailSelectField extends SproutFieldsBaseField
 				'name'    => $field->handle,
 				'value'   => $value,
 				'options' => $field->settings['maskedOptions'],
+				'field'   => $field
 			)
 		);
 

@@ -94,15 +94,10 @@
 				Craft.postActionRequest('sproutFields/phoneValidate', data, function(response) {
 					if (response)
 					{
-						console.log('yay');
-						console.log(currentPhoneField);
-						console.log(phoneNumber);
-						console.log(data);
 						showCallText(phoneNumber, currentPhoneField);
 					}
 					else
 					{
-						console.log('nay');
 						$(currentPhoneField).next('.sprout-phone-button').html('');
 					}
 				})

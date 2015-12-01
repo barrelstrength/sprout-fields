@@ -25,6 +25,14 @@ class SproutFieldsPlugin extends BasePlugin
 	/**
 	 * @return string
 	 */
+	public function getDescription()
+	{
+		return 'Powerful fields. Cleaner data.';
+	}
+
+	/**
+	 * @return string
+	 */
 	public function getVersion()
 	{
 		return '1.0.2';
@@ -44,6 +52,22 @@ class SproutFieldsPlugin extends BasePlugin
 	public function getDeveloperUrl()
 	{
 		return 'http://barrelstrengthdesign.com';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDocumentationUrl()
+	{
+		return "http://sprout.barrelstrengthdesign.com/craft-plugins/fields/docs";
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getReleaseFeedUrl()
+	{
+		return 'http://sprout.barrelstrengthdesign.com/craft-plugins/fields/releases.json';
 	}
 
 	/**

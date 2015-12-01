@@ -67,7 +67,7 @@ class SproutFieldsPlugin extends BasePlugin
 	 */
 	public function getReleaseFeedUrl()
 	{
-		return 'http://sprout.barrelstrengthdesign.com/craft-plugins/fields/releases.json';
+		return 'https://sprout.barrelstrengthdesign.com/craft-plugins/fields/releases.json';
 	}
 
 	/**

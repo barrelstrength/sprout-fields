@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="Sprout Forms" default="release">
+<project name="Sprout Fields" default="release">
 
     <property name="pluginFileName" value="SproutFields" />
     <property name="pluginName" value="sproutfields" />
-    <property name="pluginVersion" value="1.0.2" />
+    <property name="pluginVersion" value="2.0.0" />
 
     <target name="release">
         <echo msg="Preparing release distro..." />

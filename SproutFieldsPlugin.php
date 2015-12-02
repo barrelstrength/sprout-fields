@@ -37,7 +37,7 @@ class SproutFieldsPlugin extends BasePlugin
 	 */
 	public function getVersion()
 	{
-		return '1.0.2';
+		return '2.0.0';
 	}
 
 	/**
@@ -88,7 +88,7 @@ class SproutFieldsPlugin extends BasePlugin
 
 
 	public function getSettingsHtml()
-	{ 
+	{
 		return craft()->templates->render('sproutfields/_cp/settings', array(
 			'settings' => $this->getSettings()
 		));

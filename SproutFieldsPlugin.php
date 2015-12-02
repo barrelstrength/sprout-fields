@@ -12,6 +12,8 @@ class SproutFieldsPlugin extends BasePlugin
 	{
 		Craft::import('plugins.sproutfields.contracts.SproutFieldsBaseField');
 		Craft::import('plugins.sproutfields.integrations.sproutforms.fields.*');
+
+		craft()->on('sproutForms.beforePopulateEntry', array(sproutFields()->emailSelect, 'handleUnobfuscateEmailAddresses'));
 	}
 
 	/**

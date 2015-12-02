@@ -38,7 +38,7 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 			$value = $this->getDefaultValue();
 		}
 
-		$options = $this->model->settings['maskedOptions'];
+		$options = $this->model->settings['options'];
 
 		return craft()->templates->render('sproutfields/_fieldtypes/emailselect/input', array(
 			'name'    => $name,
@@ -103,61 +103,6 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 		}
 
 		return true;
-	}
-
-	/**
-	 * Creates a copy of model.settings.options with all values replaced with indices in model.settings.maskedOptions
-	 *
-	 * @see prepValueFromPost()
-	 *
-	 * @param mixed $value
-	 *
-	 * @return mixed
-	 */
-	public function prepValue($value)
-	{
-		$maskedValue = $value;
-		$settings = array();
-
-		foreach ($this->model->settings['options'] as $index => $option)
-		{
-			if ($value == $option['value'])
-			{
-				$maskedValue = $index;
-			}
-
-			$option['value'] = $index;
-
-			// Adds the updated/masked option to the masked options list
-			$settings['maskedOptions'][$index] = $option;
-		}
-
-		// Combines default options and masked options inside settings for later retrieval
-		$this->model->setAttribute('settings', array_merge($this->model->settings, $settings));
-
-		return $maskedValue;
-	}
-
-	/**
-	 * Returns the value inside the model.settings.options identified by the index submitted in $value
-	 *
-	 * @see prepValue()
-	 *
-	 * @param int $value The email address index due to masking on form rendering
-	 *
-	 * @throws Exception
-	 * @return mixed
-	 */
-	public function prepValueFromPost($value)
-	{
-		if (!array_key_exists($value, $this->model->settings['options']))
-		{
-			throw new Exception(Craft::t('Email selection not allowed'));
-		}
-
-		$selectedValue = $this->model->settings['options'][$value]['value'];
-
-		return $selectedValue;
 	}
 
 	/**

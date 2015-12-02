@@ -1,9 +1,30 @@
-{#
-	@todo - update to use macro
-	@todo - value doesn't repopulate in form if validation fails
-#}
-<select name="{{ name }}">
-	{% for item in options %}
-		<option value="{{ item.value }}">{{ item.label }}</option>
-	{% endfor %}
-</select>
+{%- set type      = field.type|lower %}
+{%- set data      = renderingOptions.data is defined ? renderingOptions.data : null %}
+{%- set id        = renderingOptions.id is defined ? renderingOptions.id : name %}
+{%- set class     = renderingOptions.class is defined ? renderingOptions.class : name %}
+{%- set value     = value is defined ? value : null %}
+{%- set required  = field.required is defined and field.required ? " required" %}
+{%- set options   = options is defined ? options : [] %}
+
+{%- set dataAttributes = null %}
+{%- for key, dataValue in data %}
+	{%- set dataAttributes = dataAttributes ~ ' data-'~key~'='~dataValue %}
+{%- endfor -%}
+
+{% spaceless %}
+	<select
+			{%- if id %} id="{{ id }}"{% endif %}
+			{%- if class %} class="{{ class }}"{% endif %}
+			{%- if name %} name="{{ name }}"{% endif %}
+			{{- required -}}
+			{{- dataAttributes -}}
+	>
+		{%- for key, option in options -%}
+
+			{%- set optionLabel = (option.label is defined ? option.label : null) -%}
+			{%- set optionValue = (option.value is defined ? option.value : key) -%}
+
+			<option value="{{ optionValue }}" {% if optionValue == value %}selected{% endif %}>{{ optionLabel }}</option>
+		{% endfor %}
+	</select>
+{% endspaceless %}

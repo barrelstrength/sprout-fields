@@ -24,12 +24,16 @@ class SproutFieldsEmailSelectField extends SproutFieldsBaseField
 	{
 		$this->beginRendering();
 
+		$options  = $settings['options'];
+		$options  = craft()->sproutFields_emailSelectField->obfuscateEmailAddresses($options);
+
 		$rendered = craft()->templates->render(
 			'emailselect/input',
 			array(
 				'name'    => $field->handle,
-				'value'   => $value,
-				'options' => $field->settings['maskedOptions'],
+				'value'   => $value->getOptions(),
+				'options' => $options,
+				'field'   => $field
 			)
 		);
 

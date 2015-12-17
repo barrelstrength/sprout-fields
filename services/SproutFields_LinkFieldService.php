@@ -50,7 +50,7 @@ class SproutFields_LinkFieldService extends BaseApplicationComponent
 	 */
 	public function getErrorMessage($fieldName, $settings)
 	{
-		if (isset($settings['customPattern']) && isset($settings['customPatternErrorMessage']))
+		if (!empty($settings['customPattern']) && isset($settings['customPatternErrorMessage']))
 		{
 			return Craft::t($settings['customPatternErrorMessage']);
 		}

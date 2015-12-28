@@ -29,7 +29,7 @@ class SproutFieldsPlugin extends BasePlugin
 	 */
 	public function getDescription()
 	{
-		return 'Powerful fields. Cleaner data.';
+		return 'Fabulous fields. Cleaner data.';
 	}
 
 	/**

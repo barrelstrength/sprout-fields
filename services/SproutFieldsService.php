@@ -32,4 +32,27 @@ class SproutFieldsService extends BaseApplicationComponent
 		$this->emailSelect = Craft::app()->getComponent('sproutFields_emailSelectField');
 		$this->phone       = Craft::app()->getComponent('sproutFields_phoneField');
 	}
+
+	/**
+	 * Returns current Field Type context to properly get field settings
+	 *
+	 * @param $fieldType FieldType Object
+	 * @return string
+	 */
+	public function getFieldContext($fieldType)
+	{
+		$context = 'global';
+
+		if($fieldType->model != null)
+		{
+			$context = $fieldType->model->context;
+		}
+
+		if($fieldType->element != null)
+		{
+			$context = $fieldType->element->getFieldContext();
+		}
+
+		return $context;
+	}
 }

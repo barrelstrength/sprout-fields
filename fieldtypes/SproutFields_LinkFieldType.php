@@ -49,7 +49,7 @@ class SproutFields_LinkFieldType extends BaseFieldType
 		$inputId          = craft()->templates->formatInputId($name);
 		$namespaceInputId = craft()->templates->namespaceInputId($inputId);
 
-		$context = sproutFields()->getFieldContext($this);
+		$fieldContext = sproutFields()->getFieldContext($this);
 
 		return craft()->templates->render(
 			'sproutfields/_fieldtypes/link/input',
@@ -57,7 +57,7 @@ class SproutFields_LinkFieldType extends BaseFieldType
 				'id'           => $namespaceInputId,
 				'name'         => $name,
 				'value'        => $value,
-				'fieldContext' => $context
+				'fieldContext' => $fieldContext
 			)
 		);
 	}

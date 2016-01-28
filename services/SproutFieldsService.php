@@ -34,23 +34,23 @@ class SproutFieldsService extends BaseApplicationComponent
 	}
 
 	/**
-	 * Returns current fields context to properly get field settings
+	 * Returns current Field Type context to properly get field settings
 	 *
-	 * @param $class Obj
+	 * @param $fieldType FieldType Object
 	 * @return string
 	 */
-	public function getFieldContext($class)
+	public function getFieldContext($fieldType)
 	{
 		$context = 'global';
 
-		if($class->model != null)
+		if($fieldType->model != null)
 		{
-			$context = $class->model->context;
+			$context = $fieldType->model->context;
 		}
 
-		if($class->element != null)
+		if($fieldType->element != null)
 		{
-			$context = $class->element->getFieldContext();
+			$context = $fieldType->element->getFieldContext();
 		}
 
 		return $context;

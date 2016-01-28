@@ -52,9 +52,9 @@ class SproutFields_EmailFieldType extends BaseFieldType
 		$inputId          = craft()->templates->formatInputId($name);
 		$namespaceInputId = craft()->templates->namespaceInputId($inputId);
 
-		$context = sproutFields()->getFieldContext($this);
+		$fieldContext = sproutFields()->getFieldContext($this);
 
-		// set false if field on quick entry widget
+		// Set this to false for Quick Entry Dashboard Widget
 		$elementId = ($this->element != null) ? $this->element->id : false;
 
 		return craft()->templates->render(
@@ -64,7 +64,7 @@ class SproutFields_EmailFieldType extends BaseFieldType
 				'name'         => $name,
 				'value'        => $value,
 				'elementId'    => $elementId,
-				'fieldContext' => $context
+				'fieldContext' => $fieldContext
 			)
 		);
 	}

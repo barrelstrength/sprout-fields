@@ -7,6 +7,7 @@ class SproutFieldsInstallHelper
 
 	/**
 	 * Install default styles to be used with Notes Field
+	 *
 	 * @return none
 	 */
 	public function installDefaultNotesStyles()
@@ -20,7 +21,7 @@ class SproutFieldsInstallHelper
 			),
 			'class=:class',
 			array(
-				':class'=>'SproutFields'
+				':class' => 'SproutFields'
 			)
 		);
 	}
@@ -34,8 +35,10 @@ class SproutFieldsInstallHelper
 	public function migrateSproutFields()
 	{
 		$fieldClassMap = array(
-			'SproutEmailField_Email' => 'SproutFields_Email',
-			'SproutLinkField_Link' => 'SproutFields_Link'
+			'SproutEmailField_Email'  => 'SproutFields_Email',
+			'SproutLinkField_Link'    => 'SproutFields_Link',
+			'SproutMoreInfo_MoreInfo' => 'SproutFields_Notes',
+			'MoreInfo_MoreInfo'       => 'SproutFields_Notes'
 		);
 
 		if (craft()->db->columnExists('fields', 'type'))

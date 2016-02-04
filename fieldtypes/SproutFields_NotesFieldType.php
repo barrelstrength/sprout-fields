@@ -32,6 +32,18 @@ class SproutFields_NotesFieldType extends BaseFieldType
 	}
 
 	/**
+	 * Define database column
+	 *
+	 * @return false
+	 */
+	public function defineContentAttribute()
+	{
+		// field type doesn’t need its own column
+		// in the content table, return false
+		return false;
+	}
+
+	/**
 	 * @return array
 	 */
 	protected function defineSettings()

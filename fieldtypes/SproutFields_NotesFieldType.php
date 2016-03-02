@@ -79,6 +79,10 @@ class SproutFields_NotesFieldType extends BaseFieldType
 	 */
 	public function getInputHtml($name, $value)
 	{
+
+		$inputId          = craft()->templates->formatInputId($name);
+		$namespaceInputId = craft()->templates->namespaceInputId($inputId);
+
 		$settings       = $this->getSettings();
 		$selectedStyle  = $settings->style;
 		$pluginSettings = craft()->plugins->getPlugin('sproutfields')->getSettings()->getAttributes();
@@ -93,6 +97,7 @@ class SproutFields_NotesFieldType extends BaseFieldType
 		return craft()->templates->render(
 			'sproutfields/_fieldtypes/notes/input',
 			array(
+				'id'               => $namespaceInputId,
 				'name'             => $name,
 				'settings'         => $settings,
 				'selectedStyleCss' => $selectedStyleCss

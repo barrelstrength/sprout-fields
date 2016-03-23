@@ -61,11 +61,16 @@ class SproutFields_NotesFieldType extends BaseFieldType
 	public function getSettingsHtml()
 	{
 		$settings = $this->getSettings();
+		$name = $this->getName();
+		$inputId          = craft()->templates->formatInputId($name);
+		$namespaceInputId = craft()->templates->namespaceInputId($inputId);
 
 		return craft()->templates->render(
 			'sproutfields/_fieldtypes/notes/settings', array(
 				'options'  => $this->options,
-				'settings' => $settings
+				'settings' => $settings,
+				'id'       => $namespaceInputId,
+				'name'     => $name
 			)
 		);
 	}

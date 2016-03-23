@@ -1,7 +1,10 @@
 {% import "_includes/forms" as forms %}
 
+{% set selectId = id ~ "-output" %}
+{% set selectTextarea = id ~ "-textarea" %}
+
 {{ forms.selectField({
-	id: 'output',
+	id: name ~ "-output",
 	name: 'output',
 	label: 'Output As',
 	options: options.output,
@@ -9,6 +12,7 @@
 }) }}
 
 {{ forms.textareaField({
+	id:   name ~ "-textarea",
 	label: 'Notes'|t,
 	instructions: 'Add your field notes below. Note: The name of your Notes field above will be used as the first line of
 	your notes.'|t,
@@ -59,41 +63,44 @@ away from this fieldtype, otherwise it remains hidden
 
 $(document).ready(function() {
 
-	if($("option[value|='richText']").is(":selected")) {
-		$('.sproutnotes').redactor({
+	var initSelectValue = $("{{ '#' ~ selectId }}").val();
+
+	if(initSelectValue == "richText") {
+		$("#{{ selectTextarea }}").redactor({
 			buttons: ['bold', 'italic', '|', 'unorderedlist', 'orderedlist'],
 			toolbar: true
 		});
 
-		$('.sproutnotes').toggleClass('redactor');
+		$("#{{ selectTextarea }}").toggleClass('redactor');
 	}
 	
-	$('#types-SproutFields_Notes-output-field').on('change', function() {
+	$("{{ '#' ~ selectId }}").on('change', function() {
+		var selectedValue = $(this).val();
 
-		if($("option[value|='richText']").is(":selected")) {
+		if(selectedValue == "richText") {
 
-			$('.sproutnotes').redactor({
+			$("#{{ selectTextarea }}").redactor({
 				buttons: ['bold', 'italic', '|', 'unorderedlist', 'orderedlist'],
 				toolbar: true
 			});
 
-			$('.sproutnotes').toggleClass('redactor');
+			$("#{{ selectTextarea }}").toggleClass('redactor');
 		}
-		else if ($("option[value|='html']").is(":selected"))
+		else if (selectedValue == "html")
 		{
-			if($('.sproutnotes').hasClass('redactor'))
+			if($("#{{ selectTextarea }}").hasClass('redactor'))
 			{
-				$('.sproutnotes').redactor('core.destroy').removeClass('redactor');
+				$("#{{ selectTextarea }}").redactor('core.destroy').removeClass('redactor');
 			}
 		}
 		else
 		{
-			if($('.sproutnotes').hasClass('redactor'))
+			if($("#{{ selectTextarea }}").hasClass('redactor'))
 			{
-				$('.sproutnotes').redactor('core.destroy').removeClass('redactor');
+				$("#{{ selectTextarea }}").redactor('core.destroy').removeClass('redactor');
 			}
 
-			$('.sproutnotes').val($('.sproutnotes').text());
+			$("#{{ selectTextarea }}").val($(".{{ selectTextarea }}").text());
 		}
 	});
 });

@@ -35,25 +35,7 @@
 textarea.sproutnotes {
 	min-height: 125px;
 }
-
-{# 
-
-If we do this we need to dynamically add it back when we switch 
-away from this fieldtype, otherwise it remains hidden
-
-#instructions-field {
-	display: none;
-}
-
-#}
 </style>
-
-{#
-	Need Output As field to dynamically update field type to Rich Text when selected.
-	
-	Perhaps also convert Markup to Rich Text when moved from Markup Output As?
-	
-#}
 
 {% includeCssResource "lib/redactor/redactor.css" %}
 {% includeJsResource "lib/redactor/redactor.js" %}
@@ -64,43 +46,46 @@ away from this fieldtype, otherwise it remains hidden
 $(document).ready(function() {
 
 	var initSelectValue = $("{{ '#' ~ selectId }}").val();
+	var textareaInput = $("#{{ selectTextarea }}");
 
-	if(initSelectValue == "richText") {
-		$("#{{ selectTextarea }}").redactor({
+	if (initSelectValue == "richText") {
+		textareaInput.redactor({
 			buttons: ['bold', 'italic', '|', 'unorderedlist', 'orderedlist'],
 			toolbar: true
 		});
 
-		$("#{{ selectTextarea }}").toggleClass('redactor');
+		textareaInput.toggleClass('redactor');
 	}
-	
+
 	$("{{ '#' ~ selectId }}").on('change', function() {
-		var selectedValue = $(this).val();
 
-		if(selectedValue == "richText") {
+		var textareaType = $(this).val();
+		var textareaValue = $("#{{ selectTextarea }}").val();
 
-			$("#{{ selectTextarea }}").redactor({
+		if (textareaType == "richText") {
+
+			textareaInput.redactor({
 				buttons: ['bold', 'italic', '|', 'unorderedlist', 'orderedlist'],
 				toolbar: true
 			});
 
-			$("#{{ selectTextarea }}").toggleClass('redactor');
+			textareaInput.toggleClass('redactor');
 		}
-		else if (selectedValue == "html")
+		else if (textareaType == "html")
 		{
-			if($("#{{ selectTextarea }}").hasClass('redactor'))
+			if (textareaInput.hasClass('redactor'))
 			{
-				$("#{{ selectTextarea }}").redactor('core.destroy').removeClass('redactor');
+				textareaInput.redactor('core.destroy').removeClass('redactor');
 			}
 		}
 		else
 		{
-			if($("#{{ selectTextarea }}").hasClass('redactor'))
+			if (textareaInput.hasClass('redactor'))
 			{
-				$("#{{ selectTextarea }}").redactor('core.destroy').removeClass('redactor');
+				textareaInput.redactor('core.destroy').removeClass('redactor');
 			}
 
-			$("#{{ selectTextarea }}").val($(".{{ selectTextarea }}").text());
+			textareaInput.val(textareaInput.text());
 		}
 	});
 });

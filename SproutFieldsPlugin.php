@@ -12,6 +12,7 @@ class SproutFieldsPlugin extends BasePlugin
 	{
 		Craft::import('plugins.sproutfields.contracts.SproutFieldsBaseField');
 		Craft::import('plugins.sproutfields.integrations.sproutforms.fields.*');
+		Craft::import('plugins.sproutfields.integrations.sproutimport.fields.*');
 
 		craft()->on('sproutForms.beforePopulateEntry', array(sproutFields()->emailSelect, 'handleUnobfuscateEmailAddresses'));
 	}
@@ -115,6 +116,17 @@ class SproutFieldsPlugin extends BasePlugin
 			new SproutFieldsLinkField(),
 			new SproutFieldsPhoneField(),
 			new SproutFieldsNotesField()
+		);
+	}
+
+	/**
+	 * Sprout Import fake data integration
+	 * @return array
+	 */
+	public function registerSproutImportFields()
+	{
+		return array(
+			new SproutFields_EmailSproutImportFieldImporter()
 		);
 	}
 

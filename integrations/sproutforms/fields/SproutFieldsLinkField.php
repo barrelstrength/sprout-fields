@@ -39,7 +39,8 @@ class SproutFieldsLinkField extends SproutFieldsBaseField
 				'field'            => $field,
 				'pattern'          => $settings['customPattern'],
 				'errorMessage'     => $errorMessage,
-				'renderingOptions' => $renderingOptions
+				'renderingOptions' => $renderingOptions,
+				'placeholder'			 => $settings['placeholder']
 			)
 		);
 

@@ -30,10 +30,11 @@ class SproutFieldsEmailSelectField extends SproutFieldsBaseField
 		$rendered = craft()->templates->render(
 			'emailselect/input',
 			array(
-				'name'    => $field->handle,
-				'value'   => $value->getOptions(),
-				'options' => $options,
-				'field'   => $field
+				'name'     => $field->handle,
+				'value'    => $value,
+				'options'  => $options,
+				'settings' => $settings,
+				'field'    => $field
 			)
 		);
 

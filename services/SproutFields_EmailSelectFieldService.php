@@ -33,7 +33,8 @@ class SproutFields_EmailSelectFieldService extends BaseApplicationComponent
 		$oldContext = craft()->content->fieldContext;
 		craft()->content->fieldContext = $fieldContext;
 
-		foreach ($emailSelectFieldHandles as $key => $handle) 
+
+		foreach ($emailSelectFieldHandles as $key => $handle)
 		{
 				if (isset($submittedFields[$handle]))
 				{
@@ -43,11 +44,11 @@ class SproutFields_EmailSelectFieldService extends BaseApplicationComponent
 					$options = $field->settings['options'];
 
 					// Get the obfuscated email index from our post request
-					$emailIndex = $submittedFields[$handle];
+					$emailValue = $submittedFields[$handle];
 
 					// Update the Email Select value in our post request from
 					// the Email Index value to the Email Address
-					$_POST['fields'][$handle] = $options[$emailIndex]['value'];
+					$_POST['fields'][$handle] = $emailValue;
 				}
 		}
 

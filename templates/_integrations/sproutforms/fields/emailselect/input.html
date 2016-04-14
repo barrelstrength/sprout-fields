@@ -4,21 +4,21 @@
 {%- set class     = renderingOptions.class is defined ? renderingOptions.class : name %}
 {%- set value     = value is defined ? value : null %}
 {%- set required  = field.required is defined and field.required ? " required" %}
-{%- set options   = options is defined ? options : [] %}
+{%- set options   = settings.options is defined ? settings.options : [] %}
 
 {%- set dataAttributes = null %}
 {%- for key, dataValue in data %}
-	{%- set dataAttributes = dataAttributes ~ ' data-'~key~'='~dataValue %}
+	{%- set dataAttributes = dataAttributes ~ ' data-'~key~'="'~dataValue~'"' %}
 {%- endfor -%}
 
 {% spaceless %}
 	<select
-			{%- if id %} id="{{ id }}"{% endif %}
-			{%- if class %} class="{{ class }}"{% endif %}
-			{%- if name %} name="{{ name }}"{% endif %}
-			{{- required -}}
-			{{- dataAttributes -}}
-	>
+		{%- if id %} id="{{ id }}"{% endif %}
+		{%- if class %} class="{{ class }}"{% endif %}
+		{%- if name %} name="{{ name }}"{% endif %}
+		{{- required -}}
+		{{- dataAttributes|raw -}}
+		>
 		{%- for key, option in options -%}
 
 			{%- set optionLabel = (option.label is defined ? option.label : null) -%}

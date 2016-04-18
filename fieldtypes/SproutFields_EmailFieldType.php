@@ -20,6 +20,7 @@ class SproutFields_EmailFieldType extends BaseFieldType
 			'customPattern'             => array(AttributeType::String),
 			'customPatternToggle'       => array(AttributeType::Bool),
 			'customPatternErrorMessage' => array(AttributeType::String),
+			'customPlaceholder'         => array(AttributeType::String),
 			'uniqueEmail'               => array(AttributeType::Bool, 'default' => false),
 		);
 	}
@@ -56,6 +57,9 @@ class SproutFields_EmailFieldType extends BaseFieldType
 
 		// Set this to false for Quick Entry Dashboard Widget
 		$elementId = ($this->element != null) ? $this->element->id : false;
+		$settings = $this->model->settings;
+
+		$customPlaceHolder = (!empty($settings['customPlaceholder'])) ? $settings['customPlaceholder'] : "";
 
 		return craft()->templates->render(
 			'sproutfields/_fieldtypes/email/input',
@@ -64,7 +68,8 @@ class SproutFields_EmailFieldType extends BaseFieldType
 				'name'         => $name,
 				'value'        => $value,
 				'elementId'    => $elementId,
-				'fieldContext' => $fieldContext
+				'fieldContext' => $fieldContext,
+				'customPlaceHolder'  => $customPlaceHolder
 			)
 		);
 	}

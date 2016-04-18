@@ -7,6 +7,14 @@
 	toggle: 'sproutemailfield-custom-validation-pattern'
 }) }}
 
+	{{ forms.textField({
+		label: 'Placeholder'|t,
+		instructions: 'Add a placeholder.'|t,
+		name: 'customPlaceholder',
+		placeholder: 'You placeholder text here.',
+		value: settings.customPlaceholder
+	}) }}
+
 <div id="sproutemailfield-custom-validation-pattern" {% if not settings.customPatternToggle %}class="hidden"{% endif %}>
 	{{ forms.textField({
 		label: 'Validation Pattern'|t,

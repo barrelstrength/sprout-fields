@@ -3,7 +3,8 @@
 {{ forms.text({
 	id: name,
   name: name,
-  value: (value is defined) ? value : ''
+  value: (value is defined) ? value : '',
+	placeholder: customPlaceHolder
 }) }}
 
 <span class="sprout-email-button {{ id }}"></span>

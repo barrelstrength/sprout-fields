@@ -1,5 +1,13 @@
 {% import "_includes/forms" as forms %}
 
+{{ forms.textField({
+	label: "Placeholder Text"|t,
+	instructions: "The text that will be shown if the field doesn’t have a value."|t,
+	id: 'placeholder',
+	name: 'placeholder',
+	value: settings.placeholder
+}) }}
+
 {{ forms.checkboxField({
 	label: "Email Addresses for this field have their own validation pattern"|t,
 	name: 'customPatternToggle',
@@ -27,13 +35,6 @@
 
 <hr>
 
-{{ forms.textField({
-	label: "Placeholder Text"|t,
-	instructions: "The text that will be shown if the field doesn’t have a value."|t,
-	id: 'placeholder',
-	name: 'placeholder',
-	value: settings.placeholder
-}) }}
 
 {{ forms.lightswitchField ({
 	label: "Require email address to be unique"|t,

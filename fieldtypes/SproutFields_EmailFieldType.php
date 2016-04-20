@@ -21,7 +21,7 @@ class SproutFields_EmailFieldType extends BaseFieldType
 			'customPatternToggle'       => array(AttributeType::Bool),
 			'customPatternErrorMessage' => array(AttributeType::String),
 			'uniqueEmail'               => array(AttributeType::Bool, 'default' => false),
-			'placeholder'						=> array(AttributeType::String),
+			'placeholder'						    => array(AttributeType::String),
 		);
 	}
 
@@ -69,6 +69,7 @@ class SproutFields_EmailFieldType extends BaseFieldType
 				'elementId'    => $elementId,
 				'fieldContext' => $fieldContext,
 				'placeholder'	 => $settings->placeholder
+
 			)
 		);
 	}

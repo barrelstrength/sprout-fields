@@ -51,12 +51,10 @@ class SproutFieldsPhoneField extends SproutFieldsBaseField
 				'value'            => $value,
 				'settings'         => $settings,
 				'field'            => $field,
-				'mask'             => $settings['mask'],
 				'pattern'          => $pattern,
 				'errorMessage'     => $errorMessage,
 				'namespaceInputId' => $namespaceInputId,
-				'renderingOptions' => $renderingOptions,
-				'placeholder'			 => $settings['placeholder']
+				'renderingOptions' => $renderingOptions
 			)
 		);
 

@@ -27,6 +27,14 @@
 
 <hr>
 
+{{ forms.textField({
+	label: "Placeholder Text"|t,
+	instructions: "The text that will be shown if the field doesn’t have a value."|t,
+	id: 'placeholder',
+	name: 'placeholder',
+	value: settings.placeholder
+}) }}
+
 {{ forms.lightswitchField ({
 	label: "Require email address to be unique"|t,
 	instructions: "Duplicate email addresses saved to this field will not be allowed."|t,

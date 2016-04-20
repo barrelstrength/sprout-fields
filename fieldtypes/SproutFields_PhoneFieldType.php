@@ -23,6 +23,7 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 			'customPatternToggle'       => array(AttributeType::Bool),
 			'inputMask'                 => array(AttributeType::Bool),
 			'mask'                      => array(AttributeType::String, 'default' => $default),
+			'placeholder'						=> array(AttributeType::String),
 		);
 	}
 
@@ -55,7 +56,8 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 			'id' => $namespaceInputId,
 			'name' => $name,
 			'value' => $value,
-			'settings' => $settings
+			'settings' => $settings,
+			'placeholder'	 => $settings->placeholder
 		));
 	}
 

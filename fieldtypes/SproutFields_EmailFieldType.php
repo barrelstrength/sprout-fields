@@ -21,6 +21,7 @@ class SproutFields_EmailFieldType extends BaseFieldType
 			'customPatternToggle'       => array(AttributeType::Bool),
 			'customPatternErrorMessage' => array(AttributeType::String),
 			'uniqueEmail'               => array(AttributeType::Bool, 'default' => false),
+			'placeholder'						=> array(AttributeType::String),
 		);
 	}
 
@@ -52,6 +53,8 @@ class SproutFields_EmailFieldType extends BaseFieldType
 		$inputId          = craft()->templates->formatInputId($name);
 		$namespaceInputId = craft()->templates->namespaceInputId($inputId);
 
+		$settings = $this->getSettings();
+
 		$fieldContext = sproutFields()->getFieldContext($this);
 
 		// Set this to false for Quick Entry Dashboard Widget
@@ -64,7 +67,8 @@ class SproutFields_EmailFieldType extends BaseFieldType
 				'name'         => $name,
 				'value'        => $value,
 				'elementId'    => $elementId,
-				'fieldContext' => $fieldContext
+				'fieldContext' => $fieldContext,
+				'placeholder'	 => $settings->placeholder
 			)
 		);
 	}

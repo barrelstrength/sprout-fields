@@ -26,6 +26,14 @@
 	}) }}
 </div>
 
+{{ forms.textField({
+	label: "Placeholder Text"|t,
+	instructions: "The text that will be shown if the field doesn’t have a value."|t,
+	id: 'placeholder',
+	name: 'placeholder',
+	value: settings.placeholder
+}) }}
+
 {% if craft.request.getSegment(1) != 'sproutforms' %}
 	{{ forms.lightswitchField({
 		label: "Display Pattern Mask?"|t,

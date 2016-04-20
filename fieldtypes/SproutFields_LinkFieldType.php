@@ -20,6 +20,7 @@ class SproutFields_LinkFieldType extends BaseFieldType
 			'customPattern'             => array(AttributeType::String),
 			'customPatternErrorMessage' => array(AttributeType::String),
 			'customPatternToggle'       => array(AttributeType::Bool),
+			'placeholder'						=> array(AttributeType::String),
 		);
 	}
 
@@ -49,6 +50,8 @@ class SproutFields_LinkFieldType extends BaseFieldType
 		$inputId          = craft()->templates->formatInputId($name);
 		$namespaceInputId = craft()->templates->namespaceInputId($inputId);
 
+		$settings = $this->getSettings();
+
 		$fieldContext = sproutFields()->getFieldContext($this);
 
 		return craft()->templates->render(
@@ -57,7 +60,8 @@ class SproutFields_LinkFieldType extends BaseFieldType
 				'id'           => $namespaceInputId,
 				'name'         => $name,
 				'value'        => $value,
-				'fieldContext' => $fieldContext
+				'fieldContext' => $fieldContext,
+				'placeholder'	 => $settings->placeholder
 			)
 		);
 	}

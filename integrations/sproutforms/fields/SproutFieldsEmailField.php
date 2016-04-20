@@ -31,6 +31,8 @@ class SproutFieldsEmailField extends SproutFieldsBaseField
 		$attributes = $field->getAttributes();
 		$errorMessage = craft()->sproutFields_emailField->getErrorMessage($attributes['name'], $settings);
 
+		//Craft::dd($settings['placeholderText']);
+
 		$rendered = craft()->templates->render(
 			'email/input',
 			array(
@@ -39,7 +41,8 @@ class SproutFieldsEmailField extends SproutFieldsBaseField
 				'field'            => $field,
 				'pattern'          => $settings['customPattern'],
 				'errorMessage'     => $errorMessage,
-				'renderingOptions' => $renderingOptions
+				'renderingOptions' => $renderingOptions,
+				'placeholder'			 => $settings['placeholder']
 			)
 		);
 

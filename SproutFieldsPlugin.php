@@ -38,7 +38,7 @@ class SproutFieldsPlugin extends BasePlugin
 	 */
 	public function getVersion()
 	{
-		return '2.0.3';
+		return '2.0.4';
 	}
 
 	/**

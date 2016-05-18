@@ -30,6 +30,7 @@ class SproutFieldsLinkField extends SproutFieldsBaseField
 
 		$attributes = $field->getAttributes();
 		$errorMessage = craft()->sproutFields_linkField->getErrorMessage($attributes['name'], $settings);
+		$placeholder = (isset($settings['placeholder'])) ? $settings['placeholder'] : '';
 
 		$rendered = craft()->templates->render(
 			'link/input',
@@ -40,7 +41,7 @@ class SproutFieldsLinkField extends SproutFieldsBaseField
 				'pattern'          => $settings['customPattern'],
 				'errorMessage'     => $errorMessage,
 				'renderingOptions' => $renderingOptions,
-				'placeholder'			 => $settings['placeholder']
+				'placeholder'			 => $placeholder
 			)
 		);
 

@@ -44,7 +44,8 @@ class SproutFields_EmailSelectFieldService extends BaseApplicationComponent
 					$options = $field->settings['options'];
 
 					// Get the obfuscated email index from our post request
-					$emailValue = $submittedFields[$handle];
+					$index = $submittedFields[$handle];
+					$emailValue = $options[$index]['value'];
 
 					// Update the Email Select value in our post request from
 					// the Email Index value to the Email Address

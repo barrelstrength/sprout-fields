@@ -76,7 +76,7 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 
 		if ($settings['mask'] == "")
 		{
-			$settings['mask'] = craft()->sproutFields_phoneField->getDefaultMask();
+			$settings['mask'] = sproutFields()->phone->getDefaultMask();
 		}
 
 		if (!craft()->sproutFields_phoneField->validate($value, $settings['mask']))

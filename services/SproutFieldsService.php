@@ -55,4 +55,20 @@ class SproutFieldsService extends BaseApplicationComponent
 
 		return $context;
 	}
+
+	public function isAnyOptionsSelected($options)
+	{
+		if (!empty($options))
+		{
+			foreach ($options as $option)
+			{
+				if ($option->selected == true)
+				{
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
 }

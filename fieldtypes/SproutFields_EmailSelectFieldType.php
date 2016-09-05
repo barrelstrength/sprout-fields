@@ -32,8 +32,11 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 	 */
 	public function getInputHtml($name, $value)
 	{
-		// If this is a new entry, look for a default option
-		if ($this->isFresh())
+		$valueOptions = $value->getOptions();
+
+		$anySelected = sproutFields()->isAnyOptionsSelected($valueOptions);
+
+		if ($anySelected === false)
 		{
 			$value = $this->getDefaultValue();
 		}

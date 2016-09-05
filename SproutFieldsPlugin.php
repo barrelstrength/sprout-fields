@@ -138,7 +138,7 @@ class SproutFieldsPlugin extends BasePlugin
 	 * Sprout Import fake data integration
 	 * @return array
 	 */
-	public function registerSproutImportFields()
+	public function registerSproutImportFieldImporters()
 	{
 		return array(
 			new SproutFields_EmailSproutImportFieldImporter(),

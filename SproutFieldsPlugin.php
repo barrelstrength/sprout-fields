@@ -11,8 +11,23 @@ class SproutFieldsPlugin extends BasePlugin
 	public function init()
 	{
 		Craft::import('plugins.sproutfields.contracts.SproutFieldsBaseField');
-		Craft::import('plugins.sproutfields.integrations.sproutforms.fields.*');
-		Craft::import('plugins.sproutfields.integrations.sproutimport.fields.*');
+
+		Craft::import('plugins.sproutfields.integrations.sproutforms.fields.SproutFieldsAddressField');
+		Craft::import('plugins.sproutfields.integrations.sproutforms.fields.SproutFieldsEmailField');
+		Craft::import('plugins.sproutfields.integrations.sproutforms.fields.SproutFieldsEmailSelectField');
+		Craft::import('plugins.sproutfields.integrations.sproutforms.fields.SproutFieldsHiddenField');
+		Craft::import('plugins.sproutfields.integrations.sproutforms.fields.SproutFieldsInvisibleField');
+		Craft::import('plugins.sproutfields.integrations.sproutforms.fields.SproutFieldsLinkField');
+		Craft::import('plugins.sproutfields.integrations.sproutforms.fields.SproutFieldsNotesField');
+		Craft::import('plugins.sproutfields.integrations.sproutforms.fields.SproutFieldsPhoneField');
+
+		Craft::import('plugins.sproutfields.integrations.sproutimport.fields.SproutFields_EmailSproutImportFieldImporter');
+		Craft::import('plugins.sproutfields.integrations.sproutimport.fields.SproutFields_EmailSelectSproutImportFieldImporter');
+		Craft::import('plugins.sproutfields.integrations.sproutimport.fields.SproutFields_HiddenSproutImportFieldImporter');
+		Craft::import('plugins.sproutfields.integrations.sproutimport.fields.SproutFields_InvisibleSproutImportFieldImporter');
+		Craft::import('plugins.sproutfields.integrations.sproutimport.fields.SproutFields_LinkSproutImportFieldImporter');
+		Craft::import('plugins.sproutfields.integrations.sproutimport.fields.SproutFields_NotesSproutImportFieldImporter');
+		Craft::import('plugins.sproutfields.integrations.sproutimport.fields.SproutFields_PhoneSproutImportFieldImporter');
 
 		craft()->on('sproutForms.beforePopulateEntry', array(sproutFields()->emailSelect, 'handleUnobfuscateEmailAddresses'));
 	}
@@ -123,10 +138,16 @@ class SproutFieldsPlugin extends BasePlugin
 	 * Sprout Import fake data integration
 	 * @return array
 	 */
-	public function registerSproutImportFields()
+	public function registerSproutImportFieldImporters()
 	{
 		return array(
-			new SproutFields_EmailSproutImportFieldImporter()
+			new SproutFields_EmailSproutImportFieldImporter(),
+			new SproutFields_EmailSelectSproutImportFieldImporter(),
+			new SproutFields_HiddenSproutImportFieldImporter(),
+			new SproutFields_InvisibleSproutImportFieldImporter(),
+			new SproutFields_LinkSproutImportFieldImporter(),
+			new SproutFields_NotesSproutImportFieldImporter(),
+			new SproutFields_PhoneSproutImportFieldImporter()
 		);
 	}
 

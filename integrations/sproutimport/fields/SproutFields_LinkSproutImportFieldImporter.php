@@ -1,14 +1,14 @@
 <?php
 namespace Craft;
 
-class SproutFields_EmailSproutImportFieldImporter extends BaseSproutImportFieldImporter
+class SproutFields_LinkSproutImportFieldImporter extends BaseSproutImportFieldImporter
 {
 	/**
 	 * @return string
 	 */
 	public function getModelName()
 	{
-		return 'SproutFields_Email';
+		return 'SproutFields_Link';
 	}
 
 	/**
@@ -24,6 +24,6 @@ class SproutFields_EmailSproutImportFieldImporter extends BaseSproutImportFieldI
 			return null;
 		}
 
-		return $this->fakerService->email;
+		return $this->fakerService->url;
 	}
 }

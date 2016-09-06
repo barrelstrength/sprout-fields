@@ -45,7 +45,7 @@ class SproutFieldsInvisibleField extends SproutFormsBaseField
 		}
 		catch (\Exception $e)
 		{
-			SproutInvisibleFieldPlugin::log($e->getMessage());
+			SproutFieldsPlugin::log($e->getMessage());
 		}
 
 		craft()->httpSession->add($field->handle, $value);

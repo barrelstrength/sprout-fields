@@ -14,16 +14,16 @@ class SproutFieldsController extends BaseController
 		$value        = craft()->request->getRequiredPost('value');
 		$fieldContext = craft()->request->getRequiredPost('fieldContext');
 		$fieldHandle  = craft()->request->getRequiredPost('fieldHandle');
-		$field = craft()->fields->getFieldByHandle($fieldHandle);
+		$field        = craft()->fields->getFieldByHandle($fieldHandle);
 
-		$oldFieldContext = craft()->content->fieldContext;
+		$oldFieldContext               = craft()->content->fieldContext;
 		craft()->content->fieldContext = $fieldContext;
 
 		$field = craft()->fields->getFieldByHandle($fieldHandle);
-		
+
 		craft()->content->fieldContext = $oldFieldContext;
 
-		if (!craft()->sproutFields_linkField->validate($value, $field))
+		if (!sproutFields()->link->validate($value, $field))
 		{
 			$this->returnJson(false);
 		}
@@ -36,19 +36,19 @@ class SproutFieldsController extends BaseController
 		$this->requirePostRequest();
 		$this->requireAjaxRequest();
 
-		$value         = craft()->request->getRequiredPost('value');
-		$elementId     = craft()->request->getRequiredPost('elementId');
-		$fieldContext  = craft()->request->getRequiredPost('fieldContext');
-		$fieldHandle   = craft()->request->getRequiredPost('fieldHandle');
-		
-		$oldFieldContext = craft()->content->fieldContext;
+		$value        = craft()->request->getRequiredPost('value');
+		$elementId    = craft()->request->getRequiredPost('elementId');
+		$fieldContext = craft()->request->getRequiredPost('fieldContext');
+		$fieldHandle  = craft()->request->getRequiredPost('fieldHandle');
+
+		$oldFieldContext               = craft()->content->fieldContext;
 		craft()->content->fieldContext = $fieldContext;
 
 		$field = craft()->fields->getFieldByHandle($fieldHandle);
-		
+
 		craft()->content->fieldContext = $oldFieldContext;
 
-		if (!craft()->sproutFields_emailField->validate($value, $elementId, $field))
+		if (!sproutFields()->email->validate($value, $elementId, $field))
 		{
 			$this->returnJson(false);
 		}
@@ -64,7 +64,7 @@ class SproutFieldsController extends BaseController
 		$value = craft()->request->getRequiredPost('value');
 		$mask  = craft()->request->getRequiredPost('mask');
 
-		if (!craft()->sproutFields_phoneField->validate($value, $mask))
+		if (!sproutFields()->phone->validate($value, $mask))
 		{
 			$this->returnJson(false);
 		}

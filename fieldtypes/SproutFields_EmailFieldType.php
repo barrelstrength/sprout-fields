@@ -21,7 +21,7 @@ class SproutFields_EmailFieldType extends BaseFieldType
 			'customPatternToggle'       => array(AttributeType::Bool),
 			'customPatternErrorMessage' => array(AttributeType::String),
 			'uniqueEmail'               => array(AttributeType::Bool, 'default' => false),
-			'placeholder'						    => array(AttributeType::String),
+			'placeholder'               => array(AttributeType::String),
 		);
 	}
 
@@ -68,7 +68,7 @@ class SproutFields_EmailFieldType extends BaseFieldType
 				'value'        => $value,
 				'elementId'    => $elementId,
 				'fieldContext' => $fieldContext,
-				'placeholder'	 => $settings->placeholder
+				'placeholder'  => $settings->placeholder
 
 			)
 		);
@@ -98,7 +98,7 @@ class SproutFields_EmailFieldType extends BaseFieldType
 
 		if ($uniqueEmail && !sproutFields()->email->validateUniqueEmailAddress($value, $this->element, $this->model))
 		{
-			return Craft::t($this->model->name.' must be a unique email.');
+			return Craft::t($this->model->name . ' must be a unique email.');
 		}
 
 		return true;
@@ -107,11 +107,12 @@ class SproutFields_EmailFieldType extends BaseFieldType
 	public function prepSettings($settings)
 	{
 		// Clear input when checkbox is uncheck
-		if(empty($settings['customPatternToggle']))
+		if (empty($settings['customPatternToggle']))
 		{
-			$settings['customPattern'] = '';
+			$settings['customPattern']             = '';
 			$settings['customPatternErrorMessage'] = '';
 		}
+
 		return $settings;
 	}
 }

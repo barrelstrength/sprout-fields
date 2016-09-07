@@ -22,12 +22,12 @@ class m151115_000000_sproutFields_addNotesStyles extends BaseMigration
 			),
 			'class=:class',
 			array(
-				':class'=>'SproutFields'
+				':class' => 'SproutFields'
 			)
 		);
-		
+
 		SproutFieldsPlugin::log("Added default style settings for Notes Field", LogLevel::Info, true);
-		
+
 		return true;
 	}
 }

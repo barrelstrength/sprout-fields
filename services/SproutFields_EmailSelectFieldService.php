@@ -5,7 +5,7 @@ class SproutFields_EmailSelectFieldService extends BaseApplicationComponent
 {
 	public function obfuscateEmailAddresses($options)
 	{
-		foreach ($options as $key => $option) 
+		foreach ($options as $key => $option)
 		{
 			$options[$key]['value'] = $key;
 		}
@@ -15,7 +15,7 @@ class SproutFields_EmailSelectFieldService extends BaseApplicationComponent
 
 	public function unobfuscateEmailAddresses($formId, $submittedFields = array())
 	{
-		if (!is_numeric($formId)) 
+		if (!is_numeric($formId))
 		{
 			return false;
 		}
@@ -26,31 +26,31 @@ class SproutFields_EmailSelectFieldService extends BaseApplicationComponent
 		$emailSelectFieldHandles = craft()->db->createCommand()
 			->select('handle')
 			->from('fields')
-			->where('context=:context', array(':context'=>$fieldContext))
-			->andWhere('type=:type', array(':type'=>'SproutFields_EmailSelect'))
+			->where('context=:context', array(':context' => $fieldContext))
+			->andWhere('type=:type', array(':type' => 'SproutFields_EmailSelect'))
 			->queryColumn();
 
 		$oldContext = craft()->content->fieldContext;
-		craft()->content->fieldContext = $fieldContext;
 
+		craft()->content->fieldContext = $fieldContext;
 
 		foreach ($emailSelectFieldHandles as $key => $handle)
 		{
-				if (isset($submittedFields[$handle]))
-				{
-					// Get our field settings, which include the map of 
-					// email addresses to their indexes
-					$field = craft()->fields->getFieldByHandle($handle);
-					$options = $field->settings['options'];
+			if (isset($submittedFields[$handle]))
+			{
+				// Get our field settings, which include the map of
+				// email addresses to their indexes
+				$field   = craft()->fields->getFieldByHandle($handle);
+				$options = $field->settings['options'];
 
-					// Get the obfuscated email index from our post request
-					$index = $submittedFields[$handle];
-					$emailValue = $options[$index]['value'];
+				// Get the obfuscated email index from our post request
+				$index      = $submittedFields[$handle];
+				$emailValue = $options[$index]['value'];
 
-					// Update the Email Select value in our post request from
-					// the Email Index value to the Email Address
-					$_POST['fields'][$handle] = $emailValue;
-				}
+				// Update the Email Select value in our post request from
+				// the Email Index value to the Email Address
+				$_POST['fields'][$handle] = $emailValue;
+			}
 		}
 
 		craft()->content->fieldContext = $oldContext;
@@ -68,7 +68,7 @@ class SproutFields_EmailSelectFieldService extends BaseApplicationComponent
 			return;
 		}
 
-		$formId = $event->params['form']->id;
+		$formId          = $event->params['form']->id;
 		$submittedFields = craft()->request->getPost('fields');
 
 		// Unobfuscate email address in $_POST request

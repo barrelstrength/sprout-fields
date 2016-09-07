@@ -82,9 +82,9 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 			{
 				$length = strlen($hash);
 
-				$hashPatterns[$i]['pattern']      = "([0-9]{".$length."})";
+				$hashPatterns[$i]['pattern']      = "([0-9]{" . $length . "})";
 				$hashPatterns[$i]['hash']         = $hash;
-				$hashPatterns[$i]['preg_replace'] = "([#]{".$length."})";
+				$hashPatterns[$i]['preg_replace'] = "([#]{" . $length . "})";
 
 				$i++;
 			}
@@ -117,7 +117,7 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 				$mask = preg_replace($preg_replace, $pattern, $mask, 1);
 			}
 
-			$regEx = '/^'.$mask.'$/';
+			$regEx = '/^' . $mask . '$/';
 
 			return $regEx;
 		}
@@ -127,7 +127,7 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 	 * Return error message
 	 *
 	 * @param  string $fieldName
-	 * @param  array $settings
+	 * @param  array  $settings
 	 *
 	 * @return string
 	 */
@@ -136,7 +136,7 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 		// Change empty condition to show default message when toggle settings is unchecked
 		if (!empty($settings['customPatternErrorMessage']))
 		{
-			 return Craft::t($settings['customPatternErrorMessage']);
+			return Craft::t($settings['customPatternErrorMessage']);
 		}
 
 		$vars = array('field' => $fieldName, 'format' => $settings['mask']);

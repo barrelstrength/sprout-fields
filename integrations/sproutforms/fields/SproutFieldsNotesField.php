@@ -30,14 +30,14 @@ class SproutFieldsNotesField extends SproutFieldsBaseField
 		$this->beginRendering();
 
 		$name             = $field->handle;
-		$namespaceInputId = $this->getNamespace().'-'.$name;
+		$namespaceInputId = $this->getNamespace() . '-' . $name;
 
-		$selectedStyle = $settings['style'];
-		$pluginSettings = craft()->plugins->getPlugin('sproutfields')->getSettings()->getAttributes();
+		$selectedStyle    = $settings['style'];
+		$pluginSettings   = craft()->plugins->getPlugin('sproutfields')->getSettings()->getAttributes();
 		$selectedStyleCss = str_replace("{{ name }}", $name, $pluginSettings[$selectedStyle]);
-		
+
 		$rendered = craft()->templates->render('notes/input', array(
-			'settings' => $settings,
+			'settings'         => $settings,
 			'selectedStyleCss' => $selectedStyleCss
 		));
 

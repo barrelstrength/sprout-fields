@@ -9,8 +9,8 @@ namespace Craft;
 class SproutFields_EmailFieldService extends BaseApplicationComponent
 {
 	/**
-	 * @param string $value
-	 * @param int $elementId
+	 * @param string     $value
+	 * @param int        $elementId
 	 * @param FieldModel $field
 	 *
 	 * @return bool
@@ -26,7 +26,7 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 		}
 
 		$element = craft()->elements->getElementById($elementId);
-		
+
 		if ($field->settings['uniqueEmail'] && !$this->validateUniqueEmailAddress($value, $element, $field))
 		{
 			return false;
@@ -66,8 +66,8 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 	}
 
 	/**
-	 * @param string $value
-	 * @param int $elementId
+	 * @param string     $value
+	 * @param int        $elementId
 	 * @param FieldModel $field
 	 *
 	 * @return bool
@@ -100,7 +100,7 @@ class SproutFields_EmailFieldService extends BaseApplicationComponent
 
 	/**
 	 * @param  string $fieldName
-	 * @param  array $settings
+	 * @param  array  $settings
 	 *
 	 * @return string
 	 */

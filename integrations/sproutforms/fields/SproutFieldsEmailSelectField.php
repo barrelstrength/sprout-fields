@@ -3,7 +3,6 @@ namespace Craft;
 
 class SproutFieldsEmailSelectField extends SproutFieldsBaseField
 {
-
 	/**
 	 * @return string
 	 */
@@ -24,8 +23,8 @@ class SproutFieldsEmailSelectField extends SproutFieldsBaseField
 	{
 		$this->beginRendering();
 
-		$options  = $settings['options'];
-		$options  = sproutFields()->emailSelect->obfuscateEmailAddresses($options);
+		$options = $settings['options'];
+		$options = sproutFields()->emailSelect->obfuscateEmailAddresses($options, $value->value);
 
 		$rendered = craft()->templates->render(
 			'emailselect/input',

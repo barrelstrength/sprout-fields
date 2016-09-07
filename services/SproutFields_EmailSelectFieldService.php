@@ -3,11 +3,20 @@ namespace Craft;
 
 class SproutFields_EmailSelectFieldService extends BaseApplicationComponent
 {
-	public function obfuscateEmailAddresses($options)
+	public function obfuscateEmailAddresses($options, $value = null)
 	{
 		foreach ($options as $key => $option)
 		{
 			$options[$key]['value'] = $key;
+
+			if ($option['value'] == $value)
+			{
+				$options[$key]['selected'] = 1;
+			}
+			else
+			{
+				$options[$key]['selected'] = 0;
+			}
 		}
 
 		return $options;

@@ -13,6 +13,6 @@ abstract class SproutFieldsBaseField extends SproutFormsBaseField
 	 */
 	public function getTemplatesPath()
 	{
-		return craft()->path->getPluginsPath().'sproutfields/templates/_integrations/sproutforms/fields/';
+		return craft()->path->getPluginsPath() . 'sproutfields/templates/_integrations/sproutforms/fields/';
 	}
 }

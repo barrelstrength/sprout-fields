@@ -3,8 +3,8 @@ namespace Craft;
 
 class SproutFieldsVariable
 {
-	public function obfuscateEmailAddresses($options)
+	public function obfuscateEmailAddresses($options, $value = null)
 	{
-		return craft()->sproutFields_emailSelectField->obfuscateEmailAddresses($options);
+		return sproutFields()->emailSelect->obfuscateEmailAddresses($options, $value);
 	}
 }

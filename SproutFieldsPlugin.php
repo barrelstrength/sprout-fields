@@ -102,14 +102,13 @@ class SproutFieldsPlugin extends BasePlugin
 	protected function defineSettings()
 	{
 		return array(
-			'infoPrimaryDocumentation'      => AttributeType::String,
-			'infoSecondaryDocumentation'    => AttributeType::String,
-			'warningDocumentation'          => AttributeType::String,
-			'dangerDocumentation'           => AttributeType::String,
-			'highlightDocumentation'        => AttributeType::String
+			'infoPrimaryDocumentation'   => AttributeType::String,
+			'infoSecondaryDocumentation' => AttributeType::String,
+			'warningDocumentation'       => AttributeType::String,
+			'dangerDocumentation'        => AttributeType::String,
+			'highlightDocumentation'     => AttributeType::String
 		);
 	}
-
 
 	public function getSettingsHtml()
 	{
@@ -136,6 +135,7 @@ class SproutFieldsPlugin extends BasePlugin
 
 	/**
 	 * Sprout Import fake data integration
+	 *
 	 * @return array
 	 */
 	public function registerSproutImportFieldImporters()

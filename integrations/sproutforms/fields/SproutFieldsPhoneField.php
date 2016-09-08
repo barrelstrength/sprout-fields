@@ -35,14 +35,14 @@ class SproutFieldsPhoneField extends SproutFieldsBaseField
 		$this->beginRendering();
 
 		$name             = $field->handle;
-		$namespaceInputId = $this->getNamespace().'-'.$name;
+		$namespaceInputId = $this->getNamespace() . '-' . $name;
 
-		$pattern = craft()->sproutFields_phoneField->convertMaskToRegEx($settings['mask']);
+		$pattern = sproutFields()->phone->convertMaskToRegEx($settings['mask']);
 
 		$pattern = trim($pattern, '/');
 
-		$attributes = $field->getAttributes();
-		$errorMessage = craft()->sproutFields_phoneField->getErrorMessage($attributes['name'], $settings);
+		$attributes   = $field->getAttributes();
+		$errorMessage = sproutFields()->phone->getErrorMessage($attributes['name'], $settings);
 
 		$rendered = craft()->templates->render(
 			'phone/input',

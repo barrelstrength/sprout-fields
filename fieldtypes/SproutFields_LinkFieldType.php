@@ -20,7 +20,7 @@ class SproutFields_LinkFieldType extends BaseFieldType
 			'customPattern'             => array(AttributeType::String),
 			'customPatternErrorMessage' => array(AttributeType::String),
 			'customPatternToggle'       => array(AttributeType::Bool),
-			'placeholder'						=> array(AttributeType::String),
+			'placeholder'               => array(AttributeType::String),
 		);
 	}
 
@@ -61,7 +61,7 @@ class SproutFields_LinkFieldType extends BaseFieldType
 				'name'         => $name,
 				'value'        => $value,
 				'fieldContext' => $fieldContext,
-				'placeholder'	 => $settings->placeholder
+				'placeholder'  => $settings->placeholder
 			)
 		);
 	}
@@ -80,21 +80,21 @@ class SproutFields_LinkFieldType extends BaseFieldType
 
 		if (!sproutFields()->link->validate($value, $this->model))
 		{
-			return craft()->sproutFields_linkField->getErrorMessage($this->model->name, $settings);
+			return sproutFields()->link->getErrorMessage($this->model->name, $settings);
 		}
 
 		return true;
 	}
 
-
 	public function prepSettings($settings)
 	{
 		// Clear input when checkbox is uncheck
-		if(empty($settings['customPatternToggle']))
+		if (empty($settings['customPatternToggle']))
 		{
-			$settings['customPattern'] = '';
+			$settings['customPattern']             = '';
 			$settings['customPatternErrorMessage'] = '';
 		}
+
 		return $settings;
 	}
 }

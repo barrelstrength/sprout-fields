@@ -18,7 +18,7 @@ class SproutFields_HiddenFieldType extends BaseFieldType
 	{
 		return array(
 			'allowEdits' => array(AttributeType::Bool),
-			'value' => array(AttributeType::String),
+			'value'      => array(AttributeType::String),
 		);
 	}
 

@@ -24,7 +24,7 @@ class SproutFields_LinkFieldService extends BaseApplicationComponent
 			// Use backticks as delimiters as they are invalid characters for emails
 			$customPattern = "`" . $customPattern . "`";
 
-			if(preg_match($customPattern, $value))
+			if (preg_match($customPattern, $value))
 			{
 				return true;
 			}
@@ -44,7 +44,7 @@ class SproutFields_LinkFieldService extends BaseApplicationComponent
 	 * Return error message
 	 *
 	 * @param  string $fieldName
-	 * @param  array $settings
+	 * @param  array  $settings
 	 *
 	 * @return string
 	 */

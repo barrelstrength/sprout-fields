@@ -20,8 +20,8 @@ class SproutFields_InvisibleFieldType extends BaseFieldType
 	{
 		return array(
 			'allowEdits' => array(AttributeType::Bool),
-			'hideValue' => array(AttributeType::Bool),
-			'value' => array(AttributeType::String),
+			'hideValue'  => array(AttributeType::Bool),
+			'value'      => array(AttributeType::String),
 		);
 	}
 

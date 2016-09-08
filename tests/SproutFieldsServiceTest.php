@@ -21,7 +21,7 @@ class SproutFieldsTest extends BaseTest
 
 		foreach ($bools as $bool)
 		{
-			$object = new \stdClass();
+			$object           = new \stdClass();
 			$object->selected = $bool;
 
 			$options[] = $object;
@@ -35,7 +35,7 @@ class SproutFieldsTest extends BaseTest
 
 		foreach ($bools as $bool)
 		{
-			$object = new \stdClass();
+			$object           = new \stdClass();
 			$object->selected = $bool;
 
 			$options[] = $object;
@@ -51,12 +51,12 @@ class SproutFieldsTest extends BaseTest
 		$dir = __DIR__;
 
 		$map = array(
-			'\\Craft\\SproutFieldsService'	=> '/../services/SproutFieldsService.php'
+			'\\Craft\\SproutFieldsService' => '/../services/SproutFieldsService.php'
 		);
 
-		foreach($map as $class => $path)
+		foreach ($map as $class => $path)
 		{
-			if(!class_exists($class))
+			if (!class_exists($class))
 			{
 				require $dir . $path;
 			}

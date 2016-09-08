@@ -60,8 +60,8 @@ class SproutFields_NotesFieldType extends BaseFieldType
 	 */
 	public function getSettingsHtml()
 	{
-		$settings = $this->getSettings();
-		$name = $this->getName();
+		$settings         = $this->getSettings();
+		$name             = $this->getName();
 		$inputId          = craft()->templates->formatInputId($name);
 		$namespaceInputId = craft()->templates->namespaceInputId($inputId);
 

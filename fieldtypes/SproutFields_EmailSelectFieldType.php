@@ -64,32 +64,32 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 
 		return craft()->templates->renderMacro(
 			'_includes/forms', 'editableTableField', array(
-			array(
-				'label'        => $this->getOptionsSettingsLabel(),
-				'instructions' => Craft::t('Define the available options.'),
-				'id'           => 'options',
-				'name'         => 'options',
-				'addRowLabel'  => Craft::t('Add an option'),
-				'cols'         => array(
-					'label'   => array(
-						'heading'      => Craft::t('Name'),
-						'type'         => 'singleline',
-						'autopopulate' => 'value'
+				array(
+					'label'        => $this->getOptionsSettingsLabel(),
+					'instructions' => Craft::t('Define the available options.'),
+					'id'           => 'options',
+					'name'         => 'options',
+					'addRowLabel'  => Craft::t('Add an option'),
+					'cols'         => array(
+						'label'   => array(
+							'heading'      => Craft::t('Name'),
+							'type'         => 'singleline',
+							'autopopulate' => 'value'
+						),
+						'value'   => array(
+							'heading' => Craft::t('Email'),
+							'type'    => 'singleline',
+							'class'   => 'code'
+						),
+						'default' => array(
+							'heading' => Craft::t('Default?'),
+							'type'    => 'checkbox',
+							'class'   => 'thin'
+						),
 					),
-					'value'   => array(
-						'heading' => Craft::t('Email'),
-						'type'    => 'singleline',
-						'class'   => 'code'
-					),
-					'default' => array(
-						'heading' => Craft::t('Default?'),
-						'type'    => 'checkbox',
-						'class'   => 'thin'
-					),
-				),
-				'rows'         => $options
+					'rows'         => $options
+				)
 			)
-		)
 		);
 	}
 

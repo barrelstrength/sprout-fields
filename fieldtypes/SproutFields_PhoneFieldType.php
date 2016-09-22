@@ -1,7 +1,7 @@
 <?php
 namespace Craft;
 
-class SproutFields_PhoneFieldType extends BaseFieldType
+class SproutFields_PhoneFieldType extends BaseFieldType implements IPreviewableFieldType
 {
 	/**
 	 * @return string
@@ -27,6 +27,9 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 		);
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getSettingsHtml()
 	{
 		return craft()->templates->render('sproutfields/_fieldtypes/phone/settings', array(
@@ -88,6 +91,11 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 		return true;
 	}
 
+	/**
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
 	public function prepSettings($settings)
 	{
 		// Clear input message when checkbox is uncheck
@@ -102,5 +110,17 @@ class SproutFields_PhoneFieldType extends BaseFieldType
 		}
 
 		return $settings;
+	}
+
+	/**
+	 * @param mixed $value
+	 *
+	 * @return string
+	 */
+	public function getTableAttributeHtml($value)
+	{
+		$html = '<a href="tel:' . $value . '" target="_blank">' . $value . '</a>';
+
+		return $html;
 	}
 }

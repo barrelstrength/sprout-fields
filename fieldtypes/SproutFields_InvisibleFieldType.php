@@ -1,7 +1,7 @@
 <?php
 namespace Craft;
 
-class SproutFields_InvisibleFieldType extends BaseFieldType
+class SproutFields_InvisibleFieldType extends BaseFieldType implements IPreviewableFieldType
 {
 	/**
 	 * @return string
@@ -77,5 +77,23 @@ class SproutFields_InvisibleFieldType extends BaseFieldType
 		craft()->httpSession->remove($this->model->handle);
 
 		return $value;
+	}
+
+	/**
+	 * @param mixed $value
+	 *
+	 * @return mixed|string
+	 */
+	public function getTableAttributeHtml($value)
+	{
+		$hiddenValue = "";
+		$settings    = $this->getSettings();
+
+		if ($value != "")
+		{
+			$hiddenValue = $settings->hideValue ? "&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" : $value;
+		}
+
+		return $hiddenValue;
 	}
 }

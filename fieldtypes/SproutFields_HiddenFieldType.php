@@ -1,7 +1,7 @@
 <?php
 namespace Craft;
 
-class SproutFields_HiddenFieldType extends BaseFieldType
+class SproutFields_HiddenFieldType extends BaseFieldType implements IPreviewableFieldType
 {
 	/**
 	 * @return string

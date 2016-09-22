@@ -10,6 +10,7 @@ class SproutFieldsPlugin extends BasePlugin
 {
 	public function init()
 	{
+
 		Craft::import('plugins.sproutfields.contracts.SproutFieldsBaseField');
 
 		Craft::import('plugins.sproutfields.integrations.sproutforms.fields.SproutFieldsAddressField');
@@ -29,7 +30,12 @@ class SproutFieldsPlugin extends BasePlugin
 		Craft::import('plugins.sproutfields.integrations.sproutimport.fields.SproutFields_NotesSproutImportFieldImporter');
 		Craft::import('plugins.sproutfields.integrations.sproutimport.fields.SproutFields_PhoneSproutImportFieldImporter');
 
-		craft()->on('sproutForms.beforePopulateEntry', array(sproutFields()->emailSelect, 'handleUnobfuscateEmailAddresses'));
+		// This check ensures the yiic command line tool can run
+		// @deprecate - Craft 3 may not require this check any longer
+		if (!craft()->isConsole())
+		{
+			craft()->on('sproutForms.beforePopulateEntry', array(sproutFields()->emailSelect, 'handleUnobfuscateEmailAddresses'));
+		}
 	}
 
 	/**

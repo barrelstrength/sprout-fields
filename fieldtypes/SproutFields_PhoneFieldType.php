@@ -53,7 +53,7 @@ class SproutFields_PhoneFieldType extends BaseFieldType implements IPreviewableF
 		craft()->templates->includeJsResource('sproutfields/js/inputmask.js');
 		craft()->templates->includeJsResource('sproutfields/js/jquery.inputmask.js');
 		craft()->templates->includeJsResource('sproutfields/js/PhoneInputMask.js');
-		craft()->templates->includeCssResource('sproutfields/css/sproutphonefield.css');
+		craft()->templates->includeCssResource('sproutfields/css/sproutfields.css');
 
 		return craft()->templates->render('sproutfields/_fieldtypes/phone/input', array(
 			'id'          => $namespaceInputId,

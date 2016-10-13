@@ -144,7 +144,7 @@ class SproutFieldsPlugin extends BasePlugin
 	 *
 	 * @return array
 	 */
-	public function registerSproutImportFieldImporters()
+	public function registerSproutImportImporters()
 	{
 		return array(
 			new SproutFields_EmailSproutImportFieldImporter(),

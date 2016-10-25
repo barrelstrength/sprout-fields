@@ -3,6 +3,12 @@ namespace Craft;
 
 class SproutFields_EmailSelectFieldService extends BaseApplicationComponent
 {
+	/**
+	 * @param      $options
+	 * @param null $value
+	 *
+	 * @return mixed
+	 */
 	public function obfuscateEmailAddresses($options, $value = null)
 	{
 		foreach ($options as $key => $option)
@@ -22,6 +28,12 @@ class SproutFields_EmailSelectFieldService extends BaseApplicationComponent
 		return $options;
 	}
 
+	/**
+	 * @param       $formId
+	 * @param array $submittedFields
+	 *
+	 * @return bool
+	 */
 	public function unobfuscateEmailAddresses($formId, $submittedFields = array())
 	{
 		if (!is_numeric($formId))

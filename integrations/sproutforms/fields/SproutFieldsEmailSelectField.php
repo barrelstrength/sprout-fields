@@ -23,8 +23,10 @@ class SproutFieldsEmailSelectField extends SproutFieldsBaseField
 	{
 		$this->beginRendering();
 
+		$selectedValue = isset($value->value) ? $value->value : null;
+
 		$options = $settings['options'];
-		$options = sproutFields()->emailSelect->obfuscateEmailAddresses($options, $value->value);
+		$options = sproutFields()->emailSelect->obfuscateEmailAddresses($options, $selectedValue);
 
 		$rendered = craft()->templates->render(
 			'emailselect/input',

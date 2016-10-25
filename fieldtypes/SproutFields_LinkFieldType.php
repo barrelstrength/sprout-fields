@@ -1,7 +1,7 @@
 <?php
 namespace Craft;
 
-class SproutFields_LinkFieldType extends BaseFieldType
+class SproutFields_LinkFieldType extends BaseFieldType implements IPreviewableFieldType
 {
 	/**
 	 * @return string
@@ -86,6 +86,11 @@ class SproutFields_LinkFieldType extends BaseFieldType
 		return true;
 	}
 
+	/**
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
 	public function prepSettings($settings)
 	{
 		// Clear input when checkbox is uncheck
@@ -96,5 +101,17 @@ class SproutFields_LinkFieldType extends BaseFieldType
 		}
 
 		return $settings;
+	}
+
+	/**
+	 * @param mixed $value
+	 *
+	 * @return string
+	 */
+	public function getTableAttributeHtml($value)
+	{
+		$html = '<a href="' . $value . '" target="_blank">' . $value . '</a>';
+
+		return $html;
 	}
 }

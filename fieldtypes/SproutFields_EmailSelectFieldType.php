@@ -6,7 +6,7 @@ namespace Craft;
  *
  * @package Craft
  */
-class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
+class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType implements IPreviewableFieldType
 {
 	/**
 	 * @return string
@@ -114,6 +114,18 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType
 	protected function getOptionsSettingsLabel()
 	{
 		return Craft::t('Dropdown Options');
+	}
+
+	/**
+	 * @param mixed $value
+	 *
+	 * @return string
+	 */
+	public function getTableAttributeHtml($value)
+	{
+		$html = $value->label . ': <a href="mailto:' . $value . '" target="_blank">' . $value . '</a>';
+
+		return $html;
 	}
 }
 

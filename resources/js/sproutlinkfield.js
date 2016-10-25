@@ -18,7 +18,7 @@ function checkSproutLinkField(id, fieldHandle, fieldContext) {
 			if (response)
 			{
 				$(sproutLinkButtonClass).addClass('fade');
-				$(sproutLinkButtonClass).html('<a href="' + data.value + '" target="_blank">Visit URL &rarr;</a>');
+				$(sproutLinkButtonClass).html('<a href="' + data.value + '" target="_blank" class="sproutfields-icon">&#xf0a9;</a>');
 			}
 			else
 			{

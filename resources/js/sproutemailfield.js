@@ -19,7 +19,7 @@ function checkSproutEmailField(id, elementId, fieldHandle, fieldContext) {
 			if (response)
 			{
 				$(sproutEmailButtonClass).addClass('fade');
-				$(sproutEmailButtonClass).html('<a href="mailto:' + data.value + '" target="_blank">Send Email &rarr;</a>');
+				$(sproutEmailButtonClass).html('<a href="mailto:' + data.value + '" target="_blank" class="sproutfields-icon">&#xf0e0;</a>');
 			}
 			else
 			{

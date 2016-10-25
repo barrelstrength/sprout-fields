@@ -1,0 +1,26 @@
+{% import "_includes/forms" as forms %}
+
+{# Setup our field #}
+{{ forms.text({
+	id: name,
+  name: name,
+	type: settings.inputType,
+  value: (value is defined) ? value : '',
+  placeholder: placeholder is not empty ? placeholder : null,
+}) }}
+
+<span class="sprout-custominput-button {{ id }}"></span>
+
+{# Add our CSS and Javascript #}
+{% includeCssResource "sproutfields/css/sproutfields.css" %}
+{% includeJsResource "sproutfields/js/sproutcustominputfield.js" %}
+
+{% set myJs %}
+
+(function() {
+	checkSproutCustomInputField("{{ id }}", "{{ name }}", "{{ fieldContext }}");
+})();
+
+{% endset %}
+
+{% includeJs myJs %}

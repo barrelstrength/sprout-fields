@@ -1,0 +1,45 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+	label: "Placeholder Text"|t,
+	instructions: "The text that will be shown if the field doesn’t have a value."|t,
+	id: 'placeholder',
+	name: 'placeholder',
+	value: settings.placeholder
+}) }}
+
+{{ forms.selectField({
+	label: "Input Type"|t,
+	instructions: "Select the input type for your field."|t,
+	name: 'inputType',
+	options: inputTypes,
+	value: settings.inputType
+}) }}
+
+<div id="sproutcustominputfield-custom-validation-pattern">
+	{{ forms.textField({
+		label: 'Validation Pattern'|t,
+		instructions: 'Validate custom input using this regular expression.'|t,
+		name: 'customPattern',
+		placeholder: '(.*)',
+		value: settings.customPattern,
+		errors: settings.getErrors('customPattern')
+	}) }}
+
+	{{ forms.textField({
+		label: 'Success Message'|t,
+		instructions: 'Display this succes message when a link is valid.'|t,
+		name: 'customPatternSuccesMessage',
+		placeholder: 'Input the success message text.',
+		value: settings.customPatternSuccessMessage
+	}) }}
+
+	{{ forms.textField({
+		label: 'Error Message'|t,
+		instructions: 'Display this error message when a link is invalid.'|t,
+		name: 'customPatternErrorMessage',
+		placeholder: 'Input the error message text.',
+		value: settings.customPatternErrorMessage
+	}) }}
+</div>
+

@@ -31,6 +31,31 @@ class SproutFieldsController extends BaseController
 		$this->returnJson(true);
 	}
 
+	public function actionCustomInputValidate()
+	{
+		$this->requirePostRequest();
+		$this->requireAjaxRequest();
+
+		$value        = craft()->request->getRequiredPost('value');
+		$fieldContext = craft()->request->getRequiredPost('fieldContext');
+		$fieldHandle  = craft()->request->getRequiredPost('fieldHandle');
+		$field        = craft()->fields->getFieldByHandle($fieldHandle);
+
+		$oldFieldContext               = craft()->content->fieldContext;
+		craft()->content->fieldContext = $fieldContext;
+
+		$field = craft()->fields->getFieldByHandle($fieldHandle);
+
+		craft()->content->fieldContext = $oldFieldContext;
+
+		if (!sproutFields()->customInput->validate($value, $field))
+		{
+			$this->returnJson(false);
+		}
+
+		$this->returnJson(true);
+	}
+
 	public function actionEmailValidate()
 	{
 		$this->requirePostRequest();

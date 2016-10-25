@@ -34,7 +34,9 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType implements 
 	{
 		$valueOptions = $value->getOptions();
 
-		$anySelected = sproutFields()->isAnyOptionsSelected($valueOptions);
+		$anySelected = sproutFields()->isAnyOptionsSelected($valueOptions, $value->value);
+
+		$value = $value->value;
 
 		if ($anySelected === false)
 		{
@@ -100,10 +102,23 @@ class SproutFields_EmailSelectFieldType extends BaseOptionsFieldType implements 
 	 */
 	public function validate($value)
 	{
-		if (!filter_var($value, FILTER_VALIDATE_EMAIL))
+		$emailAddresses = ArrayHelper::stringToArray($value);
+
+		$emailAddresses = array_unique($emailAddresses);
+
+		if (count($emailAddresses))
 		{
-			return "Email does not validate";
+			$invalidEmails = array();
+			foreach ($emailAddresses as $emailAddress)
+			{
+				if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL))
+				{
+					$invalidEmails[] = Craft::t($emailAddress . " email does not validate");
+				}
+			}
 		}
+
+		if (!empty($invalidEmails)) return $invalidEmails;
 
 		return true;
 	}

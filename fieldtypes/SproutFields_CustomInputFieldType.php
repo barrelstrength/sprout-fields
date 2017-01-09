@@ -19,6 +19,7 @@ class SproutFields_CustomInputFieldType extends BaseFieldType implements IPrevie
 		return array(
 			'customPattern'               => array(AttributeType::String, 'required' => false),
 			'customPatternErrorMessage'   => array(AttributeType::String),
+			'customPatternSuccessMessage' => array(AttributeType::String),
 			'inputType'                   => array(AttributeType::String, 'default' => 'text'),
 			'placeholder'                 => array(AttributeType::String),
 		);

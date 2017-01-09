@@ -108,6 +108,12 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 		{
 			$mask = preg_quote($mask);
 
+			// Here we undo the preg_quote treatment of the dashes. It
+			// feels hacky but seems to be necessary to get the HTML5
+			// pattern="" attribute to validate on the front-end without
+			// throwing errors as the user types
+			$mask = preg_replace('/\\\\-/', '-', $mask);
+
 			foreach ($hashPatterns as $hashPattern)
 			{
 				$pattern      = $hashPattern['pattern'];

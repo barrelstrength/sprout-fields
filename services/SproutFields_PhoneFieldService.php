@@ -33,7 +33,7 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 	{
 		$phonePattern = $this->convertMaskToRegEx($mask);
 
-		if (preg_match($phonePattern, $value))
+		if ($value == $mask || preg_match($phonePattern, $value))
 		{
 			return true;
 		}

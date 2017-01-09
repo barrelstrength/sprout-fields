@@ -77,10 +77,20 @@ class SproutFields_PhoneFieldType extends BaseFieldType implements IPreviewableF
 	public function validate($value)
 	{
 		$settings = $this->getSettings();
+		$handle = $this->model->handle;
+		$name   = $this->model->name;
+		$configs = $this->element->getContent()->getAttributeConfigs();
+
+		$configAttribute = $configs[$handle];
 
 		if ($settings['mask'] == "")
 		{
 			$settings['mask'] = sproutFields()->phone->getDefaultMask();
+		}
+
+		if (isset($configAttribute['required']) && $value == $settings['mask'])
+		{
+			return Craft::t($name . ' is required.');
 		}
 
 		if (!sproutFields()->phone->validate($value, $settings['mask']))

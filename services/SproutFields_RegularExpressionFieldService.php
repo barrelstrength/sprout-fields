@@ -6,7 +6,7 @@ namespace Craft;
  *
  * @package Craft
  */
-class SproutFields_CustomInputFieldService extends BaseApplicationComponent
+class SproutFields_RegularExpressionFieldService extends BaseApplicationComponent
 {
 	/**
 	 * @param $value

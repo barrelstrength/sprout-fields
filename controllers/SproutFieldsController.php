@@ -31,7 +31,7 @@ class SproutFieldsController extends BaseController
 		$this->returnJson(true);
 	}
 
-	public function actionCustomInputValidate()
+	public function actionRegularExpressionValidate()
 	{
 		$this->requirePostRequest();
 		$this->requireAjaxRequest();
@@ -48,7 +48,7 @@ class SproutFieldsController extends BaseController
 
 		craft()->content->fieldContext = $oldFieldContext;
 
-		if (!sproutFields()->customInput->validate($value, $field))
+		if (!sproutFields()->regularExpression->validate($value, $field))
 		{
 			$this->returnJson(false);
 		}

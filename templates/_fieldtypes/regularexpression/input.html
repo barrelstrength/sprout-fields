@@ -4,21 +4,20 @@
 {{ forms.text({
 	id: name,
   name: name,
-	type: settings.inputType,
   value: (value is defined) ? value : '',
   placeholder: placeholder is not empty ? placeholder : null,
 }) }}
 
-<span class="sprout-custominput-button {{ id }}"></span>
+<span class="sprout-regularexpression-button {{ id }}"></span>
 
 {# Add our CSS and Javascript #}
 {% includeCssResource "sproutfields/css/sproutfields.css" %}
-{% includeJsResource "sproutfields/js/sproutcustominputfield.js" %}
+{% includeJsResource "sproutfields/js/sproutregularexpressionfield.js" %}
 
 {% set myJs %}
 
 (function() {
-	checkSproutCustomInputField("{{ id }}", "{{ name }}", "{{ fieldContext }}");
+	checkSproutRegularExpressionField("{{ id }}", "{{ name }}", "{{ fieldContext }}");
 })();
 
 {% endset %}

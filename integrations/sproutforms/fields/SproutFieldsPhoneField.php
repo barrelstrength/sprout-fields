@@ -36,8 +36,12 @@ class SproutFieldsPhoneField extends SproutFieldsBaseField
 
 		$name             = $field->handle;
 		$namespaceInputId = $this->getNamespace() . '-' . $name;
+		$mask = $settings['mask'];
 
-		$pattern = sproutFields()->phone->convertMaskToRegEx($settings['mask']);
+		$mask = preg_quote($settings['mask']);
+		// Do no escape "-" html5 does not treat it as special chars
+		$mask = str_replace("\\-", '-', $mask);
+		$pattern = sproutFields()->phone->convertMaskToRegEx($mask);
 
 		$pattern = trim($pattern, '/');
 

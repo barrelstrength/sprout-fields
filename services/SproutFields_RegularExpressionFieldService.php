@@ -20,8 +20,6 @@ class SproutFields_RegularExpressionFieldService extends BaseApplicationComponen
 
 		if (!empty($customPattern))
 		{
-			$customPattern = preg_quote($customPattern);
-
 			// Use backticks as delimiters
 			$customPattern = "`" . $customPattern . "`";
 

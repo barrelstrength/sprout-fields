@@ -30,13 +30,10 @@ class SproutFieldsRegularExpressionField extends SproutFieldsBaseField
 
 		$placeholder  = (isset($settings['placeholder'])) ? $settings['placeholder'] : '';
 
-		$pattern = preg_quote($settings['customPattern']);
+		$pattern = $settings['customPattern'];
 
-		// Here we undo the preg_quote treatment of the dashes. It
-		// feels hacky but seems to be necessary to get the HTML5
-		// pattern="" attribute to validate on the front-end without
-		// throwing errors as the user types
-		$pattern = preg_replace('/\\\\-/', '-', $pattern);
+		// Do no escape "-" html5 does not treat it as special chars
+		$pattern = str_replace("\\-", '-', $pattern);
 
 		$rendered = craft()->templates->render(
 			'regularexpression/input',

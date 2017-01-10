@@ -31,6 +31,8 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 	 */
 	public function validate($value, $mask)
 	{
+		$mask = preg_quote($mask);
+
 		$phonePattern = $this->convertMaskToRegEx($mask);
 
 		if ($value == $mask || preg_match($phonePattern, $value))
@@ -106,8 +108,6 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 
 		if ($hashPatterns)
 		{
-			$mask = preg_quote($mask);
-
 			foreach ($hashPatterns as $hashPattern)
 			{
 				$pattern      = $hashPattern['pattern'];

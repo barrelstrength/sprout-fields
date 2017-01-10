@@ -19,7 +19,7 @@ class SproutFieldsService extends BaseApplicationComponent
 	public $emailSelect;
 
 	/**
-	 * @var sproutFields_regularExpressionField
+	 * @var SproutFields_RegularExpressionFieldService
 	 */
 	public $regularExpression;
 
@@ -32,10 +32,10 @@ class SproutFieldsService extends BaseApplicationComponent
 	{
 		parent::init();
 
-		$this->link        = Craft::app()->getComponent('sproutFields_linkField');
-		$this->email       = Craft::app()->getComponent('sproutFields_emailField');
-		$this->emailSelect = Craft::app()->getComponent('sproutFields_emailSelectField');
-		$this->phone       = Craft::app()->getComponent('sproutFields_phoneField');
+		$this->link              = Craft::app()->getComponent('sproutFields_linkField');
+		$this->email             = Craft::app()->getComponent('sproutFields_emailField');
+		$this->emailSelect       = Craft::app()->getComponent('sproutFields_emailSelectField');
+		$this->phone             = Craft::app()->getComponent('sproutFields_phoneField');
 		$this->regularExpression = Craft::app()->getComponent('sproutFields_regularExpressionField');
 	}
 

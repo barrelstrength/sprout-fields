@@ -20,7 +20,9 @@ class SproutFields_RegularExpressionFieldService extends BaseApplicationComponen
 
 		if (!empty($customPattern))
 		{
-			// Use backticks as delimiters as they are invalid characters for emails
+			$customPattern = preg_quote($customPattern);
+
+			// Use backticks as delimiters
 			$customPattern = "`" . $customPattern . "`";
 
 			if (!preg_match($customPattern, $value))

@@ -43,10 +43,14 @@
 				localStorage.setItem('{{ id }}-field', 'hidden');
 			}
 		});
-
-
 	});
-	
+
+
+	{% if (settings.hideLabel)  %}
+		$('#' + '{{ id }}-field' + ' .heading').remove();
+		$('#' + '{{ id }}-field' + ' .input').css('display', 'block');
+	{% endif %}
+
 {% endset %}
 
 {% includeCss css %}

@@ -10,6 +10,7 @@ class SproutFields_NotesFieldType extends BaseFieldType
 {
 	private $options = array(
 		'style'  => array(
+			'default'                    => 'Default',
 			'infoPrimaryDocumentation'   => 'Primary Information',
 			'infoSecondaryDocumentation' => 'Secondary Information',
 			'warningDocumentation'       => 'Warning',
@@ -50,7 +51,8 @@ class SproutFields_NotesFieldType extends BaseFieldType
 	{
 		return array(
 			'instructions' => array(AttributeType::Mixed),
-			'style'        => array(AttributeType::Mixed, 'default' => 'infoPrimaryDocumentation'),
+			'style'        => array(AttributeType::Mixed, 'default' => 'default'),
+			'hideLabel'    => array(AttributeType::Bool, 'default' => false),
 			'output'       => array(AttributeType::Mixed, 'default' => 'markdown')
 		);
 	}

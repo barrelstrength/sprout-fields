@@ -37,7 +37,21 @@
 	on: settings.hideLabel,
 }) }}
 
+<section class="buttons">
+	<div class="btngroup submit">
+		<input type="submit" class="btn submit" value="{{ 'Save'|t }}">
 
+		<div class="btn submit menubtn"></div>
+		<div class="menu">
+			<ul>
+				<li>
+					<a class="formsubmit" data-redirect="settings/fields/edit/{id}">{{ "Save and continue editing"|t }}
+						<span class="shortcut">⌘S</span></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>
 
 <style type="text/css">
 textarea.sproutnotes {

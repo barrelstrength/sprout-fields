@@ -12,36 +12,26 @@ use barrelstrength\sproutfields\SproutFields;
 
 class SproutFieldsController extends BaseController
 {
-
 	protected $allowAnonymous = ['actionSproutAddress'];
-
-	/**
-	 * @inheritdoc
-	 */
-	public function init()
-	{
-		parent::init();
-		$this->defaultAction = 'load-bucket-data';
-	}
 
 	public function actionLinkValidate()
 	{
 		$this->requirePostRequest();
 		$this->requireAcceptsJson();
 
-		$value        = Craft::$app->getRequest()->getRequiredBodyParam('value');
-		$fieldContext = Craft::$app->getRequest()->getRequiredBodyParam('fieldContext');
-		$fieldHandle  = Craft::$app->getRequest()->getRequiredBodyParam('fieldHandle');
+		$value        = Craft::$app->getRequest()->getParam('value');
+		$fieldContext = Craft::$app->getRequest()->getParam('fieldContext');
+		$fieldHandle  = Craft::$app->getRequest()->getParam('fieldHandle');
 		$field        = Craft::$app->fields->getFieldByHandle($fieldHandle);
 
-		$oldFieldContext               = Craft::$app->content->fieldContext;
+		$oldFieldContext = Craft::$app->content->fieldContext;
 		Craft::$app->content->fieldContext = $fieldContext;
 
 		$field = Craft::$app->fields->getFieldByHandle($fieldHandle);
 
 		Craft::$app->content->fieldContext = $oldFieldContext;
 
-		if (!sproutFields()->link->validate($value, $field))
+		if (!SproutFields::$api->link->validate($value, $field))
 		{
 			$this->asJson(false);
 		}
@@ -54,9 +44,9 @@ class SproutFieldsController extends BaseController
 		$this->requirePostRequest();
 		$this->requireAcceptsJson();
 
-		$value        = Craft::$app->getRequest()->getRequiredBodyParam('value');
-		$fieldContext = Craft::$app->getRequest()->getRequiredBodyParam('fieldContext');
-		$fieldHandle  = Craft::$app->getRequest()->getRequiredBodyParam('fieldHandle');
+		$value        = Craft::$app->getRequest()->getParam('value');
+		$fieldContext = Craft::$app->getRequest()->getParam('fieldContext');
+		$fieldHandle  = Craft::$app->getRequest()->getParam('fieldHandle');
 		$field        = Craft::$app->fields->getFieldByHandle($fieldHandle);
 
 		$oldFieldContext               = Craft::$app->content->fieldContext;
@@ -66,7 +56,7 @@ class SproutFieldsController extends BaseController
 
 		Craft::$app->content->fieldContext = $oldFieldContext;
 
-		if (!sproutFields()->regularExpression->validate($value, $field))
+		if (!SproutFields::$api->regularExpression->validate($value, $field))
 		{
 			$this->asJson(false);
 		}
@@ -79,24 +69,24 @@ class SproutFieldsController extends BaseController
 		$this->requirePostRequest();
 		$this->requireAcceptsJson();
 
-		$value        = Craft::$app->getRequest()->getRequiredBodyParam('value');
-		$elementId    = Craft::$app->getRequest()->getRequiredBodyParam('elementId');
-		$fieldContext = Craft::$app->getRequest()->getRequiredBodyParam('fieldContext');
-		$fieldHandle  = Craft::$app->getRequest()->getRequiredBodyParam('fieldHandle');
+		$value        = Craft::$app->getRequest()->getParam('value');
+		$elementId    = Craft::$app->getRequest()->getParam('elementId');
+		$fieldContext = Craft::$app->getRequest()->getParam('fieldContext');
+		$fieldHandle  = Craft::$app->getRequest()->getParam('fieldHandle');
 
-		$oldFieldContext               = Craft::$app->content->fieldContext;
+		$oldFieldContext = Craft::$app->content->fieldContext;
 		Craft::$app->content->fieldContext = $fieldContext;
 
 		$field = Craft::$app->fields->getFieldByHandle($fieldHandle);
 
 		Craft::$app->content->fieldContext = $oldFieldContext;
 
-		if (!sproutFields()->email->validate($value, $elementId, $field))
+		if (!SproutFields::$api->email->validate($value, $elementId, $field))
 		{
-			$this->asJson(false);
+			return $this->asJson(false);
 		}
 
-		$this->asJson(true);
+		return $this->asJson(true);
 	}
 
 	public function actionPhoneValidate()
@@ -106,9 +96,8 @@ class SproutFieldsController extends BaseController
 
 		$value = Craft::$app->getRequest()->getParam('value');
 		$mask  = Craft::$app->getRequest()->getParam('mask');
-		$plugin = SproutFields::$plugin;
 
-		if (!SproutFields::$plugin->phone->validate($value, $mask))
+		if (!SproutFields::$api->phone->validate($value, $mask))
 		{
 			return $this->asJson(false);
 		}
@@ -116,21 +105,15 @@ class SproutFieldsController extends BaseController
 		return $this->asJson(true);
 	}
 
-	public function actionTest()
-	{
-	
-		$this->asJson(true);
-	}
-
 	public function actionSproutAddress()
 	{
 		$this->requirePostRequest();
 		$this->requireAcceptsJson();
 
-		$countryCode = Craft::$app->getRequest()->getPost('countryCode');
+		$countryCode = Craft::$app->getRequest()->getParam('countryCode');
 
-		$sproutAddress = Craft::$app->getRequest()->getPost('sproutAddress');
-		$namespaceName = Craft::$app->getRequest()->getPost('sproutAddressNamespaceInputName');
+		$sproutAddress = Craft::$app->getRequest()->getParam('sproutAddress');
+		$namespaceName = Craft::$app->getRequest()->getParam('sproutAddressNamespaceInputName');
 
 		$addressField = Craft::$app->sproutFields_addressField->getAddress($sproutAddress);
 

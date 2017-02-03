@@ -14,6 +14,9 @@
     "version": "3.0.0",
     "schemaVersion": "3.0.0",
     "developer": "Barrel Strength",
-    "class": "barrelstrength\\sproutfields\\SproutFields"
+    "class": "barrelstrength\\sproutfields\\SproutFields",
+    "components": {
+      "api": "barrelstrength\\sproutfields\\services\\Api"
+    }
   }
 }

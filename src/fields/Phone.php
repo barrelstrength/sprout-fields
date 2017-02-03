@@ -112,12 +112,12 @@ class Phone extends Field implements PreviewableFieldInterface
 
 		if ($this->mask == "")
 		{
-			$this->mask = SproutFields::$plugin->phone->getDefaultMask();
+			$this->mask = SproutFields::$api->phone->getDefaultMask();
 		}
 
-		if (!SproutFields::$plugin->phone->validate($value, $this->mask))
+		if (!SproutFields::$api->phone->validate($value, $this->mask))
 		{
-			$element->addError($this->handle, SproutFields::$plugin->phone->getErrorMessage($this));
+			$element->addError($this->handle, SproutFields::$api->phone->getErrorMessage($this));
 		}
 	}
 

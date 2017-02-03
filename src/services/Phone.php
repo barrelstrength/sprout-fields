@@ -8,7 +8,7 @@ use yii\base\Component;
  * Class PhoneService
  *
  */
-class PhoneService extends Component
+class Phone extends Component
 {
 	/**
 	 * @var string

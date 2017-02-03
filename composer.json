@@ -1,0 +1,19 @@
+{
+  "name": "barrelstrength/sproutfields",
+  "description": "Fabulous fields. Cleaner data.",
+  "version": "3.0.0",
+  "type": "craft-plugin",
+  "autoload": {
+    "psr-4": {
+      "barrelstrength\\sproutfields\\": "src/"
+    }
+  },
+  "extra": {
+    "name": "Sprout Fields",
+    "handle": "sproutFields",
+    "version": "3.0.0",
+    "schemaVersion": "3.0.0",
+    "developer": "Barrel Strength",
+    "class": "barrelstrength\\sproutfields\\SproutFields"
+  }
+}

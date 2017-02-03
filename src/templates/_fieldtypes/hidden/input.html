@@ -1,0 +1,8 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.text({
+	id: name,
+	name: name,
+	disabled: (not field.allowEdits),
+	value: (value is defined) ? value : ''
+}) }}

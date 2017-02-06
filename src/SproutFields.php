@@ -7,10 +7,11 @@ use craft\events\RegisterComponentTypesEvent;
 use craft\services\Fields;
 use yii\base\Component;
 
-use barrelstrength\sproutfields\fields\Hidden as HiddenField;
-use barrelstrength\sproutfields\fields\Phone  as PhoneField;
-use barrelstrength\sproutfields\fields\Email  as EmailField;
-use barrelstrength\sproutfields\fields\EmailSelect  as EmailSelectField;
+use barrelstrength\sproutfields\fields\Hidden      as HiddenField;
+use barrelstrength\sproutfields\fields\Phone       as PhoneField;
+use barrelstrength\sproutfields\fields\Email       as EmailField;
+use barrelstrength\sproutfields\fields\EmailSelect as EmailSelectField;
+use barrelstrength\sproutfields\fields\Invisible   as InvisibleField;
 use barrelstrength\sproutfields\services\PhoneService;
 
 class SproutFields extends \craft\base\Plugin
@@ -33,6 +34,7 @@ class SproutFields extends \craft\base\Plugin
 				$event->types[] = PhoneField::class;
 				$event->types[] = EmailField::class;
 				$event->types[] = EmailSelectField::class;
+				$event->types[] = InvisibleField::class;
 			}
 		);
 	}

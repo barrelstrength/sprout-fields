@@ -1,0 +1,17 @@
+{% import "_includes/forms" as forms %}
+
+{% if field.hideValue %}
+	{{ forms.passwordField({
+		id: id,
+		name: name,
+		disabled: (not field.allowEdits),
+		value: value is defined ? value : ''
+	}) }}
+{% else %}   
+	{{ forms.textField({
+		id: id,
+		name: name,
+		disabled: (not field.allowEdits),
+		value: value is defined ? value : ''
+	}) }}
+{% endif %}

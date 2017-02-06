@@ -2,11 +2,7 @@
 namespace barrelstrength\sproutfields\controllers;
 
 use Craft;
-use craft\base\Field;
 use craft\web\Controller as BaseController;
-use yii\web\NotFoundHttpException;
-use yii\web\Response;
-use yii\web\ServerErrorHttpException;
 
 use barrelstrength\sproutfields\SproutFields;
 
@@ -27,16 +23,14 @@ class SproutFieldsController extends BaseController
 		$oldFieldContext = Craft::$app->content->fieldContext;
 		Craft::$app->content->fieldContext = $fieldContext;
 
-		$field = Craft::$app->fields->getFieldByHandle($fieldHandle);
-
 		Craft::$app->content->fieldContext = $oldFieldContext;
 
 		if (!SproutFields::$api->link->validate($value, $field))
 		{
-			$this->asJson(false);
+			return $this->asJson(false);
 		}
 
-		$this->asJson(true);
+		return $this->asJson(true);
 	}
 
 	public function actionRegularExpressionValidate()
@@ -49,19 +43,18 @@ class SproutFieldsController extends BaseController
 		$fieldHandle  = Craft::$app->getRequest()->getParam('fieldHandle');
 		$field        = Craft::$app->fields->getFieldByHandle($fieldHandle);
 
-		$oldFieldContext               = Craft::$app->content->fieldContext;
+		$oldFieldContext = Craft::$app->content->fieldContext;
+		
 		Craft::$app->content->fieldContext = $fieldContext;
-
-		$field = Craft::$app->fields->getFieldByHandle($fieldHandle);
 
 		Craft::$app->content->fieldContext = $oldFieldContext;
 
 		if (!SproutFields::$api->regularExpression->validate($value, $field))
 		{
-			$this->asJson(false);
+			return $this->asJson(false);
 		}
 
-		$this->asJson(true);
+		return $this->asJson(true);
 	}
 
 	public function actionEmailValidate()

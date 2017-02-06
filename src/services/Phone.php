@@ -140,7 +140,7 @@ class Phone extends Component
 			return Craft::t('sproutFields', $field->customPatternErrorMessage);
 		}
 
-		$vars = array('field' => $fieldName, 'format' => $field->mask);
+		$vars = array('field' => $field->name, 'format' => $field->mask);
 
 		return Craft::t('sproutFields', '{field} is invalid. Required format: {format}', $vars);
 	}

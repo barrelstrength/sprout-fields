@@ -6,14 +6,14 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use craft\helpers\Db;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutfields\assetbundles\phonefield\PhoneFieldAsset;
+use barrelstrength\sproutfields\assetbundles\linkfield\LinkFieldAsset;
 
-class Phone extends Field implements PreviewableFieldInterface
+class Link extends Field implements PreviewableFieldInterface
 {
+
 	/**
 	 * @var string|null
 	 */
@@ -25,14 +25,9 @@ class Phone extends Field implements PreviewableFieldInterface
 	public $customPatternToggle;
 
 	/**
-	 * @var bool|null
-	 */
-	public $inputMask;
-
-	/**
 	 * @var string|null
 	 */
-	public $mask;
+	public $customPattern;
 
 	/**
 	 * @var string|null
@@ -41,7 +36,7 @@ class Phone extends Field implements PreviewableFieldInterface
 
 	public static function displayName(): string
 	{
-		return Craft::t('sproutFields', 'Phone Number');
+		return Craft::t('sproutFields', 'Link');
 	}
 
 	/**
@@ -58,7 +53,7 @@ class Phone extends Field implements PreviewableFieldInterface
 	public function getSettingsHtml()
 	{
 		return Craft::$app->getView()->renderTemplate(
-			'sproutfields/_fieldtypes/phone/settings',
+			'sproutfields/_fieldtypes/link/settings',
 			[
 				'field' => $this,
 			]
@@ -71,18 +66,22 @@ class Phone extends Field implements PreviewableFieldInterface
 	public function getInputHtml($value, ElementInterface $element = null): string
 	{
 		$view = Craft::$app->getView();
-		$view->registerAssetBundle(PhoneFieldAsset::class);
-		$name = $this->handle;
+		$view->registerAssetBundle(LinkFieldAsset::class);
+		
+		$name             = $this->handle;
 		$inputId          = Craft::$app->getView()->formatInputId($name);
 		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
+		$fieldContext = SproutFields::$api->utilities->getFieldContext($this, $element);
+
 		return Craft::$app->getView()->renderTemplate(
-			'sproutfields/_fieldtypes/phone/input',
+			'sproutfields/_fieldtypes/link/input',
 			[
-				'id'    => $namespaceInputId,
-				'name'  => $this->handle,
-				'value' => $value,
-				'field' => $this
+				'id'           => $namespaceInputId,
+				'name'         => $name,
+				'value'        => $value,
+				'fieldContext' => $fieldContext,
+				'placeholder'  => $this->placeholder
 			]
 		);
 	}
@@ -93,7 +92,7 @@ class Phone extends Field implements PreviewableFieldInterface
 	public function getElementValidationRules(): array
 	{
 		$rules = parent::getElementValidationRules();
-		$rules[] = 'validatePhone';
+		$rules[] = 'validateLink';
 
 		return $rules;
 	}
@@ -107,23 +106,18 @@ class Phone extends Field implements PreviewableFieldInterface
 	 *
 	 * @return void
 	 */
-	public function validatePhone(ElementInterface $element)
+	public function validateLink(ElementInterface $element)
 	{
 		$value = $element->getFieldValue($this->handle);
 
 		$handle  = $this->handle;
 		$name    = $this->name;
 
-		if ($this->mask == "")
-		{
-			$this->mask = SproutFields::$api->phone->getDefaultMask();
-		}
-
-		if (!SproutFields::$api->phone->validate($value, $this->mask))
+		if (!SproutFields::$api->link->validate($value, $this))
 		{
 			$element->addError(
 				$this->handle, 
-				SproutFields::$api->phone->getErrorMessage($this)
+				SproutFields::$api->link->getErrorMessage($this)
 			);
 		}
 	}
@@ -137,9 +131,7 @@ class Phone extends Field implements PreviewableFieldInterface
 
 		if ($value) 
 		{
-			$formatter = Craft::$app->getFormatter();
-
-			$html = '<a href="tel:' . $value . '" target="_blank">' . $value . '</a>';
+			$html = '<a href="' . $value . '" target="_blank">' . $value . '</a>';
 		}
 
 		return $html;

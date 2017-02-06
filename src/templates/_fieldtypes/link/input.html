@@ -1,0 +1,23 @@
+{% import "_includes/forms" as forms %}
+
+{# Setup our field #}
+{{ forms.text({
+	id: name,
+  name: name,
+  value: (value is defined) ? value : '',
+  placeholder: placeholder is not empty ? placeholder : null,
+}) }}
+
+<span class="sprout-link-button {{ id }}"></span>
+
+{% js %}
+
+(function() {
+	checkSproutLinkField("{{ id }}", "{{ name }}", "{{ fieldContext }}");
+})();
+
+$('input#{{ id }}').on('input', function () {
+	checkSproutLinkField("{{ id }}", "{{ name }}", "{{ fieldContext }}");
+});
+
+{% endjs %}

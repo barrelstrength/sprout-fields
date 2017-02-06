@@ -12,6 +12,7 @@ use barrelstrength\sproutfields\fields\Phone       as PhoneField;
 use barrelstrength\sproutfields\fields\Email       as EmailField;
 use barrelstrength\sproutfields\fields\EmailSelect as EmailSelectField;
 use barrelstrength\sproutfields\fields\Invisible   as InvisibleField;
+use barrelstrength\sproutfields\fields\Link        as LinkField;
 use barrelstrength\sproutfields\services\PhoneService;
 
 class SproutFields extends \craft\base\Plugin
@@ -35,6 +36,7 @@ class SproutFields extends \craft\base\Plugin
 				$event->types[] = EmailField::class;
 				$event->types[] = EmailSelectField::class;
 				$event->types[] = InvisibleField::class;
+				$event->types[] = LinkField::class;
 			}
 		);
 	}

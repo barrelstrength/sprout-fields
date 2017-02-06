@@ -6,11 +6,9 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use craft\helpers\Db;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutfields\assetbundles\emailfield\EmailFieldAsset;
 
 class Invisible extends Field implements PreviewableFieldInterface
 {

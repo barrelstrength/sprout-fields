@@ -6,9 +6,7 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use craft\helpers\Db;
 use yii\db\Schema;
-
 
 class Hidden extends Field implements PreviewableFieldInterface
 {

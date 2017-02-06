@@ -14,7 +14,7 @@ function checkSproutLinkField(id, fieldHandle, fieldContext) {
 		};
 
 		// Query the controller so the regex validation is all done through PHP.
-		Craft.postActionRequest('sproutFields/linkValidate', data, function(response) {
+		Craft.postActionRequest('sprout-fields/sprout-fields/link-validate', data, function(response) {
 			if (response)
 			{
 				$(sproutLinkButtonClass).addClass('fade');

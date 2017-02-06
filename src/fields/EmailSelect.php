@@ -7,12 +7,10 @@ use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\fields\BaseOptionsField;
 use craft\base\PreviewableFieldInterface;
-use craft\helpers\Db;
 use yii\db\Schema;
 use craft\helpers\ArrayHelper;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutfields\assetbundles\emailfield\EmailFieldAsset;
 
 class EmailSelect extends BaseOptionsField
 {

@@ -9,40 +9,32 @@ use barrelstrength\sproutfields\SproutFields;
  * Class PhoneService
  *
  */
-class Link extends Component
+class RegularExpression extends Component
 {
+
 	/**
-	 * Validates a phone number against a given mask/pattern
 	 *
 	 * @param $value
-	 * @param $mask
+	 * @param $field
 	 *
 	 * @return bool
 	 */
 	public function validate($value, $field): bool
 	{
 		$customPattern = $field->customPattern;
-		$checkPattern  = $field->customPatternToggle;
 
-		if ($customPattern && $checkPattern)
+		if (!empty($customPattern))
 		{
-			// Use backticks as delimiters as they are invalid characters for emails
+			// Use backticks as delimiters
 			$customPattern = "`" . $customPattern . "`";
 
-			if (preg_match($customPattern, $value))
+			if (!preg_match($customPattern, $value))
 			{
-				return true;
-			}
-		}
-		else
-		{
-			if ((!filter_var($value, FILTER_VALIDATE_URL) === false))
-			{
-				return true;
+				return false;
 			}
 		}
 
-		return false;
+		return true;
 	}
 
 	/**
@@ -59,7 +51,7 @@ class Link extends Component
 			return SproutFields::t($field->customPatternErrorMessage);
 		}
 
-		return SproutFields::t($field->name . ' must be a valid link.');
+		return SproutFields::t($field->name . ' must be a valid pattern.');
 	}
 
 }

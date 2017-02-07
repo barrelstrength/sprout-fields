@@ -10,7 +10,7 @@ class Utilities extends Component
 	 * Returns current Field Type context to properly get field settings
 	 *
 	 * @param $field Email Field Object
-	 * @param $element 
+	 * @param $element
 	 *
 	 * @return string
 	 */

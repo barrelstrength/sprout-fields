@@ -44,7 +44,7 @@ class SproutFieldsController extends BaseController
 		$field        = Craft::$app->fields->getFieldByHandle($fieldHandle);
 
 		$oldFieldContext = Craft::$app->content->fieldContext;
-		
+
 		Craft::$app->content->fieldContext = $fieldContext;
 
 		Craft::$app->content->fieldContext = $oldFieldContext;
@@ -96,22 +96,5 @@ class SproutFieldsController extends BaseController
 		}
 
 		return $this->asJson(true);
-	}
-
-	public function actionSproutAddress()
-	{
-		$this->requirePostRequest();
-		$this->requireAcceptsJson();
-
-		$countryCode = Craft::$app->getRequest()->getParam('countryCode');
-
-		$sproutAddress = Craft::$app->getRequest()->getParam('sproutAddress');
-		$namespaceName = Craft::$app->getRequest()->getParam('sproutAddressNamespaceInputName');
-
-		$addressField = Craft::$app->sproutFields_addressField->getAddress($sproutAddress);
-
-		Craft::$app->sproutFields_addressFormField->setParams($countryCode, '', $sproutAddress, $addressField, $namespaceName);
-		echo Craft::$app->sproutFields_addressFormField->setForm(true);
-		exit;
 	}
 }

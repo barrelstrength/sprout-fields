@@ -10,38 +10,28 @@ use craft\helpers\Db;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutfields\assetbundles\emailfield\EmailFieldAsset;
+use barrelstrength\sproutfields\assetbundles\regularexpressionfield\RegularExpressionFieldAsset;
 
-class Email extends Field implements PreviewableFieldInterface
+class RegularExpression extends Field implements PreviewableFieldInterface
 {
 	/**
-	 * @var string|null
-	 */
-	public $customPattern;
-
-	/**
-	 * @var bool
-	 */
-	public $customPatternToggle;
-
-	/**
-	 * @var string|null
+	 * @var string
 	 */
 	public $customPatternErrorMessage;
 
 	/**
-	 * @var bool
+	 * @var string
 	 */
-	public $uniqueEmail;
+	public $customPattern;
 
 	/**
-	 * @var string|null
+	 * @var string
 	 */
 	public $placeholder;
 
 	public static function displayName(): string
 	{
-		return Craft::t('sproutFields', 'Email Address');
+		return Craft::t('sproutFields', 'Regular Expression');
 	}
 
 	/**
@@ -57,10 +47,12 @@ class Email extends Field implements PreviewableFieldInterface
 	 */
 	public function getSettingsHtml()
 	{
-		return Craft::$app->getView()->renderTemplate('sproutfields/_fieldtypes/email/settings',
+		return Craft::$app->getView()->renderTemplate(
+			'sproutfields/_fieldtypes/regularexpression/settings',
 			[
 				'field' => $this,
-			]);
+			]
+		);
 	}
 
 	/**
@@ -69,7 +61,7 @@ class Email extends Field implements PreviewableFieldInterface
 	public function getInputHtml($value, ElementInterface $element = null): string
 	{
 		$view = Craft::$app->getView();
-		$view->registerAssetBundle(EmailFieldAsset::class);
+		$view->registerAssetBundle(RegularExpressionFieldAsset::class);
 
 		$name = $this->handle;
 		$inputId          = Craft::$app->getView()->formatInputId($name);
@@ -77,18 +69,17 @@ class Email extends Field implements PreviewableFieldInterface
 
 		$fieldContext = SproutFields::$api->utilities->getFieldContext($this, $element);
 
-		// Set this to false for Quick Entry Dashboard Widget
-		$elementId = ($element != null) ? $element->id : false;
-
-		return Craft::$app->getView()->renderTemplate('sproutfields/_fieldtypes/email/input',
+		return Craft::$app->getView()->renderTemplate(
+			'sproutfields/_fieldtypes/regularexpression/input',
 			[
 				'id'           => $namespaceInputId,
+				'field'        => $this,
 				'name'         => $name,
 				'value'        => $value,
-				'elementId'    => $elementId,
 				'fieldContext' => $fieldContext,
 				'placeholder'  => $this->placeholder
-			]);
+			]
+		);
 	}
 
 	/**
@@ -97,7 +88,7 @@ class Email extends Field implements PreviewableFieldInterface
 	public function getElementValidationRules(): array
 	{
 		$rules = parent::getElementValidationRules();
-		$rules[] = 'validateEmail';
+		$rules[] = 'validateRegularExpression';
 
 		return $rules;
 	}
@@ -111,29 +102,27 @@ class Email extends Field implements PreviewableFieldInterface
 	 *
 	 * @return void
 	 */
-	public function validateEmail(ElementInterface $element)
+	public function validateRegularExpression(ElementInterface $element)
 	{
 		$value = $element->getFieldValue($this->handle);
 
-		$customPattern = $this->customPattern;
-		$checkPattern  = $this->customPatternToggle;
+		$handle  = $this->handle;
+		$name    = $this->name;
 
-		if (!SproutFields::$api->email->validateEmailAddress($value, $customPattern, $checkPattern))
+		if (!SproutFields::$api->regularExpression->validate($value, $this))
 		{
-			$element->addError($this->handle,
-				SproutFields::$api->email->getErrorMessage(
-					$this->name, $this)
+			$element->addError(
+				$this->handle,
+				SproutFields::$api->regularExpression->getErrorMessage($this)
 			);
 		}
+	}
 
-		$uniqueEmail = $this->uniqueEmail;
-
-		if ($uniqueEmail && !SproutFields::$api->email->validateUniqueEmailAddress($value, $element, $this))
-		{
-			$var = "2";
-			$element->addError($this->handle,
-				Craft::t('sproutFields', $this->name . ' must be a unique email.')
-			);
-		}
+	/**
+	 * @inheritdoc
+	 */
+	public function getTableAttributeHtml($value, ElementInterface $element)
+	{
+		return $value;
 	}
 }

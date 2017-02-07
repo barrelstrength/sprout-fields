@@ -13,6 +13,7 @@
     "handle": "sproutFields",
     "version": "3.0.0",
     "schemaVersion": "3.0.0",
+    "hasSettings": true,
     "developer": "Barrel Strength",
     "class": "barrelstrength\\sproutfields\\SproutFields",
     "components": {

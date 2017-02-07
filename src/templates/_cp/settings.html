@@ -1,0 +1,60 @@
+{% import "_includes/forms" as forms %}
+
+<div class="grid first">
+	<div class="item" data-position="left" data-colspan="1">
+
+		<h2>{{ "Notes Field Settings"|t }}</h2>
+
+		<p class="light">{{ "Adjust your Notes Field custom styles."|t }}</p>
+
+		<p class="light">{{ "The `{{ name }}` value will get swapped out with your field's name to create the proper
+		 ID when
+		the
+		block is being rendered.  Currently, spacing matters, so use the `{{ name }}` value exactly as you see it in the other examples."|t }}</p>
+
+	</div>
+
+	<div class="item" data-position="right" data-min-colspan="1" data-max-colspan="3">
+
+		{#
+			Plugin Settings
+			Control the styles of the 5 different style options.
+		#}
+		<h3><label>Primary Information Styles</label></h3>
+
+		{{ forms.textarea({
+			name: 'infoPrimaryDocumentation',
+			rows: 10,
+			value: settings.infoPrimaryDocumentation
+		}) }}
+
+		<h3><label>Secondary Information Styles</label></h3>
+		{{ forms.textarea({
+			name: 'infoSecondaryDocumentation',
+			rows: 10,
+			value: settings.infoSecondaryDocumentation
+		}) }}
+
+		<h3><label>Warning Styles</label></h3>
+		{{ forms.textarea({
+			name: 'warningDocumentation',
+			rows: 10,
+			value: settings.warningDocumentation
+		}) }}
+
+		<h3><label>Danger Styles</label></h3>
+		{{ forms.textarea({
+			name: 'dangerDocumentation',
+			rows: 10,
+			value: settings.dangerDocumentation
+		}) }}
+
+		<h3><label>Highlight Styles</label></h3>
+		{{ forms.textarea({
+			name: 'highlightDocumentation',
+			rows: 10,
+			value: settings.highlightDocumentation
+		}) }}
+
+	</div>
+</div>

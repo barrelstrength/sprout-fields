@@ -150,7 +150,7 @@ class Notes extends Field
 	/**
 	 * @inheritdoc
 	 */
-	public function getTableAttributeHtml($value, ElementInterface $element)
+	public function getTableAttributeHtml($value, ElementInterface $element): string
 	{
 		$html = '';
 

@@ -57,7 +57,7 @@ class Invisible extends Field implements PreviewableFieldInterface
 	 * @inheritdoc
 	 */
 	public function getInputHtml($value, ElementInterface $element = null): string
-	{	
+	{
 		$name             = $this->handle;
 		$inputId          = Craft::$app->getView()->formatInputId($name);
 		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
@@ -93,7 +93,7 @@ class Invisible extends Field implements PreviewableFieldInterface
 	/**
 	 * @inheritdoc
 	 */
-	public function getTableAttributeHtml($value, ElementInterface $element)
+	public function getTableAttributeHtml($value, ElementInterface $element): string
 	{
 		$hiddenValue = "";
 

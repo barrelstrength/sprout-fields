@@ -122,7 +122,7 @@ class Phone extends Field implements PreviewableFieldInterface
 		if (!SproutFields::$api->phone->validate($value, $this->mask))
 		{
 			$element->addError(
-				$this->handle, 
+				$this->handle,
 				SproutFields::$api->phone->getErrorMessage($this)
 			);
 		}
@@ -131,11 +131,11 @@ class Phone extends Field implements PreviewableFieldInterface
 	/**
 	 * @inheritdoc
 	 */
-	public function getTableAttributeHtml($value, ElementInterface $element)
+	public function getTableAttributeHtml($value, ElementInterface $element): string
 	{
 		$html = '';
 
-		if ($value) 
+		if ($value)
 		{
 			$formatter = Craft::$app->getFormatter();
 

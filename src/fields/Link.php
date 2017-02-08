@@ -67,7 +67,7 @@ class Link extends Field implements PreviewableFieldInterface
 	{
 		$view = Craft::$app->getView();
 		$view->registerAssetBundle(LinkFieldAsset::class);
-		
+
 		$name             = $this->handle;
 		$inputId          = Craft::$app->getView()->formatInputId($name);
 		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
@@ -116,7 +116,7 @@ class Link extends Field implements PreviewableFieldInterface
 		if (!SproutFields::$api->link->validate($value, $this))
 		{
 			$element->addError(
-				$this->handle, 
+				$this->handle,
 				SproutFields::$api->link->getErrorMessage($this)
 			);
 		}
@@ -125,11 +125,11 @@ class Link extends Field implements PreviewableFieldInterface
 	/**
 	 * @inheritdoc
 	 */
-	public function getTableAttributeHtml($value, ElementInterface $element)
+	public function getTableAttributeHtml($value, ElementInterface $element): string
 	{
 		$html = '';
 
-		if ($value) 
+		if ($value)
 		{
 			$html = '<a href="' . $value . '" target="_blank">' . $value . '</a>';
 		}

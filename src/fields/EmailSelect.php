@@ -86,7 +86,7 @@ class EmailSelect extends BaseOptionsField
 	{
 		$valueOptions = $value->getOptions();
 		$anySelected  = SproutFields::$api->utilities->isAnyOptionsSelected(
-			$valueOptions, 
+			$valueOptions,
 			$value->value
 		);
 
@@ -154,7 +154,7 @@ class EmailSelect extends BaseOptionsField
 
 		if (!empty($invalidEmails))
 		{
-			foreach ($invalidEmails as $invalidEmail) 
+			foreach ($invalidEmails as $invalidEmail)
 			{
 				$element->addError($this->handle, $invalidEmail, $this);
 			}
@@ -164,11 +164,11 @@ class EmailSelect extends BaseOptionsField
 	/**
 	 * @inheritdoc
 	 */
-	public function getTableAttributeHtml($value, ElementInterface $element)
+	public function getTableAttributeHtml($value, ElementInterface $element): string
 	{
 		$html = '';
 
-		if ($value) 
+		if ($value)
 		{
 			$html = $value->label . ': <a href="mailto:' . $value . '" target="_blank">' . $value . '</a>';
 		}

@@ -121,7 +121,7 @@ class RegularExpression extends Field implements PreviewableFieldInterface
 	/**
 	 * @inheritdoc
 	 */
-	public function getTableAttributeHtml($value, ElementInterface $element)
+	public function getTableAttributeHtml($value, ElementInterface $element): string
 	{
 		return $value;
 	}

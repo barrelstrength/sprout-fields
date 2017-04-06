@@ -2,6 +2,7 @@
 namespace barrelstrength\sproutfields\services;
 
 use Craft;
+use craft\base\Field;
 use yii\base\Component;
 use craft\db\Query;
 
@@ -16,11 +17,11 @@ class Email extends Component
 	/**
 	 * @param string     $value
 	 * @param int        $elementId
-	 * @param FieldModel $field
+	 * @param Field $field
 	 *
 	 * @return bool
 	 */
-	public function validate($value, $elementId, $field): bool
+	public function validate($value, $elementId, Field $field): bool
 	{
 		$customPattern = $field->customPattern;
 		$checkPattern  = $field->customPatternToggle;
@@ -73,7 +74,7 @@ class Email extends Component
 	/**
 	 * @param string     $value
 	 * @param int        $elementId
-	 * @param FieldModel $field
+	 * @param Field $field
 	 *
 	 * @return bool
 	 */

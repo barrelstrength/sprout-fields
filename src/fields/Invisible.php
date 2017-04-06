@@ -29,7 +29,7 @@ class Invisible extends Field implements PreviewableFieldInterface
 
 	public static function displayName(): string
 	{
-		return Craft::t('sproutFields', 'Invisible');
+		return SproutFields::t('Invisible');
 	}
 
 	/**

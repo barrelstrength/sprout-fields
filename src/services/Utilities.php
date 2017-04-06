@@ -1,8 +1,8 @@
 <?php
 namespace barrelstrength\sproutfields\services;
 
-use Craft;
 use craft\base\Component;
+use craft\base\Element;
 
 class Utilities extends Component
 {
@@ -10,11 +10,11 @@ class Utilities extends Component
 	 * Returns current Field Type context to properly get field settings
 	 *
 	 * @param $field Email Field Object
-	 * @param $element
+	 * @param Element $element
 	 *
 	 * @return string
 	 */
-	public function getFieldContext($field, $element)
+	public function getFieldContext($field, Element $element)
 	{
 		$context = 'global';
 

@@ -5,7 +5,6 @@ use Craft;
 use yii\base\Event;
 use craft\events\RegisterComponentTypesEvent;
 use craft\services\Fields;
-use yii\base\Component;
 
 use barrelstrength\sproutfields\helpers\SproutFieldsInstallHelper;
 use barrelstrength\sproutfields\models\SettingsModel;
@@ -18,7 +17,6 @@ use barrelstrength\sproutfields\fields\Invisible         as InvisibleField;
 use barrelstrength\sproutfields\fields\Link              as LinkField;
 use barrelstrength\sproutfields\fields\Notes             as NotesField;
 use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
-use barrelstrength\sproutfields\services\PhoneService;
 
 class SproutFields extends \craft\base\Plugin
 {
@@ -56,7 +54,7 @@ class SproutFields extends \craft\base\Plugin
 	 */
 	public static function t($message, array $params = [])
 	{
-		return Craft::t('sproutFields', $message, $params);
+		return Craft::t('sproutfields', $message, $params);
 	}
 
 	/**

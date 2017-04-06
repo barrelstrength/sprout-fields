@@ -37,7 +37,7 @@ class Notes extends Field
 
 	public static function displayName(): string
 	{
-		return Craft::t('sproutFields', 'Notes');
+		return SproutFields::t('Notes');
 	}
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 namespace barrelstrength\sproutfields\services;
 
-use Craft;
+use craft\base\Field;
 use yii\base\Component;
 
 use barrelstrength\sproutfields\SproutFields;
@@ -15,11 +15,11 @@ class RegularExpression extends Component
 	/**
 	 *
 	 * @param $value
-	 * @param $field
+	 * @param Field $field
 	 *
 	 * @return bool
 	 */
-	public function validate($value, $field): bool
+	public function validate($value, Field $field): bool
 	{
 		$customPattern = $field->customPattern;
 

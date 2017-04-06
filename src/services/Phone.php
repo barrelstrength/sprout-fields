@@ -1,7 +1,6 @@
 <?php
 namespace barrelstrength\sproutfields\services;
 
-use Craft;
 use yii\base\Component;
 
 use barrelstrength\sproutfields\SproutFields;
@@ -77,11 +76,13 @@ class Phone extends Component
 		// Remove empty array values
 		$hashes = array_values(array_filter($matches[0]));
 
+		$hashPatterns = array();
+
 		// Organize for regex replacement
 		if ($hashes)
 		{
 			$i            = 0;
-			$hashPatterns = array();
+
 
 			foreach ($hashes as $hash)
 			{
@@ -93,9 +94,9 @@ class Phone extends Component
 
 				$i++;
 			}
-
-			return $hashPatterns;
 		}
+
+		return $hashPatterns;
 	}
 
 	/**
@@ -109,6 +110,8 @@ class Phone extends Component
 	{
 		$mask = $this->mask;
 
+		$regEx = '';
+
 		if ($hashPatterns)
 		{
 			foreach ($hashPatterns as $hashPattern)
@@ -121,9 +124,9 @@ class Phone extends Component
 			}
 
 			$regEx = '/^' . $mask . '$/';
-
-			return $regEx;
 		}
+
+		return $regEx;
 	}
 
 	/**

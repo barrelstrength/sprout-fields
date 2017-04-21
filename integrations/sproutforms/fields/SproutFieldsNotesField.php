@@ -34,9 +34,14 @@ class SproutFieldsNotesField extends SproutFieldsBaseField
 
 		$selectedStyle    = $settings['style'];
 		$pluginSettings   = craft()->plugins->getPlugin('sproutfields')->getSettings()->getAttributes();
-		$selectedStyleCss = str_replace("{{ name }}", $name, $pluginSettings[$selectedStyle]);
 
+		$selectedStyleCss = "";
+		if (isset($pluginSettings[$selectedStyle]))
+		{
+			$selectedStyleCss = str_replace("{{ name }}", $name, $pluginSettings[$selectedStyle]);
+		}
 		$rendered = craft()->templates->render('notes/input', array(
+			'id'               => $namespaceInputId,
 			'settings'         => $settings,
 			'selectedStyleCss' => $selectedStyleCss
 		));

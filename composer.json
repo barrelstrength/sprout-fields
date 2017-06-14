@@ -8,6 +8,9 @@
       "barrelstrength\\sproutfields\\": "src/"
     }
   },
+  "require": {
+    "barrelstrength/sproutcore": "^1.0.0"
+  },
   "extra": {
     "name": "Sprout Fields",
     "handle": "sproutFields",

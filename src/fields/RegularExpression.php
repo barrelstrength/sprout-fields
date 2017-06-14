@@ -70,7 +70,7 @@ class RegularExpression extends Field implements PreviewableFieldInterface
 		$fieldContext = SproutFields::$api->utilities->getFieldContext($this, $element);
 
 		return Craft::$app->getView()->renderTemplate(
-			'sproutfields/_fieldtypes/regularexpression/input',
+			'sprout-core/_integrations/sproutfields/fields/regularexpression/input',
 			[
 				'id'           => $namespaceInputId,
 				'field'        => $this,

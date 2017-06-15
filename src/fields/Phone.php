@@ -41,7 +41,7 @@ class Phone extends Field implements PreviewableFieldInterface
 
 	public static function displayName(): string
 	{
-		return Craft::t('sproutFields', 'Phone Number');
+		return SproutFields::t('Phone Number');
 	}
 
 	/**
@@ -77,7 +77,7 @@ class Phone extends Field implements PreviewableFieldInterface
 		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
 		return Craft::$app->getView()->renderTemplate(
-			'sproutfields/_fieldtypes/phone/input',
+			'sprout-core/_integrations/sproutfields/fields/phone/input',
 			[
 				'id'    => $namespaceInputId,
 				'name'  => $this->handle,

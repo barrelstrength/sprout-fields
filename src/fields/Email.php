@@ -6,7 +6,6 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use craft\helpers\Db;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
@@ -41,7 +40,7 @@ class Email extends Field implements PreviewableFieldInterface
 
 	public static function displayName(): string
 	{
-		return Craft::t('sproutFields', 'Email Address');
+		return SproutFields::t('Email Address');
 	}
 
 	/**
@@ -80,7 +79,7 @@ class Email extends Field implements PreviewableFieldInterface
 		// Set this to false for Quick Entry Dashboard Widget
 		$elementId = ($element != null) ? $element->id : false;
 
-		return Craft::$app->getView()->renderTemplate('sproutfields/_fieldtypes/email/input',
+		return Craft::$app->getView()->renderTemplate('sprout-core/_integrations/sproutfields/fields/email/input',
 			[
 				'id'           => $namespaceInputId,
 				'name'         => $name,
@@ -130,9 +129,8 @@ class Email extends Field implements PreviewableFieldInterface
 
 		if ($uniqueEmail && !SproutFields::$api->email->validateUniqueEmailAddress($value, $element, $this))
 		{
-			$var = "2";
 			$element->addError($this->handle,
-				Craft::t('sproutFields', $this->name . ' must be a unique email.')
+				SproutFields::t($this->name . ' must be a unique email.')
 			);
 		}
 	}

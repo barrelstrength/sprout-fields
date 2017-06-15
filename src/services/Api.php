@@ -1,9 +1,8 @@
 <?php
 namespace barrelstrength\sproutfields\services;
 
-use Craft;
 use craft\base\Component;
-use barrelstrength\sproutfields\SproutFields;
+use barrelstrength\sproutcore\services\sproutfields\Utilities;
 
 class Api extends Component
 {

@@ -2,6 +2,7 @@
 
 namespace barrelstrength\sproutfields\fields;
 
+use barrelstrength\sproutfields\SproutFields;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
@@ -22,7 +23,7 @@ class Hidden extends Field implements PreviewableFieldInterface
 
 	public static function displayName(): string
 	{
-		return Craft::t('sproutFields', 'Hidden');
+		return SproutFields::t('Hidden');
 	}
 
 	/**
@@ -49,7 +50,7 @@ class Hidden extends Field implements PreviewableFieldInterface
 	 */
 	public function getInputHtml($value, ElementInterface $element = null): string
 	{
-		return Craft::$app->getView()->renderTemplate('sproutfields/_fieldtypes/hidden/input',
+		return Craft::$app->getView()->renderTemplate('sprout-core/_integrations/sproutfields/fields/hidden/input',
 			[
 				'id'    => $this->handle,
 				'name'  => $this->handle,

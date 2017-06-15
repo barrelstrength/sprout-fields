@@ -36,7 +36,7 @@ class Link extends Field implements PreviewableFieldInterface
 
 	public static function displayName(): string
 	{
-		return Craft::t('sproutFields', 'Link');
+		return SproutFields::t('Link');
 	}
 
 	/**
@@ -75,7 +75,7 @@ class Link extends Field implements PreviewableFieldInterface
 		$fieldContext = SproutFields::$api->utilities->getFieldContext($this, $element);
 
 		return Craft::$app->getView()->renderTemplate(
-			'sproutfields/_fieldtypes/link/input',
+			'sprout-core/_integrations/sproutfields/fields/link/input',
 			[
 				'id'           => $namespaceInputId,
 				'name'         => $name,

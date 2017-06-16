@@ -10,7 +10,7 @@ use craft\helpers\Db;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutfields\assetbundles\regularexpressionfield\RegularExpressionFieldAsset;
+use barrelstrength\sproutcore\web\sproutfields\regularexpressionfield\RegularExpressionFieldAsset;
 
 class RegularExpression extends Field implements PreviewableFieldInterface
 {

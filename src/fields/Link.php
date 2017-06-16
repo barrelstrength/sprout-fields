@@ -9,7 +9,7 @@ use craft\base\PreviewableFieldInterface;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutfields\assetbundles\linkfield\LinkFieldAsset;
+use barrelstrength\sproutcore\web\sproutfields\linkfield\LinkFieldAsset;
 
 class Link extends Field implements PreviewableFieldInterface
 {

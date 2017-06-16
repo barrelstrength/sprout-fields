@@ -10,7 +10,7 @@ use craft\helpers\Db;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutfields\assetbundles\phonefield\PhoneFieldAsset;
+use barrelstrength\sproutcore\web\sproutfields\phonefield\PhoneFieldAsset;
 
 class Phone extends Field implements PreviewableFieldInterface
 {

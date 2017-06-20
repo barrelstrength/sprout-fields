@@ -9,7 +9,7 @@ use craft\base\PreviewableFieldInterface;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutfields\assetbundles\emailfield\EmailFieldAsset;
+use barrelstrength\sproutcore\web\sproutfields\emailfield\EmailFieldAsset;
 
 class Email extends Field implements PreviewableFieldInterface
 {
@@ -79,7 +79,7 @@ class Email extends Field implements PreviewableFieldInterface
 		// Set this to false for Quick Entry Dashboard Widget
 		$elementId = ($element != null) ? $element->id : false;
 
-		return Craft::$app->getView()->renderTemplate('sprout-core/_integrations/sproutfields/fields/email/input',
+		return Craft::$app->getView()->renderTemplate('sprout-core/sproutfields/fields/email/input',
 			[
 				'id'           => $namespaceInputId,
 				'name'         => $name,

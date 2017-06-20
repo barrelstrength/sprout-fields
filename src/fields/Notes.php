@@ -101,7 +101,7 @@ class Notes extends Field
 		}
 
 		return Craft::$app->getView()->renderTemplate(
-			'sprout-core/_integrations/sproutfields/fields/notes/input',
+			'sprout-core/sproutfields/fields/notes/input',
 			[
 				'id'               => $namespaceInputId,
 				'name'             => $name,

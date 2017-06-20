@@ -9,7 +9,7 @@ use craft\base\PreviewableFieldInterface;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutfields\assetbundles\linkfield\LinkFieldAsset;
+use barrelstrength\sproutcore\web\sproutfields\linkfield\LinkFieldAsset;
 
 class Link extends Field implements PreviewableFieldInterface
 {
@@ -75,7 +75,7 @@ class Link extends Field implements PreviewableFieldInterface
 		$fieldContext = SproutFields::$api->utilities->getFieldContext($this, $element);
 
 		return Craft::$app->getView()->renderTemplate(
-			'sprout-core/_integrations/sproutfields/fields/link/input',
+			'sprout-core/sproutfields/fields/link/input',
 			[
 				'id'           => $namespaceInputId,
 				'name'         => $name,

@@ -4,6 +4,7 @@ namespace barrelstrength\sproutfields\services;
 use craft\base\Component;
 use barrelstrength\sproutcore\services\sproutfields\Utilities;
 use barrelstrength\sproutcore\services\sproutfields\Link;
+use barrelstrength\sproutcore\services\sproutfields\Phone;
 
 class Api extends Component
 {

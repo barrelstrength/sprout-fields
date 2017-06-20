@@ -5,6 +5,7 @@ use craft\base\Component;
 use barrelstrength\sproutcore\services\sproutfields\Utilities;
 use barrelstrength\sproutcore\services\sproutfields\Link;
 use barrelstrength\sproutcore\services\sproutfields\Phone;
+use barrelstrength\sproutcore\services\sproutfields\RegularExpression;
 
 class Api extends Component
 {

@@ -20,18 +20,10 @@ use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionFie
 
 class SproutFields extends \craft\base\Plugin
 {
-	/**
-	 * Enable use of SproutFields::$plugin-> in place of Craft::$app->
-	 *
-	 * @var [type]
-	 */
-	public static $api;
-
 	public function init()
 	{
 		parent::init();
 
-		self::$api = $this->get('api');
 		SproutCoreHelper::registerModule();
 
 		Event::on(Fields::class, Fields::EVENT_REGISTER_FIELD_TYPES, function(RegisterComponentTypesEvent $event) {

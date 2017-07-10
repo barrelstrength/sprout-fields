@@ -67,7 +67,7 @@ class Notes extends Field
 		$view->registerAssetBundle(RichTextAsset::class);
 
 		return Craft::$app->getView()->renderTemplate(
-			'sproutfields/_fieldtypes/notes/settings',
+			'sprout-fields/_fieldtypes/notes/settings',
 			[
 				'options'  => $this->getOptions(),
 				'id'       => $namespaceInputId,

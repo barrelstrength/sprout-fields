@@ -57,7 +57,7 @@ class Email extends Field implements PreviewableFieldInterface
 	 */
 	public function getSettingsHtml()
 	{
-		return Craft::$app->getView()->renderTemplate('sproutfields/_fieldtypes/email/settings',
+		return Craft::$app->getView()->renderTemplate('sprout-fields/_fieldtypes/email/settings',
 			[
 				'field' => $this,
 			]);

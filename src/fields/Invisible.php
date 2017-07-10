@@ -46,7 +46,7 @@ class Invisible extends Field implements PreviewableFieldInterface
 	public function getSettingsHtml()
 	{
 		return Craft::$app->getView()->renderTemplate(
-			'sproutfields/_fieldtypes/invisible/settings',
+			'sprout-fields/_fieldtypes/invisible/settings',
 			[
 				'field' => $this,
 			]

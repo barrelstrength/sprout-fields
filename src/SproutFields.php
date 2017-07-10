@@ -47,7 +47,7 @@ class SproutFields extends \craft\base\Plugin
 	 */
 	public static function t($message, array $params = [])
 	{
-		return Craft::t('sproutfields', $message, $params);
+		return Craft::t('sprout-fields', $message, $params);
 	}
 
 	/**

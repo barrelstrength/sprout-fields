@@ -103,8 +103,9 @@ class Address extends Field implements PreviewableFieldInterface
 	{
 		if (empty($value)) return;
 
-		$addressId = null;
-
+		// on the resave element task $value is the id
+		$addressId = $value;
+		// Comes when the field is saved by post request
 		if (isset($value['id']) && $value['id'])
 		{
 			$addressId = $value['id'];
@@ -120,35 +121,34 @@ class Address extends Field implements PreviewableFieldInterface
 	public function afterElementSave(ElementInterface $element, bool $isNew)
 	{
 		$fieldHandle = $this->handle;
-		$addressInfo  = $element->{$fieldHandle};
+		$addressInfo = $element->{$fieldHandle};
 
 		// Make sure we are actually submitting our field
-		if (!$addressInfo)
+		if (is_array($addressInfo))
 		{
-			return;
-		}
-		$addressInfo['modelId'] = $this->id;
-		$addressModel = new AddressModel($addressInfo);
+			$addressInfo['modelId'] = $this->id;
+			$addressModel = new AddressModel($addressInfo);
 
-		if ($addressModel->validate() == true && SproutCore::$app->address->saveAddress($addressModel))
-		{
-			$addressId = $addressModel->id;
+			if ($addressModel->validate() == true && SproutCore::$app->address->saveAddress($addressModel))
+			{
+				$addressId = $addressModel->id;
 
-			$addressInfo['id'] = $addressId;
+				$addressInfo['id'] = $addressId;
 
-			$element->{$fieldHandle} = $addressInfo;
+				$element->{$fieldHandle} = $addressInfo;
 
-			// Update the field again with addressId value
-			Craft::$app->getContent()->saveContent($element);
-		}
+				// Update the field again with addressId value
+				Craft::$app->getContent()->saveContent($element);
+			}
 
-		if ($addressModel->id == null && isset($this->id))
-		{
-			SproutCore::$app->address->deleteAddressByModelId($this->id);
+			if ($addressModel->id == null && isset($this->id))
+			{
+				SproutCore::$app->address->deleteAddressByModelId($this->id);
 
-			$element->getContent()->{$fieldHandle} = null;
+				$element->getContent()->{$fieldHandle} = null;
 
-			Craft::$app->getContent()->saveContent($element);
+				Craft::$app->getContent()->saveContent($element);
+			}
 		}
 
 		parent::afterElementSave($element, $isNew);

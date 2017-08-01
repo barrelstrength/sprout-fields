@@ -17,6 +17,7 @@ use barrelstrength\sproutfields\fields\Invisible         as InvisibleField;
 use barrelstrength\sproutfields\fields\Link              as LinkField;
 use barrelstrength\sproutfields\fields\Notes             as NotesField;
 use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
+use barrelstrength\sproutfields\fields\Address           as AddressField;
 
 class SproutFields extends \craft\base\Plugin
 {
@@ -27,6 +28,7 @@ class SproutFields extends \craft\base\Plugin
 		SproutCoreHelper::registerModule();
 
 		Event::on(Fields::class, Fields::EVENT_REGISTER_FIELD_TYPES, function(RegisterComponentTypesEvent $event) {
+				$event->types[] = AddressField::class;
 				$event->types[] = HiddenField::class;
 				$event->types[] = PhoneField::class;
 				$event->types[] = EmailField::class;

@@ -12,14 +12,13 @@
 
 {% includeCss css %}
 
-
 {% set js %}
 
 	{% if (settings.hideLabel)  %}
-		var sproutField = document.getElementById('{{ id }}-field').getElementsByClassName('heading')[0];
-
-		sproutField.style.display = 'none';
+		var notesField = document.getElementById('{{ id }}-field').getElementsByClassName('heading')[0];
+		notesField.parentNode.removeChild(notesField);
 	{% endif %}
+
 {% endset %}
 
 {% includeJs js %}

@@ -31,11 +31,16 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 	 */
 	public function validate($value, $mask)
 	{
+		if ($value == $mask)
+		{
+			return true;
+		}
+
 		$mask = preg_quote($mask);
 
 		$phonePattern = $this->convertMaskToRegEx($mask);
 
-		if ($value == $mask || preg_match($phonePattern, $value))
+		if (preg_match($phonePattern, $value))
 		{
 			return true;
 		}

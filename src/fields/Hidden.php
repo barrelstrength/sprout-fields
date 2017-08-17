@@ -39,7 +39,7 @@ class Hidden extends Field implements PreviewableFieldInterface
 	 */
 	public function getSettingsHtml()
 	{
-		return Craft::$app->getView()->renderTemplate('sproutfields/_fieldtypes/hidden/settings',
+		return Craft::$app->getView()->renderTemplate('sprout-fields/_fieldtypes/hidden/settings',
 			[
 				'field' => $this,
 			]);

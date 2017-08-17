@@ -13,14 +13,11 @@
   },
   "extra": {
     "name": "Sprout Fields",
-    "handle": "sproutFields",
+    "handle": "sprout-fields",
     "version": "3.0.0",
     "schemaVersion": "3.0.0",
     "hasSettings": true,
     "developer": "Barrel Strength",
-    "class": "barrelstrength\\sproutfields\\SproutFields",
-    "components": {
-      "api": "barrelstrength\\sproutfields\\services\\Api"
-    }
+    "class": "barrelstrength\\sproutfields\\SproutFields"
   }
 }

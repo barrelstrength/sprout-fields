@@ -11,6 +11,7 @@ use yii\db\Schema;
 use craft\helpers\ArrayHelper;
 
 use barrelstrength\sproutfields\SproutFields;
+use barrelstrength\sproutcore\SproutCore;
 
 class EmailSelect extends BaseOptionsField
 {
@@ -85,7 +86,7 @@ class EmailSelect extends BaseOptionsField
 	public function getInputHtml($value, ElementInterface $element = null): string
 	{
 		$valueOptions = $value->getOptions();
-		$anySelected  = SproutFields::$api->utilities->isAnyOptionsSelected(
+		$anySelected  = SproutCore::$app->utilities->isAnyOptionsSelected(
 			$valueOptions,
 			$value->value
 		);

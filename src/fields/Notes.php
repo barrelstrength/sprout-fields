@@ -67,7 +67,7 @@ class Notes extends Field
 		$view->registerAssetBundle(RichTextAsset::class);
 
 		return Craft::$app->getView()->renderTemplate(
-			'sproutfields/_fieldtypes/notes/settings',
+			'sprout-fields/_fieldtypes/notes/settings',
 			[
 				'options'  => $this->getOptions(),
 				'id'       => $namespaceInputId,
@@ -109,57 +109,6 @@ class Notes extends Field
 				'selectedStyleCss' => $selectedStyleCss
 			]
 		);
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function getElementValidationRules(): array
-	{
-		$rules = parent::getElementValidationRules();
-		$rules[] = 'validateLink';
-
-		return $rules;
-	}
-
-	/**
-	 * Validates our fields submitted value beyond the checks
-	 * that were assumed based on the content attribute.
-	 *
-	 *
-	 * @param ElementInterface $element
-	 *
-	 * @return void
-	 */
-	public function validateLink(ElementInterface $element)
-	{
-		$value = $element->getFieldValue($this->handle);
-
-		$handle  = $this->handle;
-		$name    = $this->name;
-
-		if (!SproutFields::$api->link->validate($value, $this))
-		{
-			$element->addError(
-				$this->handle,
-				SproutFields::$api->link->getErrorMessage($this)
-			);
-		}
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function getTableAttributeHtml($value, ElementInterface $element): string
-	{
-		$html = '';
-
-		if ($value)
-		{
-			$html = '<a href="' . $value . '" target="_blank">' . $value . '</a>';
-		}
-
-		return $html;
 	}
 
 	private function getOptions()

@@ -1,15 +1,12 @@
 {% import "_includes/forms" as forms %}
 
 {# Setup our field #}
-<input class="text sprout-regularexpression-field fullwidth" type="text"
-	id="{{ name }}"
-	name="{{ name }}"
-	value="{{ (value is defined) ? value : '' }}"
-	autocomplete="off"
-	{% if settings.customPattern is not empty %}
-		pattern="{{ settings.customPattern }}"
-	{% endif %}
-	placeholder="{{ placeholder is not empty ? placeholder : null }}">
+{{ forms.text({
+	id: name,
+	name: name,
+	value: (value is defined) ? value : '',
+	placeholder: placeholder is not empty ? placeholder : null,
+}) }}
 
 <span class="sprout-regularexpression-button {{ id }}"></span>
 

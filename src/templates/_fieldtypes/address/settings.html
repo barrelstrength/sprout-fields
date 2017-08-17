@@ -1,0 +1,19 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.selectField({
+	label: "Default Country"|t,
+	instructions: "Choose a default country input.",
+	id: 'country',
+	name: 'country',
+	options: countries,
+	value: settings.country
+}) }}
+
+{{ forms.lightswitchField({
+	label: "Hide country input?"|t,
+	instructions: 'Hide country dropdown and use the Default Country when saving address field.'|t,
+	warning: '',
+	id: 'countryToggle',
+	name: 'countryToggle',
+	on: settings.countryToggle,
+}) }}

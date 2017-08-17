@@ -11,12 +11,13 @@ use yii\db\Schema;
 use craft\helpers\ArrayHelper;
 
 use barrelstrength\sproutfields\SproutFields;
+use barrelstrength\sproutcore\SproutCore;
 
 class EmailSelect extends BaseOptionsField
 {
 	public static function displayName(): string
 	{
-		return Craft::t('sproutFields', 'Email Select');
+		return SproutFields::t('Email Select');
 	}
 
 	/**
@@ -32,7 +33,7 @@ class EmailSelect extends BaseOptionsField
 	 */
 	protected function optionsSettingLabel(): string
 	{
-		return Craft::t('sproutFields', 'Dropdown Options');
+		return SproutFields::t('Dropdown Options');
 	}
 
 	/**
@@ -52,23 +53,23 @@ class EmailSelect extends BaseOptionsField
 			[
 				[
 					'label'        => $this->optionsSettingLabel(),
-					'instructions' => Craft::t('sproutFields', 'Define the available options.'),
+					'instructions' => SproutFields::t('Define the available options.'),
 					'id'           => 'options',
 					'name'         => 'options',
-					'addRowLabel'  => Craft::t('sproutFields', 'Add an option'),
+					'addRowLabel'  => SproutFields::t('Add an option'),
 					'cols'         => [
 						'label'   => [
-							'heading'      => Craft::t('sproutFields', 'Name'),
+							'heading'      => SproutFields::t('Name'),
 							'type'         => 'singleline',
 							'autopopulate' => 'value'
 						],
 						'value'   => [
-							'heading' => Craft::t('sproutFields', 'Email'),
+							'heading' => SproutFields::t('Email'),
 							'type'    => 'singleline',
 							'class'   => 'code'
 						],
 						'default' => [
-							'heading' => Craft::t('sproutFields', 'Default?'),
+							'heading' => SproutFields::t('Default?'),
 							'type'    => 'checkbox',
 							'class'   => 'thin'
 						],
@@ -85,7 +86,7 @@ class EmailSelect extends BaseOptionsField
 	public function getInputHtml($value, ElementInterface $element = null): string
 	{
 		$valueOptions = $value->getOptions();
-		$anySelected  = SproutFields::$api->utilities->isAnyOptionsSelected(
+		$anySelected  = SproutCore::$app->utilities->isAnyOptionsSelected(
 			$valueOptions,
 			$value->value
 		);
@@ -100,7 +101,7 @@ class EmailSelect extends BaseOptionsField
 
 		$options = $this->options;
 
-		return Craft::$app->getView()->renderTemplate('sproutfields/_fieldtypes/emailselect/input',
+		return Craft::$app->getView()->renderTemplate('sprout-core/sproutfields/fields/emailselect/input',
 			[
 				'name'    => $name,
 				'value'   => $value,
@@ -144,7 +145,7 @@ class EmailSelect extends BaseOptionsField
 			{
 				if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL))
 				{
-					$invalidEmails[] = Craft::t(
+					$invalidEmails[] = SproutFields::t(
 						'sproutFields',
 						$emailAddress . " email does not validate"
 					);

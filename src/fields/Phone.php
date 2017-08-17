@@ -10,7 +10,8 @@ use craft\helpers\Db;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutfields\assetbundles\phonefield\PhoneFieldAsset;
+use barrelstrength\sproutcore\SproutCore;
+use barrelstrength\sproutcore\web\sproutfields\phonefield\PhoneFieldAsset;
 
 class Phone extends Field implements PreviewableFieldInterface
 {
@@ -41,7 +42,7 @@ class Phone extends Field implements PreviewableFieldInterface
 
 	public static function displayName(): string
 	{
-		return Craft::t('sproutFields', 'Phone Number');
+		return SproutFields::t('Phone Number');
 	}
 
 	/**
@@ -58,7 +59,7 @@ class Phone extends Field implements PreviewableFieldInterface
 	public function getSettingsHtml()
 	{
 		return Craft::$app->getView()->renderTemplate(
-			'sproutfields/_fieldtypes/phone/settings',
+			'sprout-fields/_fieldtypes/phone/settings',
 			[
 				'field' => $this,
 			]
@@ -77,7 +78,7 @@ class Phone extends Field implements PreviewableFieldInterface
 		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
 		return Craft::$app->getView()->renderTemplate(
-			'sproutfields/_fieldtypes/phone/input',
+			'sprout-core/sproutfields/fields/phone/input',
 			[
 				'id'    => $namespaceInputId,
 				'name'  => $this->handle,
@@ -116,14 +117,14 @@ class Phone extends Field implements PreviewableFieldInterface
 
 		if ($this->mask == "")
 		{
-			$this->mask = SproutFields::$api->phone->getDefaultMask();
+			$this->mask = SproutCore::$app->phone->getDefaultMask();
 		}
 
-		if (!SproutFields::$api->phone->validate($value, $this->mask))
+		if (!SproutCore::$app->phone->validate($value, $this->mask))
 		{
 			$element->addError(
 				$this->handle,
-				SproutFields::$api->phone->getErrorMessage($this)
+				SproutCore::$app->phone->getErrorMessage($this)
 			);
 		}
 	}

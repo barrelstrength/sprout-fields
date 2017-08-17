@@ -9,7 +9,8 @@ use craft\base\PreviewableFieldInterface;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutfields\assetbundles\linkfield\LinkFieldAsset;
+use barrelstrength\sproutcore\SproutCore;
+use barrelstrength\sproutcore\web\sproutfields\linkfield\LinkFieldAsset;
 
 class Link extends Field implements PreviewableFieldInterface
 {
@@ -36,7 +37,7 @@ class Link extends Field implements PreviewableFieldInterface
 
 	public static function displayName(): string
 	{
-		return Craft::t('sproutFields', 'Link');
+		return SproutFields::t('Link');
 	}
 
 	/**
@@ -53,7 +54,7 @@ class Link extends Field implements PreviewableFieldInterface
 	public function getSettingsHtml()
 	{
 		return Craft::$app->getView()->renderTemplate(
-			'sproutfields/_fieldtypes/link/settings',
+			'sprout-fields/_fieldtypes/link/settings',
 			[
 				'field' => $this,
 			]
@@ -72,10 +73,10 @@ class Link extends Field implements PreviewableFieldInterface
 		$inputId          = Craft::$app->getView()->formatInputId($name);
 		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
-		$fieldContext = SproutFields::$api->utilities->getFieldContext($this, $element);
+		$fieldContext = SproutCore::$app->utilities->getFieldContext($this, $element);
 
 		return Craft::$app->getView()->renderTemplate(
-			'sproutfields/_fieldtypes/link/input',
+			'sprout-core/sproutfields/fields/link/input',
 			[
 				'id'           => $namespaceInputId,
 				'name'         => $name,
@@ -113,11 +114,11 @@ class Link extends Field implements PreviewableFieldInterface
 		$handle  = $this->handle;
 		$name    = $this->name;
 
-		if (!SproutFields::$api->link->validate($value, $this))
+		if (!SproutCore::$app->link->validate($value, $this))
 		{
 			$element->addError(
 				$this->handle,
-				SproutFields::$api->link->getErrorMessage($this)
+				SproutCore::$app->link->getErrorMessage($this)
 			);
 		}
 	}

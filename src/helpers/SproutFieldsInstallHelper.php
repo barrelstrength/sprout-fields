@@ -3,9 +3,6 @@
 namespace barrelstrength\sproutfields\helpers;
 
 use Craft;
-use craft\db\Query;
-
-use barrelstrength\sproutfields\SproutFields;
 
 class SproutFieldsInstallHelper
 {

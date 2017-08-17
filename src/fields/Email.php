@@ -6,11 +6,11 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use craft\helpers\Db;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutfields\assetbundles\emailfield\EmailFieldAsset;
+use barrelstrength\sproutcore\SproutCore;
+use barrelstrength\sproutcore\web\sproutfields\emailfield\EmailFieldAsset;
 
 class Email extends Field implements PreviewableFieldInterface
 {
@@ -41,7 +41,7 @@ class Email extends Field implements PreviewableFieldInterface
 
 	public static function displayName(): string
 	{
-		return Craft::t('sproutFields', 'Email Address');
+		return SproutFields::t('Email Address');
 	}
 
 	/**
@@ -57,7 +57,7 @@ class Email extends Field implements PreviewableFieldInterface
 	 */
 	public function getSettingsHtml()
 	{
-		return Craft::$app->getView()->renderTemplate('sproutfields/_fieldtypes/email/settings',
+		return Craft::$app->getView()->renderTemplate('sprout-fields/_fieldtypes/email/settings',
 			[
 				'field' => $this,
 			]);
@@ -75,12 +75,12 @@ class Email extends Field implements PreviewableFieldInterface
 		$inputId          = Craft::$app->getView()->formatInputId($name);
 		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
-		$fieldContext = SproutFields::$api->utilities->getFieldContext($this, $element);
+		$fieldContext = SproutFields::$app->utilities->getFieldContext($this, $element);
 
 		// Set this to false for Quick Entry Dashboard Widget
 		$elementId = ($element != null) ? $element->id : false;
 
-		return Craft::$app->getView()->renderTemplate('sproutfields/_fieldtypes/email/input',
+		return Craft::$app->getView()->renderTemplate('sprout-core/sproutfields/fields/email/input',
 			[
 				'id'           => $namespaceInputId,
 				'name'         => $name,
@@ -118,21 +118,20 @@ class Email extends Field implements PreviewableFieldInterface
 		$customPattern = $this->customPattern;
 		$checkPattern  = $this->customPatternToggle;
 
-		if (!SproutFields::$api->email->validateEmailAddress($value, $customPattern, $checkPattern))
+		if (!SproutCore::$app->email->validateEmailAddress($value, $customPattern, $checkPattern))
 		{
 			$element->addError($this->handle,
-				SproutFields::$api->email->getErrorMessage(
+				SproutCore::$app->email->getErrorMessage(
 					$this->name, $this)
 			);
 		}
 
 		$uniqueEmail = $this->uniqueEmail;
 
-		if ($uniqueEmail && !SproutFields::$api->email->validateUniqueEmailAddress($value, $element, $this))
+		if ($uniqueEmail && !SproutCore::$app->email->validateUniqueEmailAddress($value, $element, $this))
 		{
-			$var = "2";
 			$element->addError($this->handle,
-				Craft::t('sproutFields', $this->name . ' must be a unique email.')
+				SproutFields::t($this->name . ' must be a unique email.')
 			);
 		}
 	}

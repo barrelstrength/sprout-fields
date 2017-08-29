@@ -21,15 +21,15 @@
 		instructions: 'Validate phone numbers using this pattern of numbers.'|t('sproutFields'),
 		required: true,
 		name: 'mask',
-		placeholder: '###-###-####',
-		value: field.mask ? field.mask : '###-###-####'
+		placeholder: '##########',
+		value: field.mask ? field.mask : '##########'
 	}) }}
 
 	{{ forms.textField({
 		label: 'Error Message'|t('sproutFields'),
 		instructions: 'Display this error message when a phone number is invalid.'|t('sproutFields'),
 		name: 'customPatternErrorMessage',
-		placeholder: 'Phone number must match the format: ###-###-####',
+		placeholder: 'Phone number must match the format: ##########',
 		value: field.customPatternErrorMessage
 	}) }}
 </div>

@@ -18,7 +18,7 @@ class SproutFields_PhoneFieldService extends BaseApplicationComponent
 	 */
 	public function getDefaultMask()
 	{
-		return "###-###-####";
+		return "##########";
 	}
 
 	/**

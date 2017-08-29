@@ -18,18 +18,19 @@
 <div id="sproutlinkfield-custom-validation-pattern" {% if not settings.customPatternToggle %}class="hidden"{% endif %}>
 	{{ forms.textField({
 		label: 'Validation Pattern'|t,
-		instructions: 'Validate phone numbers using this pattern of numbers.'|t,
+		instructions: 'Validate phone numbers using this pattern of numbers. Note: Be careful if you wish to use dashes as
+		part of your validation pattern. Dashes are not supported by all mobile operating systems.'|t,
 		required: true,
 		name: 'mask',
-		placeholder: '###-###-####',
-		value: settings.mask ? settings.mask : '###-###-####'
+		placeholder: '##########',
+		value: settings.mask ? settings.mask : '##########'
 	}) }}
 
 	{{ forms.textField({
 		label: 'Error Message'|t,
 		instructions: 'Display this error message when a phone number is invalid.'|t,
 		name: 'customPatternErrorMessage',
-		placeholder: 'Phone number must match the format: ###-###-####',
+		placeholder: 'Phone number must match the format: ##########',
 		value: settings.customPatternErrorMessage
 	}) }}
 </div>

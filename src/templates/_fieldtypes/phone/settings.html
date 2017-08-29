@@ -18,7 +18,8 @@
 <div id="sproutlinkfield-custom-validation-pattern" {% if not field.customPatternToggle %}class="hidden"{% endif %}>
 	{{ forms.textField({
 		label: 'Validation Pattern'|t('sproutFields'),
-		instructions: 'Validate phone numbers using this pattern of numbers.'|t('sproutFields'),
+		instructions: 'Validate phone numbers using this pattern of numbers. Note: Be careful if you wish to use dashes as
+		part of your validation pattern. Dashes are not supported by all mobile operating systems.'|t('sproutFields'),
 		required: true,
 		name: 'mask',
 		placeholder: '##########',

@@ -11,7 +11,7 @@ use yii\db\Schema;
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutcore\SproutCore;
 use barrelstrength\sproutcore\helpers\AddressHelper;
-use barrelstrength\sproutcore\models\Address as AddressModel;
+use barrelstrength\sproutcore\models\sproutfields\Address as AddressModel;
 
 class Address extends Field implements PreviewableFieldInterface
 {

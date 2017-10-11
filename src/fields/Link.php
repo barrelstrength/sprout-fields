@@ -10,7 +10,6 @@ use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutcore\SproutCore;
-use barrelstrength\sproutcore\web\sproutfields\linkfield\LinkFieldAsset;
 
 class Link extends Field implements PreviewableFieldInterface
 {
@@ -66,23 +65,19 @@ class Link extends Field implements PreviewableFieldInterface
 	 */
 	public function getInputHtml($value, ElementInterface $element = null): string
 	{
-		$view = Craft::$app->getView();
-		$view->registerAssetBundle(LinkFieldAsset::class);
-
-		$name             = $this->handle;
-		$inputId          = Craft::$app->getView()->formatInputId($name);
+		$name = $this->handle;
+		$inputId = Craft::$app->getView()->formatInputId($name);
 		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
 		$fieldContext = SproutCore::$app->utilities->getFieldContext($this, $element);
 
-		return Craft::$app->getView()->renderTemplate(
-			'sprout-core/sproutfields/fields/link/input',
-			[
-				'id'           => $namespaceInputId,
-				'name'         => $name,
-				'value'        => $value,
+		return Craft::$app->getView()->renderTemplate('sprout-core/sproutfields/fields/link/input', [
+				'namespaceInputId' => $namespaceInputId,
+				'id' => $inputId,
+				'name' => $name,
+				'value' => $value,
 				'fieldContext' => $fieldContext,
-				'placeholder'  => $this->placeholder
+				'placeholder' => $this->placeholder
 			]
 		);
 	}
@@ -111,8 +106,8 @@ class Link extends Field implements PreviewableFieldInterface
 	{
 		$value = $element->getFieldValue($this->handle);
 
-		$handle  = $this->handle;
-		$name    = $this->name;
+		$handle = $this->handle;
+		$name = $this->name;
 
 		if (!SproutCore::$app->link->validate($value, $this))
 		{
@@ -132,7 +127,7 @@ class Link extends Field implements PreviewableFieldInterface
 
 		if ($value)
 		{
-			$html = '<a href="' . $value . '" target="_blank">' . $value . '</a>';
+			$html = '<a href="'.$value.'" target="_blank">'.$value.'</a>';
 		}
 
 		return $html;

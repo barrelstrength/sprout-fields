@@ -13,7 +13,6 @@ use barrelstrength\sproutcore\SproutCore;
 
 class Link extends Field implements PreviewableFieldInterface
 {
-
 	/**
 	 * @var string|null
 	 */

@@ -10,7 +10,6 @@ use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutcore\SproutCore;
-use barrelstrength\sproutcore\web\sproutfields\emailfield\EmailFieldAsset;
 
 class Email extends Field implements PreviewableFieldInterface
 {
@@ -68,26 +67,24 @@ class Email extends Field implements PreviewableFieldInterface
 	 */
 	public function getInputHtml($value, ElementInterface $element = null): string
 	{
-		$view = Craft::$app->getView();
-		$view->registerAssetBundle(EmailFieldAsset::class);
-
 		$name = $this->handle;
-		$inputId          = Craft::$app->getView()->formatInputId($name);
+		$inputId = Craft::$app->getView()->formatInputId($name);
 		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
-		$fieldContext = SproutFields::$app->utilities->getFieldContext($this, $element);
+		$fieldContext = SproutCore::$app->utilities->getFieldContext($this, $element);
 
 		// Set this to false for Quick Entry Dashboard Widget
 		$elementId = ($element != null) ? $element->id : false;
 
 		return Craft::$app->getView()->renderTemplate('sprout-core/sproutfields/fields/email/input',
 			[
-				'id'           => $namespaceInputId,
-				'name'         => $name,
-				'value'        => $value,
-				'elementId'    => $elementId,
+				'namespaceInputId' => $namespaceInputId,
+				'id' => $inputId,
+				'name' => $name,
+				'value' => $value,
+				'elementId' => $elementId,
 				'fieldContext' => $fieldContext,
-				'placeholder'  => $this->placeholder
+				'placeholder' => $this->placeholder
 			]);
 	}
 
@@ -116,7 +113,7 @@ class Email extends Field implements PreviewableFieldInterface
 		$value = $element->getFieldValue($this->handle);
 
 		$customPattern = $this->customPattern;
-		$checkPattern  = $this->customPatternToggle;
+		$checkPattern = $this->customPatternToggle;
 
 		if (!SproutCore::$app->email->validateEmailAddress($value, $customPattern, $checkPattern))
 		{
@@ -131,7 +128,7 @@ class Email extends Field implements PreviewableFieldInterface
 		if ($uniqueEmail && !SproutCore::$app->email->validateUniqueEmailAddress($value, $element, $this))
 		{
 			$element->addError($this->handle,
-				SproutFields::t($this->name . ' must be a unique email.')
+				SproutFields::t($this->name.' must be a unique email.')
 			);
 		}
 	}

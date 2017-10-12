@@ -6,12 +6,11 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use craft\helpers\Db;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutcore\SproutCore;
-use barrelstrength\sproutcore\web\sproutfields\phonefield\PhoneFieldAsset;
+use barrelstrength\sproutcore\web\assets\sproutfields\phone\PhoneFieldAsset;
 
 class Phone extends Field implements PreviewableFieldInterface
 {

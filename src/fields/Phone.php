@@ -70,19 +70,20 @@ class Phone extends Field implements PreviewableFieldInterface
 	 */
 	public function getInputHtml($value, ElementInterface $element = null): string
 	{
-		$view = Craft::$app->getView();
-		$view->registerAssetBundle(PhoneFieldAsset::class);
 		$name = $this->handle;
-		$inputId          = Craft::$app->getView()->formatInputId($name);
+		$inputId = Craft::$app->getView()->formatInputId($name);
 		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
 		return Craft::$app->getView()->renderTemplate(
 			'sprout-core/sproutfields/fields/phone/input',
 			[
-				'id'    => $namespaceInputId,
-				'name'  => $this->handle,
+				'namespaceInputId' => $namespaceInputId,
+				'id' => $inputId,
+				'name' => $this->handle,
 				'value' => $value,
-				'field' => $this
+				'placeholder' => $this->placeholder,
+				'inputMask' => $this->inputMask,
+				'mask' => $this->mask,
 			]
 		);
 	}
@@ -111,8 +112,8 @@ class Phone extends Field implements PreviewableFieldInterface
 	{
 		$value = $element->getFieldValue($this->handle);
 
-		$handle  = $this->handle;
-		$name    = $this->name;
+		$handle = $this->handle;
+		$name = $this->name;
 
 		if ($this->mask == "")
 		{
@@ -139,7 +140,7 @@ class Phone extends Field implements PreviewableFieldInterface
 		{
 			$formatter = Craft::$app->getFormatter();
 
-			$html = '<a href="tel:' . $value . '" target="_blank">' . $value . '</a>';
+			$html = '<a href="tel:'.$value.'" target="_blank">'.$value.'</a>';
 		}
 
 		return $html;

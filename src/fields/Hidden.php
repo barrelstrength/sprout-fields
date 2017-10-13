@@ -50,7 +50,7 @@ class Hidden extends Field implements PreviewableFieldInterface
 	 */
 	public function getInputHtml($value, ElementInterface $element = null): string
 	{
-		return Craft::$app->getView()->renderTemplate('sprout-core/sproutfields/fields/hidden/input',
+		return Craft::$app->getView()->renderTemplate('sprout-core/sproutfields/_includes/forms/hidden/input',
 			[
 				'id'    => $this->handle,
 				'name'  => $this->handle,

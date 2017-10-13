@@ -70,7 +70,7 @@ class Link extends Field implements PreviewableFieldInterface
 
 		$fieldContext = SproutCore::$app->utilities->getFieldContext($this, $element);
 
-		return Craft::$app->getView()->renderTemplate('sprout-core/sproutfields/fields/link/input', [
+		return Craft::$app->getView()->renderTemplate('sprout-core/sproutfields/_includes/forms/link/input', [
 				'namespaceInputId' => $namespaceInputId,
 				'id' => $inputId,
 				'name' => $name,

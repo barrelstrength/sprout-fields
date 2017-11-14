@@ -9,9 +9,9 @@ use craft\base\PreviewableFieldInterface;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutcore\SproutCore;
-use barrelstrength\sproutcore\helpers\AddressHelper;
-use barrelstrength\sproutcore\models\sproutfields\Address as AddressModel;
+use barrelstrength\sproutbase\SproutBase;
+use barrelstrength\sproutbase\helpers\AddressHelper;
+use barrelstrength\sproutbase\models\sproutfields\Address as AddressModel;
 
 class Address extends Field implements PreviewableFieldInterface
 {
@@ -82,7 +82,7 @@ class Address extends Field implements PreviewableFieldInterface
 		$namespaceInputId   = Craft::$app->getView()->namespaceInputId($inputId);
 
 		return Craft::$app->getView()->renderTemplate(
-			'sprout-core/sproutfields/_includes/forms/address/input',
+			'sprout-base/sproutfields/_includes/forms/address/input',
 			[
 				'namespaceInputId'   => $namespaceInputId,
 				'namespaceInputName' => $namespaceInputName,
@@ -116,7 +116,7 @@ class Address extends Field implements PreviewableFieldInterface
 	}
 
 	/**
-	 * Save the address info to the sproutcore_address table
+	 * Save the address info to the sproutbase_address table
 	 */
 	public function afterElementSave(ElementInterface $element, bool $isNew)
 	{
@@ -129,7 +129,7 @@ class Address extends Field implements PreviewableFieldInterface
 			$addressInfo['modelId'] = $this->id;
 			$addressModel = new AddressModel($addressInfo);
 
-			if ($addressModel->validate() == true && SproutCore::$app->address->saveAddress($addressModel))
+			if ($addressModel->validate() == true && SproutBase::$app->address->saveAddress($addressModel))
 			{
 				$addressId = $addressModel->id;
 
@@ -143,7 +143,7 @@ class Address extends Field implements PreviewableFieldInterface
 
 			if ($addressModel->id == null && isset($this->id))
 			{
-				SproutCore::$app->address->deleteAddressByModelId($this->id);
+				SproutBase::$app->address->deleteAddressByModelId($this->id);
 
 				$element->getContent()->{$fieldHandle} = null;
 

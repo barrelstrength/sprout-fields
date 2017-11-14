@@ -9,8 +9,8 @@ use craft\base\PreviewableFieldInterface;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutcore\SproutCore;
-use barrelstrength\sproutcore\web\assets\sproutfields\phone\PhoneFieldAsset;
+use barrelstrength\sproutbase\SproutBase;
+use barrelstrength\sproutbase\web\assets\sproutfields\phone\PhoneFieldAsset;
 
 class Phone extends Field implements PreviewableFieldInterface
 {
@@ -75,7 +75,7 @@ class Phone extends Field implements PreviewableFieldInterface
 		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
 		return Craft::$app->getView()->renderTemplate(
-			'sprout-core/sproutfields/_includes/forms/phone/input',
+			'sprout-base/sproutfields/_includes/forms/phone/input',
 			[
 				'namespaceInputId' => $namespaceInputId,
 				'id' => $inputId,
@@ -117,14 +117,14 @@ class Phone extends Field implements PreviewableFieldInterface
 
 		if ($this->mask == "")
 		{
-			$this->mask = SproutCore::$app->phone->getDefaultMask();
+			$this->mask = SproutBase::$app->phone->getDefaultMask();
 		}
 
-		if (!SproutCore::$app->phone->validate($value, $this->mask))
+		if (!SproutBase::$app->phone->validate($value, $this->mask))
 		{
 			$element->addError(
 				$this->handle,
-				SproutCore::$app->phone->getErrorMessage($this)
+				SproutBase::$app->phone->getErrorMessage($this)
 			);
 		}
 	}

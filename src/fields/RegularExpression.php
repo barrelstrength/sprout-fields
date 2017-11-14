@@ -9,8 +9,8 @@ use craft\base\PreviewableFieldInterface;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutcore\SproutCore;
-use barrelstrength\sproutcore\web\assets\sproutfields\regularexpression\RegularExpressionFieldAsset;
+use barrelstrength\sproutbase\SproutBase;
+use barrelstrength\sproutbase\web\assets\sproutfields\regularexpression\RegularExpressionFieldAsset;
 
 class RegularExpression extends Field implements PreviewableFieldInterface
 {
@@ -67,10 +67,10 @@ class RegularExpression extends Field implements PreviewableFieldInterface
 		$inputId          = Craft::$app->getView()->formatInputId($name);
 		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
-		$fieldContext = SproutCore::$app->utilities->getFieldContext($this, $element);
+		$fieldContext = SproutBase::$app->utilities->getFieldContext($this, $element);
 
 		return Craft::$app->getView()->renderTemplate(
-			'sprout-core/sproutfields/_includes/forms/regularexpression/input',
+			'sprout-base/sproutfields/_includes/forms/regularexpression/input',
 			[
 				'id'           => $namespaceInputId,
 				'field'        => $this,
@@ -109,11 +109,11 @@ class RegularExpression extends Field implements PreviewableFieldInterface
 		$handle  = $this->handle;
 		$name    = $this->name;
 
-		if (!SproutCore::$app->regularExpression->validate($value, $this))
+		if (!SproutBase::$app->regularExpression->validate($value, $this))
 		{
 			$element->addError(
 				$this->handle,
-				SproutCore::$app->regularExpression->getErrorMessage($this)
+				SproutBase::$app->regularExpression->getErrorMessage($this)
 			);
 		}
 	}

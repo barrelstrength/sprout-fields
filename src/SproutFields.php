@@ -8,7 +8,7 @@ use craft\services\Fields;
 
 use barrelstrength\sproutfields\helpers\SproutFieldsInstallHelper;
 use barrelstrength\sproutfields\models\SettingsModel;
-use barrelstrength\sproutcore\SproutCoreHelper;
+use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutfields\fields\Hidden            as HiddenField;
 use barrelstrength\sproutfields\fields\Phone             as PhoneField;
 use barrelstrength\sproutfields\fields\Email             as EmailField;
@@ -25,7 +25,7 @@ class SproutFields extends \craft\base\Plugin
 	{
 		parent::init();
 
-		SproutCoreHelper::registerModule();
+		SproutBaseHelper::registerModule();
 
 		Event::on(Fields::class, Fields::EVENT_REGISTER_FIELD_TYPES, function(RegisterComponentTypesEvent $event) {
 				$event->types[] = AddressField::class;

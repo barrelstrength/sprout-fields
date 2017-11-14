@@ -1,5 +1,5 @@
 {
-  "name": "barrelstrength/sproutfields",
+  "name": "barrelstrength/sprout-fields",
   "description": "Fabulous fields. Cleaner data.",
   "version": "3.0.0",
   "type": "craft-plugin",
@@ -9,7 +9,7 @@
     }
   },
   "require": {
-    "barrelstrength/sproutcore": "^1.0.0"
+    "barrelstrength/sprout-base": "^1.0.0"
   },
   "extra": {
     "name": "Sprout Fields",

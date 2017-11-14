@@ -9,7 +9,7 @@ use craft\base\PreviewableFieldInterface;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutcore\SproutCore;
+use barrelstrength\sproutbase\SproutBase;
 
 class Email extends Field implements PreviewableFieldInterface
 {
@@ -71,12 +71,12 @@ class Email extends Field implements PreviewableFieldInterface
 		$inputId = Craft::$app->getView()->formatInputId($name);
 		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
-		$fieldContext = SproutCore::$app->utilities->getFieldContext($this, $element);
+		$fieldContext = SproutBase::$app->utilities->getFieldContext($this, $element);
 
 		// Set this to false for Quick Entry Dashboard Widget
 		$elementId = ($element != null) ? $element->id : false;
 
-		return Craft::$app->getView()->renderTemplate('sprout-core/sproutfields/_includes/forms/email/input',
+		return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_includes/forms/email/input',
 			[
 				'namespaceInputId' => $namespaceInputId,
 				'id' => $inputId,
@@ -115,17 +115,17 @@ class Email extends Field implements PreviewableFieldInterface
 		$customPattern = $this->customPattern;
 		$checkPattern = $this->customPatternToggle;
 
-		if (!SproutCore::$app->email->validateEmailAddress($value, $customPattern, $checkPattern))
+		if (!SproutBase::$app->email->validateEmailAddress($value, $customPattern, $checkPattern))
 		{
 			$element->addError($this->handle,
-				SproutCore::$app->email->getErrorMessage(
+				SproutBase::$app->email->getErrorMessage(
 					$this->name, $this)
 			);
 		}
 
 		$uniqueEmail = $this->uniqueEmail;
 
-		if ($uniqueEmail && !SproutCore::$app->email->validateUniqueEmailAddress($value, $element, $this))
+		if ($uniqueEmail && !SproutBase::$app->email->validateUniqueEmailAddress($value, $element, $this))
 		{
 			$element->addError($this->handle,
 				SproutFields::t($this->name.' must be a unique email.')

@@ -3,21 +3,45 @@
   "description": "Fabulous fields. Cleaner data.",
   "version": "3.0.0",
   "type": "craft-plugin",
+  "keywords": [
+    "craft",
+    "cms",
+    "craftcms",
+    "fields",
+    "sprout fields"
+  ],
+  "license": "Barrel Strength Design LLC",
+  "authors": [
+    {
+      "name": "Barrel Strength",
+      "homepage": "https://www.barrelstrengthdesign.com/"
+    }
+  ],
+  "support": {
+    "email": "sprout@barrelstrengthdesign.com",
+    "issues": "https://github.com/barrelstrength/sprout-fields/issues?state=open",
+    "source": "https://github.com/barrelstrength/sprout-fields",
+    "docs": "https://sprout.barrelstrengthdesign.com/craft-plugins/fields/docs",
+    "rss": "https://github.com/barrelstrength/sprout-fields/commits/v2.atom"
+  },
+  "require": {
+    "barrelstrength/sprout-base": "^1.0.0"
+  },
   "autoload": {
     "psr-4": {
       "barrelstrength\\sproutfields\\": "src/"
     }
   },
-  "require": {
-    "barrelstrength/sprout-base": "^1.0.0"
-  },
   "extra": {
     "name": "Sprout Fields",
     "handle": "sprout-fields",
-    "version": "3.0.0",
     "schemaVersion": "3.0.0",
-    "hasSettings": true,
+    "hasCpSettings": false,
     "developer": "Barrel Strength",
+    "developerUrl": "https://barrelstrengthdesign.com",
+    "documentationUrl": "https://sprout.barrelstrengthdesign.com/craft-plugins/fields",
+    "changelogUrl": "https://raw.githubusercontent.com/BarrelStrength/sprout-fields/master/CHANGELOG.md",
+    "downloadUrl": "https://github.com/BarrelStrength/sprout-fields/archive/master.zip",
     "class": "barrelstrength\\sproutfields\\SproutFields"
   }
 }

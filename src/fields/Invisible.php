@@ -12,96 +12,95 @@ use barrelstrength\sproutfields\SproutFields;
 
 class Invisible extends Field implements PreviewableFieldInterface
 {
-	/**
-	 * @var basename(path)ool
-	 */
-	public $allowEdits;
+    /**
+     * @var basename(path)ool
+     */
+    public $allowEdits;
 
-	/**
-	 * @var bool
-	 */
-	public $hideValue;
+    /**
+     * @var bool
+     */
+    public $hideValue;
 
-	/**
-	 * @var string|null
-	 */
-	public $value;
+    /**
+     * @var string|null
+     */
+    public $value;
 
-	public static function displayName(): string
-	{
-		return SproutFields::t('Invisible');
-	}
+    public static function displayName(): string
+    {
+        return SproutFields::t('Invisible');
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getContentColumnType(): string
-	{
-		return Schema::TYPE_STRING;
-	}
+    /**
+     * @inheritdoc
+     */
+    public function getContentColumnType(): string
+    {
+        return Schema::TYPE_STRING;
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getSettingsHtml()
-	{
-		return Craft::$app->getView()->renderTemplate(
-			'sprout-fields/_fieldtypes/invisible/settings',
-			[
-				'field' => $this,
-			]
-		);
-	}
+    /**
+     * @inheritdoc
+     */
+    public function getSettingsHtml()
+    {
+        return Craft::$app->getView()->renderTemplate(
+            'sprout-fields/_fieldtypes/invisible/settings',
+            [
+                'field' => $this,
+            ]
+        );
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getInputHtml($value, ElementInterface $element = null): string
-	{
-		$name             = $this->handle;
-		$inputId          = Craft::$app->getView()->formatInputId($name);
-		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
+    /**
+     * @inheritdoc
+     */
+    public function getInputHtml($value, ElementInterface $element = null): string
+    {
+        $name = $this->handle;
+        $inputId = Craft::$app->getView()->formatInputId($name);
+        $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
-		return Craft::$app->getView()->renderTemplate(
-			'sprout-base/sproutfields/_includes/forms/invisible/input',
-			[
-				'id'           => $namespaceInputId,
-				'name'         => $name,
-				'value'        => $value,
-				'field'     => $this
-			]
-		);
-	}
+        return Craft::$app->getView()->renderTemplate(
+            'sprout-base/sproutfields/_includes/forms/invisible/input',
+            [
+                'id' => $namespaceInputId,
+                'name' => $name,
+                'value' => $value,
+                'field' => $this
+            ]
+        );
+    }
 
-	/**
-	 * The value from post should be empty, we must attempt to grab the value from session
-	 *
-	 * @param mixed $value
-	 *
-	 * @return mixed
-	 */
-	public function prepValueFromPost($value)
-	{
-		// @todo how test if works on Craft 3?
-		$value = Craft::$app->getSession()->get($this->handle, $value);
+    /**
+     * The value from post should be empty, we must attempt to grab the value from session
+     *
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    public function prepValueFromPost($value)
+    {
+        // @todo how test if works on Craft 3?
+        $value = Craft::$app->getSession()->get($this->handle, $value);
 
-		Craft::$app->getSession()->remove($this->handle);
+        Craft::$app->getSession()->remove($this->handle);
 
-		return $value;
-	}
+        return $value;
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getTableAttributeHtml($value, ElementInterface $element): string
-	{
-		$hiddenValue = "";
+    /**
+     * @inheritdoc
+     */
+    public function getTableAttributeHtml($value, ElementInterface $element): string
+    {
+        $hiddenValue = "";
 
-		if ($value != "")
-		{
-			$hiddenValue = $this->hideValue ? "&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" : $value;
-		}
+        if ($value != "") {
+            $hiddenValue = $this->hideValue ? "&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" : $value;
+        }
 
-		return $hiddenValue;
-	}
+        return $hiddenValue;
+    }
 }

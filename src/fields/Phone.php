@@ -14,135 +14,132 @@ use barrelstrength\sproutbase\web\assets\sproutfields\phone\PhoneFieldAsset;
 
 class Phone extends Field implements PreviewableFieldInterface
 {
-	/**
-	 * @var string|null
-	 */
-	public $customPatternErrorMessage;
+    /**
+     * @var string|null
+     */
+    public $customPatternErrorMessage;
 
-	/**
-	 * @var bool|null
-	 */
-	public $customPatternToggle;
+    /**
+     * @var bool|null
+     */
+    public $customPatternToggle;
 
-	/**
-	 * @var bool|null
-	 */
-	public $inputMask;
+    /**
+     * @var bool|null
+     */
+    public $inputMask;
 
-	/**
-	 * @var string|null
-	 */
-	public $mask;
+    /**
+     * @var string|null
+     */
+    public $mask;
 
-	/**
-	 * @var string|null
-	 */
-	public $placeholder;
+    /**
+     * @var string|null
+     */
+    public $placeholder;
 
-	public static function displayName(): string
-	{
-		return SproutFields::t('Phone Number');
-	}
+    public static function displayName(): string
+    {
+        return SproutFields::t('Phone Number');
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getContentColumnType(): string
-	{
-		return Schema::TYPE_STRING;
-	}
+    /**
+     * @inheritdoc
+     */
+    public function getContentColumnType(): string
+    {
+        return Schema::TYPE_STRING;
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getSettingsHtml()
-	{
-		return Craft::$app->getView()->renderTemplate(
-			'sprout-fields/_fieldtypes/phone/settings',
-			[
-				'field' => $this,
-			]
-		);
-	}
+    /**
+     * @inheritdoc
+     */
+    public function getSettingsHtml()
+    {
+        return Craft::$app->getView()->renderTemplate(
+            'sprout-fields/_fieldtypes/phone/settings',
+            [
+                'field' => $this,
+            ]
+        );
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getInputHtml($value, ElementInterface $element = null): string
-	{
-		$name = $this->handle;
-		$inputId = Craft::$app->getView()->formatInputId($name);
-		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
+    /**
+     * @inheritdoc
+     */
+    public function getInputHtml($value, ElementInterface $element = null): string
+    {
+        $name = $this->handle;
+        $inputId = Craft::$app->getView()->formatInputId($name);
+        $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
-		return Craft::$app->getView()->renderTemplate(
-			'sprout-base/sproutfields/_includes/forms/phone/input',
-			[
-				'namespaceInputId' => $namespaceInputId,
-				'id' => $inputId,
-				'name' => $this->handle,
-				'value' => $value,
-				'placeholder' => $this->placeholder,
-				'inputMask' => $this->inputMask,
-				'mask' => $this->mask,
-			]
-		);
-	}
+        return Craft::$app->getView()->renderTemplate(
+            'sprout-base/sproutfields/_includes/forms/phone/input',
+            [
+                'namespaceInputId' => $namespaceInputId,
+                'id' => $inputId,
+                'name' => $this->handle,
+                'value' => $value,
+                'placeholder' => $this->placeholder,
+                'inputMask' => $this->inputMask,
+                'mask' => $this->mask,
+            ]
+        );
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getElementValidationRules(): array
-	{
-		$rules = parent::getElementValidationRules();
-		$rules[] = 'validatePhone';
+    /**
+     * @inheritdoc
+     */
+    public function getElementValidationRules(): array
+    {
+        $rules = parent::getElementValidationRules();
+        $rules[] = 'validatePhone';
 
-		return $rules;
-	}
+        return $rules;
+    }
 
-	/**
-	 * Validates our fields submitted value beyond the checks
-	 * that were assumed based on the content attribute.
-	 *
-	 *
-	 * @param ElementInterface $element
-	 *
-	 * @return void
-	 */
-	public function validatePhone(ElementInterface $element)
-	{
-		$value = $element->getFieldValue($this->handle);
+    /**
+     * Validates our fields submitted value beyond the checks
+     * that were assumed based on the content attribute.
+     *
+     *
+     * @param ElementInterface $element
+     *
+     * @return void
+     */
+    public function validatePhone(ElementInterface $element)
+    {
+        $value = $element->getFieldValue($this->handle);
 
-		$handle = $this->handle;
-		$name = $this->name;
+        $handle = $this->handle;
+        $name = $this->name;
 
-		if ($this->mask == "")
-		{
-			$this->mask = SproutBase::$app->phone->getDefaultMask();
-		}
+        if ($this->mask == "") {
+            $this->mask = SproutBase::$app->phone->getDefaultMask();
+        }
 
-		if (!SproutBase::$app->phone->validate($value, $this->mask))
-		{
-			$element->addError(
-				$this->handle,
-				SproutBase::$app->phone->getErrorMessage($this)
-			);
-		}
-	}
+        if (!SproutBase::$app->phone->validate($value, $this->mask)) {
+            $element->addError(
+                $this->handle,
+                SproutBase::$app->phone->getErrorMessage($this)
+            );
+        }
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getTableAttributeHtml($value, ElementInterface $element): string
-	{
-		$html = '';
+    /**
+     * @inheritdoc
+     */
+    public function getTableAttributeHtml($value, ElementInterface $element): string
+    {
+        $html = '';
 
-		if ($value)
-		{
-			$formatter = Craft::$app->getFormatter();
+        if ($value) {
+            $formatter = Craft::$app->getFormatter();
 
-			$html = '<a href="tel:'.$value.'" target="_blank">'.$value.'</a>';
-		}
+            $html = '<a href="tel:'.$value.'" target="_blank">'.$value.'</a>';
+        }
 
-		return $html;
-	}
+        return $html;
+    }
 }

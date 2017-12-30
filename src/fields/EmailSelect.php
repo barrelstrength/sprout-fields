@@ -15,165 +15,157 @@ use barrelstrength\sproutbase\SproutBase;
 
 class EmailSelect extends BaseOptionsField
 {
-	public static function displayName(): string
-	{
-		return SproutFields::t('Email Select');
-	}
+    public static function displayName(): string
+    {
+        return SproutFields::t('Email Select');
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getContentColumnType(): string
-	{
-		return Schema::TYPE_STRING;
-	}
+    /**
+     * @inheritdoc
+     */
+    public function getContentColumnType(): string
+    {
+        return Schema::TYPE_STRING;
+    }
 
-	/**
-	 * @return string
-	 */
-	protected function optionsSettingLabel(): string
-	{
-		return SproutFields::t('Dropdown Options');
-	}
+    /**
+     * @return string
+     */
+    protected function optionsSettingLabel(): string
+    {
+        return SproutFields::t('Dropdown Options');
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getSettingsHtml()
-	{
-		$options = $this->options;
+    /**
+     * @inheritdoc
+     */
+    public function getSettingsHtml()
+    {
+        $options = $this->options;
 
-		if (!$options)
-		{
-			$options = [['label' => '', 'value' => '']];
-		}
+        if (!$options) {
+            $options = [['label' => '', 'value' => '']];
+        }
 
-		return Craft::$app->getView()->renderTemplateMacro('_includes/forms',
-			'editableTableField',
-			[
-				[
-					'label'        => $this->optionsSettingLabel(),
-					'instructions' => SproutFields::t('Define the available options.'),
-					'id'           => 'options',
-					'name'         => 'options',
-					'addRowLabel'  => SproutFields::t('Add an option'),
-					'cols'         => [
-						'label'   => [
-							'heading'      => SproutFields::t('Name'),
-							'type'         => 'singleline',
-							'autopopulate' => 'value'
-						],
-						'value'   => [
-							'heading' => SproutFields::t('Email'),
-							'type'    => 'singleline',
-							'class'   => 'code'
-						],
-						'default' => [
-							'heading' => SproutFields::t('Default?'),
-							'type'    => 'checkbox',
-							'class'   => 'thin'
-						],
-					],
-					'rows' => $options
-				]
-			]
-		);
-	}
+        return Craft::$app->getView()->renderTemplateMacro('_includes/forms',
+            'editableTableField',
+            [
+                [
+                    'label' => $this->optionsSettingLabel(),
+                    'instructions' => SproutFields::t('Define the available options.'),
+                    'id' => 'options',
+                    'name' => 'options',
+                    'addRowLabel' => SproutFields::t('Add an option'),
+                    'cols' => [
+                        'label' => [
+                            'heading' => SproutFields::t('Name'),
+                            'type' => 'singleline',
+                            'autopopulate' => 'value'
+                        ],
+                        'value' => [
+                            'heading' => SproutFields::t('Email'),
+                            'type' => 'singleline',
+                            'class' => 'code'
+                        ],
+                        'default' => [
+                            'heading' => SproutFields::t('Default?'),
+                            'type' => 'checkbox',
+                            'class' => 'thin'
+                        ],
+                    ],
+                    'rows' => $options
+                ]
+            ]
+        );
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getInputHtml($value, ElementInterface $element = null): string
-	{
-		$valueOptions = $value->getOptions();
-		$anySelected  = SproutBase::$app->utilities->isAnyOptionsSelected(
-			$valueOptions,
-			$value->value
-		);
+    /**
+     * @inheritdoc
+     */
+    public function getInputHtml($value, ElementInterface $element = null): string
+    {
+        $valueOptions = $value->getOptions();
+        $anySelected = SproutBase::$app->utilities->isAnyOptionsSelected(
+            $valueOptions,
+            $value->value
+        );
 
-		$name  = $this->handle;
-		$value = $value->value;
+        $name = $this->handle;
+        $value = $value->value;
 
-		if ($anySelected === false)
-		{
-			$value = $this->defaultValue();
-		}
+        if ($anySelected === false) {
+            $value = $this->defaultValue();
+        }
 
-		$options = $this->options;
+        $options = $this->options;
 
-		return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_includes/forms/emailselect/input',
-			[
-				'name'    => $name,
-				'value'   => $value,
-				'options' => $options
-			]
-		);
-	}
+        return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_includes/forms/emailselect/input',
+            [
+                'name' => $name,
+                'value' => $value,
+                'options' => $options
+            ]
+        );
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getElementValidationRules(): array
-	{
-		$rules = parent::getElementValidationRules();
-		$rules[] = 'validateEmailSelect';
+    /**
+     * @inheritdoc
+     */
+    public function getElementValidationRules(): array
+    {
+        $rules = parent::getElementValidationRules();
+        $rules[] = 'validateEmailSelect';
 
-		return $rules;
-	}
+        return $rules;
+    }
 
-	/**
-	 * Validates our fields submitted value beyond the checks
-	 * that were assumed based on the content attribute.
-	 *
-	 *
-	 * @param ElementInterface $element
-	 *
-	 * @return void
-	 */
-	public function validateEmailSelect(ElementInterface $element)
-	{
-		$value = $element->getFieldValue($this->handle)->value;
+    /**
+     * Validates our fields submitted value beyond the checks
+     * that were assumed based on the content attribute.
+     *
+     *
+     * @param ElementInterface $element
+     *
+     * @return void
+     */
+    public function validateEmailSelect(ElementInterface $element)
+    {
+        $value = $element->getFieldValue($this->handle)->value;
 
-		$emailAddresses = ArrayHelper::toArray($value);
+        $emailAddresses = ArrayHelper::toArray($value);
 
-		$emailAddresses = array_unique($emailAddresses);
+        $emailAddresses = array_unique($emailAddresses);
 
-		if (count($emailAddresses))
-		{
-			$invalidEmails = array();
-			foreach ($emailAddresses as $emailAddress)
-			{
-				if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL))
-				{
-					$invalidEmails[] = SproutFields::t(
-						'sproutFields',
-						$emailAddress . " email does not validate"
-					);
-				}
-			}
-		}
+        if (count($emailAddresses)) {
+            $invalidEmails = [];
+            foreach ($emailAddresses as $emailAddress) {
+                if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
+                    $invalidEmails[] = SproutFields::t(
+                        'sproutFields',
+                        $emailAddress." email does not validate"
+                    );
+                }
+            }
+        }
 
-		if (!empty($invalidEmails))
-		{
-			foreach ($invalidEmails as $invalidEmail)
-			{
-				$element->addError($this->handle, $invalidEmail, $this);
-			}
-		}
-	}
+        if (!empty($invalidEmails)) {
+            foreach ($invalidEmails as $invalidEmail) {
+                $element->addError($this->handle, $invalidEmail, $this);
+            }
+        }
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getTableAttributeHtml($value, ElementInterface $element): string
-	{
-		$html = '';
+    /**
+     * @inheritdoc
+     */
+    public function getTableAttributeHtml($value, ElementInterface $element): string
+    {
+        $html = '';
 
-		if ($value)
-		{
-			$html = $value->label . ': <a href="mailto:' . $value . '" target="_blank">' . $value . '</a>';
-		}
+        if ($value) {
+            $html = $value->label.': <a href="mailto:'.$value.'" target="_blank">'.$value.'</a>';
+        }
 
-		return $html;
-	}
+        return $html;
+    }
 }

@@ -7,28 +7,28 @@ use barrelstrength\sproutbase\migrations\sproutfields\Install as SproutBaseField
 
 class Install extends Migration
 {
-	// Public Methods
-	// =========================================================================
+    // Public Methods
+    // =========================================================================
 
-	/**
-	 * @inheritdoc
-	 */
-	public function safeUp()
-	{
-		$this->runSproutBaseInstall();
+    /**
+     * @inheritdoc
+     */
+    public function safeUp()
+    {
+        $this->runSproutBaseInstall();
 
-		return true;
-	}
+        return true;
+    }
 
-	// Protected Methods
-	// =========================================================================
+    // Protected Methods
+    // =========================================================================
 
-	protected function runSproutBaseInstall()
-	{
-		$migration = new SproutBaseFieldsInstall();
+    protected function runSproutBaseInstall()
+    {
+        $migration = new SproutBaseFieldsInstall();
 
-		ob_start();
-		$migration->safeUp();
-		ob_end_clean();
-	}
+        ob_start();
+        $migration->safeUp();
+        ob_end_clean();
+    }
 }

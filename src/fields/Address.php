@@ -15,142 +15,140 @@ use barrelstrength\sproutbase\models\sproutfields\Address as AddressModel;
 
 class Address extends Field implements PreviewableFieldInterface
 {
-	/**
-	 * @var AddressHelper $addressHelper
-	 */
-	protected $addressHelper;
+    /**
+     * @var AddressHelper $addressHelper
+     */
+    protected $addressHelper;
 
-	/**
-	 * @var string
-	 */
-	public $country;
+    /**
+     * @var string
+     */
+    public $country;
 
-	/**
-	 * @var bool
-	 */
-	public $countryToggle;
+    /**
+     * @var bool
+     */
+    public $countryToggle;
 
-	/**
-	 * @var string|null
-	 */
-	public $value;
+    /**
+     * @var string|null
+     */
+    public $value;
 
-	public function init()
-	{
-		$this->addressHelper = new AddressHelper();
+    public function init()
+    {
+        $this->addressHelper = new AddressHelper();
 
-		parent::init();
-	}
+        parent::init();
+    }
 
-	public static function displayName(): string
-	{
-		return SproutFields::t('Address');
-	}
+    public static function displayName(): string
+    {
+        return SproutFields::t('Address');
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getContentColumnType(): string
-	{
-		return Schema::TYPE_INTEGER;
-	}
+    /**
+     * @inheritdoc
+     */
+    public function getContentColumnType(): string
+    {
+        return Schema::TYPE_INTEGER;
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getSettingsHtml()
-	{
-		$countries = $this->addressHelper->getCountries();
+    /**
+     * @inheritdoc
+     */
+    public function getSettingsHtml()
+    {
+        $countries = $this->addressHelper->getCountries();
 
-		return Craft::$app->getView()->renderTemplate(
-			'sprout-fields/_fieldtypes/address/settings',
-			[
-				'settings'  => $this,
-				'countries' =>$countries
-			]
-		);
-	}
+        return Craft::$app->getView()->renderTemplate(
+            'sprout-fields/_fieldtypes/address/settings',
+            [
+                'settings' => $this,
+                'countries' => $countries
+            ]
+        );
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getInputHtml($value, ElementInterface $element = null): string
-	{
-		$name               = $this->handle;
-		$inputId            = Craft::$app->getView()->formatInputId($name);
-		$namespaceInputName = Craft::$app->getView()->namespaceInputName($inputId);
-		$namespaceInputId   = Craft::$app->getView()->namespaceInputId($inputId);
+    /**
+     * @inheritdoc
+     */
+    public function getInputHtml($value, ElementInterface $element = null): string
+    {
+        $name = $this->handle;
+        $inputId = Craft::$app->getView()->formatInputId($name);
+        $namespaceInputName = Craft::$app->getView()->namespaceInputName($inputId);
+        $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
-		return Craft::$app->getView()->renderTemplate(
-			'sprout-base/sproutfields/_includes/forms/address/input',
-			[
-				'namespaceInputId'   => $namespaceInputId,
-				'namespaceInputName' => $namespaceInputName,
-				'field'              => $this,
-				'addressId'          => $value,
-			]
-		);
-	}
+        return Craft::$app->getView()->renderTemplate(
+            'sprout-base/sproutfields/_includes/forms/address/input',
+            [
+                'namespaceInputId' => $namespaceInputId,
+                'namespaceInputName' => $namespaceInputName,
+                'field' => $this,
+                'addressId' => $value,
+            ]
+        );
+    }
 
-	/**
-	 * SerializeValue renamed from Craft2 - prepValue
-	 *
-	 * @param mixed $value
-	 *
-	 * @return BaseModel|mixed
-	 */
-	public function serializeValue($value, ElementInterface $element = null)
-	{
-		if (empty($value)) return;
+    /**
+     * SerializeValue renamed from Craft2 - prepValue
+     *
+     * @param mixed $value
+     *
+     * @return BaseModel|mixed
+     */
+    public function serializeValue($value, ElementInterface $element = null)
+    {
+        if (empty($value)) {
+            return;
+        }
 
-		// on the resave element task $value is the id
-		$addressId = $value;
-		// Comes when the field is saved by post request
-		if (isset($value['id']) && $value['id'])
-		{
-			$addressId = $value['id'];
-		}
+        // on the resave element task $value is the id
+        $addressId = $value;
+        // Comes when the field is saved by post request
+        if (isset($value['id']) && $value['id']) {
+            $addressId = $value['id'];
+        }
 
-		// let's save just the Address Id in the content table
-		return $addressId;
-	}
+        // let's save just the Address Id in the content table
+        return $addressId;
+    }
 
-	/**
-	 * Save the address info to the sproutbase_address table
-	 */
-	public function afterElementSave(ElementInterface $element, bool $isNew)
-	{
-		$fieldHandle = $this->handle;
-		$addressInfo = $element->{$fieldHandle};
+    /**
+     * Save the address info to the sproutbase_address table
+     */
+    public function afterElementSave(ElementInterface $element, bool $isNew)
+    {
+        $fieldHandle = $this->handle;
+        $addressInfo = $element->{$fieldHandle};
 
-		// Make sure we are actually submitting our field
-		if (is_array($addressInfo))
-		{
-			$addressInfo['modelId'] = $this->id;
-			$addressModel = new AddressModel($addressInfo);
+        // Make sure we are actually submitting our field
+        if (is_array($addressInfo)) {
+            $addressInfo['modelId'] = $this->id;
+            $addressModel = new AddressModel($addressInfo);
 
-			if ($addressModel->validate() == true && SproutBase::$app->address->saveAddress($addressModel))
-			{
-				$addressId = $addressModel->id;
+            if ($addressModel->validate() == true && SproutBase::$app->address->saveAddress($addressModel)) {
+                $addressId = $addressModel->id;
 
-				$addressInfo['id'] = $addressId;
+                $addressInfo['id'] = $addressId;
 
-				$element->{$fieldHandle} = $addressInfo;
+                $element->{$fieldHandle} = $addressInfo;
 
-				// Update the field again with addressId value
-				Craft::$app->getContent()->saveContent($element);
-			}
+                // Update the field again with addressId value
+                Craft::$app->getContent()->saveContent($element);
+            }
 
-			if ($addressModel->id == null && isset($this->id))
-			{
-				SproutBase::$app->address->deleteAddressByModelId($this->id);
+            if ($addressModel->id == null && isset($this->id)) {
+                SproutBase::$app->address->deleteAddressByModelId($this->id);
 
-				$element->getContent()->{$fieldHandle} = null;
+                $element->getContent()->{$fieldHandle} = null;
 
-				Craft::$app->getContent()->saveContent($element);
-			}
-		}
+                Craft::$app->getContent()->saveContent($element);
+            }
+        }
 
-		parent::afterElementSave($element, $isNew);
-	}
+        parent::afterElementSave($element, $isNew);
+    }
 }

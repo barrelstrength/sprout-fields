@@ -9,7 +9,8 @@
     }
   },
   "require": {
-    "barrelstrength/sprout-base": "^1.0.0"
+    "barrelstrength/sprout-base": "^1.0.0",
+    "craftcms/cms": "^3.0.0-RC1"
   },
   "extra": {
     "name": "Sprout Fields",

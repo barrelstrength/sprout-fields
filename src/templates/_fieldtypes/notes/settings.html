@@ -49,14 +49,13 @@ $(document).ready(function() {
 
 	var initSelectValue = $("{{ '#' ~ selectId }}").val();
 	var textareaInput = $("#{{ selectTextarea }}");
+	console.log("#{{ selectTextarea }}");
 
 	if (initSelectValue == "richText") {
-		textareaInput.redactor({
-			buttons: ['bold', 'italic', '|', 'unorderedlist', 'orderedlist'],
-			toolbar: true
+		var quill = new Quill('#{{ selectTextarea }}', {
+			placeholder: 'Compose an epic...',
+			theme: 'snow'
 		});
-
-		textareaInput.toggleClass('redactor');
 	}
 
 	$("{{ '#' ~ selectId }}").on('change', function() {
@@ -66,12 +65,10 @@ $(document).ready(function() {
 
 		if (textareaType == "richText") {
 
-			textareaInput.redactor({
-				buttons: ['bold', 'italic', '|', 'unorderedlist', 'orderedlist'],
-				toolbar: true
+			var quill = new Quill('#{{ selectTextarea }}', {
+				placeholder: 'Compose an epic...',
+				theme: 'snow'
 			});
-
-			textareaInput.toggleClass('redactor');
 		}
 		else if (textareaType == "html")
 		{

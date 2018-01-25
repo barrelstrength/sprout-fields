@@ -5,10 +5,9 @@ namespace barrelstrength\sproutfields\fields;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
-use craft\base\PreviewableFieldInterface;
-use yii\db\Schema;
-use craft\web\assets\redactor\RedactorAsset;
-use craft\web\assets\richtext\RichTextAsset;
+use barrelstrength\sproutbase\web\assets\sproutfields\notes\QuillAsset;
+use craft\redactor\assets\redactor\RedactorAsset;
+use craft\redactor\assets\field\FieldAsset as RichTextAsset;
 
 use barrelstrength\sproutfields\SproutFields;
 
@@ -63,8 +62,7 @@ class Notes extends Field
 		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
 		$view = Craft::$app->getView();
-		$view->registerAssetBundle(RedactorAsset::class);
-		$view->registerAssetBundle(RichTextAsset::class);
+		$view->registerAssetBundle(QuillAsset::class);
 
 		return Craft::$app->getView()->renderTemplate(
 			'sprout-fields/_fieldtypes/notes/settings',

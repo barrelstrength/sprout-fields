@@ -2,6 +2,10 @@
 
 {% set selectId = id ~ "-output" %}
 {% set selectTextarea = id ~ "-textarea" %}
+{% set quillEditor = id ~ "-quill" %}
+{% set quillWrapper = id ~ "-quill-wrapper" %}
+{% set textareaWrapper = id ~ "-textarea-wrapper" %}
+{% set notesIntructions = 'Add your field notes below. Note: The name of your Notes field above will be used as the first line of your notes.'|t('sprout-base') %}
 
 {{ forms.selectField({
 	id: name ~ "-output",
@@ -11,15 +15,29 @@
 	value: field.output
 }) }}
 
-{{ forms.textareaField({
-	id:   name ~ "-textarea",
-	label: 'Notes'|t,
-	instructions: 'Add your field notes below. Note: The name of your Notes field above will be used as the first line of
-	your notes.'|t,
-	name: 'instructions',
-	class: 'sproutnotes',
-	value: field.instructions
-}) }}
+<div id="{{ name ~ '-quill-wrapper' }}" class="hidden">
+	<div class="field">
+		<div class="heading">
+			<label for="{{ name ~ '-quill' }}">Notes</label>
+			<div class="instructions">
+				<p>{{ notesIntructions }}</p>
+			</div>
+		</div>
+		<div class="text sproutnotes fullwidth quill-editor" id="{{ name ~ '-quill' }}"></div>
+		<textarea class="text sproutnotes fullwidth hidden" name="quillEditor" cols="50" rows="2"> </textarea>
+	</div>
+</div>
+
+<div id="{{ name ~ '-textarea-wrapper' }}" class="hidden">
+	{{ forms.textareaField({
+		id:   name ~ "-textarea",
+		label: 'Notes'|t,
+		instructions: notesIntructions,
+		name: 'instructions',
+		class: 'sproutnotes',
+		value: field.instructions
+	}) }}
+</div>
 
 {{ forms.selectField({
 	id: 'style',
@@ -41,6 +59,9 @@
 textarea.sproutnotes {
 	min-height: 125px;
 }
+.quill-editor {
+	height: 150px;
+}
 </style>
 
 {% js %}
@@ -49,13 +70,23 @@ $(document).ready(function() {
 
 	var initSelectValue = $("{{ '#' ~ selectId }}").val();
 	var textareaInput = $("#{{ selectTextarea }}");
-	console.log("#{{ selectTextarea }}");
+	var $textareaWrapper = $("#{{ textareaWrapper }}");
+	var $quillWrapper = $("#{{ quillWrapper }}");
+
+	var quill = new Quill('#{{ quillEditor }}', {
+		theme: 'snow'
+	});
+
+	quill.on('text-change', function(delta) {
+		console.log(quill.root.innerHTML);
+		$quillWrapper.find("textarea").val(quill.root.innerHTML);
+	});
 
 	if (initSelectValue == "richText") {
-		var quill = new Quill('#{{ selectTextarea }}', {
-			placeholder: 'Compose an epic...',
-			theme: 'snow'
-		});
+		$quillWrapper.removeClass('hidden');
+	}
+	else{
+		$textareaWrapper.removeClass('hidden');
 	}
 
 	$("{{ '#' ~ selectId }}").on('change', function() {
@@ -64,27 +95,19 @@ $(document).ready(function() {
 		var textareaValue = $("#{{ selectTextarea }}").val();
 
 		if (textareaType == "richText") {
-
-			var quill = new Quill('#{{ selectTextarea }}', {
-				placeholder: 'Compose an epic...',
-				theme: 'snow'
-			});
-		}
-		else if (textareaType == "html")
-		{
-			if (textareaInput.hasClass('redactor'))
-			{
-				textareaInput.redactor('core.destroy').removeClass('redactor');
-			}
+			$textareaWrapper.addClass('hidden');
+			$quillWrapper.removeClass('hidden');
 		}
 		else
 		{
-			if (textareaInput.hasClass('redactor'))
+			if (!$quillWrapper.hasClass('hidden'))
 			{
-				textareaInput.redactor('core.destroy').removeClass('redactor');
+				$quillWrapper.addClass('hidden');
 			}
 
-			textareaInput.val(textareaInput.text());
+			$textareaWrapper.removeClass('hidden');
+			// copy from rich text
+			//textareaInput.val(textareaInput.text());
 		}
 	});
 });

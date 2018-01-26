@@ -12,10 +12,10 @@ use barrelstrength\sproutfields\SproutFields;
 class Notes extends Field
 {
 
-	/**
-	 * @var text
-	 */
-	public $notes;
+    /**
+     * @var text
+     */
+    public $notes;
 
     /**
      * @var text
@@ -59,8 +59,8 @@ class Notes extends Field
         $inputId = Craft::$app->getView()->formatInputId($name);
         $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
-		$view = Craft::$app->getView();
-		$view->registerAssetBundle(QuillAsset::class);
+        $view = Craft::$app->getView();
+        $view->registerAssetBundle(QuillAsset::class);
 
         return Craft::$app->getView()->renderTemplate(
             'sprout-fields/_fieldtypes/notes/settings',
@@ -73,17 +73,17 @@ class Notes extends Field
         );
     }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getInputHtml($value, ElementInterface $element = null): string
-	{
-		$name             = $this->handle;
-		$inputId          = Craft::$app->getView()->formatInputId($name);
-		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
-		$selectedStyle    = $this->style;
-		$pluginSettings   = Craft::$app->plugins->getPlugin('sprout-fields')->getSettings()->getAttributes();
-		$selectedStyleCss = "";
+    /**
+     * @inheritdoc
+     */
+    public function getInputHtml($value, ElementInterface $element = null): string
+    {
+        $name = $this->handle;
+        $inputId = Craft::$app->getView()->formatInputId($name);
+        $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
+        $selectedStyle = $this->style;
+        $pluginSettings = Craft::$app->plugins->getPlugin('sprout-fields')->getSettings()->getAttributes();
+        $selectedStyleCss = "";
 
         if (isset($pluginSettings[$selectedStyle])) {
             $selectedStyleCss = str_replace(
@@ -104,23 +104,23 @@ class Notes extends Field
         );
     }
 
-	private function getOptions()
-	{
-		$options = [
-			'style'  => [
-				'default'                    => 'Default',
-				'infoPrimaryDocumentation'   => 'Primary Information',
-				'infoSecondaryDocumentation' => 'Secondary Information',
-				'warningDocumentation'       => 'Warning',
-				'dangerDocumentation'        => 'Danger',
-				'highlightDocumentation'     => 'Highlight'
-			],
-			'output' => [
-				'richText' => 'Rich Text',
-				'markdown' => 'Markdown',
-				'html'     => 'HTML'
-			]
-		];
+    private function getOptions()
+    {
+        $options = [
+            'style' => [
+                'default' => 'Default',
+                'infoPrimaryDocumentation' => 'Primary Information',
+                'infoSecondaryDocumentation' => 'Secondary Information',
+                'warningDocumentation' => 'Warning',
+                'dangerDocumentation' => 'Danger',
+                'highlightDocumentation' => 'Highlight'
+            ],
+            'output' => [
+                'richText' => 'Rich Text',
+                'markdown' => 'Markdown',
+                'html' => 'HTML'
+            ]
+        ];
 
         return $options;
     }

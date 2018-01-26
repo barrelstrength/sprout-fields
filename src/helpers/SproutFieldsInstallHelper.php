@@ -24,7 +24,7 @@ class SproutFieldsInstallHelper
 				],
 				'handle=:handle',
 				[
-					':handle' => 'sproutfields'
+					':handle' => 'sprout-fields'
 				])
 			->execute();
 	}

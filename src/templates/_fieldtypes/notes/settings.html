@@ -23,8 +23,7 @@
 				<p>{{ notesIntructions }}</p>
 			</div>
 		</div>
-		<div class="text sproutnotes fullwidth quill-editor" id="{{ name ~ '-quill' }}"></div>
-		<textarea class="text sproutnotes fullwidth hidden" name="quillEditor" cols="50" rows="2"> </textarea>
+		<div class="text sproutnotes fullwidth quill-editor" id="{{ name ~ '-quill' }}">{{ field.notes|raw }}</div>
 	</div>
 </div>
 
@@ -33,9 +32,9 @@
 		id:   name ~ "-textarea",
 		label: 'Notes'|t,
 		instructions: notesIntructions,
-		name: 'instructions',
+		name: 'notes',
 		class: 'sproutnotes',
-		value: field.instructions
+		value: field.notes
 	}) }}
 </div>
 
@@ -60,7 +59,7 @@ textarea.sproutnotes {
 	min-height: 125px;
 }
 .quill-editor {
-	height: 150px;
+	height: 120px;
 }
 </style>
 
@@ -78,8 +77,7 @@ $(document).ready(function() {
 	});
 
 	quill.on('text-change', function(delta) {
-		console.log(quill.root.innerHTML);
-		$quillWrapper.find("textarea").val(quill.root.innerHTML);
+		textareaInput.val(quill.root.innerHTML);
 	});
 
 	if (initSelectValue == "richText") {

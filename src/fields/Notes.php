@@ -6,8 +6,6 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use barrelstrength\sproutbase\web\assets\sproutfields\notes\QuillAsset;
-use craft\redactor\assets\redactor\RedactorAsset;
-use craft\redactor\assets\field\FieldAsset as RichTextAsset;
 
 use barrelstrength\sproutfields\SproutFields;
 
@@ -17,7 +15,7 @@ class Notes extends Field
 	/**
 	 * @var text
 	 */
-	public $instructions;
+	public $notes;
 
 	/**
 	 * @var text
@@ -80,13 +78,11 @@ class Notes extends Field
 	 */
 	public function getInputHtml($value, ElementInterface $element = null): string
 	{
-		$name             = $this->displayName();
+		$name             = $this->handle;
 		$inputId          = Craft::$app->getView()->formatInputId($name);
 		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 		$selectedStyle    = $this->style;
-		$pluginSettings   = Craft::$app->plugins->
-												getPlugin('sproutfields')->
-												getSettings()->getAttributes();
+		$pluginSettings   = Craft::$app->plugins->getPlugin('sprout-fields')->getSettings()->getAttributes();
 		$selectedStyleCss = "";
 
 		if (isset($pluginSettings[$selectedStyle]))
@@ -121,8 +117,8 @@ class Notes extends Field
 				'highlightDocumentation'     => 'Highlight'
 			],
 			'output' => [
-				'markdown' => 'Markdown',
 				'richText' => 'Rich Text',
+				'markdown' => 'Markdown',
 				'html'     => 'HTML'
 			]
 		];

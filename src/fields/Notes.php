@@ -5,20 +5,17 @@ namespace barrelstrength\sproutfields\fields;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
-use craft\base\PreviewableFieldInterface;
-use yii\db\Schema;
-use craft\web\assets\redactor\RedactorAsset;
-use craft\web\assets\richtext\RichTextAsset;
+use barrelstrength\sproutbase\web\assets\sproutfields\notes\QuillAsset;
 
 use barrelstrength\sproutfields\SproutFields;
 
 class Notes extends Field
 {
 
-    /**
-     * @var text
-     */
-    public $instructions;
+	/**
+	 * @var text
+	 */
+	public $notes;
 
     /**
      * @var text
@@ -62,9 +59,8 @@ class Notes extends Field
         $inputId = Craft::$app->getView()->formatInputId($name);
         $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
-        $view = Craft::$app->getView();
-        $view->registerAssetBundle(RedactorAsset::class);
-        $view->registerAssetBundle(RichTextAsset::class);
+		$view = Craft::$app->getView();
+		$view->registerAssetBundle(QuillAsset::class);
 
         return Craft::$app->getView()->renderTemplate(
             'sprout-fields/_fieldtypes/notes/settings',
@@ -77,19 +73,17 @@ class Notes extends Field
         );
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getInputHtml($value, ElementInterface $element = null): string
-    {
-        $name = $this->displayName();
-        $inputId = Craft::$app->getView()->formatInputId($name);
-        $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
-        $selectedStyle = $this->style;
-        $pluginSettings = Craft::$app->plugins->
-        getPlugin('sproutfields')->
-        getSettings()->getAttributes();
-        $selectedStyleCss = "";
+	/**
+	 * @inheritdoc
+	 */
+	public function getInputHtml($value, ElementInterface $element = null): string
+	{
+		$name             = $this->handle;
+		$inputId          = Craft::$app->getView()->formatInputId($name);
+		$namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
+		$selectedStyle    = $this->style;
+		$pluginSettings   = Craft::$app->plugins->getPlugin('sprout-fields')->getSettings()->getAttributes();
+		$selectedStyleCss = "";
 
         if (isset($pluginSettings[$selectedStyle])) {
             $selectedStyleCss = str_replace(
@@ -110,23 +104,23 @@ class Notes extends Field
         );
     }
 
-    private function getOptions()
-    {
-        $options = [
-            'style' => [
-                'default' => 'Default',
-                'infoPrimaryDocumentation' => 'Primary Information',
-                'infoSecondaryDocumentation' => 'Secondary Information',
-                'warningDocumentation' => 'Warning',
-                'dangerDocumentation' => 'Danger',
-                'highlightDocumentation' => 'Highlight'
-            ],
-            'output' => [
-                'markdown' => 'Markdown',
-                'richText' => 'Rich Text',
-                'html' => 'HTML'
-            ]
-        ];
+	private function getOptions()
+	{
+		$options = [
+			'style'  => [
+				'default'                    => 'Default',
+				'infoPrimaryDocumentation'   => 'Primary Information',
+				'infoSecondaryDocumentation' => 'Secondary Information',
+				'warningDocumentation'       => 'Warning',
+				'dangerDocumentation'        => 'Danger',
+				'highlightDocumentation'     => 'Highlight'
+			],
+			'output' => [
+				'richText' => 'Rich Text',
+				'markdown' => 'Markdown',
+				'html'     => 'HTML'
+			]
+		];
 
         return $options;
     }

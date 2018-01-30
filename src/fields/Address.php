@@ -87,9 +87,34 @@ class Address extends Field implements PreviewableFieldInterface
                 'namespaceInputId' => $namespaceInputId,
                 'namespaceInputName' => $namespaceInputName,
                 'field' => $this,
-                'addressId' => $value,
+                'addressId' => $value->id ?? null,
             ]
         );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function normalizeValue($value, ElementInterface $element = null)
+    {
+        if (is_array($value)){
+            $addressInfoId = SproutBase::$app->address->saveAddressByPost("fields.address");
+            // bad address or empty address
+            if (!$addressInfoId){
+                return null;
+            }
+
+            if (is_int($addressInfoId)){
+                $value = $addressInfoId;
+            }
+        }
+
+        if (is_numeric($value)) {
+            // Address Model
+            $value = SproutBase::$app->address->getAddressById($value);
+        }
+        // Always return AddressModel
+        return $value;
     }
 
     /**
@@ -105,6 +130,10 @@ class Address extends Field implements PreviewableFieldInterface
             return;
         }
 
+        if ( is_object($value) && get_class($value) == AddressModel::class) {
+            $value = $value->id;
+        }
+
         // on the resave element task $value is the id
         $addressId = $value;
         // Comes when the field is saved by post request
@@ -114,41 +143,5 @@ class Address extends Field implements PreviewableFieldInterface
 
         // let's save just the Address Id in the content table
         return $addressId;
-    }
-
-    /**
-     * Save the address info to the sproutbase_address table
-     */
-    public function afterElementSave(ElementInterface $element, bool $isNew)
-    {
-        $fieldHandle = $this->handle;
-        $addressInfo = $element->{$fieldHandle};
-
-        // Make sure we are actually submitting our field
-        if (is_array($addressInfo)) {
-            $addressInfo['modelId'] = $this->id;
-            $addressModel = new AddressModel($addressInfo);
-
-            if ($addressModel->validate() == true && SproutBase::$app->address->saveAddress($addressModel)) {
-                $addressId = $addressModel->id;
-
-                $addressInfo['id'] = $addressId;
-
-                $element->{$fieldHandle} = $addressInfo;
-
-                // Update the field again with addressId value
-                Craft::$app->getContent()->saveContent($element);
-            }
-
-            if ($addressModel->id == null && isset($this->id)) {
-                SproutBase::$app->address->deleteAddressByModelId($this->id);
-
-                $element->getContent()->{$fieldHandle} = null;
-
-                Craft::$app->getContent()->saveContent($element);
-            }
-        }
-
-        parent::afterElementSave($element, $isNew);
     }
 }

@@ -30,11 +30,9 @@ class SproutFields extends \craft\base\Plugin
 
         Event::on(Fields::class, Fields::EVENT_REGISTER_FIELD_TYPES, function(RegisterComponentTypesEvent $event) {
             $event->types[] = AddressField::class;
-            $event->types[] = HiddenField::class;
             $event->types[] = PhoneField::class;
             $event->types[] = EmailField::class;
             $event->types[] = EmailSelectField::class;
-            $event->types[] = InvisibleField::class;
             $event->types[] = LinkField::class;
             $event->types[] = NotesField::class;
             $event->types[] = RegularExpressionField::class;

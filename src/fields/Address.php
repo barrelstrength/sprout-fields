@@ -130,7 +130,7 @@ class Address extends Field implements PreviewableFieldInterface
             return;
         }
 
-        if ( is_object($value) && get_class($value) == AddressModel::class) {
+        if (is_object($value) && get_class($value) == AddressModel::class) {
             $value = $value->id;
         }
 

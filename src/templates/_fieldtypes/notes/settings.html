@@ -73,6 +73,14 @@ $(document).ready(function() {
 	var $quillWrapper = $("#{{ quillWrapper }}");
 
 	var quill = new Quill('#{{ quillEditor }}', {
+		modules: {
+			toolbar: [
+				[{ header: [1, 2, false] }],
+				['bold', 'italic', 'underline'],
+				[{ 'list': 'ordered'}, { 'list': 'bullet' }],
+				[{ 'indent': '-1'}, { 'indent': '+1' }],
+	]
+		},
 		theme: 'snow'
 	});
 

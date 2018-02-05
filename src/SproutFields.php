@@ -15,6 +15,7 @@ use barrelstrength\sproutfields\fields\Email as EmailField;
 use barrelstrength\sproutfields\fields\EmailDropdown as EmailDropdownField;
 use barrelstrength\sproutfields\fields\Link as LinkField;
 use barrelstrength\sproutfields\fields\Notes as NotesField;
+use barrelstrength\sproutfields\fields\Gender as GenderField;
 use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
 use barrelstrength\sproutfields\fields\Address as AddressField;
 
@@ -34,6 +35,7 @@ class SproutFields extends \craft\base\Plugin
             $event->types[] = LinkField::class;
             $event->types[] = NotesField::class;
             $event->types[] = RegularExpressionField::class;
+            $event->types[] = GenderField::class;
         }
         );
     }

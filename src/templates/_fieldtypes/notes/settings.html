@@ -64,7 +64,6 @@ textarea.sproutnotes {
 </style>
 
 {% js %}
-
 $(document).ready(function() {
 
 	var initSelectValue = $("{{ '#' ~ selectId }}").val();
@@ -73,12 +72,12 @@ $(document).ready(function() {
 	var $quillWrapper = $("#{{ quillWrapper }}");
 
 	var quill = new Quill('#{{ quillEditor }}', {
+        bounds: ".quill-editor",
 		modules: {
 			toolbar: [
 				[{ header: [1, 2, false] }],
-				['bold', 'italic', 'underline'],
-				[{ 'list': 'ordered'}, { 'list': 'bullet' }],
-				[{ 'indent': '-1'}, { 'indent': '+1' }],
+				['bold', 'italic', 'underline', 'link'],
+				[{ 'list': 'ordered'}, { 'list': 'bullet' }]
 	]
 		},
 		theme: 'snow'

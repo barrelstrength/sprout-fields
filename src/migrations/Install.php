@@ -3,32 +3,32 @@
 namespace barrelstrength\sproutfields\migrations;
 
 use craft\db\Migration;
-use barrelstrength\sproutcore\migrations\sproutfields\Install as SproutCoreFieldsInstall;
+use barrelstrength\sproutbase\migrations\sproutfields\Install as SproutBaseFieldsInstall;
 
 class Install extends Migration
 {
-	// Public Methods
-	// =========================================================================
+    // Public Methods
+    // =========================================================================
 
-	/**
-	 * @inheritdoc
-	 */
-	public function safeUp()
-	{
-		$this->runSproutCoreInstall();
+    /**
+     * @inheritdoc
+     */
+    public function safeUp()
+    {
+        $this->runSproutBaseInstall();
 
-		return true;
-	}
+        return true;
+    }
 
-	// Protected Methods
-	// =========================================================================
+    // Protected Methods
+    // =========================================================================
 
-	protected function runSproutCoreInstall()
-	{
-		$migration = new SproutCoreFieldsInstall();
+    protected function runSproutBaseInstall()
+    {
+        $migration = new SproutBaseFieldsInstall();
 
-		ob_start();
-		$migration->safeUp();
-		ob_end_clean();
-	}
+        ob_start();
+        $migration->safeUp();
+        ob_end_clean();
+    }
 }

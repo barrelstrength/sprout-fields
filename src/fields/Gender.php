@@ -5,36 +5,20 @@ namespace barrelstrength\sproutfields\fields;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
-use barrelstrength\sproutbase\web\assets\sproutfields\notes\QuillAsset;
 
 use barrelstrength\sproutfields\SproutFields;
 
-class Notes extends Field
+class Gender extends Field
 {
 
     /**
      * @var text
      */
-    public $notes;
-
-    /**
-     * @var text
-     */
-    public $style;
-
-    /**
-     * @var bool
-     */
-    public $hideLabel;
-
-    /**
-     * @var text
-     */
-    public $output;
+    public $genderOptions;
 
     public static function displayName(): string
     {
-        return SproutFields::t('Notes');
+        return SproutFields::t('Gender');
     }
 
     /**
@@ -59,13 +43,9 @@ class Notes extends Field
         $inputId = Craft::$app->getView()->formatInputId($name);
         $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
-        $view = Craft::$app->getView();
-        $view->registerAssetBundle(QuillAsset::class);
-
         return Craft::$app->getView()->renderTemplate(
-            'sprout-fields/_fieldtypes/notes/settings',
+            'sprout-fields/_fieldtypes/gender/settings',
             [
-                'options' => $this->getOptions(),
                 'id' => $namespaceInputId,
                 'name' => $name,
                 'field' => $this,
@@ -81,46 +61,49 @@ class Notes extends Field
         $name = $this->handle;
         $inputId = Craft::$app->getView()->formatInputId($name);
         $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
-        $selectedStyle = $this->style;
-        $pluginSettings = Craft::$app->plugins->getPlugin('sprout-fields')->getSettings()->getAttributes();
-        $selectedStyleCss = "";
-
-        if (isset($pluginSettings[$selectedStyle])) {
-            $selectedStyleCss = str_replace(
-                "{{ name }}",
-                $name,
-                $pluginSettings[$selectedStyle]
-            );
-        }
+        $genderOptions = $this->getGenderOptions($value);
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-base/sproutfields/_includes/forms/notes/input',
+            'sprout-base/sproutfields/_includes/forms/gender/input',
             [
                 'id' => $namespaceInputId,
                 'name' => $name,
                 'field' => $this,
-                'selectedStyleCss' => $selectedStyleCss
+                'value' => $value,
+                'genderOptions' => $genderOptions
             ]
         );
     }
 
-    private function getOptions()
+    /**
+     * @return array
+     */
+    private function getGenderOptions($value)
     {
         $options = [
-            'style' => [
-                'default' => 'Default',
-                'infoPrimaryDocumentation' => 'Primary Information',
-                'infoSecondaryDocumentation' => 'Secondary Information',
-                'warningDocumentation' => 'Warning',
-                'dangerDocumentation' => 'Danger',
-                'highlightDocumentation' => 'Highlight'
+            [
+                'label' => Craft::t('sprout-fields','Prefer Not to Say'),
+                'value' => ''
             ],
-            'output' => [
-                'richText' => 'Rich Text',
-                'markdown' => 'Markdown',
-                'html' => 'HTML'
+            [
+                'label' => Craft::t('sprout-fields','Female'),
+                'value' => 'female'
+            ],
+            [
+                'label' => Craft::t('sprout-fields','Male'),
+                'value' => 'male',
             ]
         ];
+
+        $gender = $value ?? null;
+
+        array_push($options, ['optgroup' => Craft::t('sprout-fields','Custom')]);
+
+        if (!array_key_exists($gender, ['female' => 0, 'male' => 1]) && $gender != '') {
+            array_push($options, ['label' => $gender, 'value' => $gender]);
+        }
+
+        array_push($options, ['label' => Craft::t('sprout-fields','Add Custom'), 'value' => 'custom']);
 
         return $options;
     }

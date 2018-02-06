@@ -1,4 +1,5 @@
 <?php
+
 namespace barrelstrength\sproutfields\models;
 
 use craft\base\Model;
@@ -8,29 +9,29 @@ use craft\base\Model;
  */
 class SettingsModel extends Model
 {
-	/**
-	 * @var string
-	 */
-	public $infoPrimaryDocumentation;
+    /**
+     * @var string
+     */
+    public $infoPrimaryDocumentation;
 
-	/**
-	 * @var string
-	 */
-	public $infoSecondaryDocumentation;
+    /**
+     * @var string
+     */
+    public $infoSecondaryDocumentation;
 
-	/**
-	 * @var string
-	 */
-	public $warningDocumentation;
+    /**
+     * @var string
+     */
+    public $warningDocumentation;
 
-	/**
-	 * @var string
-	 */
-	public $dangerDocumentation;
+    /**
+     * @var string
+     */
+    public $dangerDocumentation;
 
-	/**
-	 * @var string
-	 */
-	public $highlightDocumentation;
+    /**
+     * @var string
+     */
+    public $highlightDocumentation;
 
 }

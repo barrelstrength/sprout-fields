@@ -22,17 +22,12 @@ class Phone extends Field implements PreviewableFieldInterface
     /**
      * @var bool|null
      */
-    public $customPatternToggle;
-
-    /**
-     * @var bool|null
-     */
-    public $inputMask;
+    public $multipleCountriesToggle;
 
     /**
      * @var string|null
      */
-    public $mask;
+    public $country;
 
     /**
      * @var string|null
@@ -81,9 +76,7 @@ class Phone extends Field implements PreviewableFieldInterface
                 'id' => $inputId,
                 'name' => $this->handle,
                 'value' => $value,
-                'placeholder' => $this->placeholder,
-                'inputMask' => $this->inputMask,
-                'mask' => $this->mask,
+                'placeholder' => $this->placeholder
             ]
         );
     }
@@ -112,14 +105,7 @@ class Phone extends Field implements PreviewableFieldInterface
     {
         $value = $element->getFieldValue($this->handle);
 
-        $handle = $this->handle;
-        $name = $this->name;
-
-        if ($this->mask == "") {
-            $this->mask = SproutBase::$app->phone->getDefaultMask();
-        }
-
-        if (!SproutBase::$app->phone->validate($value, $this->mask)) {
+        if (!SproutBase::$app->phone->validate($value, $this->country)) {
             $element->addError(
                 $this->handle,
                 SproutBase::$app->phone->getErrorMessage($this)

@@ -17,15 +17,7 @@
 
 <div id="sproutphonefield-multiple-countries"
      {% if not field.multipleCountriesToggle %}class="hidden"{% endif %}>
-    {{ forms.textField({
-        label: 'Validation Pattern'|t('sproutFields'),
-        instructions: 'Validate phone numbers using this pattern of numbers. Note: Be careful if you wish to use dashes as
-        part of your validation pattern. Dashes are not supported by all mobile operating systems.'|t('sproutFields'),
-        required: true,
-        name: 'mask',
-        placeholder: '##########',
-        value: field.mask ? field.mask : '##########'
-    }) }}
+    <h1>Show countries here</h1>
 </div>
 {{ forms.textField({
     label: 'Error Message'|t('sproutFields'),

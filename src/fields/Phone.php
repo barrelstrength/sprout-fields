@@ -10,7 +10,6 @@ use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
-use barrelstrength\sproutbase\web\assets\sproutfields\phone\PhoneFieldAsset;
 
 class Phone extends Field implements PreviewableFieldInterface
 {
@@ -121,8 +120,6 @@ class Phone extends Field implements PreviewableFieldInterface
         $html = '';
 
         if ($value) {
-            $formatter = Craft::$app->getFormatter();
-
             $html = '<a href="tel:'.$value.'" target="_blank">'.$value.'</a>';
         }
 

@@ -1,0 +1,9 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+    label: 'Predefined Field Value'|t('sprout-fields'),
+    name: 'value',
+    instructions: 'Value to set when the field is displayed. Twig syntax is supported.'|t('sprout-fields'),
+    placeholder: '{{ craft.request.path }}',
+    value: field.value
+}) }}

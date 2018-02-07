@@ -2,11 +2,7 @@
 
 namespace barrelstrength\sproutfields;
 
-use Craft;
-use yii\base\Event;
-use craft\events\RegisterComponentTypesEvent;
-use craft\services\Fields;
-
+use barrelstrength\sproutfields\fields\Predefined as PredefinedField;
 use barrelstrength\sproutfields\helpers\SproutFieldsInstallHelper;
 use barrelstrength\sproutfields\models\SettingsModel;
 use barrelstrength\sproutbase\SproutBaseHelper;
@@ -18,6 +14,11 @@ use barrelstrength\sproutfields\fields\Notes as NotesField;
 use barrelstrength\sproutfields\fields\Gender as GenderField;
 use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
 use barrelstrength\sproutfields\fields\Address as AddressField;
+
+use Craft;
+use yii\base\Event;
+use craft\events\RegisterComponentTypesEvent;
+use craft\services\Fields;
 
 class SproutFields extends \craft\base\Plugin
 {
@@ -36,6 +37,7 @@ class SproutFields extends \craft\base\Plugin
             $event->types[] = NotesField::class;
             $event->types[] = RegularExpressionField::class;
             $event->types[] = GenderField::class;
+            $event->types[] = PredefinedField::class;
         }
         );
     }

@@ -61,11 +61,17 @@ class Address extends Field implements PreviewableFieldInterface
     public function getSettingsHtml()
     {
         $countries = $this->addressHelper->getCountries();
+        $settings = $this->getSettings();
+
+        if (isset($settings) && !isset($settings['country']))
+        {
+            $settings['country'] = 'US';
+        }
 
         return Craft::$app->getView()->renderTemplate(
             'sprout-fields/_fieldtypes/address/settings',
             [
-                'settings' => $this,
+                'settings' => $settings,
                 'countries' => $countries
             ]
         );
@@ -81,6 +87,15 @@ class Address extends Field implements PreviewableFieldInterface
         $namespaceInputName = Craft::$app->getView()->namespaceInputName($inputId);
         $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
+        $settings = $this->getSettings();
+
+        $defaultCountryCode = null;
+
+        if ($settings)
+        {
+            $defaultCountryCode = $settings['country'];
+        }
+
         return Craft::$app->getView()->renderTemplate(
             'sprout-base/sproutfields/_includes/forms/address/input',
             [
@@ -88,6 +103,7 @@ class Address extends Field implements PreviewableFieldInterface
                 'namespaceInputName' => $namespaceInputName,
                 'field' => $this,
                 'addressId' => $value->id ?? null,
+                'defaultCountryCode' => $defaultCountryCode
             ]
         );
     }

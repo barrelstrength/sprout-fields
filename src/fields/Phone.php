@@ -6,6 +6,7 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
+use libphonenumber\PhoneNumberUtil;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
@@ -67,6 +68,8 @@ class Phone extends Field implements PreviewableFieldInterface
         $name = $this->handle;
         $inputId = Craft::$app->getView()->formatInputId($name);
         $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
+        $phoneUtil = PhoneNumberUtil::getInstance();
+        #Craft::dd($phoneUtil->getSupportedRegions());
 
         return Craft::$app->getView()->renderTemplate(
             'sprout-base/sproutfields/_includes/forms/phone/input',

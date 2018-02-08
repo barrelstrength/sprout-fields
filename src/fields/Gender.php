@@ -82,7 +82,7 @@ class Gender extends Field
     {
         $options = [
             [
-                'label' => Craft::t('sprout-fields','Prefer Not to Say'),
+                'label' => Craft::t('sprout-fields','Select...'),
                 'value' => ''
             ],
             [
@@ -92,6 +92,10 @@ class Gender extends Field
             [
                 'label' => Craft::t('sprout-fields','Male'),
                 'value' => 'male',
+            ],
+            [
+                'label' => Craft::t('sprout-fields','Prefer Not to Say'),
+                'value' => ''
             ]
         ];
 

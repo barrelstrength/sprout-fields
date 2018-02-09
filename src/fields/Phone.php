@@ -154,6 +154,8 @@ class Phone extends Field implements PreviewableFieldInterface
             }
         }
 
+        asort($countries);
+
         return $countries;
     }
 

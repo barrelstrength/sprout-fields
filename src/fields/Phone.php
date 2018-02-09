@@ -102,6 +102,10 @@ class Phone extends Field implements PreviewableFieldInterface
             if (!isset($phoneInfo['phone']) || !isset($phoneInfo['country'])){
                 return null;
             }
+            // let's add the code
+            $phoneUtil = PhoneNumberUtil::getInstance();
+            $code = $phoneUtil->getCountryCodeForRegion($value['country']);
+            $phoneInfo['code'] = $code;
         }
 
         if (is_string($value)) {
@@ -200,9 +204,8 @@ class Phone extends Field implements PreviewableFieldInterface
     {
         $html = '';
 
-        if ($value) {
-            $phoneUtil = PhoneNumberUtil::getInstance();
-            $code = $phoneUtil->getCountryCodeForRegion($value['country']);
+        if (isset($value['country']) && isset($value['code']) && isset($value['phone'])) {
+            $code = $value['code'];
             $fullNumber = '+'.$code.$value['phone'];
             $html = '<a href="tel:'.$fullNumber.'" target="_blank">'.$fullNumber.'</a>';
         }

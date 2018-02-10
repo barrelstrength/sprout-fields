@@ -95,7 +95,7 @@ class Gender extends Field
             ],
             [
                 'label' => Craft::t('sprout-fields','Prefer Not to Say'),
-                'value' => ''
+                'value' => 'decline'
             ]
         ];
 

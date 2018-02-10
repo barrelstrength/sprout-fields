@@ -23,7 +23,7 @@ class Phone extends Field implements PreviewableFieldInterface
     /**
      * @var bool|null
      */
-    public $multipleCountriesToggle;
+    public $limitToSingleCountry;
 
     /**
      * @var string|null
@@ -83,7 +83,7 @@ class Phone extends Field implements PreviewableFieldInterface
                 'placeholder' => $this->placeholder,
                 'countries' => $countries,
                 'country' => $country,
-                'multipleCountriesToggle' => $this->multipleCountriesToggle
+                'limitToSingleCountry' => $this->limitToSingleCountry
             ]
         );
     }

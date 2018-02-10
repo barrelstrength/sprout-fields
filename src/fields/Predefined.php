@@ -42,7 +42,12 @@ class Predefined extends Field implements PreviewableFieldInterface
     }
 
     /**
-     * @inheritdoc
+     * @param                       $value
+     * @param ElementInterface|null $element
+     *
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \yii\base\Exception
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
@@ -56,12 +61,13 @@ class Predefined extends Field implements PreviewableFieldInterface
     }
 
     /**
-     * @inheritdoc
+     * @param ElementInterface $element
+     * @param bool             $isNew
      */
     public function afterElementSave(ElementInterface $element, bool $isNew)
     {
         parent::afterElementSave($element, $isNew);
 
-        SproutBase::$app->utilities->processAutoField($this, $element);
+        SproutBase::$app->utilities->processPredefinedField($this, $element);
     }
 }

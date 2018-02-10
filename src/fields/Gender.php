@@ -103,7 +103,7 @@ class Gender extends Field
 
         array_push($options, ['optgroup' => Craft::t('sprout-fields','Custom')]);
 
-        if (!array_key_exists($gender, ['female' => 0, 'male' => 1]) && $gender != '') {
+        if (!array_key_exists($gender, ['female' => 0, 'male' => 1, 'decline' => 2]) && $gender != '') {
             array_push($options, ['label' => $gender, 'value' => $gender]);
         }
 

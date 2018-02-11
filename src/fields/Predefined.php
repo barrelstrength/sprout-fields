@@ -19,7 +19,7 @@ class Predefined extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('Predefined');
+        return SproutFields::t('Predefined (Sprout)');
     }
 
     /**

@@ -15,7 +15,7 @@ class EmailDropdown extends BaseOptionsField
 {
     public static function displayName(): string
     {
-        return SproutFields::t('Email Dropdown');
+        return SproutFields::t('Email Dropdown (Sprout)');
     }
 
     /**

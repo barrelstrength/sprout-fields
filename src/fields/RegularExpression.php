@@ -31,7 +31,7 @@ class RegularExpression extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('Regular Expression');
+        return SproutFields::t('Regular Expression (Sprout)');
     }
 
     /**

@@ -13,10 +13,13 @@ use yii\db\Schema;
 class Predefined extends Field implements PreviewableFieldInterface
 {
     /**
-     * @var string|null The maximum allowed number
+     * @var string
      */
-    public $value;
+    public $fieldFormat;
 
+    /**
+     * @return string
+     */
     public static function displayName(): string
     {
         return SproutFields::t('Predefined (Sprout)');
@@ -63,6 +66,8 @@ class Predefined extends Field implements PreviewableFieldInterface
     /**
      * @param ElementInterface $element
      * @param bool             $isNew
+     *
+     * @throws \yii\db\Exception
      */
     public function afterElementSave(ElementInterface $element, bool $isNew)
     {

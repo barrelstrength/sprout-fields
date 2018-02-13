@@ -1,36 +1,35 @@
 {% import "_includes/forms" as forms %}
-
-{% set selectId = id ~ "-output" %}
-{% set selectTextarea = id ~ "-textarea" %}
-{% set quillEditor = id ~ "-quill" %}
-{% set quillWrapper = id ~ "-quill-wrapper" %}
-{% set textareaWrapper = id ~ "-textarea-wrapper" %}
+{% set selectId = view.namespaceInputId("output") %}
+{% set selectTextarea = view.namespaceInputId("textarea") %}
+{% set quillEditor = view.namespaceInputId("quill") %}
+{% set quillWrapper = view.namespaceInputId("quill-wrapper") %}
+{% set textareaWrapper = view.namespaceInputId("textarea-wrapper") %}
 {% set notesIntructions = 'Add your field notes below. Note: The name of your Notes field above will be used as the first line of your notes.'|t('sprout-base') %}
 
 {{ forms.selectField({
-    id: name ~ "-output",
+    id: "output",
     name: 'output',
     label: 'Output As',
     options: options.output,
     value: field.output
 }) }}
 
-<div id="{{ name ~ '-quill-wrapper' }}" class="hidden">
+<div id="{{ 'quill-wrapper' }}" class="hidden">
     <div class="field">
         <div class="heading">
-            <label for="{{ name ~ '-quill' }}">Notes</label>
+            <label for="{{ 'quill' }}">Notes</label>
             <div class="instructions">
                 <p>{{ notesIntructions }}</p>
             </div>
         </div>
         <div class="text sproutnotes fullwidth quill-editor"
-             id="{{ name ~ '-quill' }}">{{ field.notes|raw }}</div>
+             id="{{ 'quill' }}">{{ field.notes|raw }}</div>
     </div>
 </div>
 
-<div id="{{ name ~ '-textarea-wrapper' }}" class="hidden">
+<div id="{{ 'textarea-wrapper' }}" class="hidden">
     {{ forms.textareaField({
-        id:   name ~ "-textarea",
+        id:   "textarea",
         label: 'Notes'|t,
         instructions: notesIntructions,
         name: 'notes',

@@ -54,11 +54,6 @@ class Notes extends Field
      */
     public function getSettingsHtml()
     {
-        $name = $this->displayName();
-
-        $inputId = Craft::$app->getView()->formatInputId($name);
-        $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
-
         $view = Craft::$app->getView();
         $view->registerAssetBundle(QuillAsset::class);
 
@@ -66,8 +61,6 @@ class Notes extends Field
             'sprout-fields/_fieldtypes/notes/settings',
             [
                 'options' => $this->getOptions(),
-                'id' => $namespaceInputId,
-                'name' => $name,
                 'field' => $this,
             ]
         );

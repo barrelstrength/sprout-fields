@@ -70,6 +70,7 @@ class Phone extends Field implements PreviewableFieldInterface
         $inputId = Craft::$app->getView()->formatInputId($name);
         $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
         $countries = $this->getCountries();
+
         $country = $value['country'] ?? $this->country;
         $val = $value['phone'] ?? null;
 
@@ -189,9 +190,10 @@ class Phone extends Field implements PreviewableFieldInterface
 
         if (isset($value['country']) && isset($value['phone']) ) {
             if (!SproutBase::$app->phone->validate($value['phone'], $value['country'])) {
+
                 $element->addError(
                     $this->handle,
-                    SproutBase::$app->phone->getErrorMessage($this)
+                    SproutBase::$app->phone->getErrorMessage($this, $value['country'])
                 );
             }
         }

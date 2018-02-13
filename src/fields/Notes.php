@@ -84,6 +84,10 @@ class Notes extends Field
             $selectedStyle
         );
 
+        if (is_null($this->notes)){
+            $this->notes = '';
+        }
+
         return Craft::$app->getView()->renderTemplate(
             'sprout-base/sproutfields/_includes/forms/notes/input',
             [

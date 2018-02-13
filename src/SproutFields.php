@@ -51,17 +51,21 @@ class SproutFields extends Plugin
             $event->types[] = PredefinedField::class;
         });
 
-        Event::on(Utilities::class, Utilities::EVENT_REGISTER_IMPORTER, function(RegisterComponentTypesEvent $event) {
+        $plugin = Craft::$app->getPlugins()->getPlugin("sprout-import");
+        
+        if ($plugin){
+            Event::on(Utilities::class, Utilities::EVENT_REGISTER_IMPORTER, function(RegisterComponentTypesEvent $event) {
 //            $event->types[] = AddressFieldImporter::class;
-            $event->types[] = EmailFieldImporter::class;
-            $event->types[] = EmailDropdownFieldImporter::class;
-            $event->types[] = GenderFieldImporter::class;
-            $event->types[] = UrlFieldImporter::class;
-            $event->types[] = NotesFieldImporter::class;
+                $event->types[] = EmailFieldImporter::class;
+                $event->types[] = EmailDropdownFieldImporter::class;
+                $event->types[] = GenderFieldImporter::class;
+                $event->types[] = UrlFieldImporter::class;
+                $event->types[] = NotesFieldImporter::class;
 //            $event->types[] = PhoneFieldImporter::class;
-            $event->types[] = PredefinedFieldImporter::class;
-            $event->types[] = RegularExpressionFieldImporter::class;
-        });
+                $event->types[] = PredefinedFieldImporter::class;
+                $event->types[] = RegularExpressionFieldImporter::class;
+            });
+        }
     }
 
     /**

@@ -8,6 +8,7 @@ use craft\base\Field;
 use barrelstrength\sproutbase\web\assets\sproutfields\notes\QuillAsset;
 
 use barrelstrength\sproutfields\SproutFields;
+use craft\helpers\FileHelper;
 
 class Notes extends Field
 {
@@ -60,8 +61,9 @@ class Notes extends Field
         return Craft::$app->getView()->renderTemplate(
             'sprout-fields/_fieldtypes/notes/settings',
             [
-                'options' => $this->getOptions(),
-                'field' => $this,
+                'styles' => $this->_getCustomStyleOptions(),
+                'options' =>  $this->getOptions(),
+                'field' => $this
             ]
         );
     }
@@ -74,17 +76,13 @@ class Notes extends Field
         $name = $this->handle;
         $inputId = Craft::$app->getView()->formatInputId($name);
         $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
-        $selectedStyle = $this->style;
-        $pluginSettings = Craft::$app->plugins->getPlugin('sprout-fields')->getSettings()->getAttributes();
-        $selectedStyleCss = "";
+        $selectedStyle = $this->_getConfig();
 
-        if (isset($pluginSettings[$selectedStyle])) {
-            $selectedStyleCss = str_replace(
-                "{{ name }}",
-                $name,
-                $pluginSettings[$selectedStyle]
-            );
-        }
+        $selectedStyleCss = str_replace(
+            "{{ name }}",
+            $name,
+            $selectedStyle
+        );
 
         return Craft::$app->getView()->renderTemplate(
             'sprout-base/sproutfields/_includes/forms/notes/input',
@@ -97,17 +95,59 @@ class Notes extends Field
         );
     }
 
+    /**
+     * Returns a css style
+     *
+     * @param string      $dir  The directory name within the config/ folder to look for the config file
+     *
+     * @return string
+     * @throws \yii\base\Exception
+     */
+    private function _getConfig(string $dir= 'sproutnotes')
+    {
+        $file = $this->style;
+        // Return our default css
+        $path = Craft::getAlias('@barrelstrength/sproutfields/templates/_special/Default.css');
+
+        $customPath = Craft::$app->getPath()->getConfigPath().DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file;
+
+        if (is_file($customPath)) {
+            $path = $customPath;
+        }
+
+        return file_get_contents($path);
+    }
+
+    /**
+     * Returns the available Notes css
+     *
+     * @param string $dir The directory name within the config/ folder to look for config files
+     *
+     * @return array
+     * @throws \yii\base\Exception
+     */
+    private function _getCustomStyleOptions(string $dir = 'sproutnotes'): array
+    {
+        $options = ['' => Craft::t('sprout-fields', 'Default')];
+        $path = Craft::$app->getPath()->getConfigPath().DIRECTORY_SEPARATOR.$dir;
+
+        if (is_dir($path)) {
+            $files = FileHelper::findFiles($path, [
+                'only' => ['*.css'],
+                'recursive' => false
+            ]);
+
+            foreach ($files as $file) {
+                $options[pathinfo($file, PATHINFO_BASENAME)] = pathinfo($file, PATHINFO_FILENAME);
+            }
+        }
+
+        return $options;
+    }
+
     private function getOptions()
     {
         $options = [
-            'style' => [
-                'default' => 'Default',
-                'infoPrimaryDocumentation' => 'Primary Information',
-                'infoSecondaryDocumentation' => 'Secondary Information',
-                'warningDocumentation' => 'Warning',
-                'dangerDocumentation' => 'Danger',
-                'highlightDocumentation' => 'Highlight'
-            ],
             'output' => [
                 'richText' => 'Rich Text',
                 'markdown' => 'Markdown',

@@ -65,6 +65,7 @@ class Address extends Field implements PreviewableFieldInterface
 
         if (isset($settings) && !isset($settings['defaultCountry']))
         {
+            $settings['defaultCountry'] = 'US';
             $settings['country'] = 'US';
         }
 
@@ -91,9 +92,15 @@ class Address extends Field implements PreviewableFieldInterface
 
         $defaultCountryCode = null;
 
-        if ($settings)
-        {
+        if ($settings) {
             $defaultCountryCode = $settings['defaultCountry'];
+        }
+
+        $addressId = null;
+        if (is_object($value)) {
+            $addressId = $value->id;
+        } elseif (is_array($value)) {
+            $addressId = $value['id'];
         }
 
         return Craft::$app->getView()->renderTemplate(
@@ -102,7 +109,7 @@ class Address extends Field implements PreviewableFieldInterface
                 'namespaceInputId' => $namespaceInputId,
                 'namespaceInputName' => $namespaceInputName,
                 'field' => $this,
-                'addressId' => $value->id ?? null,
+                'addressId' => $addressId,
                 'defaultCountryCode' => $defaultCountryCode
             ]
         );

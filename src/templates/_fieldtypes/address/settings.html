@@ -3,17 +3,16 @@
 {{ forms.selectField({
 	label: "Default Country"|t,
 	instructions: "Choose a default country input.",
-	id: 'country',
-	name: 'country',
+	id: 'defaultCountry',
+	name: 'defaultCountry',
 	options: countries,
-	value: settings.country
+	value: settings.defaultCountry
 }) }}
 
 {{ forms.lightswitchField({
-	label: "Hide country input?"|t,
-	instructions: 'Hide country dropdown and use the Default Country when saving address field.'|t,
-	warning: '',
-	id: 'countryToggle',
-	name: 'countryToggle',
-	on: settings.countryToggle,
+	label: "Hide country dropdown"|t,
+	instructions: 'Hide the country dropdown and use the Default Country when saving address field.'|t,
+	id: 'hideCountryDropdown',
+	name: 'hideCountryDropdown',
+	on: settings.hideCountryDropdown,
 }) }}

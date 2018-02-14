@@ -6,11 +6,12 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
+use libphonenumber\PhoneNumberUtil;
 use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
-use barrelstrength\sproutbase\web\assets\sproutfields\phone\PhoneFieldAsset;
+use CommerceGuys\Intl\Country\CountryRepository;
 
 class Phone extends Field implements PreviewableFieldInterface
 {
@@ -22,17 +23,12 @@ class Phone extends Field implements PreviewableFieldInterface
     /**
      * @var bool|null
      */
-    public $customPatternToggle;
-
-    /**
-     * @var bool|null
-     */
-    public $inputMask;
+    public $limitToSingleCountry;
 
     /**
      * @var string|null
      */
-    public $mask;
+    public $country;
 
     /**
      * @var string|null
@@ -41,7 +37,7 @@ class Phone extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('Phone Number');
+        return SproutFields::t('Phone (Sprout)');
     }
 
     /**
@@ -49,7 +45,7 @@ class Phone extends Field implements PreviewableFieldInterface
      */
     public function getContentColumnType(): string
     {
-        return Schema::TYPE_STRING;
+        return Schema::TYPE_TEXT;
     }
 
     /**
@@ -73,6 +69,10 @@ class Phone extends Field implements PreviewableFieldInterface
         $name = $this->handle;
         $inputId = Craft::$app->getView()->formatInputId($name);
         $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
+        $countries = $this->getCountries();
+
+        $country = $value['country'] ?? $this->country;
+        $val = $value['phone'] ?? null;
 
         return Craft::$app->getView()->renderTemplate(
             'sprout-base/sproutfields/_includes/forms/phone/input',
@@ -80,12 +80,88 @@ class Phone extends Field implements PreviewableFieldInterface
                 'namespaceInputId' => $namespaceInputId,
                 'id' => $inputId,
                 'name' => $this->handle,
-                'value' => $value,
+                'value' => $val,
                 'placeholder' => $this->placeholder,
-                'inputMask' => $this->inputMask,
-                'mask' => $this->mask,
+                'countries' => $countries,
+                'country' => $country,
+                'limitToSingleCountry' => $this->limitToSingleCountry
             ]
         );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function normalizeValue($value, ElementInterface $element = null)
+    {
+        $phoneInfo = [];
+
+        if (is_array($value)){
+            $namespace = "fields.".$this->handle;
+            $phoneInfo = Craft::$app->getRequest()->getBodyParam($namespace);
+            // bad phone or empty phone
+            if (!isset($phoneInfo['phone']) || !isset($phoneInfo['country'])){
+                return null;
+            }
+            // let's add the code
+            $phoneUtil = PhoneNumberUtil::getInstance();
+            $code = $phoneUtil->getCountryCodeForRegion($value['country']);
+            $phoneInfo['code'] = $code;
+        }
+
+        if (is_string($value)) {
+            $phoneInfo = json_decode($value, true);
+        }
+        // Always return array
+        return $phoneInfo;
+    }
+
+    /**
+     * SerializeValue renamed from Craft2 - prepValue
+     *
+     * @param mixed $value
+     *
+     * @return BaseModel|mixed
+     */
+    public function serializeValue($value, ElementInterface $element = null)
+    {
+        $phoneInfo = "";
+
+        if (empty($value)) {
+            return;
+        }
+
+        if (is_string($value)) {
+            return $value;
+        }
+
+        if (is_array($value)) {
+            $phoneInfo = json_encode($value);
+        }
+
+        // let's save just the phone as json with the number and country
+        return $phoneInfo;
+    }
+
+    public function getCountries()
+    {
+        $phoneUtil = PhoneNumberUtil::getInstance();
+        $regions = $phoneUtil->getSupportedRegions();
+        $countries = [];
+
+        foreach ($regions as $countryCode) {
+            $code = $phoneUtil->getCountryCodeForRegion($countryCode);
+            $countryRepository = new CountryRepository;
+            $country = $countryRepository->get($countryCode);
+
+            if ($country){
+                $countries[$countryCode] = $country->getName().' +'.$code;
+            }
+        }
+
+        asort($countries);
+
+        return $countries;
     }
 
     /**
@@ -112,18 +188,14 @@ class Phone extends Field implements PreviewableFieldInterface
     {
         $value = $element->getFieldValue($this->handle);
 
-        $handle = $this->handle;
-        $name = $this->name;
+        if (isset($value['country']) && isset($value['phone']) ) {
+            if (!SproutBase::$app->phone->validate($value['phone'], $value['country'])) {
 
-        if ($this->mask == "") {
-            $this->mask = SproutBase::$app->phone->getDefaultMask();
-        }
-
-        if (!SproutBase::$app->phone->validate($value, $this->mask)) {
-            $element->addError(
-                $this->handle,
-                SproutBase::$app->phone->getErrorMessage($this)
-            );
+                $element->addError(
+                    $this->handle,
+                    SproutBase::$app->phone->getErrorMessage($this, $value['country'])
+                );
+            }
         }
     }
 
@@ -134,10 +206,10 @@ class Phone extends Field implements PreviewableFieldInterface
     {
         $html = '';
 
-        if ($value) {
-            $formatter = Craft::$app->getFormatter();
-
-            $html = '<a href="tel:'.$value.'" target="_blank">'.$value.'</a>';
+        if (isset($value['country']) && isset($value['code']) && isset($value['phone'])) {
+            $code = $value['code'];
+            $fullNumber = '+'.$code.$value['phone'];
+            $html = '<a href="tel:'.$fullNumber.'" target="_blank">'.$fullNumber.'</a>';
         }
 
         return $html;

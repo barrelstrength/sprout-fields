@@ -40,7 +40,7 @@ class Email extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('Email Address');
+        return SproutFields::t('Email (Sprout)');
     }
 
     /**

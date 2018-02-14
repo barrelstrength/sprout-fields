@@ -11,7 +11,7 @@ use yii\db\Schema;
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
 
-class Link extends Field implements PreviewableFieldInterface
+class Url extends Field implements PreviewableFieldInterface
 {
     /**
      * @var string|null
@@ -35,7 +35,7 @@ class Link extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('Link');
+        return SproutFields::t('URL (Sprout)');
     }
 
     /**
@@ -52,7 +52,7 @@ class Link extends Field implements PreviewableFieldInterface
     public function getSettingsHtml()
     {
         return Craft::$app->getView()->renderTemplate(
-            'sprout-fields/_fieldtypes/link/settings',
+            'sprout-fields/_fieldtypes/url/settings',
             [
                 'field' => $this,
             ]
@@ -70,7 +70,7 @@ class Link extends Field implements PreviewableFieldInterface
 
         $fieldContext = SproutBase::$app->utilities->getFieldContext($this, $element);
 
-        return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_includes/forms/link/input', [
+        return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_includes/forms/url/input', [
                 'namespaceInputId' => $namespaceInputId,
                 'id' => $inputId,
                 'name' => $name,
@@ -87,7 +87,7 @@ class Link extends Field implements PreviewableFieldInterface
     public function getElementValidationRules(): array
     {
         $rules = parent::getElementValidationRules();
-        $rules[] = 'validateLink';
+        $rules[] = 'validateUrl';
 
         return $rules;
     }
@@ -101,17 +101,14 @@ class Link extends Field implements PreviewableFieldInterface
      *
      * @return void
      */
-    public function validateLink(ElementInterface $element)
+    public function validateUrl(ElementInterface $element)
     {
         $value = $element->getFieldValue($this->handle);
 
-        $handle = $this->handle;
-        $name = $this->name;
-
-        if (!SproutBase::$app->link->validate($value, $this)) {
+        if (!SproutBase::$app->url->validate($value, $this)) {
             $element->addError(
                 $this->handle,
-                SproutBase::$app->link->getErrorMessage($this)
+                SproutBase::$app->url->getErrorMessage($this->name, $this)
             );
         }
     }

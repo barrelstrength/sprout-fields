@@ -3,7 +3,7 @@ Sprout Fields!
 - Email Field
 - Hidden Field
 - Invisible Field
-- Link Field
+- URL Field
 - Phone Field
 
 Here are some online resources you might find useful:

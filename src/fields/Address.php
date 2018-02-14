@@ -16,24 +16,24 @@ use barrelstrength\sproutbase\models\sproutfields\Address as AddressModel;
 class Address extends Field implements PreviewableFieldInterface
 {
     /**
-     * @var AddressHelper $addressHelper
-     */
-    protected $addressHelper;
-
-    /**
      * @var string
      */
-    public $country;
+    public $defaultCountry;
 
     /**
      * @var bool
      */
-    public $countryToggle;
+    public $hideCountryDropdown;
 
     /**
      * @var string|null
      */
     public $value;
+
+    /**
+     * @var AddressHelper $addressHelper
+     */
+    protected $addressHelper;
 
     public function init()
     {
@@ -44,7 +44,7 @@ class Address extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('Address');
+        return SproutFields::t('Address (Sprout)');
     }
 
     /**
@@ -63,7 +63,7 @@ class Address extends Field implements PreviewableFieldInterface
         $countries = $this->addressHelper->getCountries();
         $settings = $this->getSettings();
 
-        if (isset($settings) && !isset($settings['country']))
+        if (isset($settings) && !isset($settings['defaultCountry']))
         {
             $settings['country'] = 'US';
         }
@@ -93,7 +93,7 @@ class Address extends Field implements PreviewableFieldInterface
 
         if ($settings)
         {
-            $defaultCountryCode = $settings['country'];
+            $defaultCountryCode = $settings['defaultCountry'];
         }
 
         return Craft::$app->getView()->renderTemplate(
@@ -114,7 +114,7 @@ class Address extends Field implements PreviewableFieldInterface
     public function normalizeValue($value, ElementInterface $element = null)
     {
         if (is_array($value)){
-            $addressInfoId = SproutBase::$app->address->saveAddressByPost("fields.address");
+            $addressInfoId = SproutBase::$app->address->saveAddressByPost('fields.address');
             // bad address or empty address
             if (!$addressInfoId){
                 return null;
@@ -143,7 +143,7 @@ class Address extends Field implements PreviewableFieldInterface
     public function serializeValue($value, ElementInterface $element = null)
     {
         if (empty($value)) {
-            return;
+            return false;
         }
 
         if (is_object($value) && get_class($value) == AddressModel::class) {

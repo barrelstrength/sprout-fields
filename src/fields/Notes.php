@@ -62,7 +62,7 @@ class Notes extends Field
             'sprout-fields/_fieldtypes/notes/settings',
             [
                 'styles' => $this->_getCustomStyleOptions(),
-                'options' =>  $this->getOptions(),
+                'options' => $this->getOptions(),
                 'field' => $this
             ]
         );
@@ -77,14 +77,30 @@ class Notes extends Field
         $inputId = Craft::$app->getView()->formatInputId($name);
         $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
         $selectedStyle = $this->_getConfig();
+        $selectedStyleCss = '';
 
-        $selectedStyleCss = str_replace(
-            "{{ name }}",
-            $name,
-            $selectedStyle
-        );
+        // Swap all instances of FIELDHANDLE with this specific field handle
+        if (strpos($selectedStyle, 'FIELDHANDLE') !== false) {
+            $selectedStyleCss = str_replace(
+                'FIELDHANDLE',
+                $name,
+                $selectedStyle
+            );
+        } else {
 
-        if (is_null($this->notes)){
+            // @deprecate - v3.0 in favor of Field Handle
+            if (strpos($selectedStyle, '{{ name }}') !== false) {
+                Craft::$app->getDeprecator()->log('{{ name }}', 'Sprout Fields Notes Field dynamic takon "{{ name }}" has been deprecated. Use "FIELDHANDLE" instead.');
+
+                $selectedStyleCss = str_replace(
+                    '{{ name }}',
+                    $name,
+                    $selectedStyle
+                );
+            }
+        }
+
+        if (is_null($this->notes)) {
             $this->notes = '';
         }
 
@@ -102,12 +118,12 @@ class Notes extends Field
     /**
      * Returns a css style
      *
-     * @param string      $dir  The directory name within the config/ folder to look for the config file
+     * @param string $dir The directory name within the config/ folder to look for the config file
      *
      * @return string
      * @throws \yii\base\Exception
      */
-    private function _getConfig(string $dir= 'sproutnotes')
+    private function _getConfig(string $dir = 'sproutnotes')
     {
         $file = $this->style;
         // Return our default css
@@ -132,7 +148,8 @@ class Notes extends Field
      */
     private function _getCustomStyleOptions(string $dir = 'sproutnotes'): array
     {
-        $options = ['' => Craft::t('sprout-fields', 'Default')];
+        $options = [];
+        $defaultOption = ['' => Craft::t('sprout-fields', 'Default')];
         $path = Craft::$app->getPath()->getConfigPath().DIRECTORY_SEPARATOR.$dir;
 
         if (is_dir($path)) {
@@ -145,6 +162,9 @@ class Notes extends Field
                 $options[pathinfo($file, PATHINFO_BASENAME)] = pathinfo($file, PATHINFO_FILENAME);
             }
         }
+
+        // Append our Default option to an alphabetical list of additional options
+        $options = $defaultOption + array_reverse($options);
 
         return $options;
     }

@@ -1,1 +1,27 @@
-.field[id=fields-{{ name }}-field] { background-color: #d9edf7; padding: 10px; } .field[id=fields-{{ name }}-field] label { color: #000; cursor: pointer; display: block; font-size: 1em; font-weight: bold; } .field[id=fields-{{ name }}-field] .input { border-top: 1px solid #bbd2dd; padding-top:.5em; margin-top: .5em; } .field[id=fields-{{ name }}-field] h1, .field[id=fields-{{ name }}-field] h2, .field[id=fields-{{ name }}-field] h3 { color: #29323d; font-size: 1em; font-weight: bold; } .field[id=fields-{{ name }}-field] h1, .field[id=fields-{{ name }}-field] h2 { border-bottom: 1px solid #c8dae2; font-weight: bold; padding: 0 0 .5em; margin: .5em 0; } .field[id=fields-{{ name }}-field] h1 { text-transform: uppercase; } .field[id=fields-{{ name }}-field] h3 { color: #444; margin-bottom: .2em; } .field[id=fields-{{ name }}-field] h3 + p { margin-top: 0; padding-top: 0; } .field[id=fields-{{ name }}-field] p { color: #232323; font-size: 1em; } .field[id=fields-{{ name }}-field] ul { color: #232323; list-style-type: disc; margin: 0 0 1em 3em; }
+.field[id=fields-FIELDHANDLE-field] {
+    background-color: #fafafa;
+    border: 1px solid #e3e5e8;
+    padding: 0;
+    border-radius: 5px;
+}
+.field[id=fields-FIELDHANDLE-field] .heading {
+    background: #ebedef;
+    padding: 7px 14px 7px;
+    margin: 0;
+}
+.field[id=fields-FIELDHANDLE-field] .input {
+    padding: 7px 14px 14px;
+}
+.field[id=fields-FIELDHANDLE-field] label {
+    color: #576575;
+    cursor: pointer;
+    display: block;
+    font-size: 1em;
+    font-weight: bold;
+    padding-right: 100px;
+}
+.field[id=fields-FIELDHANDLE-field] ul {
+    color: #232323;
+    list-style-type: disc;
+    margin: 0 0 1em 3em;
+}

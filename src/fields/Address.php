@@ -131,6 +131,8 @@ class Address extends Field implements PreviewableFieldInterface
             $addressInfoModel = new AddressModel();
             $addressInfoModel->setAttributes($value, false);
 
+            $addressInfoId = null;
+            
             if ($addressInfoModel->validate() == true && SproutBase::$app->address->saveAddress($addressInfoModel)) {
                 $addressInfoId = $addressInfoModel->id;
             }

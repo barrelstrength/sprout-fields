@@ -120,8 +120,21 @@ class Address extends Field implements PreviewableFieldInterface
      */
     public function normalizeValue($value, ElementInterface $element = null)
     {
-        if (is_array($value)){
-            $addressInfoId = SproutBase::$app->address->saveAddressByPost('fields.address');
+        $modelId = $this->id;
+
+        if (is_array($value)) {
+
+            if ($modelId != null) {
+                $value['modelId'] = $modelId;
+            }
+
+            $addressInfoModel = new AddressModel();
+            $addressInfoModel->setAttributes($value, false);
+
+            if ($addressInfoModel->validate() == true && SproutBase::$app->address->saveAddress($addressInfoModel)) {
+                $addressInfoId = $addressInfoModel->id;
+            }
+
             // bad address or empty address
             if (!$addressInfoId){
                 return null;
@@ -136,6 +149,7 @@ class Address extends Field implements PreviewableFieldInterface
             // Address Model
             $value = SproutBase::$app->address->getAddressById($value);
         }
+
         // Always return AddressModel
         return $value;
     }

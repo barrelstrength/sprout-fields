@@ -90,13 +90,12 @@ class Address extends Field implements PreviewableFieldInterface
 
         $settings = $this->getSettings();
 
-        $defaultCountryCode = null;
+        $defaultCountryCode = (isset($settings['defaultCountry']))? $settings['defaultCountry'] : null;
 
-        if ($settings) {
-            $defaultCountryCode = $settings['defaultCountry'];
-        }
+        $hideCountryDropdown = (isset($settings['hideCountryDropdown']))? $settings['hideCountryDropdown'] : null;
 
         $addressId = null;
+
         if (is_object($value)) {
             $addressId = $value->id;
         } elseif (is_array($value)) {
@@ -110,7 +109,8 @@ class Address extends Field implements PreviewableFieldInterface
                 'namespaceInputName' => $namespaceInputName,
                 'field' => $this,
                 'addressId' => $addressId,
-                'defaultCountryCode' => $defaultCountryCode
+                'defaultCountryCode' => $defaultCountryCode,
+                'hideCountryDropdown' => $hideCountryDropdown
             ]
         );
     }

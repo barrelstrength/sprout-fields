@@ -6,6 +6,7 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
+use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
 use yii\db\Schema;
 
@@ -34,6 +35,20 @@ class Phone extends Field implements PreviewableFieldInterface
      * @var string|null
      */
     public $placeholder;
+
+    private $_formated;
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        if(isset($this->_formated['international'])) {
+            return $this->_formated['international'];
+        }
+
+        return "";
+    }
 
     public static function displayName(): string
     {
@@ -107,11 +122,29 @@ class Phone extends Field implements PreviewableFieldInterface
             $phoneUtil = PhoneNumberUtil::getInstance();
             $code = $phoneUtil->getCountryCodeForRegion($value['country']);
             $phoneInfo['code'] = $code;
+            $phoneInfo['international'] = '';
+            $phoneInfo['national'] = '';
+            $phoneInfo['E164'] = '';
+            $phoneInfo['RFC3966'] = '';
+
+            try {
+                $phoneNumber = $phoneUtil->parse(
+                    $value['phone'],
+                    $value['country']
+                );
+                $phoneInfo['international'] = $phoneUtil->format($phoneNumber, PhoneNumberFormat::INTERNATIONAL);
+                $phoneInfo['national'] = $phoneUtil->format($phoneNumber, PhoneNumberFormat::NATIONAL);
+                $phoneInfo['E164'] = $phoneUtil->format($phoneNumber, PhoneNumberFormat::E164);
+                $phoneInfo['RFC3966'] = $phoneUtil->format($phoneNumber, PhoneNumberFormat::RFC3966);
+            } catch (\Exception $e) {
+                // let's continue
+            }
         }
 
         if (is_string($value)) {
             $phoneInfo = json_decode($value, true);
         }
+        $this->_formated = $phoneInfo;
         // Always return array
         return $phoneInfo;
     }
@@ -188,9 +221,19 @@ class Phone extends Field implements PreviewableFieldInterface
     {
         $value = $element->getFieldValue($this->handle);
 
-        if (isset($value['country']) && isset($value['phone']) ) {
-            if (!SproutBase::$app->phone->validate($value['phone'], $value['country'])) {
+        if ($this->required){
+            if (!isset($value['phone']) || !$value['phone']){
+                $element->addError(
+                    $this->handle,
+                    Craft::t('sprout-base','{field} cannot be blank', [
+                        'field' => $this->name
+                    ])
+                );
+            }
+        }
 
+        if (isset($value['country']) && isset($value['phone']) && $value['phone']) {
+            if (!SproutBase::$app->phone->validate($value['phone'], $value['country'])) {
                 $element->addError(
                     $this->handle,
                     SproutBase::$app->phone->getErrorMessage($this, $value['country'])
@@ -206,9 +249,8 @@ class Phone extends Field implements PreviewableFieldInterface
     {
         $html = '';
 
-        if (isset($value['country']) && isset($value['code']) && isset($value['phone'])) {
-            $code = $value['code'];
-            $fullNumber = '+'.$code.$value['phone'];
+        if (isset($value['international']) && $value['international']) {
+            $fullNumber = $value['international'];
             $html = '<a href="tel:'.$fullNumber.'" target="_blank">'.$fullNumber.'</a>';
         }
 

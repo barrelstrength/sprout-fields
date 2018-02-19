@@ -37,10 +37,6 @@ class m180216_161522_rename_fields extends Migration
 
             $this->update('{{%fields}}', ['type' => Notes::class, 'settings' => $settingsAsJson], ['id' => $noteField['id']], [], false);
         }
-        // We also renamed
-        if (!$this->db->columnExists('{{%migrations}}', 'name')) {
-            MigrationHelper::renameColumn('{{%migrations}}', 'version', 'name', $this);
-        }
         // end notes
 
         // Phone - Update settings and Type

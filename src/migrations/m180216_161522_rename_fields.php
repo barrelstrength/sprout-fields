@@ -7,7 +7,6 @@ use barrelstrength\sproutfields\fields\EmailDropdown;
 use barrelstrength\sproutfields\fields\Notes;
 use barrelstrength\sproutfields\fields\RegularExpression;
 use barrelstrength\sproutfields\fields\Url;
-use barrelstrength\sproutfields\fields\Phone;
 use barrelstrength\sproutfields\fields\Email;
 use craft\fields\PlainText;
 use craft\db\Query;

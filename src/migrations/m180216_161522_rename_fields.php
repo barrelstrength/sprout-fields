@@ -9,6 +9,7 @@ use barrelstrength\sproutfields\fields\RegularExpression;
 use barrelstrength\sproutfields\fields\Url;
 use barrelstrength\sproutfields\fields\Phone;
 use barrelstrength\sproutfields\fields\Email;
+use craft\fields\PlainText;
 use craft\db\Query;
 
 /**
@@ -40,6 +41,14 @@ class m180216_161522_rename_fields extends Migration
         // end notes
 
         // Phone - Update settings and Type
+        $newSettings = [
+            'placeholder' => '',
+            'multiline' => '',
+            'initialRows' => '4',
+            'charLimit' => '255',
+            'columnType' => 'string'
+        ];
+
         $phoneFields = (new Query())
             ->select(['id', 'handle', 'settings'])
             ->from(['{{%fields}}'])
@@ -47,15 +56,9 @@ class m180216_161522_rename_fields extends Migration
             ->all();
 
         foreach ($phoneFields as $phoneField) {
-            $newSettings = [];
-            $settings = json_decode($phoneField['settings'], true);
-            $newSettings['placeholder'] = $settings['placeholder'] ?? '';
-            $newSettings['customPatternErrorMessage'] = $settings['customPatternErrorMessage'] ?? '';
-            $newSettings['country'] = 'US';
-            $newSettings['limitToSingleCountry'] = '';
             $settingsAsJson = json_encode($newSettings);
 
-            $this->update('{{%fields}}', ['type' => Phone::class, 'settings' => $settingsAsJson], ['id' => $phoneField['id']], [], false);
+            $this->update('{{%fields}}', ['type' => PlainText::class, 'settings' => $settingsAsJson], ['id' => $phoneField['id']], [], false);
         }
         // end Phone
 

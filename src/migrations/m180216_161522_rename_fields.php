@@ -8,6 +8,7 @@ use barrelstrength\sproutfields\fields\Notes;
 use barrelstrength\sproutfields\fields\RegularExpression;
 use barrelstrength\sproutfields\fields\Url;
 use barrelstrength\sproutfields\fields\Phone;
+use barrelstrength\sproutfields\fields\Email;
 use craft\db\Query;
 
 /**
@@ -30,9 +31,15 @@ class m180216_161522_rename_fields extends Migration
         foreach ($notesFields as $noteField) {
             $settings = json_decode($noteField['settings'], true);
             $settings['style'] = '';
+            $settings['notes'] = $settings['instructions'] ?? '';
+            unset($settings['instructions']);
             $settingsAsJson = json_encode($settings);
 
             $this->update('{{%fields}}', ['type' => Notes::class, 'settings' => $settingsAsJson], ['id' => $noteField['id']], [], false);
+        }
+        // We also renamed
+        if (!$this->db->columnExists('{{%migrations}}', 'name')) {
+            MigrationHelper::renameColumn('{{%migrations}}', 'version', 'name', $this);
         }
         // end notes
 
@@ -75,6 +82,13 @@ class m180216_161522_rename_fields extends Migration
             'type' => Url::class
         ], [
             'type' => 'SproutFields_Link'
+        ], [], false);
+
+        // Email
+        $this->update('{{%fields}}', [
+            'type' => Email::class
+        ], [
+            'type' => 'SproutFields_Email'
         ], [], false);
 
         return true;

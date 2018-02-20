@@ -130,4 +130,18 @@ class Email extends Field implements PreviewableFieldInterface
             );
         }
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTableAttributeHtml($value, ElementInterface $element): string
+    {
+        $html = '';
+
+        if ($value) {
+            $html = '<a href="mailto:'.$value.'" target="_blank">'.$value.'</a>';
+        }
+
+        return $html;
+    }
 }

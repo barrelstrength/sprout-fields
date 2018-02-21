@@ -4,6 +4,7 @@ namespace barrelstrength\sproutfields\migrations;
 
 use craft\db\Migration;
 use craft\fields\PlainText;
+use craft\db\Query;
 
 /**
  * m180221_161528_hidden_fields migration.

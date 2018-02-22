@@ -61,7 +61,7 @@ class SproutFields extends Plugin
                 $event->types[] = GenderFieldImporter::class;
                 $event->types[] = UrlFieldImporter::class;
                 $event->types[] = NotesFieldImporter::class;
-//            $event->types[] = PhoneFieldImporter::class;
+                $event->types[] = PhoneFieldImporter::class;
                 $event->types[] = PredefinedFieldImporter::class;
                 $event->types[] = RegularExpressionFieldImporter::class;
             });

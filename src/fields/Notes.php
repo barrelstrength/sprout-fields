@@ -39,14 +39,10 @@ class Notes extends Field
     }
 
     /**
-     * Define database column
-     *
-     * @return false
+     * @inheritdoc
      */
-    public function defineContentAttribute()
+    public static function hasContentColumn(): bool
     {
-        // field type doesn’t need its own column
-        // in the content table, return false
         return false;
     }
 

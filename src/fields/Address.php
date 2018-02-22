@@ -2,16 +2,22 @@
 
 namespace barrelstrength\sproutfields\fields;
 
+
+use CommerceGuys\Addressing\Formatter\DefaultFormatter;
+use CommerceGuys\Addressing\Model\Address as CommerceGuysAddress;
+use CommerceGuys\Addressing\Repository\AddressFormatRepository;
+use CommerceGuys\Addressing\Repository\CountryRepository;
+use CommerceGuys\Addressing\Repository\SubdivisionRepository;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbase\helpers\AddressHelper;
 use barrelstrength\sproutbase\models\sproutfields\Address as AddressModel;
+use yii\db\Schema;
 
 class Address extends Field implements PreviewableFieldInterface
 {
@@ -118,50 +124,70 @@ class Address extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function normalizeValue($value, ElementInterface $element = null)
+    public function getTableAttributeHtml($value, ElementInterface $element): string
     {
-        $modelId = $this->id;
-
-        if (is_array($value)) {
-
-            if ($modelId != null) {
-                $value['modelId'] = $modelId;
-            }
-
-            $addressInfoModel = new AddressModel();
-            $addressInfoModel->setAttributes($value, false);
-
-            $addressInfoId = null;
-            
-            if ($addressInfoModel->validate() == true && SproutBase::$app->address->saveAddress($addressInfoModel)) {
-                $addressInfoId = $addressInfoModel->id;
-            }
-
-            // bad address or empty address
-            if (!$addressInfoId){
-                return null;
-            }
-
-            if (is_int($addressInfoId)){
-                $value = $addressInfoId;
-            }
+        if ($value['id'] === null)
+        {
+            return '';
         }
 
-        if (is_numeric($value)) {
-            // Address Model
-            $value = SproutBase::$app->address->getAddressById($value);
-        }
+        $addressFormatRepository = new AddressFormatRepository();
+        $countryRepository = new CountryRepository();
+        $subdivisionRepository = new SubdivisionRepository();
+        $formatter = new DefaultFormatter($addressFormatRepository, $countryRepository, $subdivisionRepository);
 
-        // Always return AddressModel
-        return $value;
+        $address = new CommerceGuysAddress();
+        $address = $address
+            ->setCountryCode($value->countryCode)
+            ->setAdministrativeArea($value->administrativeArea)
+            ->setLocality($value->locality)
+            ->setPostalCode($value->postalCode)
+            ->setAddressLine1($value->address1)
+            ->setAddressLine2($value->address2);
+
+        return $formatter->format($address);
     }
 
     /**
-     * SerializeValue renamed from Craft2 - prepValue
+     * Prepare our Address for use as an AddressModel
      *
-     * @param mixed $value
+     * @return AddressModel
+     */
+    public function normalizeValue($value, ElementInterface $element = null)
+    {
+        $addressModel = new AddressModel();
+
+        // Numeric value when retrieved from db
+        if (is_numeric($value)) {
+            $addressModel = SproutBase::$app->address->getAddressById($value);
+        }
+
+        // Array value from post data
+        if (is_array($value)) {
+            $value['fieldId'] = $this->id ?? null;
+            $addressModel = new AddressModel();
+            $addressModel->setAttributes($value, false);
+        }
+
+        // Null value when loading an Address Field in a Field Layout
+        // (because our Address is stored in another table)
+        if ($value === null)
+        {
+            $addressModel = SproutBase::$app->address->getAddress($element->id, $element->siteId, $this->id);
+        }
+
+        return $addressModel;
+    }
+
+    /**
+     * Prepare the field value for the database.
      *
-     * @return BaseModel|mixed
+     * We store the Address ID in the content column.
+     *
+     * @param mixed                 $value
+     * @param ElementInterface|null $element
+     *
+     * @return array|bool|mixed|null|string
      */
     public function serializeValue($value, ElementInterface $element = null)
     {
@@ -169,18 +195,77 @@ class Address extends Field implements PreviewableFieldInterface
             return false;
         }
 
+        // When loading a Field Layout with an Address Field
         if (is_object($value) && get_class($value) == AddressModel::class) {
-            $value = $value->id;
+            $addressId = $value->id;
         }
 
-        // on the resave element task $value is the id
-        $addressId = $value;
-        // Comes when the field is saved by post request
+        // For the ResaveElements task $value is the id
+        if (is_int($value))
+        {
+            $addressId = $value;
+        }
+
+        // When the field is saved by post request the id an attribute on $value
         if (isset($value['id']) && $value['id']) {
             $addressId = $value['id'];
         }
 
-        // let's save just the Address Id in the content table
+        // Save the addressId in the content table
         return $addressId;
+    }
+
+    /**
+     * Save our Address Field a first time and assign the Address Record ID back to the Address field model
+     * We'll save our Address Field a second time in afterElementSave to capture the Element ID for new entries.
+     *
+     * @param ElementInterface $element
+     * @param bool             $isNew
+     *
+     * @return bool
+     * @throws \Exception
+     * @throws \yii\db\Exception
+     */
+    public function beforeElementSave(ElementInterface $element, bool $isNew) : bool
+    {
+        $address = $element->getFieldValue($this->handle);
+
+        if ($address instanceof AddressModel)
+        {
+            $address->elementId = $element->id;
+            $address->siteId = $element->siteId;
+            $address->fieldId = $this->id;
+
+            SproutBase::$app->address->saveAddress($address);
+        }
+
+        $element->{$this->handle}->id = $address->id;
+
+        return true;
+
+    }
+
+    /**
+     * Save our Address Field a second time for New Entries to ensure we have the Element ID.
+     *
+     * @param ElementInterface $element
+     * @param bool             $isNew
+     *
+     * @return bool|void
+     * @throws \Exception
+     * @throws \yii\db\Exception
+     */
+    public function afterElementSave(ElementInterface $element, bool $isNew)
+    {
+        if ($isNew)
+        {
+            $address = $element->getFieldValue($this->handle);
+
+            if ($address instanceof AddressModel)
+            {
+                $address->elementId = $element->id;
+                SproutBase::$app->address->saveAddress($address);
+            }
+        }
     }
 }

@@ -82,8 +82,10 @@ class Phone extends Field implements PreviewableFieldInterface
     public function getInputHtml($value, ElementInterface $element = null): string
     {
         $name = $this->handle;
+        $countryId = Craft::$app->getView()->formatInputId($name."-country");
         $inputId = Craft::$app->getView()->formatInputId($name);
         $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
+        $namespaceCountryId = Craft::$app->getView()->namespaceInputId($countryId);
         $countries = $this->getCountries();
 
         $country = $value['country'] ?? $this->country;
@@ -93,7 +95,9 @@ class Phone extends Field implements PreviewableFieldInterface
             'sprout-base/sproutfields/_includes/forms/phone/input',
             [
                 'namespaceInputId' => $namespaceInputId,
+                'namespaceCountryId' => $namespaceCountryId,
                 'id' => $inputId,
+                'countryId' => $countryId,
                 'name' => $this->handle,
                 'value' => $val,
                 'placeholder' => $this->placeholder,

@@ -169,17 +169,16 @@ class Address extends Field implements PreviewableFieldInterface
             $addressModel->setAttributes($value, false);
         }
 
-        // Null value when loading an Address Field in a Field Layout
-        // (because our Address is stored in another table)
-        if ($value === null)
-        {
-            $addressModel = SproutBase::$app->address->getAddress($element->id, $element->siteId, $this->id);
+        // return null when clearing address to save null value on content table
+        if (!$addressModel->validate(null, false)) {
+            return null;
         }
 
         return $addressModel;
     }
 
     /**
+     *
      * Prepare the field value for the database.
      *
      * We store the Address ID in the content column.
@@ -195,14 +194,15 @@ class Address extends Field implements PreviewableFieldInterface
             return false;
         }
 
+        $addressId = null;
+
         // When loading a Field Layout with an Address Field
         if (is_object($value) && get_class($value) == AddressModel::class) {
             $addressId = $value->id;
         }
 
         // For the ResaveElements task $value is the id
-        if (is_int($value))
-        {
+        if (is_int($value)) {
             $addressId = $value;
         }
 
@@ -239,7 +239,6 @@ class Address extends Field implements PreviewableFieldInterface
             SproutBase::$app->address->saveAddress($address);
         }
 
-        $element->{$this->handle}->id = $address->id;
 
         return true;
 

@@ -18,7 +18,7 @@ class m180221_161529_invisible_fields extends Migration
     {
         // Invisible to TextField
         $invisibleFields = (new Query())
-            ->select(['id', 'handle', 'settings'])
+            ->select(['id', 'handle','instructions', 'settings'])
             ->from(['{{%fields}}'])
             ->where(['type' => 'SproutFields_Invisible'])
             ->all();
@@ -34,7 +34,7 @@ class m180221_161529_invisible_fields extends Migration
         foreach ($invisibleFields as $invisibleField) {
             $settingsAsJson = json_encode($newSettings);
             $settings = json_decode($invisibleField['settings'], true);
-            $instructions = $settings['value'] ?? '';
+            $instructions = $invisibleField['instructions'].' Invisible field pattern: '.$settings['value'] ?? '';
             $this->update('{{%fields}}', ['type' => PlainText::class, 'settings' => $settingsAsJson, 'instructions'=>$instructions], ['id' => $invisibleField['id']], [], false);
         }
 

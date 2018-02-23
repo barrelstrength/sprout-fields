@@ -18,7 +18,7 @@ class m180221_161528_hidden_fields extends Migration
     {
         // Hidden to TextField
         $hiddenFields = (new Query())
-            ->select(['id', 'handle', 'settings'])
+            ->select(['id', 'handle', 'instructions' , 'settings'])
             ->from(['{{%fields}}'])
             ->where(['type' => 'SproutFields_Hidden'])
             ->all();
@@ -34,7 +34,7 @@ class m180221_161528_hidden_fields extends Migration
         foreach ($hiddenFields as $hiddenField) {
             $settingsAsJson = json_encode($newSettings);
             $settings = json_decode($hiddenField['settings'], true);
-            $instructions = $settings['value'] ?? '';
+            $instructions = $hiddenField['instructions'].' Hidden field pattern: '.$settings['value'] ?? '';
             $this->update('{{%fields}}', ['type' => PlainText::class, 'settings' => $settingsAsJson, 'instructions'=>$instructions], ['id' => $hiddenField['id']], [], false);
         }
 

@@ -64,15 +64,17 @@ class Predefined extends Field implements PreviewableFieldInterface
     }
 
     /**
-     * @param ElementInterface $element
-     * @param bool             $isNew
+     * SerializeValue renamed from Craft2 - prepValue
      *
+     * @param mixed $value
+     *
+     * @return BaseModel|mixed
      * @throws \yii\db\Exception
      */
-    public function afterElementSave(ElementInterface $element, bool $isNew)
+    public function serializeValue($value, ElementInterface $element = null)
     {
-        parent::afterElementSave($element, $isNew);
+        $value = SproutBase::$app->utilities->processPredefinedField($this->fieldFormat, $element);
 
-        SproutBase::$app->utilities->processPredefinedField($this, $element);
+        return $value;
     }
 }

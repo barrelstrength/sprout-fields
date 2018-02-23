@@ -116,7 +116,8 @@ class Phone extends Field implements PreviewableFieldInterface
         $phoneInfo = [];
 
         if (is_array($value)){
-            $namespace = "fields.".$this->handle;
+            $namespace = $element->getFieldParamNamespace();
+            $namespace = $namespace.".".$this->handle;
             $phoneInfo = Craft::$app->getRequest()->getBodyParam($namespace);
             // bad phone or empty phone
             if (!isset($phoneInfo['phone']) || !isset($phoneInfo['country'])){

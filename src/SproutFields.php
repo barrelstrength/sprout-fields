@@ -2,7 +2,6 @@
 
 namespace barrelstrength\sproutfields;
 
-use barrelstrength\sproutfields\helpers\SproutFieldsInstallHelper;
 use barrelstrength\sproutfields\models\SettingsModel;
 use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutfields\fields\Address as AddressField;
@@ -73,36 +72,6 @@ class SproutFields extends Plugin
     public static function t($message, array $params = [])
     {
         return Craft::t('sprout-fields', $message, $params);
-    }
-
-    /**
-     * Returns settings model with custom properties
-     *
-     * @return SettingsModel
-     */
-    public function createSettingsModel()
-    {
-        return new SettingsModel();
-    }
-
-    /**
-     * @return null|string
-     * @throws \Twig_Error_Loader
-     * @throws \yii\base\Exception
-     */
-    public function settingsHtml()
-    {
-        return Craft::$app->getView()->renderTemplate('sproutfields/_cp/settings',
-            [
-                'settings' => $this->getSettings()
-            ]
-        );
-    }
-
-    public function afterInstall()
-    {
-        $helper = new SproutFieldsInstallHelper();
-        $helper->installDefaultNotesStyles();
     }
 }
 

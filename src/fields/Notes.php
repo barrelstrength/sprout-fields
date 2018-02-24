@@ -14,12 +14,12 @@ class Notes extends Field
 {
 
     /**
-     * @var text
+     * @var string
      */
     public $notes;
 
     /**
-     * @var text
+     * @var string
      */
     public $style;
 
@@ -29,7 +29,7 @@ class Notes extends Field
     public $hideLabel;
 
     /**
-     * @var text
+     * @var string
      */
     public $output;
 
@@ -96,7 +96,7 @@ class Notes extends Field
             }
         }
 
-        if (is_null($this->notes)) {
+        if ($this->notes === null) {
             $this->notes = '';
         }
 
@@ -160,7 +160,7 @@ class Notes extends Field
         }
 
         // Append our Default option to an alphabetical list of additional options
-        $options = $defaultOption + array_reverse($options);
+        $options = array_merge($defaultOption, array_reverse($options));
 
         return $options;
     }

@@ -36,18 +36,21 @@ class Phone extends Field implements PreviewableFieldInterface
      */
     public $placeholder;
 
-    private $_formated;
+    /**
+     * @var array
+     */
+    private $_formatted;
 
     /**
      * @return string
      */
     public function __toString()
     {
-        if(isset($this->_formated['international'])) {
-            return $this->_formated['international'];
+        if(isset($this->_formatted['international'])) {
+            return $this->_formatted['international'];
         }
 
-        return "";
+        return '';
     }
 
     public static function displayName(): string
@@ -82,7 +85,7 @@ class Phone extends Field implements PreviewableFieldInterface
     public function getInputHtml($value, ElementInterface $element = null): string
     {
         $name = $this->handle;
-        $countryId = Craft::$app->getView()->formatInputId($name."-country");
+        $countryId = Craft::$app->getView()->formatInputId($name.'-country');
         $inputId = Craft::$app->getView()->formatInputId($name);
         $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
         $namespaceCountryId = Craft::$app->getView()->namespaceInputId($countryId);
@@ -117,7 +120,7 @@ class Phone extends Field implements PreviewableFieldInterface
 
         if (is_array($value)){
             $namespace = $element->getFieldParamNamespace();
-            $namespace = $namespace.".".$this->handle;
+            $namespace = $namespace.'.'.$this->handle;
             $phoneInfo = Craft::$app->getRequest()->getBodyParam($namespace);
             // bad phone or empty phone
             if (!isset($phoneInfo['phone']) || !isset($phoneInfo['country'])){
@@ -149,36 +152,25 @@ class Phone extends Field implements PreviewableFieldInterface
         if (is_string($value)) {
             $phoneInfo = json_decode($value, true);
         }
-        $this->_formated = $phoneInfo;
+        $this->_formatted = $phoneInfo;
         // Always return array
         return $phoneInfo;
     }
 
     /**
-     * SerializeValue renamed from Craft2 - prepValue
+     * @param mixed                 $value
+     * @param ElementInterface|null $element
      *
-     * @param mixed $value
-     *
-     * @return BaseModel|mixed
+     * @return array|mixed|null|string
      */
     public function serializeValue($value, ElementInterface $element = null)
     {
-        $phoneInfo = "";
-
-        if (empty($value)) {
-            return;
-        }
-
-        if (is_string($value)) {
-            return $value;
-        }
-
         if (is_array($value)) {
-            $phoneInfo = json_encode($value);
+            $value = json_encode($value);
         }
 
-        // let's save just the phone as json with the number and country
-        return $phoneInfo;
+        // Save the phone as json with the number and country
+        return $value;
     }
 
     public function getCountries()

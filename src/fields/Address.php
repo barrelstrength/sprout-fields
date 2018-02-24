@@ -96,9 +96,9 @@ class Address extends Field implements PreviewableFieldInterface
 
         $settings = $this->getSettings();
 
-        $defaultCountryCode = (isset($settings['defaultCountry']))? $settings['defaultCountry'] : null;
+        $defaultCountryCode = isset($settings['defaultCountry']) ?? $settings['defaultCountry'];
 
-        $hideCountryDropdown = (isset($settings['hideCountryDropdown']))? $settings['hideCountryDropdown'] : null;
+        $hideCountryDropdown = isset($settings['hideCountryDropdown']) ?? $settings['hideCountryDropdown'];
 
         $addressId = null;
 
@@ -151,7 +151,10 @@ class Address extends Field implements PreviewableFieldInterface
     /**
      * Prepare our Address for use as an AddressModel
      *
-     * @return AddressModel
+     * @param mixed                 $value
+     * @param ElementInterface|null $element
+     *
+     * @return AddressModel|mixed|null
      */
     public function normalizeValue($value, ElementInterface $element = null)
     {

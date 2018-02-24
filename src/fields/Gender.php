@@ -11,7 +11,7 @@ use barrelstrength\sproutfields\SproutFields;
 class Gender extends Field
 {
     /**
-     * @var text
+     * @var array
      */
     public $genderOptions;
 
@@ -38,26 +38,6 @@ class Gender extends Field
     /**
      * @inheritdoc
      */
-    public function getSettingsHtml()
-    {
-        $name = $this->displayName();
-
-        $inputId = Craft::$app->getView()->formatInputId($name);
-        $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
-
-        return Craft::$app->getView()->renderTemplate(
-            'sprout-fields/_fieldtypes/gender/settings',
-            [
-                'id' => $namespaceInputId,
-                'name' => $name,
-                'field' => $this,
-            ]
-        );
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
         $name = $this->handle;
@@ -78,6 +58,8 @@ class Gender extends Field
     }
 
     /**
+     * @param $value
+     *
      * @return array
      */
     private function getGenderOptions($value)

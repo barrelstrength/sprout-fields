@@ -2,7 +2,6 @@
 
 namespace barrelstrength\sproutfields;
 
-use barrelstrength\sproutfields\models\SettingsModel;
 use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutfields\fields\Address as AddressField;
 use barrelstrength\sproutfields\fields\Phone as PhoneField;
@@ -12,7 +11,6 @@ use barrelstrength\sproutfields\fields\Url as UrlField;
 use barrelstrength\sproutfields\fields\Notes as NotesField;
 use barrelstrength\sproutfields\fields\Predefined as PredefinedField;
 use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
-use barrelstrength\sproutfields\integrations\sproutimport\fields\Address as AddressFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\fields\Email as EmailFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\fields\Gender as GenderFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\fields\Url as UrlFieldImporter;
@@ -47,7 +45,7 @@ class SproutFields extends Plugin
             $event->types[] = PredefinedField::class;
         });
 
-        $plugin = Craft::$app->getPlugins()->getPlugin("sprout-import");
+        $plugin = Craft::$app->getPlugins()->getPlugin('sprout-import');
         
         if ($plugin){
             Event::on(Utilities::class, Utilities::EVENT_REGISTER_IMPORTER, function(RegisterComponentTypesEvent $event) {

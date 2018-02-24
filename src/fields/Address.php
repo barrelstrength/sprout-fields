@@ -96,9 +96,8 @@ class Address extends Field implements PreviewableFieldInterface
 
         $settings = $this->getSettings();
 
-        $defaultCountryCode = isset($settings['defaultCountry']) ?? $settings['defaultCountry'];
-
-        $hideCountryDropdown = isset($settings['hideCountryDropdown']) ?? $settings['hideCountryDropdown'];
+        $defaultCountryCode = $settings['defaultCountry'] ?? null;
+        $hideCountryDropdown = $settings['hideCountryDropdown'] ?? null;
 
         $addressId = null;
 

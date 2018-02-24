@@ -76,7 +76,7 @@ class Address extends Field implements PreviewableFieldInterface
         }
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-fields/_fieldtypes/address/settings',
+            'sprout-fields/_fields/address/settings',
             [
                 'settings' => $settings,
                 'countries' => $countries
@@ -108,7 +108,7 @@ class Address extends Field implements PreviewableFieldInterface
         }
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-base/sproutfields/_includes/forms/address/input',
+            'sprout-base/sproutfields/_fields/address/input',
             [
                 'namespaceInputId' => $namespaceInputId,
                 'namespaceInputName' => $namespaceInputName,

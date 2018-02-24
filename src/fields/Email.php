@@ -47,7 +47,7 @@ class Email extends Field implements PreviewableFieldInterface
      */
     public function getSettingsHtml()
     {
-        return Craft::$app->getView()->renderTemplate('sprout-fields/_fieldtypes/email/settings',
+        return Craft::$app->getView()->renderTemplate('sprout-fields/_fields/email/settings',
             [
                 'field' => $this,
             ]);
@@ -67,7 +67,7 @@ class Email extends Field implements PreviewableFieldInterface
         // Set this to false for Quick Entry Dashboard Widget
         $elementId = ($element != null) ? $element->id : false;
 
-        return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_includes/forms/email/input',
+        return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_fields/email/input',
             [
                 'namespaceInputId' => $namespaceInputId,
                 'id' => $inputId,

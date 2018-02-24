@@ -42,7 +42,7 @@ class RegularExpression extends Field implements PreviewableFieldInterface
     public function getSettingsHtml()
     {
         return Craft::$app->getView()->renderTemplate(
-            'sprout-fields/_fieldtypes/regularexpression/settings',
+            'sprout-fields/_fields/regularexpression/settings',
             [
                 'field' => $this,
             ]
@@ -64,7 +64,7 @@ class RegularExpression extends Field implements PreviewableFieldInterface
         $fieldContext = SproutBase::$app->utilities->getFieldContext($this, $element);
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-base/sproutfields/_includes/forms/regularexpression/input',
+            'sprout-base/sproutfields/_fields/regularexpression/input',
             [
                 'id' => $namespaceInputId,
                 'field' => $this,

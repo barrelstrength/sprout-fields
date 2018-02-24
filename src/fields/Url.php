@@ -43,7 +43,7 @@ class Url extends Field implements PreviewableFieldInterface
     public function getSettingsHtml()
     {
         return Craft::$app->getView()->renderTemplate(
-            'sprout-fields/_fieldtypes/url/settings',
+            'sprout-fields/_fields/url/settings',
             [
                 'field' => $this,
             ]
@@ -61,7 +61,7 @@ class Url extends Field implements PreviewableFieldInterface
 
         $fieldContext = SproutBase::$app->utilities->getFieldContext($this, $element);
 
-        return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_includes/forms/url/input', [
+        return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_fields/url/input', [
                 'namespaceInputId' => $namespaceInputId,
                 'id' => $inputId,
                 'name' => $name,

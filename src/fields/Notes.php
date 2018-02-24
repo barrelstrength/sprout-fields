@@ -55,7 +55,7 @@ class Notes extends Field
         $view->registerAssetBundle(QuillAsset::class);
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-fields/_fieldtypes/notes/settings',
+            'sprout-fields/_fields/notes/settings',
             [
                 'styles' => $this->_getCustomStyleOptions(),
                 'options' => $this->getOptions(),
@@ -101,7 +101,7 @@ class Notes extends Field
         }
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-base/sproutfields/_includes/forms/notes/input',
+            'sprout-base/sproutfields/_fields/notes/input',
             [
                 'id' => $namespaceInputId,
                 'name' => $name,

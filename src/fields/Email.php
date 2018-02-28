@@ -6,7 +6,6 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
@@ -46,17 +45,9 @@ class Email extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getContentColumnType(): string
-    {
-        return Schema::TYPE_STRING;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getSettingsHtml()
     {
-        return Craft::$app->getView()->renderTemplate('sprout-fields/_fieldtypes/email/settings',
+        return Craft::$app->getView()->renderTemplate('sprout-fields/_fields/email/settings',
             [
                 'field' => $this,
             ]);
@@ -76,7 +67,7 @@ class Email extends Field implements PreviewableFieldInterface
         // Set this to false for Quick Entry Dashboard Widget
         $elementId = ($element != null) ? $element->id : false;
 
-        return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_includes/forms/email/input',
+        return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_fields/email/input',
             [
                 'namespaceInputId' => $namespaceInputId,
                 'id' => $inputId,

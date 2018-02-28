@@ -6,7 +6,6 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
@@ -41,18 +40,10 @@ class Url extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getContentColumnType(): string
-    {
-        return Schema::TYPE_STRING;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getSettingsHtml()
     {
         return Craft::$app->getView()->renderTemplate(
-            'sprout-fields/_fieldtypes/url/settings',
+            'sprout-fields/_fields/url/settings',
             [
                 'field' => $this,
             ]
@@ -70,7 +61,7 @@ class Url extends Field implements PreviewableFieldInterface
 
         $fieldContext = SproutBase::$app->utilities->getFieldContext($this, $element);
 
-        return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_includes/forms/url/input', [
+        return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_fields/url/input', [
                 'namespaceInputId' => $namespaceInputId,
                 'id' => $inputId,
                 'name' => $name,

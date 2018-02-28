@@ -8,7 +8,6 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use yii\db\Schema;
 
 class Predefined extends Field implements PreviewableFieldInterface
 {
@@ -28,17 +27,9 @@ class Predefined extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getContentColumnType(): string
-    {
-        return Schema::TYPE_STRING;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getSettingsHtml()
     {
-        return Craft::$app->getView()->renderTemplate('sprout-fields/_fieldtypes/predefined/settings',
+        return Craft::$app->getView()->renderTemplate('sprout-fields/_fields/predefined/settings',
             [
                 'field' => $this,
             ]);
@@ -54,7 +45,7 @@ class Predefined extends Field implements PreviewableFieldInterface
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-        return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_includes/forms/predefined/input',
+        return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_fields/predefined/input',
             [
                 'id' => $this->handle,
                 'name' => $this->handle,
@@ -64,19 +55,16 @@ class Predefined extends Field implements PreviewableFieldInterface
     }
 
     /**
-     * SerializeValue renamed from Craft2 - prepValue
+     * @param ElementInterface $element
+     * @param bool             $isNew
      *
-     * @param mixed $value
-     *
-     * @return BaseModel|mixed
+     * @return string|void
      * @throws \yii\db\Exception
      */
     public function afterElementSave(ElementInterface $element, bool $isNew)
     {
         parent::afterElementSave($element, $isNew);
 
-        $value = SproutBase::$app->utilities->processPredefinedField($this, $element);
-
-        return $value;
+        SproutBase::$app->utilities->processPredefinedField($this, $element);
     }
 }

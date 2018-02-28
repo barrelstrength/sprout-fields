@@ -14,12 +14,12 @@ class Notes extends Field
 {
 
     /**
-     * @var text
+     * @var string
      */
     public $notes;
 
     /**
-     * @var text
+     * @var string
      */
     public $style;
 
@@ -29,7 +29,7 @@ class Notes extends Field
     public $hideLabel;
 
     /**
-     * @var text
+     * @var string
      */
     public $output;
 
@@ -55,7 +55,7 @@ class Notes extends Field
         $view->registerAssetBundle(QuillAsset::class);
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-fields/_fieldtypes/notes/settings',
+            'sprout-fields/_fields/notes/settings',
             [
                 'styles' => $this->_getCustomStyleOptions(),
                 'options' => $this->getOptions(),
@@ -96,12 +96,12 @@ class Notes extends Field
             }
         }
 
-        if (is_null($this->notes)) {
+        if ($this->notes === null) {
             $this->notes = '';
         }
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-base/sproutfields/_includes/forms/notes/input',
+            'sprout-base/sproutfields/_fields/notes/input',
             [
                 'id' => $namespaceInputId,
                 'name' => $name,
@@ -160,7 +160,7 @@ class Notes extends Field
         }
 
         // Append our Default option to an alphabetical list of additional options
-        $options = $defaultOption + array_reverse($options);
+        $options = array_merge($defaultOption, array_reverse($options));
 
         return $options;
     }

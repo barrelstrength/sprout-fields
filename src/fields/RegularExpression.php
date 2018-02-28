@@ -6,7 +6,6 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use yii\db\Schema;
 
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
@@ -40,18 +39,10 @@ class RegularExpression extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getContentColumnType(): string
-    {
-        return Schema::TYPE_STRING;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getSettingsHtml()
     {
         return Craft::$app->getView()->renderTemplate(
-            'sprout-fields/_fieldtypes/regularexpression/settings',
+            'sprout-fields/_fields/regularexpression/settings',
             [
                 'field' => $this,
             ]
@@ -73,7 +64,7 @@ class RegularExpression extends Field implements PreviewableFieldInterface
         $fieldContext = SproutBase::$app->utilities->getFieldContext($this, $element);
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-base/sproutfields/_includes/forms/regularexpression/input',
+            'sprout-base/sproutfields/_fields/regularexpression/input',
             [
                 'id' => $namespaceInputId,
                 'field' => $this,
@@ -108,9 +99,6 @@ class RegularExpression extends Field implements PreviewableFieldInterface
     public function validateRegularExpression(ElementInterface $element)
     {
         $value = $element->getFieldValue($this->handle);
-
-        $handle = $this->handle;
-        $name = $this->name;
 
         if (!SproutBase::$app->regularExpression->validate($value, $this)) {
             $element->addError(

@@ -5,7 +5,6 @@ Sprout Fields adds several common field types to Craft CMS. Sprout Fields focuse
 
 - Address Field (International)
 - Email Field
-- Email Dropdown
 - Gender (Inclusive)
 - Phone Field (International)
 - Predefined

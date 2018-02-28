@@ -69,14 +69,14 @@ class Address extends Field implements PreviewableFieldInterface
         $countries = $this->addressHelper->getCountries();
         $settings = $this->getSettings();
 
-        if (isset($settings) && !isset($settings['defaultCountry']))
+        if ($settings !== null && !isset($settings['defaultCountry']))
         {
             $settings['defaultCountry'] = 'US';
             $settings['country'] = 'US';
         }
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-fields/_fieldtypes/address/settings',
+            'sprout-fields/_fields/address/settings',
             [
                 'settings' => $settings,
                 'countries' => $countries
@@ -96,9 +96,8 @@ class Address extends Field implements PreviewableFieldInterface
 
         $settings = $this->getSettings();
 
-        $defaultCountryCode = (isset($settings['defaultCountry']))? $settings['defaultCountry'] : null;
-
-        $hideCountryDropdown = (isset($settings['hideCountryDropdown']))? $settings['hideCountryDropdown'] : null;
+        $defaultCountryCode = $settings['defaultCountry'] ?? null;
+        $hideCountryDropdown = $settings['hideCountryDropdown'] ?? null;
 
         $addressId = null;
 
@@ -109,7 +108,7 @@ class Address extends Field implements PreviewableFieldInterface
         }
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-base/sproutfields/_includes/forms/address/input',
+            'sprout-base/sproutfields/_fields/address/input',
             [
                 'namespaceInputId' => $namespaceInputId,
                 'namespaceInputName' => $namespaceInputName,
@@ -145,13 +144,20 @@ class Address extends Field implements PreviewableFieldInterface
             ->setAddressLine1($value->address1)
             ->setAddressLine2($value->address2);
 
-        return $formatter->format($address);
+        $html = $formatter->format($address);
+
+        $html = str_replace(' ', '&nbsp;', $html);
+
+        return $html;
     }
 
     /**
      * Prepare our Address for use as an AddressModel
      *
-     * @return AddressModel
+     * @param mixed                 $value
+     * @param ElementInterface|null $element
+     *
+     * @return AddressModel|mixed|null
      */
     public function normalizeValue($value, ElementInterface $element = null)
     {

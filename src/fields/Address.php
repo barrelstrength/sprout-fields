@@ -144,7 +144,11 @@ class Address extends Field implements PreviewableFieldInterface
             ->setAddressLine1($value->address1)
             ->setAddressLine2($value->address2);
 
-        return $formatter->format($address);
+        $html = $formatter->format($address);
+
+        $html = str_replace(' ', '&nbsp;', $html);
+
+        return $html;
     }
 
     /**

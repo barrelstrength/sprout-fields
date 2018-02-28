@@ -69,7 +69,7 @@ class Address extends Field implements PreviewableFieldInterface
         $countries = $this->addressHelper->getCountries();
         $settings = $this->getSettings();
 
-        if (isset($settings) && !isset($settings['defaultCountry']))
+        if ($settings !== null && !isset($settings['defaultCountry']))
         {
             $settings['defaultCountry'] = 'US';
             $settings['country'] = 'US';

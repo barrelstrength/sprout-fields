@@ -8,6 +8,7 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
+use yii\db\Schema;
 
 class Predefined extends Field implements PreviewableFieldInterface
 {
@@ -22,6 +23,14 @@ class Predefined extends Field implements PreviewableFieldInterface
     public static function displayName(): string
     {
         return SproutFields::t('Predefined (Sprout)');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getContentColumnType(): string
+    {
+        return Schema::TYPE_TEXT;
     }
 
     /**

@@ -19,7 +19,7 @@ class m180221_161525_regular_expression_fields extends Migration
         $this->update('{{%fields}}', [
             'type' => RegularExpression::class
         ], [
-            'type' => 'SproutFields_RegularExpression'
+            'type' => 'SproutFields_RegularExpression', 'context' => 'global'
         ], [], false);
 
         return true;

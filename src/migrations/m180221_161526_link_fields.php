@@ -19,7 +19,7 @@ class m180221_161526_link_fields extends Migration
         $this->update('{{%fields}}', [
             'type' => Url::class
         ], [
-            'type' => 'SproutFields_Link'
+            'type' => 'SproutFields_Link', 'context' => 'global'
         ], [], false);
 
         return true;

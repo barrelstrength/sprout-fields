@@ -20,7 +20,7 @@ class m180221_161522_notes_fields extends Migration
         $notesFields = (new Query())
             ->select(['id', 'handle', 'settings'])
             ->from(['{{%fields}}'])
-            ->where(['type' => 'SproutFields_Notes'])
+            ->where(['type' => 'SproutFields_Notes', 'context' => 'global'])
             ->all();
 
         foreach ($notesFields as $noteField) {

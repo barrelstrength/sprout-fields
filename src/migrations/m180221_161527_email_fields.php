@@ -19,7 +19,7 @@ class m180221_161527_email_fields extends Migration
         $this->update('{{%fields}}', [
             'type' => Email::class
         ], [
-            'type' => 'SproutFields_Email'
+            'type' => 'SproutFields_Email', 'context' => 'global'
         ], [], false);
 
         return true;

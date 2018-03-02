@@ -64,7 +64,8 @@ class SproutFields extends Plugin
     }
 
     /**
-     * @todo remove this after response from P&T
+     * @todo - remove this after response from P&T
+     *
      * @inheritdoc
      */
     public function setSettings(array $settings)

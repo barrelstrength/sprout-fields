@@ -84,9 +84,9 @@ class Notes extends Field
             );
         } else {
 
-            // @deprecate - v3.0 in favor of Field Handle
+            // @deprecate - v3.0 in favor of FIELDHANDLE
             if (strpos($selectedStyle, '{{ name }}') !== false) {
-                Craft::$app->getDeprecator()->log('{{ name }}', 'Sprout Fields Notes Field dynamic takon "{{ name }}" has been deprecated. Use "FIELDHANDLE" instead.');
+                Craft::$app->getDeprecator()->log('{{ name }}', 'Sprout Fields Notes Field dynamic token `{{ name }}` has been deprecated. Use `FIELDHANDLE` instead.');
 
                 $selectedStyleCss = str_replace(
                     '{{ name }}',
@@ -116,7 +116,7 @@ class Notes extends Field
      *
      * @param string $dir The directory name within the config/ folder to look for the config file
      *
-     * @return string
+     * @return bool|string
      * @throws \yii\base\Exception
      */
     private function _getConfig(string $dir = 'sproutnotes')

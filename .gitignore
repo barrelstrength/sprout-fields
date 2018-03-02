@@ -1,4 +1,6 @@
-.tmp
-.temp
-.idea
 .DS_Store
+.idea
+/.env
+/.idea
+/composer.lock
+/vendor

@@ -132,17 +132,6 @@ class Name extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getElementValidationRules(): array
-    {
-        $rules = parent::getElementValidationRules();
-        $rules[] = 'validateName';
-
-        return $rules;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getTableAttributeHtml($value, ElementInterface $element): string
     {
         $html = '';

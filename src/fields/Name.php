@@ -141,48 +141,16 @@ class Name extends Field implements PreviewableFieldInterface
     }
 
     /**
-     * Validates our fields submitted value beyond the checks
-     * that were assumed based on the content attribute.
-     *
-     *
-     * @param ElementInterface $element
-     *
-     * @return void
-     */
-    public function validateName(ElementInterface $element)
-    {
-//        $value = $element->getFieldValue($this->handle);
-//
-//        $customPattern = $this->customPattern;
-//        $checkPattern = $this->customPatternToggle;
-//
-//        if (!SproutBase::$app->email->validateEmailAddress($value, $customPattern, $checkPattern)) {
-//            $element->addError($this->handle,
-//                SproutBase::$app->email->getErrorMessage(
-//                    $this->name, $this)
-//            );
-//        }
-//
-//        $uniqueEmail = $this->uniqueEmail;
-//
-//        if ($uniqueEmail && !SproutBase::$app->email->validateUniqueEmailAddress($value, $element, $this)) {
-//            $element->addError($this->handle,
-//                SproutFields::t($this->name.' must be a unique email.')
-//            );
-//        }
-    }
-
-    /**
      * @inheritdoc
      */
     public function getTableAttributeHtml($value, ElementInterface $element): string
     {
-//        $html = '';
-//
-//        if ($value) {
-//            $html = '<a href="mailto:'.$value.'" target="_blank">'.$value.'</a>';
-//        }
-//
-//        return $html;
+        $html = '';
+
+        if ($value) {
+            $html = $value->getFullName();
+        }
+
+        return $html;
     }
 }

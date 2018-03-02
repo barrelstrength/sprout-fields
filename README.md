@@ -43,14 +43,14 @@ Sprout Fields adds several common field types to Craft CMS. Sprout Fields focuse
 {{ entry.nameField.suffix }}
 
 {# Phone #}
-{{ entry.phoneFieldAll.international }}
-{{ entry.phoneFieldAll.national }}
-{{ entry.phoneFieldAll.E164 }}
-{{ entry.phoneFieldAll.RFC3966 }}
+{{ entry.phoneField.international }}
+{{ entry.phoneField.national }}
+{{ entry.phoneField.E164 }}
+{{ entry.phoneField.RFC3966 }}
 
-{{ entry.phoneFieldAll.country }}
-{{ entry.phoneFieldAll.phone }}
-{{ entry.phoneFieldAll.code }}
+{{ entry.phoneField.country }}
+{{ entry.phoneField.phone }}
+{{ entry.phoneField.code }}
 
 {# Predefined Field #}
 {{ entry.predefinedField }}

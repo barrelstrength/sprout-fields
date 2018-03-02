@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.1 - 2018-03-01
+
+### Added
+- Added Craft License
+
 ## 3.0.0 - 2018-03-01
 
 ### Added

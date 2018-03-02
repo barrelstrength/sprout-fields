@@ -1,11 +1,12 @@
-Sprout Fields
-===================
+# Sprout Fields
 
 Sprout Fields adds several common field types to Craft CMS. Sprout Fields focuses on fields for an international community with a Craft-friendly user experience.  
 
 - Address Field (International)
 - Email Field
 - Gender (Inclusive)
+- Name (International)
+- Notes
 - Phone Field (International)
 - Predefined
 - Regular Expression (Exclusive)
@@ -27,11 +28,19 @@ Sprout Fields adds several common field types to Craft CMS. Sprout Fields focuse
 {# Email Field #}
 {{ entry.emailField }}
 
-{# Email Dropdown Field #}
-{{ entry.emailDropdownField }}
-
 {# Gender #}
 {{ entry.genderField }}
+
+{# Name #}
+{{ entry.nameField.getFriendlyName() }}
+{{ entry.nameField.getFullName() }}
+{{ entry.nameField.getFullNameExtended() }}
+
+{{ entry.nameField.prefix }}
+{{ entry.nameField.firstName }}
+{{ entry.nameField.middleName }}
+{{ entry.nameField.lastName }}
+{{ entry.nameField.suffix }}
 
 {# Phone #}
 {{ entry.phoneFieldAll.international }}
@@ -55,33 +64,15 @@ Sprout Fields adds several common field types to Craft CMS. Sprout Fields focuse
 
 ----
 
-## Control Panel Usage
+## Documentation
 
-Once installed, a user can add any number of _Sprout Fields_ to their Field Layouts.
+See the [Sprout Website](https://sprout.barrelstrengthdesign.com/craft-plugins/fields/docs) for documentation, guides, and additional resources. 
 
-1. Go to _Settings → Fields_
-2. Select _New Field_
-3. Choose the Sprout Field of your choosing from the Field Type dropdown
-4. Delight!
+## Support
 
-----
+- [Send a Support Ticket](https://sprout.barrelstrengthdesign.com/craft-plugins/request/support) via the Sprout Website.
+- [Create an issue](https://github.com/barrelstrength/craft-sprout-fields/issues) on Github.
 
-## Getting Started 
-
-### Requirements
-
-This plugin requires Craft CMS 3.0.0-RC1 or later.
-
-### Installation
-
-To install the plugin, follow these instructions.
-
-1. Open your terminal and go to your Craft project:
-
-        cd /path/to/project
-
-2. Then tell Composer to load the plugin:
-
-        composer require barrelstrength/sprout-fields
-
-3. In the Control Panel, go to _Settings → Plugins_ and click the “Install” button for Sprout Fields.
+<a href="https://sprout.barrelstrengthdesign.com" target="_blank">
+  <img src="https://sprout.barrelstrengthdesign.com/content/plugins/sprout-icon.svg" width="72" align="right">
+</a>

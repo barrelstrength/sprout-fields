@@ -1,7 +1,7 @@
 {
   "name": "barrelstrength/sprout-fields",
-  "description": "Fabulous fields. Cleaner data.",
-  "version": "3.0.1",
+  "description": "International, Craft-friendly field types.",
+  "version": "3.0.2",
   "type": "craft-plugin",
   "keywords": [
     "craft",
@@ -25,7 +25,7 @@
     "rss": "https://github.com/barrelstrength/sprout-fields/commits/v2.atom"
   },
   "require": {
-    "barrelstrength/sprout-base": "1.0.6",
+    "barrelstrength/sprout-base": "~1.0.0",
     "craftcms/cms": "^3.0.0-RC1"
   },
   "autoload": {

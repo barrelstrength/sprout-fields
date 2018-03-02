@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.0.2 - 2018-03-01
+
+### Changed
+- Updated Sprout Base requirement
+
+### Fixed
+- Fixed Name field validation bug
+
 ## 3.0.1 - 2018-03-01
 
 ### Added

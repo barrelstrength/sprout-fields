@@ -33,6 +33,6 @@ class Gender extends BaseFieldImporter
             [ 'value' => $itsComplicated ]
         ];
 
-        return SproutImport::$app->mockData->getRandomOptionValue($options);
+        return SproutImport::$app->fieldImporter->getRandomOptionValue($options);
     }
 }

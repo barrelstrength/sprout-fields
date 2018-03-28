@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.3 - 2018-03-08
+
+### Fixed
+- Fixes bug where Phone Field could throw error when empty ([#38](https://github.com/barrelstrength/craft-sprout-fields/issues/38))
+- Fixes bug where Name Field referenced deprecated method 
+
 ## 3.0.2 - 2018-03-01
 
 ### Changed

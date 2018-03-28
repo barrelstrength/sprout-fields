@@ -25,7 +25,7 @@ class EmailDropdown extends BaseFieldImporter
 
         if (!empty($settings['options']))
         {
-            return SproutImport::$app->mockData->getRandomOptionValue($settings['options']);
+            return SproutImport::$app->fieldImporter->getRandomOptionValue($settings['options']);
         }
 
         return null;

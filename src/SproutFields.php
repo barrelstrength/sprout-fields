@@ -2,6 +2,7 @@
 
 namespace barrelstrength\sproutfields;
 
+use barrelstrength\sproutbase\services\sproutimport\Importers;
 use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutfields\fields\Address as AddressField;
 use barrelstrength\sproutfields\fields\Name as NameField;
@@ -19,8 +20,6 @@ use barrelstrength\sproutfields\integrations\sproutimport\fields\Notes as NotesF
 use barrelstrength\sproutfields\integrations\sproutimport\fields\Phone as PhoneFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\fields\Predefined as PredefinedFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\fields\RegularExpression as RegularExpressionFieldImporter;
-
-use barrelstrength\sproutimport\services\Utilities;
 use Craft;
 use craft\base\Plugin;
 use yii\base\Event;
@@ -50,7 +49,7 @@ class SproutFields extends Plugin
         $plugin = Craft::$app->getPlugins()->getPlugin('sprout-import');
         
         if ($plugin){
-            Event::on(Utilities::class, Utilities::EVENT_REGISTER_IMPORTER, function(RegisterComponentTypesEvent $event) {
+            Event::on(Importers::class, Importers::EVENT_REGISTER_IMPORTER_TYPES, function(RegisterComponentTypesEvent $event) {
 //            $event->types[] = AddressFieldImporter::class;
                 $event->types[] = EmailFieldImporter::class;
                 $event->types[] = GenderFieldImporter::class;

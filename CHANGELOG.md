@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.6 - 2018-04-03
+
+## Fixed
+- Fixed Sprout Import Field Importer registration
+
 ## 3.0.5 - 2018-04-03
 
 ## Changed

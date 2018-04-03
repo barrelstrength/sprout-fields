@@ -1,7 +1,7 @@
 {
   "name": "barrelstrength/sprout-fields",
   "description": "International, Craft-friendly field types.",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "type": "craft-plugin",
   "keywords": [
     "craft",

@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.0.4 - 2018-04-03
+
+## Changed
+- Updated Sprout Import service layer references from: `mockData` => `fieldImporter`
+- Moves name field CP settings to Sprout Base
+- Fixed potential conflicts with svg icon styles
+
+## Fixed 
+- Added migration for creating `sproutfields_addresses` table when migrating from Craft 2 to Craft 3
+
 ## 3.0.3 - 2018-03-08
 
 ### Fixed

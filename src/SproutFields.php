@@ -46,10 +46,11 @@ class SproutFields extends Plugin
             $event->types[] = UrlField::class;
         });
 
-        $plugin = Craft::$app->getPlugins()->getPlugin('sprout-import');
-        
-        if ($plugin){
-            Event::on(Importers::class, Importers::EVENT_REGISTER_IMPORTER_TYPES, function(RegisterComponentTypesEvent $event) {
+        Event::on(Importers::class, Importers::EVENT_REGISTER_IMPORTER_TYPES, function(RegisterComponentTypesEvent $event) {
+
+            $plugin = Craft::$app->getPlugins()->getPlugin('sprout-import');
+
+            if ($plugin) {
 //            $event->types[] = AddressFieldImporter::class;
                 $event->types[] = EmailFieldImporter::class;
                 $event->types[] = GenderFieldImporter::class;
@@ -58,8 +59,8 @@ class SproutFields extends Plugin
                 $event->types[] = PhoneFieldImporter::class;
                 $event->types[] = PredefinedFieldImporter::class;
                 $event->types[] = RegularExpressionFieldImporter::class;
-            });
-        }
+            }
+        });
     }
 
     /**

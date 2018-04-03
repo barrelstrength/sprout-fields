@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.4 - 2018-04-03
+## 3.0.5 - 2018-04-03
 
 ## Changed
 - Updated Sprout Import service layer references from: `mockData` => `fieldImporter`

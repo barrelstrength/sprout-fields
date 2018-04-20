@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.8 - 2018-04-20
+
+## Fixed
+- Fixed issue where Notes field caused a javascript error
+
 ## 3.0.7 - 2018-04-18
 
 ## Fixed

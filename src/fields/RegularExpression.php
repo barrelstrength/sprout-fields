@@ -9,7 +9,7 @@ use craft\base\PreviewableFieldInterface;
 
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
-use barrelstrength\sproutbase\web\assets\sproutfields\regularexpression\RegularExpressionFieldAsset;
+use barrelstrength\sproutfields\web\assets\regularexpression\RegularExpressionFieldAsset;
 
 class RegularExpression extends Field implements PreviewableFieldInterface
 {

@@ -5,7 +5,7 @@ namespace barrelstrength\sproutfields\fields;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
-use barrelstrength\sproutbase\web\assets\sproutfields\notes\QuillAsset;
+use barrelstrength\sproutbase\sproutfields\web\assets\notes\QuillAsset;
 
 use barrelstrength\sproutfields\SproutFields;
 use craft\helpers\FileHelper;

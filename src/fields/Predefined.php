@@ -54,7 +54,7 @@ class Predefined extends Field implements PreviewableFieldInterface
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-        return Craft::$app->getView()->renderTemplate('sprout-base/sproutfields/_fields/predefined/input',
+        return Craft::$app->getView()->renderTemplate('sprout-base-fields/_fields/predefined/input',
             [
                 'id' => $this->handle,
                 'name' => $this->handle,

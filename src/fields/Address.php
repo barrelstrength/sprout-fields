@@ -108,7 +108,7 @@ class Address extends Field implements PreviewableFieldInterface
         }
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-base/sproutfields/_fields/address/input',
+            'sprout-base-fields/_fields/address/input',
             [
                 'namespaceInputId' => $namespaceInputId,
                 'namespaceInputName' => $namespaceInputName,

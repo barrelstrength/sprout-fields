@@ -8,7 +8,7 @@ use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutbase\models\sproutfields\Name as NameModel;
+use barrelstrength\sproutbase\sproutfields\models\Name as NameModel;
 
 class Name extends Field implements PreviewableFieldInterface
 {

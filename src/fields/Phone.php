@@ -12,7 +12,7 @@ use yii\db\Schema;
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
 use CommerceGuys\Intl\Country\CountryRepository;
-use barrelstrength\sproutbase\models\sproutfields\Phone as PhoneModel;
+use barrelstrength\sproutbase\sproutfields\models\Phone as PhoneModel;
 
 class Phone extends Field implements PreviewableFieldInterface
 {

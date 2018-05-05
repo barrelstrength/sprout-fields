@@ -2,7 +2,7 @@
 
 namespace barrelstrength\sproutfields\integrations\sproutimport\fields;
 
-use barrelstrength\sproutbase\contracts\sproutimport\BaseFieldImporter;
+use barrelstrength\sproutbase\sproutimport\contracts\BaseFieldImporter;
 use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
 
 class RegularExpression extends BaseFieldImporter

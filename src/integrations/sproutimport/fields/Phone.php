@@ -2,7 +2,7 @@
 
 namespace barrelstrength\sproutfields\integrations\sproutimport\fields;
 
-use barrelstrength\sproutbase\contracts\sproutimport\BaseFieldImporter;
+use barrelstrength\sproutbase\sproutimport\contracts\BaseFieldImporter;
 use barrelstrength\sproutfields\fields\Phone as PhoneField;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;

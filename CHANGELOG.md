@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.0.8 - 2018-04-20
+
+## Fixed
+- Fixed issue where Notes field caused a javascript error
+
+## 3.0.7 - 2018-04-18
+
+## Fixed
+- Fixed issue where Phone field could return an error when empty
+- Fixed Address Field display issues
+- Fixed potential icon display issue
+
 ## 3.0.6 - 2018-04-03
 
 ## Fixed

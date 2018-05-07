@@ -15,8 +15,8 @@ use craft\base\PreviewableFieldInterface;
 
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
-use barrelstrength\sproutbase\helpers\AddressHelper;
-use barrelstrength\sproutbase\models\sproutfields\Address as AddressModel;
+use barrelstrength\sproutbase\sproutfields\helpers\AddressHelper;
+use barrelstrength\sproutbase\sproutfields\models\Address as AddressModel;
 use yii\db\Schema;
 
 class Address extends Field implements PreviewableFieldInterface
@@ -108,7 +108,7 @@ class Address extends Field implements PreviewableFieldInterface
         }
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-base/sproutfields/_fields/address/input',
+            'sprout-base-fields/_fields/address/input',
             [
                 'namespaceInputId' => $namespaceInputId,
                 'namespaceInputName' => $namespaceInputName,

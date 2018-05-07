@@ -9,7 +9,7 @@ use craft\base\PreviewableFieldInterface;
 
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
-use barrelstrength\sproutbase\web\assets\sproutfields\regularexpression\RegularExpressionFieldAsset;
+use barrelstrength\sproutfields\web\assets\regularexpression\RegularExpressionFieldAsset;
 
 class RegularExpression extends Field implements PreviewableFieldInterface
 {
@@ -64,7 +64,7 @@ class RegularExpression extends Field implements PreviewableFieldInterface
         $fieldContext = SproutBase::$app->utilities->getFieldContext($this, $element);
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-base/sproutfields/_fields/regularexpression/input',
+            'sprout-base-fields/_fields/regularexpression/input',
             [
                 'id' => $namespaceInputId,
                 'field' => $this,

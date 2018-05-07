@@ -12,7 +12,7 @@ use yii\db\Schema;
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
 use CommerceGuys\Intl\Country\CountryRepository;
-use barrelstrength\sproutbase\models\sproutfields\Phone as PhoneModel;
+use barrelstrength\sproutbase\sproutfields\models\Phone as PhoneModel;
 
 class Phone extends Field implements PreviewableFieldInterface
 {
@@ -78,7 +78,7 @@ class Phone extends Field implements PreviewableFieldInterface
         $val = $value['phone'] ?? null;
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-base/sproutfields/_fields/phone/input',
+            'sprout-base-fields/_fields/phone/input',
             [
                 'namespaceInputId' => $namespaceInputId,
                 'namespaceCountryId' => $namespaceCountryId,

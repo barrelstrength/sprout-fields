@@ -46,7 +46,7 @@ class Gender extends Field
         $genderOptions = $this->getGenderOptions($value);
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-base/sproutfields/_fields/gender/input',
+            'sprout-base-fields/_fields/gender/input',
             [
                 'id' => $namespaceInputId,
                 'name' => $name,

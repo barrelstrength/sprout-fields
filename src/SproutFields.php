@@ -2,7 +2,7 @@
 
 namespace barrelstrength\sproutfields;
 
-use barrelstrength\sproutbase\sproutimport\services\Importers;
+use barrelstrength\sproutbase\app\import\services\Importers;
 use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutfields\fields\Address as AddressField;
 use barrelstrength\sproutfields\fields\Name as NameField;

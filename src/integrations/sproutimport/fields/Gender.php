@@ -2,7 +2,7 @@
 
 namespace barrelstrength\sproutfields\integrations\sproutimport\fields;
 
-use barrelstrength\sproutbase\sproutimport\contracts\BaseFieldImporter;
+use barrelstrength\sproutbase\app\import\contracts\BaseFieldImporter;
 use barrelstrength\sproutfields\fields\Gender as GenderField;
 use barrelstrength\sproutimport\SproutImport;
 use Craft;

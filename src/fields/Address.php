@@ -15,8 +15,8 @@ use craft\base\PreviewableFieldInterface;
 
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
-use barrelstrength\sproutbase\sproutfields\helpers\AddressHelper;
-use barrelstrength\sproutbase\sproutfields\models\Address as AddressModel;
+use barrelstrength\sproutbase\app\fields\helpers\AddressHelper;
+use barrelstrength\sproutbase\app\fields\models\Address as AddressModel;
 use yii\db\Schema;
 
 class Address extends Field implements PreviewableFieldInterface

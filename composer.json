@@ -36,7 +36,6 @@
   "extra": {
     "name": "Sprout Fields",
     "handle": "sprout-fields",
-    "schemaVersion": "3.0.0",
     "developer": "Barrel Strength",
     "developerUrl": "https://barrelstrengthdesign.com",
     "documentationUrl": "https://sprout.barrelstrengthdesign.com/craft-plugins/fields",

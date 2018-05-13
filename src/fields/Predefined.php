@@ -38,7 +38,7 @@ class Predefined extends Field implements PreviewableFieldInterface
      */
     public function getSettingsHtml()
     {
-        return Craft::$app->getView()->renderTemplate('sprout-fields/_fields/predefined/settings',
+        return Craft::$app->getView()->renderTemplate('sprout-base-fields/_components/fields/formfields/predefined/settings',
             [
                 'field' => $this,
             ]);
@@ -54,7 +54,7 @@ class Predefined extends Field implements PreviewableFieldInterface
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-        return Craft::$app->getView()->renderTemplate('sprout-base-fields/_fields/predefined/input',
+        return Craft::$app->getView()->renderTemplate('sprout-base-fields/_components/fields/formfields/predefined/input',
             [
                 'id' => $this->handle,
                 'name' => $this->handle,

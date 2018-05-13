@@ -1,9 +1,0 @@
-{% import "_includes/forms" as forms %}
-
-{{ forms.textField({
-    label: 'Field Format'|t('sprout-fields'),
-    name: 'fieldFormat',
-    instructions: 'What the auto-generated field value should look like. You can include tags that output element properties, such as {myCustomField}.'|t('sprout-fields'),
-    placeholder: '{title} OR {{ object.title }}',
-    value: field.fieldFormat
-}) }}

@@ -1,13 +1,13 @@
 <?php
 
-namespace barrelstrength\sproutfields\integrations\sproutimport\fields;
+namespace barrelstrength\sproutfields\integrations\sproutimport\importers\fields;
 
-use barrelstrength\sproutbase\sproutimport\contracts\BaseFieldImporter;
+use barrelstrength\sproutbase\app\import\base\FieldImporter;
 use barrelstrength\sproutfields\fields\Gender as GenderField;
 use barrelstrength\sproutimport\SproutImport;
 use Craft;
 
-class Gender extends BaseFieldImporter
+class Gender extends FieldImporter
 {
     /**
      * @return string

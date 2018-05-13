@@ -47,7 +47,7 @@ class Email extends Field implements PreviewableFieldInterface
      */
     public function getSettingsHtml()
     {
-        return Craft::$app->getView()->renderTemplate('sprout-fields/_fields/email/settings',
+        return Craft::$app->getView()->renderTemplate('sprout-base-fields/_components/fields/formfields/email/settings',
             [
                 'field' => $this,
             ]);
@@ -67,7 +67,7 @@ class Email extends Field implements PreviewableFieldInterface
         // Set this to false for Quick Entry Dashboard Widget
         $elementId = ($element != null) ? $element->id : false;
 
-        return Craft::$app->getView()->renderTemplate('sprout-base-fields/_fields/email/input',
+        return Craft::$app->getView()->renderTemplate('sprout-base-fields/_components/fields/formfields/email/input',
             [
                 'namespaceInputId' => $namespaceInputId,
                 'id' => $inputId,
@@ -106,16 +106,16 @@ class Email extends Field implements PreviewableFieldInterface
         $customPattern = $this->customPattern;
         $checkPattern = $this->customPatternToggle;
 
-        if (!SproutBase::$app->email->validateEmailAddress($value, $customPattern, $checkPattern)) {
+        if (!SproutBase::$app->emailField->validateEmailAddress($value, $customPattern, $checkPattern)) {
             $element->addError($this->handle,
-                SproutBase::$app->email->getErrorMessage(
+                SproutBase::$app->emailField->getErrorMessage(
                     $this->name, $this)
             );
         }
 
         $uniqueEmail = $this->uniqueEmail;
 
-        if ($uniqueEmail && !SproutBase::$app->email->validateUniqueEmailAddress($value, $element, $this)) {
+        if ($uniqueEmail && !SproutBase::$app->emailField->validateUniqueEmailAddress($value, $element, $this)) {
             $element->addError($this->handle,
                 SproutFields::t($this->name.' must be a unique email.')
             );

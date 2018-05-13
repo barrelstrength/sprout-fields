@@ -5,7 +5,7 @@ namespace barrelstrength\sproutfields\fields;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
-use barrelstrength\sproutbase\app\fields\web\assets\notes\QuillAsset;
+use barrelstrength\sproutbase\app\fields\web\assets\quill\QuillAsset;
 
 use barrelstrength\sproutfields\SproutFields;
 use craft\helpers\FileHelper;
@@ -55,7 +55,7 @@ class Notes extends Field
         $view->registerAssetBundle(QuillAsset::class);
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-fields/_fields/notes/settings',
+            'sprout-base-fields/_components/fields/formfields/notes/settings',
             [
                 'styles' => $this->_getCustomStyleOptions(),
                 'options' => $this->getOptions(),
@@ -101,7 +101,7 @@ class Notes extends Field
         }
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-base-fields/_fields/notes/input',
+            'sprout-base-fields/_components/fields/formfields/notes/input',
             [
                 'id' => $namespaceInputId,
                 'name' => $name,
@@ -123,7 +123,7 @@ class Notes extends Field
     {
         $file = $this->style;
         // Return our default css
-        $path = Craft::getAlias('@barrelstrength/sproutfields/templates/_special/Default.css');
+        $path = Craft::getAlias('@sproutbase/app/fields/templates/_special/Default.css');
 
         $customPath = Craft::$app->getPath()->getConfigPath().DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file;
 

@@ -55,7 +55,7 @@ class Phone extends Field implements PreviewableFieldInterface
     public function getSettingsHtml()
     {
         return Craft::$app->getView()->renderTemplate(
-            'sprout-fields/_fields/phone/settings',
+            'sprout-base-fields/_components/fields/formfields/phone/settings',
             [
                 'field' => $this,
             ]
@@ -78,7 +78,7 @@ class Phone extends Field implements PreviewableFieldInterface
         $val = $value['phone'] ?? null;
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-base-fields/_fields/phone/input',
+            'sprout-base-fields/_components/fields/formfields/phone/input',
             [
                 'namespaceInputId' => $namespaceInputId,
                 'namespaceCountryId' => $namespaceCountryId,
@@ -194,10 +194,10 @@ class Phone extends Field implements PreviewableFieldInterface
         }
 
         if ($value->country && $value->phone) {
-            if (!SproutBase::$app->phone->validate($value->phone, $value->country)) {
+            if (!SproutBase::$app->phoneField->validate($value->phone, $value->country)) {
                 $element->addError(
                     $this->handle,
-                    SproutBase::$app->phone->getErrorMessage($this, $value->country)
+                    SproutBase::$app->phoneField->getErrorMessage($this, $value->country)
                 );
             }
         }

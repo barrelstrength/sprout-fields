@@ -1,11 +1,11 @@
 <?php
 
-namespace barrelstrength\sproutfields\integrations\sproutimport\fields;
+namespace barrelstrength\sproutfields\integrations\sproutimport\importers\fields;
 
-use barrelstrength\sproutbase\sproutimport\contracts\BaseFieldImporter;
+use barrelstrength\sproutbase\app\import\base\FieldImporter;
 use barrelstrength\sproutfields\fields\Address as AddressField;
 
-class Address extends BaseFieldImporter
+class Address extends FieldImporter
 {
     /**
      * @return string

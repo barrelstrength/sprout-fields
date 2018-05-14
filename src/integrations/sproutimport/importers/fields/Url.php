@@ -1,18 +1,18 @@
 <?php
 
-namespace barrelstrength\sproutfields\integrations\sproutimport\fields;
+namespace barrelstrength\sproutfields\integrations\sproutimport\importers\fields;
 
-use barrelstrength\sproutbase\sproutimport\contracts\BaseFieldImporter;
-use barrelstrength\sproutfields\fields\Email as EmailField;
+use barrelstrength\sproutbase\app\import\base\FieldImporter;
+use barrelstrength\sproutfields\fields\Url as UrlField;
 
-class Email extends BaseFieldImporter
+class Url extends FieldImporter
 {
     /**
      * @return string
      */
     public function getModelName()
     {
-        return EmailField::class;
+        return UrlField::class;
     }
 
     /**
@@ -28,6 +28,6 @@ class Email extends BaseFieldImporter
             return null;
         }
 
-        return $this->fakerService->email;
+        return $this->fakerService->url;
     }
 }

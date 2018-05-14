@@ -15,8 +15,8 @@ use craft\base\PreviewableFieldInterface;
 
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
-use barrelstrength\sproutbase\sproutfields\helpers\AddressHelper;
-use barrelstrength\sproutbase\sproutfields\models\Address as AddressModel;
+use barrelstrength\sproutbase\app\fields\helpers\AddressHelper;
+use barrelstrength\sproutbase\app\fields\models\Address as AddressModel;
 use yii\db\Schema;
 
 class Address extends Field implements PreviewableFieldInterface
@@ -76,7 +76,7 @@ class Address extends Field implements PreviewableFieldInterface
         }
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-fields/_fields/address/settings',
+            'sprout-base-fields/_components/fields/formfields/address/settings',
             [
                 'settings' => $settings,
                 'countries' => $countries
@@ -108,7 +108,7 @@ class Address extends Field implements PreviewableFieldInterface
         }
 
         return Craft::$app->getView()->renderTemplate(
-            'sprout-base-fields/_fields/address/input',
+            'sprout-base-fields/_components/fields/formfields/address/input',
             [
                 'namespaceInputId' => $namespaceInputId,
                 'namespaceInputName' => $namespaceInputName,
@@ -165,7 +165,7 @@ class Address extends Field implements PreviewableFieldInterface
 
         // Numeric value when retrieved from db
         if (is_numeric($value)) {
-            $addressModel = SproutBase::$app->address->getAddressById($value);
+            $addressModel = SproutBase::$app->addressField->getAddressById($value);
         }
 
         // Array value from post data
@@ -242,7 +242,7 @@ class Address extends Field implements PreviewableFieldInterface
             $address->siteId = $element->siteId;
             $address->fieldId = $this->id;
 
-            SproutBase::$app->address->saveAddress($address);
+            SproutBase::$app->addressField->saveAddress($address);
         }
 
 
@@ -269,7 +269,7 @@ class Address extends Field implements PreviewableFieldInterface
             if ($address instanceof AddressModel)
             {
                 $address->elementId = $element->id;
-                SproutBase::$app->address->saveAddress($address);
+                SproutBase::$app->addressField->saveAddress($address);
             }
         }
     }

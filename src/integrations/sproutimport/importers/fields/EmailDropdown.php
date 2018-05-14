@@ -1,12 +1,12 @@
 <?php
 
-namespace barrelstrength\sproutfields\integrations\sproutimport\fields;
+namespace barrelstrength\sproutfields\integrations\sproutimport\importers\fields;
 
 use barrelstrength\sproutimport\SproutImport;
-use barrelstrength\sproutbase\sproutimport\contracts\BaseFieldImporter;
-use barrelstrength\sproutforms\integrations\sproutforms\fields\EmailDropdown as EmailDropdownField;
+use barrelstrength\sproutbase\app\import\base\FieldImporter;
+use barrelstrength\sproutforms\fields\formfields\EmailDropdown as EmailDropdownField;
 
-class EmailDropdown extends BaseFieldImporter
+class EmailDropdown extends FieldImporter
 {
     /**
      * @return string

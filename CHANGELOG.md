@@ -1,8 +1,13 @@
 # Changelog
 
+## 3.1.2 - 2018-05-15
+
+### Fixed
+- Fixes release notes warning syntax
+
 ## 3.1.1 - 2018-05-15
 
-{warning} If you have more than one Sprout Plugin installed, to avoid errors use the 'Update All' option.
+> {warning} If you have more than one Sprout Plugin installed, to avoid errors use the 'Update All' option.
 
 ### Added
 - Added minVersionRequired: Sprout Fields v2.1.3 

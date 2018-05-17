@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.1.0 - 2018-05-15
+## 3.1.1 - 2018-05-15
 
 {warning} If you have more than one Sprout Plugin installed, to avoid errors use the 'Update All' option.
 

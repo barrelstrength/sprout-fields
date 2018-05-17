@@ -24,7 +24,7 @@ class Phone extends FieldImporter
     {
         $settings = $this->model->settings;
 
-        $country = $settings->country;
+        $country = $settings['country'];
         $phoneUtil = PhoneNumberUtil::getInstance();
         $exampleNumber = $phoneUtil->getExampleNumber($country);
         $national = $phoneUtil->format($exampleNumber, PhoneNumberFormat::NATIONAL);
@@ -35,6 +35,6 @@ class Phone extends FieldImporter
           'national'  => $national
         ];
 
-        return json_decode($phoneData);
+        return $phoneData;
     }
 }

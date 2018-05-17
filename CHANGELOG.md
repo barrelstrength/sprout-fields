@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.1.0 - 2018-05-15
+
+{warning} If you have more than one Sprout Plugin installed, to avoid errors use the 'Update All' option.
+
+### Added
+- Added minVersionRequired: Sprout Fields v2.1.3 
+
+### Changed
+- Updated application folder structure
+- Moved all templates to Sprout Base
+- Moved all asset bundles to Sprout Base
+- Moved schema and component definitions to Plugin class
+- Updated Sprout Base requirement to v2.0.0 
+- Updated Craft requirement to v3.0.0
+
 ## 3.0.8 - 2018-04-20
 
 ## Fixed

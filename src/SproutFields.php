@@ -31,7 +31,12 @@ class SproutFields extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '3.0.0';
+    public $schemaVersion = '3.1.0';
+
+    /**
+     * @var string
+     */
+    public $minVersionRequired = '2.1.3';
 
     public function init()
     {

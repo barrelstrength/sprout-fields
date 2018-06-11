@@ -113,7 +113,7 @@ class Phone extends Field implements PreviewableFieldInterface
         }
 
         if (!isset($phoneInfo['phone']) || !isset($phoneInfo['country'])){
-            return null;
+            return $value;
         }
         // Always return array
         $phoneModel = new PhoneModel($phoneInfo['phone'], $phoneInfo['country']);

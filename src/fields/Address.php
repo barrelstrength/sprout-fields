@@ -177,7 +177,7 @@ class Address extends Field implements PreviewableFieldInterface
 
         // return null when clearing address to save null value on content table
         if (!$addressModel->validate(null, false)) {
-            return null;
+            return $value;
         }
 
         return $addressModel;

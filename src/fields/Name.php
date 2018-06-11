@@ -87,6 +87,7 @@ class Name extends Field implements PreviewableFieldInterface
         if (is_string($value)) {
             $nameArray = json_decode($value, true);
             $nameModel->setAttributes($nameArray, false);
+            return $nameModel;
         }
 
         // Array value from post data
@@ -103,9 +104,10 @@ class Name extends Field implements PreviewableFieldInterface
 
                 $nameModel->lastName = implode(' ', $nameArray);
             }
+            return $nameModel;
         }
 
-        return $nameModel;
+        return $value;
     }
 
     /**

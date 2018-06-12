@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.1.3 - 2018-06-11
+
+### Fixed
+- Fixed bug where some characters in the URL Field would not validate ([#48])
+- Fixed bug where Address, Name, and Phone field could lose value when set to Not Translatable ([#51])
+- Fixed bug where Data Sources migration could fail if being run for the second time ([#54])
+ 
+[#48]: https://github.com/barrelstrength/craft-sprout-fields/issues/48
+[#51]: https://github.com/barrelstrength/craft-sprout-fields/issues/51
+[#54]: https://github.com/barrelstrength/craft-sprout-fields/issues/54
+
 ## 3.1.2 - 2018-05-15
 
 ### Fixed

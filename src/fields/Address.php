@@ -120,6 +120,11 @@ class Address extends Field implements PreviewableFieldInterface
 
         $this->addressHelper->setParams($countryCode, $name, $addressInfoModel);
 
+        $addressFormat = "";
+        if ($addressId) {
+            $addressFormat = $this->addressHelper->getAddressWithFormat($addressInfoModel);
+        }
+
         $countryInput = $this->addressHelper->countryInput();
         $addressForm = $this->addressHelper->getAddressFormHtml();
 
@@ -131,6 +136,7 @@ class Address extends Field implements PreviewableFieldInterface
                 'field' => $this,
                 'addressId' => $addressId,
                 'defaultCountryCode' => $defaultCountryCode,
+                'addressFormat' => $addressFormat,
                 'countryInput' => $countryInput,
                 'addressForm' => $addressForm,
                 'hideCountryDropdown' => $hideCountryDropdown
@@ -171,11 +177,12 @@ class Address extends Field implements PreviewableFieldInterface
 
     /**
      * Prepare our Address for use as an AddressModel
-     *
-     * @param mixed                 $value
+     * @param                       $value
      * @param ElementInterface|null $element
      *
-     * @return AddressModel|mixed|null
+     * @return array|AddressModel|int|mixed|string
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function normalizeValue($value, ElementInterface $element = null)
     {
@@ -188,9 +195,14 @@ class Address extends Field implements PreviewableFieldInterface
 
         // Array value from post data
         if (is_array($value)) {
-            $value['fieldId'] = $this->id ?? null;
-            $addressModel = new AddressModel();
-            $addressModel->setAttributes($value, false);
+
+            if (!empty($value['delete'])) {
+                SproutBase::$app->addressField->deleteAddressById($value['id']);
+            } else {
+                $value['fieldId'] = $this->id ?? null;
+                $addressModel = new AddressModel();
+                $addressModel->setAttributes($value, false);
+            }
         }
 
         // return null when clearing address to save null value on content table
@@ -263,9 +275,7 @@ class Address extends Field implements PreviewableFieldInterface
             SproutBase::$app->addressField->saveAddress($address);
         }
 
-
         return true;
-
     }
 
     /**

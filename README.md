@@ -74,5 +74,5 @@ See the [Sprout Website](https://sprout.barrelstrengthdesign.com/craft-plugins/f
 - [Create an issue](https://github.com/barrelstrength/craft-sprout-fields/issues) on Github.
 
 <a href="https://sprout.barrelstrengthdesign.com" target="_blank">
-  <img src="https://sprout.barrelstrengthdesign.com/content/plugins/sprout-icon.svg" width="72" align="right">
+  <img src="https://s3.amazonaws.com/sprout.barrelstrengthdesign.com-assets/content/plugins/sprout-icon.svg" width="72" align="right">
 </a>

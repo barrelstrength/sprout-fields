@@ -62,7 +62,9 @@ class Address extends Field implements PreviewableFieldInterface
     }
 
     /**
-     * @inheritdoc
+     * @return null|string
+     * @throws \Twig_Error_Loader
+     * @throws \yii\base\Exception
      */
     public function getSettingsHtml()
     {
@@ -85,7 +87,12 @@ class Address extends Field implements PreviewableFieldInterface
     }
 
     /**
-     * @inheritdoc
+     * @param                       $value
+     * @param ElementInterface|null $element
+     *
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \yii\base\Exception
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
@@ -107,6 +114,15 @@ class Address extends Field implements PreviewableFieldInterface
             $addressId = $value['id'];
         }
 
+        $addressInfoModel = SproutBase::$app->addressField->getAddressById($addressId);
+
+        $countryCode = $addressInfoModel->countryCode;
+
+        $this->addressHelper->setParams($countryCode, $name, $addressInfoModel);
+
+        $countryInput = $this->addressHelper->countryInput();
+        $addressForm = $this->addressHelper->getAddressFormHtml();
+
         return Craft::$app->getView()->renderTemplate(
             'sprout-base-fields/_components/fields/formfields/address/input',
             [
@@ -115,6 +131,8 @@ class Address extends Field implements PreviewableFieldInterface
                 'field' => $this,
                 'addressId' => $addressId,
                 'defaultCountryCode' => $defaultCountryCode,
+                'countryInput' => $countryInput,
+                'addressForm' => $addressForm,
                 'hideCountryDropdown' => $hideCountryDropdown
             ]
         );

@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.1.4 - 2018-07-26
+
+### Changed
+- Updated Sprout Base requirement to v2.0.10
+
+### Fixed
+- Fixed issue where Address Field prompted user that a form had changed after page load ([#60])
+
+[#60]: https://github.com/barrelstrength/craft-sprout-fields/issues/60
+
 ## 3.1.3 - 2018-06-11
 
 ### Fixed

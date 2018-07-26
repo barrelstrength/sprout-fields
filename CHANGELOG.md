@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.5 - 2018-07-26
+
+## Changed
+- Updated Sprout Base requirement to v3.0.0
+
 ## 3.1.4 - 2018-07-26
 
 ### Changed

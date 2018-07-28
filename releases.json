@@ -1,0 +1,149 @@
+[
+  {
+    "version": "2.2.0",
+    "downloadUrl": "https://github.com/barrelstrength/craft-sprout-fields/archive/v2.2.0.zip",
+    "date": "2018-07-28T08:00:00+00:00",
+    "notes": [
+      "[Improved] Moved release feed to Github"
+    ]
+  },
+  {
+    "version": "2.1.3",
+    "downloadUrl": "https://github.com/barrelstrength/craft-sprout-fields/releases",
+    "date": "2017-08-29T07:00:00+00:00",
+    "notes": [
+      "[Improved] Updated default pattern for Phone field to work with Android and iPhone devices"
+    ]
+  },
+  {
+    "version": "2.1.2",
+    "downloadUrl": "https://github.com/barrelstrength/craft-sprout-fields/releases",
+    "date": "2017-08-25T07:00:00+00:00",
+    "notes": [
+      "[Improved] Updated legacy Redactor syntax for lists",
+      "[Fixed] Fixed bug in Notes field where the &#039;Default&#039; style option would throw an error in Sprout Forms front-end field output",
+      "[Fixed] Fixed bug in Notes field where &#039;Hide Field Label&#039; option had no effect on Sprout Forms front-end field output",
+      "[Fixed] Fixed incorrect placeholder text in Invisible field settings",
+      "[Fixed] Fixed bug in Phone field where submitting an empty field would not save if Pattern Mask was enabled"
+    ]
+  },
+  {
+    "version": "2.1.1",
+    "downloadUrl": "https://github.com/barrelstrength/craft-sprout-fields/releases",
+    "date": "2017-01-11T08:00:00+00:00",
+    "notes": [
+      "[Added] Added Regular Expression Field type",
+      "[Added] Added Notes Field Default style option",
+      "[Added] Added Notes Field option to hide the field label",
+      "[Added] Added Email Select Field support for comma-separated email addresses",
+      "[Fixed] Fixed a bug where Phone Field did not accept empty values",
+      "[Fixed] Fixed an issue where Phone Field could throw an HTML5 pattern attribute syntax error for some phone patterns"
+    ]
+  },
+  {
+    "version": "2.1.0",
+    "downloadUrl": "https://github.com/barrelstrength/craft-sprout-fields/releases",
+    "date": "2016-09-26T16:00:00+00:00",
+    "notes": [
+      "[Added] Added support to add Email, Email Select, Hidden, Invisible, Link, and Phone fields as columns in Element Index column configurator",
+      "[Added] Added Sprout Import integrations for Email, Email Select, Hidden, Invisible, Link, and Phone fields",
+      "[Added] Added craft.sproutFields.obfuscateEmailAddresses variable",
+      "[Improved] Updated Email, Link, and Phone field actions to use icons",
+      "[Improved] Added support for &#039;default&#039; setting in Email Select template",
+      "[Improved] Added support for &#039;selected&#039; setting in Email Select output",
+      "[Improved] Removed the use of wildcards when using Craft::import()",
+      "[Fixed] Fixed issue where Phone field mask did not display",
+      "[Fixed] Fixed incorrect log method name"
+    ]
+  },
+  {
+    "version": "2.0.5",
+    "downloadUrl": "https://github.com/barrelstrength/craft-sprout-fields/releases",
+    "date": "2016-05-18T14:00:00+00:00",
+    "notes": [
+      "[Fixed] Fixed issue where the placeholder setting did not display when using the Email and Link fields.",
+      "[Fixed] Fixed bug where Email Select field did not obfuscate email addresses in front-end output."
+    ]
+  },
+  {
+    "version": "2.0.4",
+    "downloadUrl": "https://github.com/barrelstrength/craft-sprout-fields/releases",
+    "date": "2016-04-20T09:30:00+00:00",
+    "notes": [
+      "[Added] Added placeholder setting to Email, Link and Phone fields",
+      "[Added] Added Sprout Import integration for importing fake data into email fields",
+      "[Fixed] Fixed error when Email Select field is used with Sprout Forms getField tag"
+    ]
+  },
+  {
+    "version": "2.0.3",
+    "downloadUrl": "https://github.com/barrelstrength/craft-sprout-fields/releases",
+    "date": "2016-03-30T15:00:00+00:00",
+    "notes": [
+      "[Added] Added PHP 7 compatibility",
+      "[Fixed] Fixed a bug where Notes field did not minimize when used within a Matrix field"
+    ]
+  },
+  {
+    "version": "2.0.2",
+    "downloadUrl": "https://github.com/barrelstrength/craft-sprout-fields/releases",
+    "date": "2016-02-04T08:00:00+00:00",
+    "notes": [
+      "[Added] Added migration to update legacy Sprout More Info fields to Notes fields",
+      "[Improved] Notes no longer requires a database column in the content table",
+      "[Fixed] Fixed error when Link field type was included on Recent Entries dashboard widget"
+    ]
+  },
+  {
+    "version": "2.0.1",
+    "downloadUrl": "https://github.com/barrelstrength/craft-sprout-fields/releases",
+    "date": "2015-12-31T11:30:00+00:00",
+    "notes": [
+      "[Fixed] Fixed issue where error message could be blank when the Email Field failed validation",
+      "[Fixed] Fixed issue where error message could be blank when the Link Field failed validation"
+    ]
+  },
+  {
+    "version": "2.0.0",
+    "downloadUrl": "https://github.com/barrelstrength/craft-sprout-fields/releases",
+    "date": "2015-12-02T08:00:00+00:00",
+    "notes": [
+      "# General",
+      "[Added] Added Plugin icon",
+      "[Added] Added Plugin description",
+      "[Added] Added link to documentation",
+      "[Added] Added link to plugin settings",
+      "[Added] Added link to release feed",
+      "# Fields",
+      "[Added] Added Email Select field (Initial Release)",
+      "[Added] Added Email Select field support for Sprout Forms and Sprout Email",
+      "[Added] Added Notes field (previously Sprout More Info)",
+      "[Added] Added Notes field support for Sprout Forms",
+      "[Added] Added support to expand/collapse Notes fields in the Control Panel and retain state",
+      "[Improved] Improved default styles for Notes field to accomodate more common elements",
+      "[Improved] Improved several naming conventions",
+      "[Improved] Improved behavior when updating Notes output setting to immediately display related options",
+      "[Improved] Improved phone validation to occur on `input` instead of on `blur`",
+      "[Fixed] Fixed a bug where Phone field settings could load without making all selected settings visible",
+      "[Fixed] Fixed a bug where Email, Link, and Phone field custom validation settings could remain even after they were toggled off",
+      "[Fixed] Fixed Phone field link to display if valid on page load",
+      "[Fixed] Fixed a bug where Unique Email validation didn&#039;t take into account new Elements"
+    ]
+  },
+  {
+    "version": "1.0.0",
+    "downloadUrl": "https://github.com/barrelstrength/craft-sprout-fields/releases",
+    "date": "2015-10-20T17:00:00+00:00",
+    "notes": [
+      "[Added] Added Phone Field (Initial Release)",
+      "[Added] Added Hidden Field (Initial Release)",
+      "[Added] Added Invisible Field (Initial Release)",
+      "[Added] Added Email Field (previously Sprout Email Field)",
+      "[Added] Added Link Field (previously Sprout Link Field)",
+      "[Improved] Standardized settings and naming conventions across all field types",
+      "[Improved] Updated Phone, Link, and Email field to support input types tel, url, and email",
+      "[Added] Added support for validation using HTML5 patterns and custom error messages",
+      "[Added] Added Sprout Forms front-end field support for Phone, Email, Link, Hidden, and Invisible fields."
+    ]
+  }
+]

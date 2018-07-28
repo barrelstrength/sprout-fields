@@ -16,15 +16,14 @@ http://sprout.barrelstrengthdesign.com/craft-plugins/fields
 
 Sprout Fields Updates
 ------------------------------------------------------------
-http://sprout.barrelstrengthdesign.com/craft-plugins/fields/updates
+https://sprout.barrelstrengthdesign.com/docs/support/changelog.html
 
 
 Sprout Fields Support
 ------------------------------------------------------------
-http://sprout.barrelstrengthdesign.com/craft-plugins/request/support
+Via Craft Stack Exchange: Tag your questions with `plugin-sproutfields`:
+https://craftcms.stackexchange.com/
 
+Via Email:
+Send us a note at: sprout@barrelstrengthdesign.com
 
-Sprout Fields License Terms
-------------------------------------------------------------
-Use of Sprout Fields is subject to the license agreement available here:
-http://sprout.barrelstrengthdesign.com/license

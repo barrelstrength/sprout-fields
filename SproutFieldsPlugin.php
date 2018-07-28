@@ -60,7 +60,7 @@ class SproutFieldsPlugin extends BasePlugin
 	 */
 	public function getVersion()
 	{
-		return '2.1.3';
+		return '2.2.0';
 	}
 
 	/**
@@ -100,7 +100,7 @@ class SproutFieldsPlugin extends BasePlugin
 	 */
 	public function getReleaseFeedUrl()
 	{
-		return 'https://sprout.barrelstrengthdesign.com/craft-plugins/fields/releases.json';
+        return 'https://raw.githubusercontent.com/barrelstrength/craft-sprout-fields/v2/releases.json';
 	}
 
 	/**

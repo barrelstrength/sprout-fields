@@ -6,7 +6,7 @@ namespace barrelstrength\sproutfields\fields;
 use CommerceGuys\Addressing\Formatter\DefaultFormatter;
 use CommerceGuys\Addressing\Model\Address as CommerceGuysAddress;
 use CommerceGuys\Addressing\Repository\AddressFormatRepository;
-use CommerceGuys\Addressing\Repository\CountryRepository;
+use CommerceGuys\Intl\Country\CountryRepository;
 use CommerceGuys\Addressing\Repository\SubdivisionRepository;
 use Craft;
 use craft\base\ElementInterface;
@@ -203,6 +203,14 @@ class Address extends Field implements PreviewableFieldInterface
                 $addressModel = new AddressModel();
                 $addressModel->setAttributes($value, false);
             }
+        }
+
+        // Adds country property that return country name
+        if ($addressModel->countryCode) {
+            $countryRepository = new CountryRepository();
+
+            $country = $countryRepository->get($addressModel->countryCode);
+            $addressModel->country = $country->getName();
         }
 
         // return null when clearing address to save null value on content table

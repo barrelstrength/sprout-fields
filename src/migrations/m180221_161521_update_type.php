@@ -16,14 +16,28 @@ class m180221_161521_update_type extends Migration
      */
     public function safeUp()
     {
-        $emailIds = $this->getIdsByType('SproutFields_Email');
+        // SproutFields_Link changed to Url on Craft3
+        $fields = [
+            'SproutFields_Email'       => 'barrelstrength\sproutfields\fields\Email',
+            'SproutFields_EmailSelect' => 'barrelstrength\sproutfields\fields\EmailSelect',
+            'SproutFields_Hidden'      => 'barrelstrength\sproutfields\fields\Hidden',
+            'SproutFields_Invisible'   => 'barrelstrength\sproutfields\fields\Invisible',
+            'SproutFields_Link'        => 'barrelstrength\sproutfields\fields\Url',
+            'SproutFields_Notes'       => 'barrelstrength\sproutfields\fields\Notes',
+            'SproutFields_Phone'       => 'barrelstrength\sproutfields\fields\Phone',
+            'SproutFields_RegularExpression' => 'barrelstrength\sproutfields\fields\RegularExpression',
+        ];
 
-        if (!empty($emailIds)) {
-            $this->update('{{%fields}}', [
-                'type' => 'barrelstrength\sproutfields\fields\Email'
-            ], [
-                'id' => $emailIds
-            ], [], false);
+        foreach ($fields as $oldField => $newField) {
+            $ids = $this->getIdsByType($oldField);
+
+            if (!empty($ids)) {
+                $this->update('{{%fields}}', [
+                    'type' => $newField
+                ], [
+                    'id' => $ids
+                ], [], false);
+            }
         }
 
         return true;

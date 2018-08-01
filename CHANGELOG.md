@@ -2,13 +2,13 @@
 
 ## 3.1.6 - 2018-08-01
 	
-## Added
+### Added
 - Added country property to Address model ([#56]) 
 
-## Changed
+### Changed
 - Updated Sprout Base requirement to v3.0.1
 
-## Fixed
+### Fixed
 - Added support for migrating Sprout Field classes for non-global fields ([#55])
 - Fixed rendering bug in Address modal when switching countries ([#61])
 

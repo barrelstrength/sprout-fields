@@ -36,15 +36,6 @@ class Phone extends Field implements PreviewableFieldInterface
      */
     public $placeholder;
 
-    /**
-     * @var bool
-     */
-    public $customPatternToggle;
-
-    public $mask;
-
-    public $inputMask;
-
     public static function displayName(): string
     {
         return SproutFields::t('Phone (Sprout)');

@@ -38,7 +38,7 @@ class Phone extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('Phone (Sprout)');
+        return SproutFields::t('Phone (Sprout Fields)');
     }
 
     /**

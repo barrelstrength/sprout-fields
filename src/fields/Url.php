@@ -34,7 +34,7 @@ class Url extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('URL (Sprout)');
+        return SproutFields::t('URL (Sprout Fields)');
     }
 
     /**

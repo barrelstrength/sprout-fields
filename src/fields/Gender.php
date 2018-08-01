@@ -20,7 +20,7 @@ class Gender extends Field
      */
     public static function displayName(): string
     {
-        return SproutFields::t('Gender (Sprout)');
+        return SproutFields::t('Gender (Sprout Fields)');
     }
 
     /**

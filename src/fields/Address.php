@@ -50,7 +50,7 @@ class Address extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('Address (Sprout)');
+        return SproutFields::t('Address (Sprout Fields)');
     }
 
     /**

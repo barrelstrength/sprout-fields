@@ -34,7 +34,7 @@ class Name extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('Name (Sprout)');
+        return SproutFields::t('Name (Sprout Fields)');
     }
 
     /**

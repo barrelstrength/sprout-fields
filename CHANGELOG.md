@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.1.8 - 2018-08-30
+	
+### Fixed
+- Fixed error where Name Field could throw errors when value was null [#62]
+
+[#62] https://github.com/barrelstrength/craft-sprout-fields/issues/62
+
 ## 3.1.7 - 2018-08-01
 	
 ### Fixed

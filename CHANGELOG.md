@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.1.9 - 2018-09-12
+
+### Fixed
+- Fixed bug where Address Field did not respect the default country setting ([#63])
+- Fixed bug where Address Field did not respect the hide country setting ([#63])
+
+[#63]: https://github.com/barrelstrength/craft-sprout-fields/issues/63
+
 ## 3.1.8 - 2018-08-30
 
 ### Fixed

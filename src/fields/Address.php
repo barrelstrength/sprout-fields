@@ -116,7 +116,7 @@ class Address extends Field implements PreviewableFieldInterface
 
         $addressInfoModel = SproutBase::$app->addressField->getAddressById($addressId);
 
-        $countryCode = $addressInfoModel->countryCode;
+        $countryCode = $addressInfoModel->countryCode ?? $defaultCountryCode;
 
         $this->addressHelper->setParams($countryCode, $name, $addressInfoModel);
 
@@ -125,7 +125,7 @@ class Address extends Field implements PreviewableFieldInterface
             $addressFormat = $this->addressHelper->getAddressWithFormat($addressInfoModel);
         }
 
-        $countryInput = $this->addressHelper->countryInput();
+        $countryInput = $this->addressHelper->countryInput($hideCountryDropdown);
         $addressForm = $this->addressHelper->getAddressFormHtml();
 
         return Craft::$app->getView()->renderTemplate(

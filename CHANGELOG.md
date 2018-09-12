@@ -1,19 +1,27 @@
 # Changelog
 
+## 3.1.9 - 2018-09-12
+
+### Fixed
+- Fixed bug where Address Field did not respect the default country setting ([#63])
+- Fixed bug where Address Field did not respect the hide country setting ([#63])
+
+[#63]: https://github.com/barrelstrength/craft-sprout-fields/issues/63
+
 ## 3.1.8 - 2018-08-30
-	
+
 ### Fixed
 - Fixed error where Name Field could throw errors when value was null [#62]
 
-[#62] https://github.com/barrelstrength/craft-sprout-fields/issues/62
+[#62]: https://github.com/barrelstrength/craft-sprout-fields/issues/62
 
 ## 3.1.7 - 2018-08-01
-	
+
 ### Fixed
 - Fixed release notes syntax 
 
 ## 3.1.6 - 2018-08-01
-	
+
 ### Added
 - Added country property to Address model ([#56]) 
 

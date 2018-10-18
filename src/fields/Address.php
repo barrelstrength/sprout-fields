@@ -48,6 +48,9 @@ class Address extends Field implements PreviewableFieldInterface
         parent::init();
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function displayName(): string
     {
         return SproutFields::t('Address (Sprout Fields)');

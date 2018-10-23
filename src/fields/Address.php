@@ -48,6 +48,9 @@ class Address extends Field implements PreviewableFieldInterface
         parent::init();
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function displayName(): string
     {
         return SproutFields::t('Address (Sprout Fields)');
@@ -273,6 +276,12 @@ class Address extends Field implements PreviewableFieldInterface
     public function beforeElementSave(ElementInterface $element, bool $isNew) : bool
     {
         $address = $element->getFieldValue($this->handle);
+
+        // If entries is Save as new entry create a new address to avoid syncing to origin entry
+        $duplicate = Craft::$app->request->getBodyParam('duplicate');
+        if ($duplicate) {
+            $address->id = null;
+        }
 
         if ($address instanceof AddressModel)
         {

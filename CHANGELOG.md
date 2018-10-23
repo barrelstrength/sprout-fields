@@ -1,11 +1,9 @@
 # Changelog
 
-## 3.1.10 - 2018-10-23
+## 3.1.11 - 2018-10-23
 
 ### Fixed
 - Fixed bug on address field when entries is save as new entry [#65]
-
-[#65]: https://github.com/barrelstrength/craft-sprout-fields/issues/65
 
 ## 3.1.9 - 2018-09-12
 

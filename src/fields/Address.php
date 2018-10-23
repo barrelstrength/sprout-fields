@@ -277,6 +277,12 @@ class Address extends Field implements PreviewableFieldInterface
     {
         $address = $element->getFieldValue($this->handle);
 
+        // If entries is Save as new entry create a new address to avoid syncing to origin entry
+        $duplicate = Craft::$app->request->getBodyParam('duplicate');
+        if ($duplicate) {
+            $address->id = null;
+        }
+
         if ($address instanceof AddressModel)
         {
             $address->elementId = $element->id;

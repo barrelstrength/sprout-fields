@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.12 - 2018-10-27
+
+### Changed
+- Updates Sprout Import references to Sprout Base
+
 ## 3.1.11 - 2018-10-23
 
 ### Fixed

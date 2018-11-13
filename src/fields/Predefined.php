@@ -18,6 +18,16 @@ class Predefined extends Field implements PreviewableFieldInterface
     public $fieldFormat;
 
     /**
+     * @var bool
+     */
+    public $showField;
+
+    /**
+     * @var bool
+     */
+    public $outputTextarea;
+
+    /**
      * @return string
      */
     public static function displayName(): string

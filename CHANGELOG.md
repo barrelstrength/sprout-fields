@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.1.2 - 2018-11-14
+## 3.1.20 - 2018-11-14
 
 ### Added
 - Added option to hide or show Predefined Field in Field Layout

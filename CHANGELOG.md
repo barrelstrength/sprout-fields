@@ -1,5 +1,26 @@
 # Changelog
 
+## 3.1.20 - 2018-11-14
+
+### Added
+- Added option to hide or show Predefined Field in Field Layout
+- Added option to display Predefined Field as a textarea field
+
+### Changed
+- Updated Predefined Field settings to use textarea
+- Updated Sprout Base requirement to v4.0.2
+- Updated commerceguys/addressing requirement to v1.0.1
+
+## 3.1.13 - 2018-10-29
+
+### Changed
+- Updated Sprout Base requirement to v4.0.0
+
+## 3.1.12 - 2018-10-27
+
+### Changed
+- Updates Sprout Import references to Sprout Base
+
 ## 3.1.11 - 2018-10-23
 
 ### Fixed

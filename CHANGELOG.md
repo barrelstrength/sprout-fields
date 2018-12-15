@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.1.21 - 2018-11-28
+
+### Added
+- Fixed bug where Address Field clear button did not have an effect before field is saved ([#68])
+
+### Changed
+- Updated Sprout Base requirement to v4.0.3
+
+[#68]: https://github.com/barrelstrength/craft-sprout-fields/issues/68
+
 ## 3.1.20 - 2018-11-14
 
 ### Added

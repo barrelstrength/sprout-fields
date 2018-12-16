@@ -5,6 +5,7 @@ namespace barrelstrength\sproutfields\migrations;
 use craft\db\Migration;
 use craft\fields\PlainText;
 use craft\db\Query;
+use craft\helpers\Json;
 
 /**
  * m180221_161528_hidden_fields migration.
@@ -32,8 +33,8 @@ class m180221_161528_hidden_fields extends Migration
         ];
 
         foreach ($hiddenFields as $hiddenField) {
-            $settingsAsJson = json_encode($newSettings);
-            $settings = json_decode($hiddenField['settings'], true);
+            $settingsAsJson = Json::encode($newSettings);
+            $settings = Json::decode($hiddenField['settings'], true);
             $instructions = $hiddenField['instructions'].' Hidden field pattern: '.$settings['value'] ?? '';
             $this->update('{{%fields}}', ['type' => PlainText::class, 'settings' => $settingsAsJson, 'instructions'=>$instructions], ['id' => $hiddenField['id']], [], false);
         }

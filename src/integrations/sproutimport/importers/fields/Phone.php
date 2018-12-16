@@ -18,7 +18,7 @@ class Phone extends FieldImporter
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getMockData()
     {

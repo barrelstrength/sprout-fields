@@ -6,6 +6,7 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
+use craft\helpers\Json;
 use libphonenumber\PhoneNumberUtil;
 use yii\db\Schema;
 
@@ -14,6 +15,13 @@ use barrelstrength\sproutbase\SproutBase;
 use CommerceGuys\Intl\Country\CountryRepository;
 use barrelstrength\sproutbase\app\fields\models\Phone as PhoneModel;
 
+/**
+ *
+ * @property array  $elementValidationRules
+ * @property string $contentColumnType
+ * @property mixed  $settingsHtml
+ * @property array  $countries
+ */
 class Phone extends Field implements PreviewableFieldInterface
 {
     /**
@@ -58,6 +66,9 @@ class Phone extends Field implements PreviewableFieldInterface
 
     /**
      * @inheritdoc
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \yii\base\Exception
      */
     public function getSettingsHtml()
     {
@@ -71,6 +82,9 @@ class Phone extends Field implements PreviewableFieldInterface
 
     /**
      * @inheritdoc
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \yii\base\Exception
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
@@ -116,15 +130,15 @@ class Phone extends Field implements PreviewableFieldInterface
         }
 
         if (is_string($value)) {
-            $phoneInfo = json_decode($value, true);
+            $phoneInfo = Json::decode($value, true);
         }
 
-        if (!isset($phoneInfo['phone']) || !isset($phoneInfo['country'])){
+        if (!isset($phoneInfo['phone'], $phoneInfo['country'])){
             return $value;
         }
+
         // Always return array
-        $phoneModel = new PhoneModel($phoneInfo['phone'], $phoneInfo['country']);
-        return $phoneModel;
+        return new PhoneModel($phoneInfo['phone'], $phoneInfo['country']);
     }
 
     /**
@@ -189,24 +203,20 @@ class Phone extends Field implements PreviewableFieldInterface
     {
         $value = $element->getFieldValue($this->handle);
 
-        if ($this->required){
-            if (!$value->phone){
-                $element->addError(
-                    $this->handle,
-                    Craft::t('sprout-base','{field} cannot be blank', [
-                        'field' => $this->name
-                    ])
-                );
-            }
+        if ($this->required && !$value->phone) {
+            $element->addError(
+                $this->handle,
+                Craft::t('sprout-base','{field} cannot be blank', [
+                    'field' => $this->name
+                ])
+            );
         }
 
-        if ($value->country && $value->phone) {
-            if (!SproutBase::$app->phoneField->validate($value->phone, $value->country)) {
-                $element->addError(
-                    $this->handle,
-                    SproutBase::$app->phoneField->getErrorMessage($this, $value->country)
-                );
-            }
+        if ($value->country && $value->phone && !SproutBase::$app->phoneField->validate($value->phone, $value->country)) {
+            $element->addError(
+                $this->handle,
+                SproutBase::$app->phoneField->getErrorMessage($this, $value->country)
+            );
         }
     }
 

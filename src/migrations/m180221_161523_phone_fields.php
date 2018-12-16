@@ -5,6 +5,7 @@ namespace barrelstrength\sproutfields\migrations;
 use craft\db\Migration;
 use craft\fields\PlainText;
 use craft\db\Query;
+use craft\helpers\Json;
 
 /**
  * m180221_161523_phone_fields migration.
@@ -32,7 +33,7 @@ class m180221_161523_phone_fields extends Migration
             ->all();
 
         foreach ($phoneFields as $phoneField) {
-            $settingsAsJson = json_encode($newSettings);
+            $settingsAsJson = Json::encode($newSettings);
             $this->update('{{%fields}}', ['type' => PlainText::class, 'settings' => $settingsAsJson], ['id' => $phoneField['id']], [], false);
         }
 

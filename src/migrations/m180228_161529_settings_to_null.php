@@ -6,6 +6,7 @@ use craft\db\Migration;
 use Craft;
 use craft\db\Query;
 use craft\helpers\FileHelper;
+use craft\helpers\Json;
 
 /**
  * m180228_161529_settings_to_null migration.
@@ -14,6 +15,8 @@ class m180228_161529_settings_to_null extends Migration
 {
     /**
      * @inheritdoc
+     * @throws \Exception
+     * @throws \yii\base\Exception
      */
     public function safeUp()
     {
@@ -23,7 +26,7 @@ class m180228_161529_settings_to_null extends Migration
             ->where(['handle' => 'sprout-fields'])
             ->one();
 
-        $settings = json_decode($plugin['settings'], true);
+        $settings = Json::decode($plugin['settings'], true);
         $path = Craft::$app->getPath()->getConfigPath();
 
         foreach ($settings as $key => $css) {

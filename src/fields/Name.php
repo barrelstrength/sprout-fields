@@ -9,7 +9,12 @@ use craft\base\PreviewableFieldInterface;
 
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\app\fields\models\Name as NameModel;
+use craft\helpers\Json;
 
+/**
+ *
+ * @property mixed $settingsHtml
+ */
 class Name extends Field implements PreviewableFieldInterface
 {
     /**
@@ -39,6 +44,9 @@ class Name extends Field implements PreviewableFieldInterface
 
     /**
      * @inheritdoc
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \yii\base\Exception
      */
     public function getSettingsHtml()
     {
@@ -51,6 +59,9 @@ class Name extends Field implements PreviewableFieldInterface
 
     /**
      * @inheritdoc
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \yii\base\Exception
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
@@ -85,7 +96,7 @@ class Name extends Field implements PreviewableFieldInterface
 
         // String value when retrieved from db
         if (is_string($value)) {
-            $nameArray = json_decode($value, true);
+            $nameArray = Json::decode($value, true);
             $nameModel->setAttributes($nameArray, false);
             return $nameModel;
         }
@@ -131,7 +142,7 @@ class Name extends Field implements PreviewableFieldInterface
 
         // Submitting an Element to be saved
         if (is_object($value) && get_class($value) == NameModel::class) {
-            return json_encode($value->getAttributes());
+            return Json::encode($value->getAttributes());
         }
 
         return $value;

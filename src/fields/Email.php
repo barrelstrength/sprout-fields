@@ -10,6 +10,11 @@ use craft\base\PreviewableFieldInterface;
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
 
+/**
+ *
+ * @property array $elementValidationRules
+ * @property mixed $settingsHtml
+ */
 class Email extends Field implements PreviewableFieldInterface
 {
     /**
@@ -44,6 +49,9 @@ class Email extends Field implements PreviewableFieldInterface
 
     /**
      * @inheritdoc
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \yii\base\Exception
      */
     public function getSettingsHtml()
     {
@@ -55,6 +63,9 @@ class Email extends Field implements PreviewableFieldInterface
 
     /**
      * @inheritdoc
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \yii\base\Exception
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {

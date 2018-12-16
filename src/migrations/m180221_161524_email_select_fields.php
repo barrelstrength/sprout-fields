@@ -5,6 +5,7 @@ namespace barrelstrength\sproutfields\migrations;
 use craft\db\Migration;
 use craft\fields\Table;
 use craft\db\Query;
+use craft\helpers\Json;
 
 /**
  * m180221_161524_email_select_fields migration.
@@ -38,7 +39,7 @@ class m180221_161524_email_select_fields extends Migration
         $defaults = [];
         foreach ($emailSelects as $emailSelect) {
             $newSettings = [];
-            $oldSettings = json_decode($emailSelect['settings'], true);
+            $oldSettings = Json::decode($emailSelect['settings'], true);
             $band = 1;
             foreach ($oldSettings['options'] as $option) {
                 $defaults['row'.$band] = ['col1' => $option['label'], 'col2'=> $option['value']];
@@ -47,7 +48,7 @@ class m180221_161524_email_select_fields extends Migration
             $newSettings['columns'] = $columns;
             $newSettings['defaults'] = $defaults;
             $newSettings['columnType'] = 'text';
-            $settingsAsJson = json_encode($newSettings);
+            $settingsAsJson = Json::encode($newSettings);
 
             $this->update('{{%fields}}', ['type' => Table::class, 'settings' => $settingsAsJson], ['id' => $emailSelect['id']], [], false);
         }

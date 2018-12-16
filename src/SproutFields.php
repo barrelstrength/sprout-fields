@@ -4,7 +4,7 @@ namespace barrelstrength\sproutfields;
 
 use barrelstrength\sproutbase\app\import\services\Importers;
 use barrelstrength\sproutbase\SproutBaseHelper;
-use barrelstrength\sproutfields\fields\Address as AddressField;
+use barrelstrength\sproutfields\fields\AddressTrait as AddressField;
 use barrelstrength\sproutfields\fields\Name as NameField;
 use barrelstrength\sproutfields\fields\Phone as PhoneField;
 use barrelstrength\sproutfields\fields\Email as EmailField;
@@ -26,6 +26,10 @@ use yii\base\Event;
 use craft\events\RegisterComponentTypesEvent;
 use craft\services\Fields;
 
+/**
+ *
+ * @property array $settings
+ */
 class SproutFields extends Plugin
 {
     /**

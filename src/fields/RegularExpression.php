@@ -11,6 +11,11 @@ use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbase\app\fields\web\assets\regularexpression\RegularExpressionFieldAsset;
 
+/**
+ *
+ * @property array $elementValidationRules
+ * @property mixed $settingsHtml
+ */
 class RegularExpression extends Field implements PreviewableFieldInterface
 {
     /**
@@ -38,6 +43,9 @@ class RegularExpression extends Field implements PreviewableFieldInterface
 
     /**
      * @inheritdoc
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \yii\base\Exception
      */
     public function getSettingsHtml()
     {
@@ -51,6 +59,10 @@ class RegularExpression extends Field implements PreviewableFieldInterface
 
     /**
      * @inheritdoc
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \yii\base\Exception
+     * @throws \yii\base\InvalidConfigException
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {

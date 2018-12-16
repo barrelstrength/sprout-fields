@@ -10,6 +10,11 @@ use barrelstrength\sproutbase\app\fields\web\assets\quill\QuillAsset;
 use barrelstrength\sproutfields\SproutFields;
 use craft\helpers\FileHelper;
 
+/**
+ *
+ * @property array $options
+ * @property mixed $settingsHtml
+ */
 class Notes extends Field
 {
 
@@ -48,6 +53,10 @@ class Notes extends Field
 
     /**
      * @inheritdoc
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \yii\base\Exception
+     * @throws \yii\base\InvalidConfigException
      */
     public function getSettingsHtml()
     {
@@ -66,6 +75,9 @@ class Notes extends Field
 
     /**
      * @inheritdoc
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \yii\base\Exception
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
@@ -82,18 +94,14 @@ class Notes extends Field
                 $name,
                 $selectedStyle
             );
-        } else {
+        } else if (strpos($selectedStyle, '{{ name }}') !== false) {
+            Craft::$app->getDeprecator()->log('{{ name }}', 'Sprout Fields Notes Field dynamic token `{{ name }}` has been deprecated. Use `FIELDHANDLE` instead.');
 
-            // @deprecate - v3.0 in favor of FIELDHANDLE
-            if (strpos($selectedStyle, '{{ name }}') !== false) {
-                Craft::$app->getDeprecator()->log('{{ name }}', 'Sprout Fields Notes Field dynamic token `{{ name }}` has been deprecated. Use `FIELDHANDLE` instead.');
-
-                $selectedStyleCss = str_replace(
-                    '{{ name }}',
-                    $name,
-                    $selectedStyle
-                );
-            }
+            $selectedStyleCss = str_replace(
+                '{{ name }}',
+                $name,
+                $selectedStyle
+            );
         }
 
         if ($this->notes === null) {

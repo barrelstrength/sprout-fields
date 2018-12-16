@@ -1,9 +1,8 @@
-<?php
+<?php /** @noinspection ClassConstantCanBeUsedInspection */
 
 namespace barrelstrength\sproutfields\migrations;
 
 use craft\db\Migration;
-use barrelstrength\sproutfields\fields\Notes;
 use craft\db\Query;
 
 /**

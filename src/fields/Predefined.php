@@ -10,6 +10,11 @@ use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 use yii\db\Schema;
 
+/**
+ *
+ * @property string $contentColumnType
+ * @property mixed  $settingsHtml
+ */
 class Predefined extends Field implements PreviewableFieldInterface
 {
     /**
@@ -45,6 +50,9 @@ class Predefined extends Field implements PreviewableFieldInterface
 
     /**
      * @inheritdoc
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \yii\base\Exception
      */
     public function getSettingsHtml()
     {
@@ -78,7 +86,8 @@ class Predefined extends Field implements PreviewableFieldInterface
      * @param bool             $isNew
      *
      * @return string|void
-     * @throws \yii\db\Exception
+     * @throws \Throwable
+     * @throws \Throwable
      */
     public function afterElementSave(ElementInterface $element, bool $isNew)
     {

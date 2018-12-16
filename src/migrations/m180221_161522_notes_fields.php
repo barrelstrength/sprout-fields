@@ -5,6 +5,7 @@ namespace barrelstrength\sproutfields\migrations;
 use craft\db\Migration;
 use barrelstrength\sproutfields\fields\Notes;
 use craft\db\Query;
+use craft\helpers\Json;
 
 /**
  * m180221_161522_notes_fields migration.
@@ -24,11 +25,11 @@ class m180221_161522_notes_fields extends Migration
             ->all();
 
         foreach ($notesFields as $noteField) {
-            $settings = json_decode($noteField['settings'], true);
+            $settings = Json::decode($noteField['settings'], true);
             $settings['style'] = '';
             $settings['notes'] = $settings['instructions'] ?? '';
             unset($settings['instructions']);
-            $settingsAsJson = json_encode($settings);
+            $settingsAsJson = Json::encode($settings);
 
             $this->update('{{%fields}}', ['type' => Notes::class, 'settings' => $settingsAsJson], ['id' => $noteField['id']], [], false);
         }

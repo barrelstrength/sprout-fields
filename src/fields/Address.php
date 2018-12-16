@@ -2,49 +2,33 @@
 
 namespace barrelstrength\sproutfields\fields;
 
-
 use barrelstrength\sproutbase\app\fields\base\AddressFieldTrait;
+use CommerceGuys\Addressing\AddressFormat\AddressFormatRepository;
 use CommerceGuys\Addressing\Formatter\DefaultFormatter;
-use CommerceGuys\Addressing\Model\Address as CommerceGuysAddress;
-use CommerceGuys\Addressing\Repository\AddressFormatRepository;
-use CommerceGuys\Intl\Country\CountryRepository;
-use CommerceGuys\Addressing\Repository\SubdivisionRepository;
+use CommerceGuys\Addressing\Address as CommerceGuysAddress;
+use CommerceGuys\Addressing\Subdivision\SubdivisionRepository;
+use CommerceGuys\Addressing\Country\CountryRepository;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutbase\app\fields\helpers\AddressHelper;
 use yii\db\Schema;
 
+/**
+ * Class Address
+ *
+ * @package barrelstrength\sproutfields\fields
+ *
+ * @property string $contentColumnType
+ */
 class Address extends Field implements PreviewableFieldInterface
 {
     use AddressFieldTrait;
-    /**
-     * @var string
-     */
-    public $defaultCountry;
-
-    /**
-     * @var bool
-     */
-    public $hideCountryDropdown;
 
     /**
      * @var string|null
      */
     public $value;
-
-    /**
-     * @var AddressHelper $addressHelper
-     */
-    protected $addressHelper;
-
-    public function init()
-    {
-        $this->addressHelper = new AddressHelper();
-
-        parent::init();
-    }
 
     /**
      * @inheritdoc
@@ -67,8 +51,7 @@ class Address extends Field implements PreviewableFieldInterface
      */
     public function getTableAttributeHtml($value, ElementInterface $element): string
     {
-        if ($value['id'] === null)
-        {
+        if ($value['id'] === null) {
             return '';
         }
 

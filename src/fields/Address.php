@@ -51,7 +51,7 @@ class Address extends Field implements PreviewableFieldInterface
      */
     public function getTableAttributeHtml($value, ElementInterface $element): string
     {
-        if ($value['id'] === null) {
+        if (!$value) {
             return '';
         }
 
@@ -62,12 +62,12 @@ class Address extends Field implements PreviewableFieldInterface
 
         $address = new CommerceGuysAddress();
         $address = $address
-            ->setCountryCode($value->countryCode)
-            ->setAdministrativeArea($value->administrativeArea)
-            ->setLocality($value->locality)
-            ->setPostalCode($value->postalCode)
-            ->setAddressLine1($value->address1)
-            ->setAddressLine2($value->address2);
+            ->withCountryCode($value->countryCode)
+            ->withAdministrativeArea($value->administrativeArea)
+            ->withLocality($value->locality)
+            ->withPostalCode($value->postalCode)
+            ->withAddressLine1($value->address1)
+            ->withAddressLine2($value->address2);
 
         $html = $formatter->format($address);
 

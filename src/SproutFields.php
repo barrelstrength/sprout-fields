@@ -3,6 +3,7 @@
 namespace barrelstrength\sproutfields;
 
 use barrelstrength\sproutbase\app\import\services\Importers;
+use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutfields\fields\Address as AddressField;
 use barrelstrength\sproutfields\fields\Name as NameField;
@@ -21,7 +22,10 @@ use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Phone
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Predefined as PredefinedFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\RegularExpression as RegularExpressionFieldImporter;
 use Craft;
+use craft\base\Element;
 use craft\base\Plugin;
+use craft\events\ElementEvent;
+use craft\services\Elements;
 use yii\base\Event;
 use craft\events\RegisterComponentTypesEvent;
 use craft\services\Fields;
@@ -47,6 +51,24 @@ class SproutFields extends Plugin
         parent::init();
 
         SproutBaseHelper::registerModule();
+
+        // Process all of our Predefined Fields after an Element is saved
+        Event::on(Elements::class, Elements::EVENT_AFTER_SAVE_ELEMENT, function(ElementEvent $event) {
+            /** @var Element $element */
+            $element = $event->element;
+            $isNew = $event->isNew;
+
+            $fieldLayout = $element->getFieldLayout();
+
+            if ($fieldLayout) {
+                foreach ($fieldLayout->getFields() as $field) {
+                    if ($field instanceof PredefinedField) {
+                        /** @var PredefinedField $field */
+                        $field->processFieldValues($element, $isNew);
+                    }
+                }
+            }
+        });
 
         Event::on(Fields::class, Fields::EVENT_REGISTER_FIELD_TYPES, function(RegisterComponentTypesEvent $event) {
             $event->types[] = AddressField::class;

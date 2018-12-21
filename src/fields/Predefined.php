@@ -81,18 +81,29 @@ class Predefined extends Field implements PreviewableFieldInterface
             ]);
     }
 
-    /**
-     * @param ElementInterface $element
-     * @param bool             $isNew
-     *
-     * @return string|void
-     * @throws \Throwable
-     * @throws \Throwable
-     */
-    public function afterElementSave(ElementInterface $element, bool $isNew)
+    public function processFieldValues($element, $isNew)
     {
-        parent::afterElementSave($element, $isNew);
+        if ($isNew) {
+            // If this is a new Element, grab the Element from the database to ensure
+            // we have all IDs from other Elements like Matrix Blocks
+            $element = Craft::$app->elements->getElementById($element->id);
+        }
 
-        SproutBase::$app->utilities->processPredefinedField($this, $element);
+        try {
+            $value = Craft::$app->view->renderObjectTemplate($this->fieldFormat, $element);
+
+            $fieldColumnPrefix = $element->getFieldColumnPrefix();
+            $column = $fieldColumnPrefix.$this->handle;
+
+            Craft::$app->db->createCommand()->update($element->contentTable, [
+                $column => $value,
+            ], 'elementId=:elementId AND siteId=:siteId', [
+                ':elementId' => $element->id,
+                ':siteId' => $element->siteId
+            ])
+                ->execute();
+        } catch (\Exception $e) {
+            SproutBase::error($e->getMessage());
+        }
     }
 }

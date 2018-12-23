@@ -18,12 +18,20 @@ Sprout Fields adds several common field types to Craft CMS. Sprout Fields focuse
 
 ``` twig
 {# Address #}
+{{ entry.addressField.country }}
 {{ entry.addressField.countryCode }}
+{{ entry.addressField.countryThreeLetterCode }}
 {{ entry.addressField.administrativeArea }}
+{{ entry.addressField.administrativeAreaCode }}
 {{ entry.addressField.locality }}
+{{ entry.addressField.dependentLocality }}
+{{ entry.addressField.sortingCode }}
 {{ entry.addressField.postalCode }}
 {{ entry.addressField.address1 }}
 {{ entry.addressField.address2 }}
+
+{{ entry.addressField.currencyCode }}
+{{ entry.addressField.locale }}
 
 {# Email Field #}
 {{ entry.emailField }}

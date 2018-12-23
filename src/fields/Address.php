@@ -63,7 +63,7 @@ class Address extends Field implements PreviewableFieldInterface
         $address = new CommerceGuysAddress();
         $address = $address
             ->withCountryCode($value->countryCode)
-            ->withAdministrativeArea($value->administrativeArea)
+            ->withAdministrativeArea($value->administrativeAreaCode)
             ->withLocality($value->locality)
             ->withPostalCode($value->postalCode)
             ->withAddressLine1($value->address1)

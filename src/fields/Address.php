@@ -39,7 +39,7 @@ class Address extends Field implements PreviewableFieldInterface
     /**
      * @var AddressHelper $addressHelper
      */
-    protected $addressHelper;
+    public $addressHelper;
 
     public function init()
     {

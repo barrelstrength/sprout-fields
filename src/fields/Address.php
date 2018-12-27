@@ -31,6 +31,18 @@ class Address extends Field implements PreviewableFieldInterface
     public $value;
 
     /**
+     * @var AddressHelper $addressHelper
+     */
+    public $addressHelper;
+
+    public function init()
+    {
+        $this->addressHelper = new AddressHelper();
+
+        parent::init();
+    }
+
+    /**
      * @inheritdoc
      */
     public static function displayName(): string

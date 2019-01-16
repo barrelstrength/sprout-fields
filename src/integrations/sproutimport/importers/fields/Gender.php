@@ -12,7 +12,7 @@ class Gender extends FieldImporter
     /**
      * @return string
      */
-    public function getModelName()
+    public function getModelName(): string
     {
         return GenderField::class;
     }

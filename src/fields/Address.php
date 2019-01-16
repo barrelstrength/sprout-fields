@@ -3,6 +3,7 @@
 namespace barrelstrength\sproutfields\fields;
 
 use barrelstrength\sproutbase\app\fields\base\AddressFieldTrait;
+use barrelstrength\sproutbase\app\fields\helpers\AddressHelper;
 use CommerceGuys\Addressing\AddressFormat\AddressFormatRepository;
 use CommerceGuys\Addressing\Formatter\DefaultFormatter;
 use CommerceGuys\Addressing\Address as CommerceGuysAddress;
@@ -29,6 +30,13 @@ class Address extends Field implements PreviewableFieldInterface
      * @var string|null
      */
     public $value;
+
+    public function init()
+    {
+        $this->addressHelper = new AddressHelper();
+
+        parent::init();
+    }
 
     /**
      * @inheritdoc

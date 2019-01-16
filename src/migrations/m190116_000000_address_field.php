@@ -1,6 +1,6 @@
 <?php
 
-namespace barrelstrength\fields\migrations;
+namespace barrelstrength\sproutfields\migrations;
 
 use barrelstrength\sproutfields\fields\Address;
 use craft\db\Migration;
@@ -24,7 +24,7 @@ class m190116_000000_address_field extends Migration
             ->all();
 
         foreach ($fields as $field) {
-            $settings = json_decode(['settings'], true);
+            $settings = json_decode($field['settings'], true);
             $settings['showCountryDropdown'] = $settings['hideCountryDropdown'] ?? '';
             if (isset($settings['hideCountryDropdown'])){
                 unset($settings['hideCountryDropdown']);

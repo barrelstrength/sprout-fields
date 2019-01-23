@@ -1,5 +1,27 @@
 # Changelog
 
+## 3.2.0 - 2019-01-23
+
+## Added
+- Added highlight countries settings to Address Field
+- Added some default options to translate the Address Field country dropdown
+
+## Changed
+- Improved indication of input fields in Address Field modal [#57]
+- Updated Predefined Field to better handle Matrix fields and new Element values
+- Refactored Address Field and standardized conventions for use across Fields, Forms, and SEO use cases
+- Updated Address Field classes in HTML output
+- Updated Address Field model to include countryThreeLetterCode, currencyCode, and locale
+- Updated barrelstrength/sprout-base to require v4.0.4
+
+## Fixed
+- Fixed Address Field clear button as it did not clear the Address data for new Entries
+- Fixed Address Field error on when field was displayed as a column on the Elenent Index page
+- Fixed bug where Name field _toString method was not returning a string
+- Fixed output exceptions for Turkey, Åland Islands, and Jersey
+
+[#57]: https://github.com/barrelstrength/craft-sprout-fields/issues/57
+
 ## 3.1.21 - 2018-11-28
 
 ### Added

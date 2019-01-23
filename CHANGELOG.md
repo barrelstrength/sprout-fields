@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.2.1 - 2019-01-23
+
+## Changed
+- Updates version number to ensure Craft Plugin Store recognizes this release
+
 ## 3.2.0 - 2019-01-23
 
 ## Added

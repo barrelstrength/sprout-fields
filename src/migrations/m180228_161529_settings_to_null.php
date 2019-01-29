@@ -20,6 +20,8 @@ class m180228_161529_settings_to_null extends Migration
      */
     public function safeUp()
     {
+        if (!$this->db->columnExists('{{%plugins}}', 'settings')) return true;
+
         $plugin = (new Query())
             ->select(['id', 'settings'])
             ->from(['{{%plugins}}'])

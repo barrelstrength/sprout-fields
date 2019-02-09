@@ -70,7 +70,7 @@ class Url extends Field implements PreviewableFieldInterface
         $inputId = Craft::$app->getView()->formatInputId($name);
         $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
-        $fieldContext = SproutBase::$app->utilities->getFieldContext($this, $element);
+        $fieldContext = SproutBaseFields::$app->utilities->getFieldContext($this, $element);
 
         return Craft::$app->getView()->renderTemplate('sprout-base-fields/_components/fields/formfields/url/input', [
                 'namespaceInputId' => $namespaceInputId,
@@ -107,10 +107,10 @@ class Url extends Field implements PreviewableFieldInterface
     {
         $value = $element->getFieldValue($this->handle);
 
-        if (!SproutBase::$app->urlField->validate($value, $this)) {
+        if (!SproutBaseFields::$app->urlField->validate($value, $this)) {
             $element->addError(
                 $this->handle,
-                SproutBase::$app->urlField->getErrorMessage($this->name, $this)
+                SproutBaseFields::$app->urlField->getErrorMessage($this->name, $this)
             );
         }
     }

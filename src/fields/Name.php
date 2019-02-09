@@ -8,7 +8,7 @@ use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 
 use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutbase\app\fields\models\Name as NameModel;
+use barrelstrength\sproutbasefields\models\Name as NameModel;
 use craft\helpers\Json;
 
 /**

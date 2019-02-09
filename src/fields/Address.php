@@ -2,8 +2,8 @@
 
 namespace barrelstrength\sproutfields\fields;
 
-use barrelstrength\sproutbase\app\fields\base\AddressFieldTrait;
-use barrelstrength\sproutbase\app\fields\helpers\AddressHelper;
+use barrelstrength\sproutbasefields\base\AddressFieldTrait;
+use barrelstrength\sproutbasefields\helpers\AddressHelper;
 use CommerceGuys\Addressing\AddressFormat\AddressFormatRepository;
 use CommerceGuys\Addressing\Formatter\DefaultFormatter;
 use CommerceGuys\Addressing\Address as CommerceGuysAddress;

@@ -2,7 +2,7 @@
 
 namespace barrelstrength\sproutfields\integrations\sproutimport\importers\fields;
 
-use barrelstrength\sproutbase\app\import\base\FieldImporter;
+use barrelstrength\sproutbaseimport\base\FieldImporter;
 use barrelstrength\sproutfields\fields\Email as EmailField;
 
 class Email extends FieldImporter

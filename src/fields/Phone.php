@@ -13,7 +13,7 @@ use yii\db\Schema;
 use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbase\SproutBase;
 use CommerceGuys\Intl\Country\CountryRepository;
-use barrelstrength\sproutbase\app\fields\models\Phone as PhoneModel;
+use barrelstrength\sproutbasefields\models\Phone as PhoneModel;
 
 /**
  *
@@ -212,10 +212,10 @@ class Phone extends Field implements PreviewableFieldInterface
             );
         }
 
-        if ($value->country && $value->phone && !SproutBase::$app->phoneField->validate($value->phone, $value->country)) {
+        if ($value->country && $value->phone && !SproutBaseFields::$app->phoneField->validate($value->phone, $value->country)) {
             $element->addError(
                 $this->handle,
-                SproutBase::$app->phoneField->getErrorMessage($this, $value->country)
+                SproutBaseFields::$app->phoneField->getErrorMessage($this, $value->country)
             );
         }
     }

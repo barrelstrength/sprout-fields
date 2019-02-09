@@ -2,7 +2,8 @@
 
 namespace barrelstrength\sproutfields;
 
-use barrelstrength\sproutbase\app\import\services\Importers;
+use barrelstrength\sproutbasefields\SproutBaseFieldsHelper;
+use barrelstrength\sproutbaseimport\services\Importers;
 use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutfields\fields\Address as AddressField;
@@ -51,6 +52,7 @@ class SproutFields extends Plugin
         parent::init();
 
         SproutBaseHelper::registerModule();
+        SproutBaseFieldsHelper::registerModule();
 
         // Process all of our Predefined Fields after an Element is saved
         Event::on(Elements::class, Elements::EVENT_AFTER_SAVE_ELEMENT, function(ElementEvent $event) {

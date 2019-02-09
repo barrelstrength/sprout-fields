@@ -2,7 +2,7 @@
 
 namespace barrelstrength\sproutfields\integrations\sproutimport\importers\fields;
 
-use barrelstrength\sproutbase\app\import\base\FieldImporter;
+use barrelstrength\sproutbaseimport\base\FieldImporter;
 use barrelstrength\sproutfields\fields\Notes as NotesField;
 
 class Notes extends FieldImporter

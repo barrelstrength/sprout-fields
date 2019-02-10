@@ -206,7 +206,7 @@ class Phone extends Field implements PreviewableFieldInterface
         if ($this->required && !$value->phone) {
             $element->addError(
                 $this->handle,
-                Craft::t('sprout-base','{field} cannot be blank', [
+                Craft::tt('sprout-fields','{field} cannot be blank', [
                     'field' => $this->name
                 ])
             );

@@ -2,11 +2,13 @@
 
 namespace barrelstrength\sproutfields\migrations;
 
+use barrelstrength\sproutfields\SproutFields;
 use craft\db\Migration;
 use Craft;
 use craft\db\Query;
 use craft\helpers\FileHelper;
 use craft\helpers\Json;
+use craft\services\Plugins;
 
 /**
  * m180228_161529_settings_to_null migration.
@@ -20,13 +22,10 @@ class m180228_161529_settings_to_null extends Migration
      */
     public function safeUp()
     {
-        $plugin = (new Query())
-            ->select(['id', 'settings'])
-            ->from(['{{%plugins}}'])
-            ->where(['handle' => 'sprout-fields'])
-            ->one();
+        $plugin = SproutFields::getInstance();
 
-        $settings = Json::decode($plugin['settings'], true);
+        $settingsModel = $plugin->getSettings();
+        $settings = $settingsModel->getAttributes();
         $path = Craft::$app->getPath()->getConfigPath();
 
         foreach ($settings as $key => $css) {
@@ -39,7 +38,8 @@ class m180228_161529_settings_to_null extends Migration
             }
         }
 
-        $this->update('{{%plugins}}', ['settings' => null], ['id' => $plugin['id']], [], false);
+        $projectConfig = Craft::$app->getProjectConfig();
+        $projectConfig->set(Plugins::CONFIG_PLUGINS_KEY . '.' . $plugin->handle . '.settings', []);
 
         return true;
     }

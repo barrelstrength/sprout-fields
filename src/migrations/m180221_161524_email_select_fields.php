@@ -42,7 +42,7 @@ class m180221_161524_email_select_fields extends Migration
             $oldSettings = Json::decode($emailSelect['settings'], true);
             $band = 1;
             foreach ($oldSettings['options'] as $option) {
-                $defaults['row'.$band] = ['col1' => $option['label'], 'col2'=> $option['value']];
+                $defaults['row'.$band] = ['col1' => $option['label'], 'col2' => $option['value']];
                 $band++;
             }
             $newSettings['columns'] = $columns;

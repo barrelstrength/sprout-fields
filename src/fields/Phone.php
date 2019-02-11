@@ -122,7 +122,7 @@ class Phone extends Field implements PreviewableFieldInterface
     {
         $phoneInfo = [];
 
-        if (is_array($value)){
+        if (is_array($value)) {
             $namespace = $element->getFieldParamNamespace();
             $namespace = $namespace.'.'.$this->handle;
             $phoneInfo = Craft::$app->getRequest()->getBodyParam($namespace);
@@ -133,7 +133,7 @@ class Phone extends Field implements PreviewableFieldInterface
             $phoneInfo = Json::decode($value, true);
         }
 
-        if (!isset($phoneInfo['phone'], $phoneInfo['country'])){
+        if (!isset($phoneInfo['phone'], $phoneInfo['country'])) {
             return $value;
         }
 
@@ -169,7 +169,7 @@ class Phone extends Field implements PreviewableFieldInterface
             $countryRepository = new CountryRepository;
             $country = $countryRepository->get($countryCode);
 
-            if ($country){
+            if ($country) {
                 $countries[$countryCode] = $country->getName().' +'.$code;
             }
         }
@@ -206,7 +206,7 @@ class Phone extends Field implements PreviewableFieldInterface
         if ($this->required && !$value->phone) {
             $element->addError(
                 $this->handle,
-                Craft::tt('sprout-fields','{field} cannot be blank', [
+                Craft::tt('sprout-fields', '{field} cannot be blank', [
                     'field' => $this->name
                 ])
             );

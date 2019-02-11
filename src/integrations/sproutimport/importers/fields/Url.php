@@ -23,8 +23,7 @@ class Url extends FieldImporter
         $settings = $this->model->settings;
 
         // We cannot support regexes, as they may allow infinite characters such as (.*)
-        if (!empty($settings['customPatternToggle']) && !empty($settings['customPattern']))
-        {
+        if (!empty($settings['customPatternToggle']) && !empty($settings['customPattern'])) {
             return null;
         }
 

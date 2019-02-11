@@ -23,8 +23,7 @@ class EmailDropdown extends FieldImporter
     {
         $settings = $this->model->settings;
 
-        if (!empty($settings['options']))
-        {
+        if (!empty($settings['options'])) {
             return SproutBaseImport::$app->fieldImporter->getRandomOptionValue($settings['options']);
         }
 

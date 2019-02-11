@@ -20,7 +20,9 @@ class m180228_161529_settings_to_null extends Migration
      */
     public function safeUp()
     {
-        if (!$this->db->columnExists('{{%plugins}}', 'settings')) return true;
+        if (!$this->db->columnExists('{{%plugins}}', 'settings')) {
+            return true;
+        }
 
         $plugin = (new Query())
             ->select(['id', 'settings'])
@@ -36,8 +38,8 @@ class m180228_161529_settings_to_null extends Migration
             try {
                 $file = $path.DIRECTORY_SEPARATOR.'sproutnotes'.DIRECTORY_SEPARATOR.$key.'.css';
                 FileHelper::writeToFile($file, $css);
-            }catch (\Throwable $e) {
-                throw new \Exception(Craft::t('sprout-fields','Something went wrong while creating custom style: '.$e->getMessage()));
+            } catch (\Throwable $e) {
+                throw new \Exception(Craft::t('sprout-fields', 'Something went wrong while creating custom style: '.$e->getMessage()));
             }
         }
 

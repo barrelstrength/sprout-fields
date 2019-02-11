@@ -4,6 +4,7 @@ namespace barrelstrength\sproutfields\migrations;
 
 use craft\db\Migration;
 use barrelstrength\sproutbasefields\migrations\Install as SproutBaseFieldsInstall;
+
 /**
  * m180328_073816_create_address_table migration.
  */

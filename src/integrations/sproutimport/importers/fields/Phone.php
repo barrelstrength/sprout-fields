@@ -30,9 +30,9 @@ class Phone extends FieldImporter
         $national = $phoneUtil->format($exampleNumber, PhoneNumberFormat::NATIONAL);
 
         $phoneData = [
-          'country' => $country,
-          'phone' =>  $national,
-          'national'  => $national
+            'country' => $country,
+            'phone' => $national,
+            'national' => $national
         ];
 
         return $phoneData;

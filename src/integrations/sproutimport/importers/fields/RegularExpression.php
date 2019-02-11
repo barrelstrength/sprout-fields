@@ -22,8 +22,7 @@ class RegularExpression extends FieldImporter
     {
         $settings = $this->model->settings;
 
-        if ($settings['customPattern'] === null)
-        {
+        if ($settings['customPattern'] === null) {
             return null;
         }
 

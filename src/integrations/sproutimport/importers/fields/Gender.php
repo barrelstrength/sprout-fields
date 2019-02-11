@@ -26,11 +26,11 @@ class Gender extends FieldImporter
         $itsComplicated = Craft::t('sprout-fields', "It's Complicated");
 
         $options = [
-            [ 'value' => 'female' ],
-            [ 'value' => 'male' ],
-            [ 'value' => 'decline' ],
-            [ 'value' => $nonBinary ],
-            [ 'value' => $itsComplicated ]
+            ['value' => 'female'],
+            ['value' => 'male'],
+            ['value' => 'decline'],
+            ['value' => $nonBinary],
+            ['value' => $itsComplicated]
         ];
 
         return SproutBaseImport::$app->fieldImporter->getRandomOptionValue($options);

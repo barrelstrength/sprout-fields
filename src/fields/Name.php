@@ -106,9 +106,8 @@ class Name extends Field implements PreviewableFieldInterface
 
             $nameModel->setAttributes($value['address'], false);
 
-            if ($fullNameShort = $value['address']['fullNameShort'] ?? null)
-            {
-                $nameArray = explode(' ',trim($fullNameShort));
+            if ($fullNameShort = $value['address']['fullNameShort'] ?? null) {
+                $nameArray = explode(' ', trim($fullNameShort));
 
                 $nameModel->firstName = $nameArray[0] ?? $fullNameShort;
                 unset($nameArray[0]);

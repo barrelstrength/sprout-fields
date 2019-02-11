@@ -15,7 +15,7 @@ class m180221_161524_email_select_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         // Email Select to Table
         $columns['col1'] = [
@@ -42,7 +42,7 @@ class m180221_161524_email_select_fields extends Migration
             $oldSettings = Json::decode($emailSelect['settings'], true);
             $band = 1;
             foreach ($oldSettings['options'] as $option) {
-                $defaults['row'.$band] = ['col1' => $option['label'], 'col2'=> $option['value']];
+                $defaults['row'.$band] = ['col1' => $option['label'], 'col2' => $option['value']];
                 $band++;
             }
             $newSettings['columns'] = $columns;
@@ -59,7 +59,7 @@ class m180221_161524_email_select_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         echo "m180221_161524_email_select_fields cannot be reverted.\n";
         return false;

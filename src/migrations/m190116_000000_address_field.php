@@ -15,7 +15,7 @@ class m190116_000000_address_field extends Migration
     /**
      * @inheritdoc
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         $fields = (new Query())
             ->select(['id', 'handle', 'settings'])
@@ -24,9 +24,9 @@ class m190116_000000_address_field extends Migration
             ->all();
 
         foreach ($fields as $field) {
-            $settings = json_decode($field['settings'], true);
+            $settings = Json::decode($field['settings'], true);
             $settings['showCountryDropdown'] = $settings['hideCountryDropdown'] ?? '';
-            if (isset($settings['hideCountryDropdown'])){
+            if (isset($settings['hideCountryDropdown'])) {
                 unset($settings['hideCountryDropdown']);
             }
             $settingsAsJson = Json::encode($settings);
@@ -39,7 +39,7 @@ class m190116_000000_address_field extends Migration
     /**
      * @inheritdoc
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         echo "m190116_000000_address_field cannot be reverted.\n";
         return false;

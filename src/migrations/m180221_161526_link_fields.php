@@ -13,7 +13,7 @@ class m180221_161526_link_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         // Link to Url
         $this->update('{{%fields}}', [
@@ -28,7 +28,7 @@ class m180221_161526_link_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         echo "m180221_161526_link_fields cannot be reverted.\n";
         return false;

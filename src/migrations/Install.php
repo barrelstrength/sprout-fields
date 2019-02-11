@@ -3,14 +3,14 @@
 namespace barrelstrength\sproutfields\migrations;
 
 use craft\db\Migration;
-use barrelstrength\sproutbase\app\fields\migrations\Install as SproutBaseFieldsInstall;
+use barrelstrength\sproutbasefields\migrations\Install as SproutBaseFieldsInstall;
 
 class Install extends Migration
 {
     /**
      * @inheritdoc
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         $migration = new SproutBaseFieldsInstall();
 

@@ -3,7 +3,8 @@
 namespace barrelstrength\sproutfields\migrations;
 
 use craft\db\Migration;
-use barrelstrength\sproutbase\app\fields\migrations\Install as SproutBaseFieldsInstall;
+use barrelstrength\sproutbasefields\migrations\Install as SproutBaseFieldsInstall;
+
 /**
  * m180328_073816_create_address_table migration.
  */
@@ -12,19 +13,21 @@ class m180328_073816_create_address_table extends Migration
     /**
      * @inheritdoc
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         $migration = new SproutBaseFieldsInstall();
 
         ob_start();
         $migration->safeUp();
         ob_end_clean();
+
+        return true;
     }
 
     /**
      * @inheritdoc
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         echo "m180328_073816_create_address_table cannot be reverted.\n";
         return false;

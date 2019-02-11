@@ -15,11 +15,11 @@ class m180221_161529_invisible_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         // Invisible to TextField
         $invisibleFields = (new Query())
-            ->select(['id', 'handle','instructions', 'settings'])
+            ->select(['id', 'handle', 'instructions', 'settings'])
             ->from(['{{%fields}}'])
             ->where(['type' => 'SproutFields_Invisible', 'context' => 'global'])
             ->all();
@@ -36,7 +36,7 @@ class m180221_161529_invisible_fields extends Migration
             $settingsAsJson = Json::encode($newSettings);
             $settings = Json::decode($invisibleField['settings'], true);
             $instructions = $invisibleField['instructions'].' Invisible field pattern: '.$settings['value'] ?? '';
-            $this->update('{{%fields}}', ['type' => PlainText::class, 'settings' => $settingsAsJson, 'instructions'=>$instructions], ['id' => $invisibleField['id']], [], false);
+            $this->update('{{%fields}}', ['type' => PlainText::class, 'settings' => $settingsAsJson, 'instructions' => $instructions], ['id' => $invisibleField['id']], [], false);
         }
 
         return true;
@@ -45,7 +45,7 @@ class m180221_161529_invisible_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         echo "m180221_161529_invisible_fields cannot be reverted.\n";
         return false;

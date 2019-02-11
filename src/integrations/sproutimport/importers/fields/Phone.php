@@ -2,7 +2,7 @@
 
 namespace barrelstrength\sproutfields\integrations\sproutimport\importers\fields;
 
-use barrelstrength\sproutbase\app\import\base\FieldImporter;
+use barrelstrength\sproutbaseimport\base\FieldImporter;
 use barrelstrength\sproutfields\fields\Phone as PhoneField;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
@@ -20,7 +20,7 @@ class Phone extends FieldImporter
     /**
      * @return array
      */
-    public function getMockData()
+    public function getMockData(): array
     {
         $settings = $this->model->settings;
 
@@ -30,9 +30,9 @@ class Phone extends FieldImporter
         $national = $phoneUtil->format($exampleNumber, PhoneNumberFormat::NATIONAL);
 
         $phoneData = [
-          'country' => $country,
-          'phone' =>  $national,
-          'national'  => $national
+            'country' => $country,
+            'phone' => $national,
+            'national' => $national
         ];
 
         return $phoneData;

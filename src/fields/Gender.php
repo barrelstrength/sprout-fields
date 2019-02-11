@@ -6,8 +6,6 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 
-use barrelstrength\sproutfields\SproutFields;
-
 class Gender extends Field
 {
     /**
@@ -20,7 +18,7 @@ class Gender extends Field
      */
     public static function displayName(): string
     {
-        return SproutFields::t('Gender (Sprout Fields)');
+        return Craft::t('sprout-fields', 'Gender (Sprout Fields)');
     }
 
     /**
@@ -28,7 +26,7 @@ class Gender extends Field
      *
      * @return false
      */
-    public function defineContentAttribute()
+    public function defineContentAttribute(): bool
     {
         // field type doesn’t need its own column
         // in the content table, return false
@@ -65,7 +63,7 @@ class Gender extends Field
      *
      * @return array
      */
-    private function getGenderOptions($value)
+    private function getGenderOptions($value): array
     {
         $options = [
             [

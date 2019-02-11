@@ -2,7 +2,9 @@
 
 namespace barrelstrength\sproutfields\fields;
 
+use barrelstrength\sproutbasefields\SproutBaseFields;
 use Craft;
+use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
@@ -10,10 +12,8 @@ use craft\helpers\Json;
 use libphonenumber\PhoneNumberUtil;
 use yii\db\Schema;
 
-use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutbase\SproutBase;
 use CommerceGuys\Intl\Country\CountryRepository;
-use barrelstrength\sproutbase\app\fields\models\Phone as PhoneModel;
+use barrelstrength\sproutbasefields\models\Phone as PhoneModel;
 
 /**
  *
@@ -53,7 +53,7 @@ class Phone extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('Phone (Sprout Fields)');
+        return Craft::t('sprout-fields', 'Phone (Sprout Fields)');
     }
 
     /**
@@ -122,7 +122,7 @@ class Phone extends Field implements PreviewableFieldInterface
     {
         $phoneInfo = [];
 
-        if (is_array($value)){
+        if (is_array($value)) {
             $namespace = $element->getFieldParamNamespace();
             $namespace = $namespace.'.'.$this->handle;
             $phoneInfo = Craft::$app->getRequest()->getBodyParam($namespace);
@@ -133,7 +133,7 @@ class Phone extends Field implements PreviewableFieldInterface
             $phoneInfo = Json::decode($value, true);
         }
 
-        if (!isset($phoneInfo['phone'], $phoneInfo['country'])){
+        if (!isset($phoneInfo['phone'], $phoneInfo['country'])) {
             return $value;
         }
 
@@ -169,7 +169,7 @@ class Phone extends Field implements PreviewableFieldInterface
             $countryRepository = new CountryRepository;
             $country = $countryRepository->get($countryCode);
 
-            if ($country){
+            if ($country) {
                 $countries[$countryCode] = $country->getName().' +'.$code;
             }
         }
@@ -195,7 +195,7 @@ class Phone extends Field implements PreviewableFieldInterface
      * that were assumed based on the content attribute.
      *
      *
-     * @param ElementInterface $element
+     * @param Element|ElementInterface $element
      *
      * @return void
      */
@@ -206,16 +206,16 @@ class Phone extends Field implements PreviewableFieldInterface
         if ($this->required && !$value->phone) {
             $element->addError(
                 $this->handle,
-                Craft::t('sprout-base','{field} cannot be blank', [
+                Craft::t('sprout-fields', '{field} cannot be blank', [
                     'field' => $this->name
                 ])
             );
         }
 
-        if ($value->country && $value->phone && !SproutBase::$app->phoneField->validate($value->phone, $value->country)) {
+        if ($value->country && $value->phone && !SproutBaseFields::$app->phoneField->validate($value->phone, $value->country)) {
             $element->addError(
                 $this->handle,
-                SproutBase::$app->phoneField->getErrorMessage($this, $value->country)
+                SproutBaseFields::$app->phoneField->getErrorMessage($this, $value->country)
             );
         }
     }

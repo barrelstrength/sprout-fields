@@ -2,13 +2,12 @@
 
 namespace barrelstrength\sproutfields\fields;
 
+use barrelstrength\sproutbasefields\SproutBaseFields;
 use Craft;
+use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-
-use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutbase\SproutBase;
 
 /**
  *
@@ -39,7 +38,7 @@ class Url extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('URL (Sprout Fields)');
+        return Craft::t('sprout-fields', 'URL (Sprout Fields)');
     }
 
     /**
@@ -70,7 +69,7 @@ class Url extends Field implements PreviewableFieldInterface
         $inputId = Craft::$app->getView()->formatInputId($name);
         $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
 
-        $fieldContext = SproutBase::$app->utilities->getFieldContext($this, $element);
+        $fieldContext = SproutBaseFields::$app->utilities->getFieldContext($this, $element);
 
         return Craft::$app->getView()->renderTemplate('sprout-base-fields/_components/fields/formfields/url/input', [
                 'namespaceInputId' => $namespaceInputId,
@@ -99,7 +98,7 @@ class Url extends Field implements PreviewableFieldInterface
      * that were assumed based on the content attribute.
      *
      *
-     * @param ElementInterface $element
+     * @param Element|ElementInterface $element
      *
      * @return void
      */
@@ -107,10 +106,10 @@ class Url extends Field implements PreviewableFieldInterface
     {
         $value = $element->getFieldValue($this->handle);
 
-        if (!SproutBase::$app->urlField->validate($value, $this)) {
+        if (!SproutBaseFields::$app->urlField->validate($value, $this)) {
             $element->addError(
                 $this->handle,
-                SproutBase::$app->urlField->getErrorMessage($this->name, $this)
+                SproutBaseFields::$app->urlField->getErrorMessage($this->name, $this)
             );
         }
     }

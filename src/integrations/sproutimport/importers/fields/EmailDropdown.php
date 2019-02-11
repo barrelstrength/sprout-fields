@@ -2,8 +2,8 @@
 
 namespace barrelstrength\sproutfields\integrations\sproutimport\importers\fields;
 
-use barrelstrength\sproutbase\SproutBase;
-use barrelstrength\sproutbase\app\import\base\FieldImporter;
+use barrelstrength\sproutbaseimport\base\FieldImporter;
+use barrelstrength\sproutbaseimport\SproutBaseImport;
 use barrelstrength\sproutforms\fields\formfields\EmailDropdown as EmailDropdownField;
 
 class EmailDropdown extends FieldImporter
@@ -23,9 +23,8 @@ class EmailDropdown extends FieldImporter
     {
         $settings = $this->model->settings;
 
-        if (!empty($settings['options']))
-        {
-            return SproutBase::$app->fieldImporter->getRandomOptionValue($settings['options']);
+        if (!empty($settings['options'])) {
+            return SproutBaseImport::$app->fieldImporter->getRandomOptionValue($settings['options']);
         }
 
         return null;

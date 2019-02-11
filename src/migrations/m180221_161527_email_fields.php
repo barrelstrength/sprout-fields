@@ -13,7 +13,7 @@ class m180221_161527_email_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         // Email
         $this->update('{{%fields}}', [
@@ -28,7 +28,7 @@ class m180221_161527_email_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         echo "m180221_161527_email_fields cannot be reverted.\n";
         return false;

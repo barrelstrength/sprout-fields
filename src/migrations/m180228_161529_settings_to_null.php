@@ -20,7 +20,7 @@ class m180228_161529_settings_to_null extends Migration
      * @throws \Exception
      * @throws \yii\base\Exception
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         $plugin = SproutFields::getInstance();
 
@@ -33,8 +33,8 @@ class m180228_161529_settings_to_null extends Migration
             try {
                 $file = $path.DIRECTORY_SEPARATOR.'sproutnotes'.DIRECTORY_SEPARATOR.$key.'.css';
                 FileHelper::writeToFile($file, $css);
-            }catch (\Throwable $e) {
-                throw new \Exception(Craft::t('sprout-fields','Something went wrong while creating custom style: '.$e->getMessage()));
+            } catch (\Throwable $e) {
+                throw new Exception(Craft::t('sprout-fields', 'Something went wrong while creating custom style: '.$e->getMessage()));
             }
         }
 
@@ -47,7 +47,7 @@ class m180228_161529_settings_to_null extends Migration
     /**
      * @inheritdoc
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         echo "m180228_161529_settings_to_null cannot be reverted.\n";
         return false;

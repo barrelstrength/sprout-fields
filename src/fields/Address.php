@@ -2,8 +2,8 @@
 
 namespace barrelstrength\sproutfields\fields;
 
-use barrelstrength\sproutbase\app\fields\base\AddressFieldTrait;
-use barrelstrength\sproutbase\app\fields\helpers\AddressHelper;
+use barrelstrength\sproutbasefields\base\AddressFieldTrait;
+use barrelstrength\sproutbasefields\helpers\AddressHelper;
 use CommerceGuys\Addressing\AddressFormat\AddressFormatRepository;
 use CommerceGuys\Addressing\Formatter\DefaultFormatter;
 use CommerceGuys\Addressing\Address as CommerceGuysAddress;
@@ -12,7 +12,7 @@ use CommerceGuys\Addressing\Country\CountryRepository;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use barrelstrength\sproutfields\SproutFields;
+use Craft;
 use yii\db\Schema;
 
 /**
@@ -43,7 +43,7 @@ class Address extends Field implements PreviewableFieldInterface
      */
     public static function displayName(): string
     {
-        return SproutFields::t('Address (Sprout Fields)');
+        return Craft::t('sprout-fields', 'Address (Sprout Fields)');
     }
 
     /**

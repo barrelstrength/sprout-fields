@@ -2,8 +2,8 @@
 
 namespace barrelstrength\sproutfields\integrations\sproutimport\importers\fields;
 
-use barrelstrength\sproutbase\app\import\base\FieldImporter;
-use barrelstrength\sproutbase\SproutBase;
+use barrelstrength\sproutbaseimport\base\FieldImporter;
+use barrelstrength\sproutbaseimport\SproutBaseImport;
 use barrelstrength\sproutfields\fields\Gender as GenderField;
 use Craft;
 
@@ -26,13 +26,13 @@ class Gender extends FieldImporter
         $itsComplicated = Craft::t('sprout-fields', "It's Complicated");
 
         $options = [
-            [ 'value' => 'female' ],
-            [ 'value' => 'male' ],
-            [ 'value' => 'decline' ],
-            [ 'value' => $nonBinary ],
-            [ 'value' => $itsComplicated ]
+            ['value' => 'female'],
+            ['value' => 'male'],
+            ['value' => 'decline'],
+            ['value' => $nonBinary],
+            ['value' => $itsComplicated]
         ];
 
-        return SproutBase::$app->fieldImporter->getRandomOptionValue($options);
+        return SproutBaseImport::$app->fieldImporter->getRandomOptionValue($options);
     }
 }

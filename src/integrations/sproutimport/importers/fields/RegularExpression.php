@@ -2,7 +2,7 @@
 
 namespace barrelstrength\sproutfields\integrations\sproutimport\importers\fields;
 
-use barrelstrength\sproutbase\app\import\base\FieldImporter;
+use barrelstrength\sproutbaseimport\base\FieldImporter;
 use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
 
 class RegularExpression extends FieldImporter
@@ -22,8 +22,7 @@ class RegularExpression extends FieldImporter
     {
         $settings = $this->model->settings;
 
-        if ($settings['customPattern'] === null)
-        {
+        if ($settings['customPattern'] === null) {
             return null;
         }
 

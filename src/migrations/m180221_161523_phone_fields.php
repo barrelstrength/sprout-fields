@@ -15,7 +15,7 @@ class m180221_161523_phone_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         // Phone - Update settings and Type
         $newSettings = [
@@ -43,7 +43,7 @@ class m180221_161523_phone_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         echo "m180221_161523_phone_fields cannot be reverted.\n";
         return false;

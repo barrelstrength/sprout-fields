@@ -3,7 +3,7 @@
 namespace barrelstrength\sproutfields\integrations\sproutimport\importers\fields;
 
 use barrelstrength\sproutbaseimport\base\FieldImporter;
-use barrelstrength\sproutbase\SproutBase;
+use barrelstrength\sproutbaseimport\SproutBaseImport;
 use barrelstrength\sproutfields\fields\Gender as GenderField;
 use Craft;
 

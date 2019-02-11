@@ -7,7 +7,6 @@ use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 
-use barrelstrength\sproutfields\SproutFields;
 use barrelstrength\sproutbasefields\models\Name as NameModel;
 use craft\helpers\Json;
 
@@ -39,7 +38,7 @@ class Name extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('Name (Sprout Fields)');
+        return Craft::t('sprout-fields', 'Name (Sprout Fields)');
     }
 
     /**
@@ -121,21 +120,20 @@ class Name extends Field implements PreviewableFieldInterface
     }
 
     /**
-     *
      * Prepare the field value for the database.
      *
      * @todo - move to helper as we can use this on both Sprout Forms and Sprout Fields
      *
      * We store the Name as JSON in the content column.
      *
-     * @param                       $value
+     * @param NameModel             $value
      * @param ElementInterface|null $element
      *
      * @return array|bool|mixed|null|string
      */
     public function serializeValue($value, ElementInterface $element = null)
     {
-        if (empty($value)) {
+        if ($value === null) {
             return false;
         }
 

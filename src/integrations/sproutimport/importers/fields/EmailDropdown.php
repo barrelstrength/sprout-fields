@@ -2,8 +2,8 @@
 
 namespace barrelstrength\sproutfields\integrations\sproutimport\importers\fields;
 
-use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbaseimport\base\FieldImporter;
+use barrelstrength\sproutbaseimport\SproutBaseImport;
 use barrelstrength\sproutforms\fields\formfields\EmailDropdown as EmailDropdownField;
 
 class EmailDropdown extends FieldImporter

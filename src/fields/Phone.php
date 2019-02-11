@@ -2,7 +2,9 @@
 
 namespace barrelstrength\sproutfields\fields;
 
+use barrelstrength\sproutbasefields\SproutBaseFields;
 use Craft;
+use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
@@ -10,8 +12,6 @@ use craft\helpers\Json;
 use libphonenumber\PhoneNumberUtil;
 use yii\db\Schema;
 
-use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutbase\SproutBase;
 use CommerceGuys\Intl\Country\CountryRepository;
 use barrelstrength\sproutbasefields\models\Phone as PhoneModel;
 
@@ -53,7 +53,7 @@ class Phone extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('Phone (Sprout Fields)');
+        return Craft::t('sprout-fields', 'Phone (Sprout Fields)');
     }
 
     /**
@@ -195,7 +195,7 @@ class Phone extends Field implements PreviewableFieldInterface
      * that were assumed based on the content attribute.
      *
      *
-     * @param ElementInterface $element
+     * @param Element|ElementInterface $element
      *
      * @return void
      */
@@ -206,7 +206,7 @@ class Phone extends Field implements PreviewableFieldInterface
         if ($this->required && !$value->phone) {
             $element->addError(
                 $this->handle,
-                Craft::tt('sprout-fields', '{field} cannot be blank', [
+                Craft::t('sprout-fields', '{field} cannot be blank', [
                     'field' => $this->name
                 ])
             );

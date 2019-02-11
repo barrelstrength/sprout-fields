@@ -7,7 +7,6 @@ use craft\base\ElementInterface;
 use craft\base\Field;
 use barrelstrength\sproutbasefields\web\assets\quill\QuillAsset;
 
-use barrelstrength\sproutfields\SproutFields;
 use craft\helpers\FileHelper;
 
 /**
@@ -40,7 +39,7 @@ class Notes extends Field
 
     public static function displayName(): string
     {
-        return SproutFields::t('Notes (Sprout Fields)');
+        return Craft::t('sprout-fields', 'Notes (Sprout Fields)');
     }
 
     /**
@@ -173,7 +172,7 @@ class Notes extends Field
         return $options;
     }
 
-    private function getOptions()
+    private function getOptions(): array
     {
         $options = [
             'output' => [

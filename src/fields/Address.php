@@ -12,7 +12,7 @@ use CommerceGuys\Addressing\Country\CountryRepository;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use barrelstrength\sproutfields\SproutFields;
+use Craft;
 use yii\db\Schema;
 
 /**
@@ -43,7 +43,7 @@ class Address extends Field implements PreviewableFieldInterface
      */
     public static function displayName(): string
     {
-        return SproutFields::t('Address (Sprout Fields)');
+        return Craft::t('sprout-fields', 'Address (Sprout Fields)');
     }
 
     /**

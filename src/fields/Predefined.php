@@ -3,8 +3,8 @@
 namespace barrelstrength\sproutfields\fields;
 
 use barrelstrength\sproutbase\SproutBase;
-use barrelstrength\sproutfields\SproutFields;
 use Craft;
+use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
@@ -37,7 +37,7 @@ class Predefined extends Field implements PreviewableFieldInterface
      */
     public static function displayName(): string
     {
-        return SproutFields::t('Predefined (Sprout Fields)');
+        return Craft::t('sprout-fields', 'Predefined (Sprout Fields)');
     }
 
     /**
@@ -81,6 +81,12 @@ class Predefined extends Field implements PreviewableFieldInterface
             ]);
     }
 
+    /**
+     * @param Element $element
+     * @param bool $isNew
+     *
+     * @throws \Throwable
+     */
     public function processFieldValues($element, $isNew)
     {
         if ($isNew) {

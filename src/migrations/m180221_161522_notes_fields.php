@@ -15,7 +15,7 @@ class m180221_161522_notes_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         // Notes - Update style to empty and Type
         $notesFields = (new Query())
@@ -40,7 +40,7 @@ class m180221_161522_notes_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         echo "m180221_161522_notes_fields cannot be reverted.\n";
         return false;

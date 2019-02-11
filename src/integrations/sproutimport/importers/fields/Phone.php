@@ -20,7 +20,7 @@ class Phone extends FieldImporter
     /**
      * @return array
      */
-    public function getMockData()
+    public function getMockData(): array
     {
         $settings = $this->model->settings;
 

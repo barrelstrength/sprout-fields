@@ -4,7 +4,6 @@ namespace barrelstrength\sproutfields;
 
 use barrelstrength\sproutbasefields\SproutBaseFieldsHelper;
 use barrelstrength\sproutbaseimport\services\Importers;
-use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutfields\fields\Address as AddressField;
 use barrelstrength\sproutfields\fields\Name as NameField;
@@ -99,24 +98,6 @@ class SproutFields extends Plugin
                 $event->types[] = RegularExpressionFieldImporter::class;
             }
         });
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setSettings(array $settings)
-    {
-    }
-
-    /**
-     * @param string $message
-     * @param array  $params
-     *
-     * @return string
-     */
-    public static function t($message, array $params = [])
-    {
-        return Craft::t('sprout-fields', $message, $params);
     }
 }
 

@@ -15,7 +15,7 @@ class m180221_161528_hidden_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         // Hidden to TextField
         $hiddenFields = (new Query())
@@ -45,7 +45,7 @@ class m180221_161528_hidden_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         echo "m180221_161528_hidden_fields cannot be reverted.\n";
         return false;

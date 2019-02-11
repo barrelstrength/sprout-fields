@@ -15,7 +15,7 @@ class m180221_161529_invisible_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         // Invisible to TextField
         $invisibleFields = (new Query())
@@ -45,7 +45,7 @@ class m180221_161529_invisible_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         echo "m180221_161529_invisible_fields cannot be reverted.\n";
         return false;

@@ -2,13 +2,12 @@
 
 namespace barrelstrength\sproutfields\fields;
 
+use barrelstrength\sproutbasefields\SproutBaseFields;
 use Craft;
+use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-
-use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutbase\SproutBase;
 
 /**
  *
@@ -39,7 +38,7 @@ class Url extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('URL (Sprout Fields)');
+        return Craft::t('sprout-fields', 'URL (Sprout Fields)');
     }
 
     /**
@@ -99,7 +98,7 @@ class Url extends Field implements PreviewableFieldInterface
      * that were assumed based on the content attribute.
      *
      *
-     * @param ElementInterface $element
+     * @param Element|ElementInterface $element
      *
      * @return void
      */

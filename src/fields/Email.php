@@ -2,13 +2,12 @@
 
 namespace barrelstrength\sproutfields\fields;
 
+use barrelstrength\sproutbasefields\SproutBaseFields;
 use Craft;
+use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-
-use barrelstrength\sproutfields\SproutFields;
-use barrelstrength\sproutbase\SproutBase;
 
 /**
  *
@@ -44,7 +43,7 @@ class Email extends Field implements PreviewableFieldInterface
 
     public static function displayName(): string
     {
-        return SproutFields::t('Email (Sprout Fields)');
+        return Craft::t('sprout-fields', 'Email (Sprout Fields)');
     }
 
     /**
@@ -62,8 +61,10 @@ class Email extends Field implements PreviewableFieldInterface
     }
 
     /**
-     * @inheritdoc
+     * @param                       $value
+     * @param Element|ElementInterface|null $element
      *
+     * @return string
      * @throws \Twig_Error_Loader
      * @throws \yii\base\Exception
      */
@@ -106,7 +107,7 @@ class Email extends Field implements PreviewableFieldInterface
      * that were assumed based on the content attribute.
      *
      *
-     * @param ElementInterface $element
+     * @param Element|ElementInterface $element
      *
      * @return void
      */
@@ -128,7 +129,7 @@ class Email extends Field implements PreviewableFieldInterface
 
         if ($uniqueEmail && !SproutBaseFields::$app->emailField->validateUniqueEmailAddress($value, $element, $this)) {
             $element->addError($this->handle,
-                SproutFields::t($this->name.' must be a unique email.')
+                Craft::t('sprout-fields', $this->name.' must be a unique email.')
             );
         }
     }

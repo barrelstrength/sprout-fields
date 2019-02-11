@@ -13,7 +13,7 @@ class m180221_161521_update_type extends Migration
     /**
      * @inheritdoc
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         // SproutFields_Link changed to Url on Craft3
         $fields = [
@@ -49,7 +49,7 @@ class m180221_161521_update_type extends Migration
      *
      * @return array
      */
-    private function getIdsByType($type)
+    private function getIdsByType($type): array
     {
         return (new Query())
             ->select(['id'])
@@ -62,7 +62,7 @@ class m180221_161521_update_type extends Migration
     /**
      * @inheritdoc
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         echo "m180221_161521_update_type cannot be reverted.\n";
         return false;

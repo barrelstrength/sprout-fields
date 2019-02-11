@@ -15,7 +15,7 @@ class m180221_161524_email_select_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         // Email Select to Table
         $columns['col1'] = [
@@ -59,7 +59,7 @@ class m180221_161524_email_select_fields extends Migration
     /**
      * @inheritdoc
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         echo "m180221_161524_email_select_fields cannot be reverted.\n";
         return false;

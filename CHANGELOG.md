@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.2.2 - 2019-02-13
+
+### Added
+- Added Craft 3.1 support
+		?? (does this commit fix those open C2->C3 migration issues right now?)
+	
+### Changed
+- Improved translation support
+- Updated barrelstrength/sprout-base requirement to v4.0.6
+- Added barrelstrength/sprout-base-fields requirement v1.0.0
+
+### Fixed
+- Fixed bug where `settings` column was not found when migrating from Craft 3.0 to 3.1 
+
 ## 3.2.1 - 2019-01-23
 
 ## Changed

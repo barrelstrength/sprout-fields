@@ -4,8 +4,7 @@
 
 ### Added
 - Added Craft 3.1 support
-		?? (does this commit fix those open C2->C3 migration issues right now?)
-	
+
 ### Changed
 - Improved translation support
 - Updated barrelstrength/sprout-base requirement to v4.0.6

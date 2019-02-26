@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.2.4 - 2019-02-26
+
+### Changed
+- Updated craftcms/cms requirement to v3.1.15
+- Added barrelstrength/sprout-base-fields requirement v1.0.1
+
+### Fixed 
+- Fixed Address Field settings that blocked field from being saved in Postgres and Project Config ([#77], [#81])
+- Fixed a console error occurring due to line break in string literal ([#1][#1sproutbasefields])
+
+[#77]: https://github.com/barrelstrength/craft-sprout-fields/issues/77
+[#81]: https://github.com/barrelstrength/craft-sprout-fields/issues/81
+[#1sproutbasefields]: https://github.com/barrelstrength/craft-sprout-base-fields/pull/1
+
 ## 3.2.3 - 2019-02-14
 
 ### Fixed

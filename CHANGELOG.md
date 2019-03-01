@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.2.5 - 2019-03-01
+
+### Changed
+- Updated barrelstrength/sprout-base-fields requirement v1.0.2
+
+### Fixed
+- Fixed invalid path alias error when running console commands ([#83])
+
+[#83]: https://github.com/barrelstrength/craft-sprout-fields/issues/83
+
 ## 3.2.4 - 2019-02-26
 
 ### Changed

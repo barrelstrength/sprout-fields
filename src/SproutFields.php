@@ -46,6 +46,21 @@ class SproutFields extends Plugin
      */
     public $minVersionRequired = '2.1.3';
 
+    /**
+     * @inheritdoc
+     */
+    public function setSettings(array $settings)
+    {
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSettings()
+    {
+        return null;
+    }
+
     public function init()
     {
         parent::init();

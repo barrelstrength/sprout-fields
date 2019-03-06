@@ -34,7 +34,7 @@ class m180228_161529_settings_to_null extends Migration
                     $file = $path.DIRECTORY_SEPARATOR.'sproutnotes'.DIRECTORY_SEPARATOR.$key.'.css';
                     FileHelper::writeToFile($file, $css);
                 } catch (\Throwable $e) {
-                    Craft::error('Something went wrong while creating custom style: '.$e->getMessage(), __METHOD__);
+                    Craft::error('Something went wrong while creating a custom style config file for the Notes field: '.$e->getMessage(), __METHOD__);
                 }
             }
         }

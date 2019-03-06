@@ -48,6 +48,7 @@ class SproutFields extends Plugin
 
     /**
      * @inheritdoc
+     * This empty method is required to avoid an error related to the Project Config when migrating from Craft 2 to Craft 3
      */
     public function setSettings(array $settings)
     {

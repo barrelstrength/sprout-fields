@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.2.6 - 2019-03-06
+
+### Fixed
+- Fixed error related to the Project Config when migrating from Craft 2 to Craft 3 ([#84])
+
+[#84]: https://github.com/barrelstrength/craft-sprout-fields/issues/84
+
 ## 3.2.5 - 2019-03-01
 
 ### Changed

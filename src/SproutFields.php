@@ -46,6 +46,22 @@ class SproutFields extends Plugin
      */
     public $minVersionRequired = '2.1.3';
 
+    /**
+     * @inheritdoc
+     * This empty method is required to avoid an error related to the Project Config when migrating from Craft 2 to Craft 3
+     */
+    public function setSettings(array $settings)
+    {
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSettings()
+    {
+        return null;
+    }
+
     public function init()
     {
         parent::init();

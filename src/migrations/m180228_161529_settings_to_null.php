@@ -22,24 +22,24 @@ class m180228_161529_settings_to_null extends Migration
      */
     public function safeUp(): bool
     {
-        $plugin = SproutFields::getInstance();
-
-        $settingsModel = $plugin->getSettings();
-        $settings = $settingsModel->getAttributes();
+        $pluginHandle = 'sprout-fields';
+        $projectConfig = Craft::$app->getProjectConfig();
+        $settings = $projectConfig->get(Plugins::CONFIG_PLUGINS_KEY . '.' . $pluginHandle . '.settings');
         $path = Craft::$app->getPath()->getConfigPath();
 
-        foreach ($settings as $key => $css) {
-            // Save code to file
-            try {
-                $file = $path.DIRECTORY_SEPARATOR.'sproutnotes'.DIRECTORY_SEPARATOR.$key.'.css';
-                FileHelper::writeToFile($file, $css);
-            } catch (\Throwable $e) {
-                throw new Exception(Craft::t('sprout-fields', 'Something went wrong while creating custom style: '.$e->getMessage()));
+        if (is_array($settings)){
+            foreach ($settings as $key => $css) {
+                // Save code to file
+                try {
+                    $file = $path.DIRECTORY_SEPARATOR.'sproutnotes'.DIRECTORY_SEPARATOR.$key.'.css';
+                    FileHelper::writeToFile($file, $css);
+                } catch (\Throwable $e) {
+                    Craft::error('Something went wrong while creating a custom style config file for the Notes field: '.$e->getMessage(), __METHOD__);
+                }
             }
         }
 
-        $projectConfig = Craft::$app->getProjectConfig();
-        $projectConfig->set(Plugins::CONFIG_PLUGINS_KEY . '.' . $plugin->handle . '.settings', []);
+        $projectConfig->set(Plugins::CONFIG_PLUGINS_KEY . '.' . $pluginHandle . '.settings', null);
 
         return true;
     }

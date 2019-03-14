@@ -7,7 +7,7 @@
 - Updated barrelstrength/sprout-base-fields requirement v1.0.3
 
 ### Fixed
--Fixed bug where Administrative Area Input was not populated correctly ([#85])
+- Fixed bug where Administrative Area Input was not populated correctly ([#85])
 
 [#85]: https://github.com/barrelstrength/craft-sprout-fields/issues/85
 

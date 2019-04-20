@@ -1,6 +1,18 @@
 # Changelog
 
+## 3.2.9 - 2019-04-20
+
+### Changed
+- Updated barrelstrength/sprout-base-fields requirement v1.0.4
+- Updated barrelstrength/sprout-base requirement v5.0.0
+
+### Fixed
+- Fixed Phone field bug in migration from Craft 2 to Craft 3 ([#86])
+
+[#86]: https://github.com/barrelstrength/craft-sprout-fields/issues/86
+
 ## 3.2.8 - 2019-03-13
+
 > {warning} This is a critical release. Please update to the latest to ensure your Address Field Administrative Area code data is being saved correctly.
 
 ### Changed

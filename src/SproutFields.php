@@ -29,6 +29,9 @@ use craft\services\Elements;
 use yii\base\Event;
 use craft\events\RegisterComponentTypesEvent;
 use craft\services\Fields;
+use craft\feedme\events\RegisterFeedMeFieldsEvent;
+use craft\feedme\services\Fields as FeedMeFields;
+use barrelstrength\sproutfields\integrations\feedme\Phone;
 
 /**
  *
@@ -113,6 +116,14 @@ class SproutFields extends Plugin
                 $event->types[] = PredefinedFieldImporter::class;
                 $event->types[] = RegularExpressionFieldImporter::class;
             }
+        });
+
+        $feedMeFields = \craft\feedme\Plugin::$plugin->fields->getRegisteredFields();
+
+
+        Event::on(FeedMeFields::class, FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS, function(RegisterFeedMeFieldsEvent $e) {
+
+            $e->fields[] = Phone::class;
         });
     }
 }

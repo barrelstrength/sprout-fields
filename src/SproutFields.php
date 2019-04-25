@@ -32,6 +32,7 @@ use craft\services\Fields;
 use craft\feedme\events\RegisterFeedMeFieldsEvent;
 use craft\feedme\services\Fields as FeedMeFields;
 use barrelstrength\sproutfields\integrations\feedme\Phone;
+use barrelstrength\sproutfields\integrations\feedme\Name;
 
 /**
  *
@@ -118,12 +119,9 @@ class SproutFields extends Plugin
             }
         });
 
-        $feedMeFields = \craft\feedme\Plugin::$plugin->fields->getRegisteredFields();
-
-
         Event::on(FeedMeFields::class, FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS, function(RegisterFeedMeFieldsEvent $e) {
-
             $e->fields[] = Phone::class;
+            $e->fields[] = Name::class;
         });
     }
 }

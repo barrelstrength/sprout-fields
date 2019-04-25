@@ -5,15 +5,14 @@ namespace barrelstrength\sproutfields\integrations\feedme;
 use craft\feedme\base\Field;
 use craft\feedme\base\FieldInterface;
 use craft\helpers\Json;
-use Cake\Utility\Hash;
 
-class Phone extends Field implements FieldInterface
+class Name extends Field implements FieldInterface
 {
     // Properties
     // =========================================================================
 
     public static $name = 'Phone';
-    public static $class = 'barrelstrength\sproutfields\fields\Phone';
+    public static $class = 'barrelstrength\sproutfields\fields\Name';
 
 
     // Templates
@@ -21,7 +20,7 @@ class Phone extends Field implements FieldInterface
 
     public function getMappingTemplate()
     {
-        return 'sprout-fields/feedme/phone';
+        return 'sprout-fields/feedme/name';
     }
 
 
@@ -32,16 +31,19 @@ class Phone extends Field implements FieldInterface
     {
         $feedData = $this->feedData;
 
-        $phone = [];
+        $parsedData = [];
 
-        if (isset($feedData['phone/country'])) {
-            $phone['country'] = $feedData['phone/country'];
+        $names = ['prefix', 'firstName', 'middleName', 'lastName', 'suffix'];
+
+        foreach ($names as $name) {
+
+            $key = 'name/' . $name;
+
+            if (isset($feedData[$key])) {
+                $parsedData[$name] = $feedData[$key];
+            }
         }
 
-        if (isset($feedData['phone/phone'])) {
-            $phone['phone'] = $feedData['phone/phone'];
-        }
-
-        return Json::encode($phone);
+        return Json::encode($parsedData);
     }
 }

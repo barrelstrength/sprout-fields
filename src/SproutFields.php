@@ -14,6 +14,8 @@ use barrelstrength\sproutfields\fields\Url as UrlField;
 use barrelstrength\sproutfields\fields\Notes as NotesField;
 use barrelstrength\sproutfields\fields\Predefined as PredefinedField;
 use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
+use barrelstrength\sproutfields\integrations\feedme\Notes;
+use barrelstrength\sproutfields\integrations\feedme\RegularExpression;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Email as EmailFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Gender as GenderFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Url as UrlFieldImporter;
@@ -122,6 +124,8 @@ class SproutFields extends Plugin
         Event::on(FeedMeFields::class, FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS, function(RegisterFeedMeFieldsEvent $e) {
             $e->fields[] = Phone::class;
             $e->fields[] = Name::class;
+            $e->fields[] = RegularExpression::class;
+            $e->fields[] = Notes::class;
         });
     }
 }

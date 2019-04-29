@@ -35,6 +35,7 @@ use craft\feedme\events\RegisterFeedMeFieldsEvent;
 use craft\feedme\services\Fields as FeedMeFields;
 use barrelstrength\sproutfields\integrations\feedme\Phone;
 use barrelstrength\sproutfields\integrations\feedme\Name;
+use barrelstrength\sproutfields\integrations\feedme\Address;
 
 /**
  *
@@ -126,6 +127,7 @@ class SproutFields extends Plugin
             $e->fields[] = Name::class;
             $e->fields[] = RegularExpression::class;
             $e->fields[] = Notes::class;
+            $e->fields[] = Address::class;
         });
     }
 }

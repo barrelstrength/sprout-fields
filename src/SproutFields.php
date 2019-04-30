@@ -16,6 +16,7 @@ use barrelstrength\sproutfields\fields\Predefined as PredefinedField;
 use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
 use barrelstrength\sproutfields\integrations\feedme\Notes;
 use barrelstrength\sproutfields\integrations\feedme\RegularExpression;
+use barrelstrength\sproutfields\integrations\feedme\SproutSeoMetaData;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Email as EmailFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Gender as GenderFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Url as UrlFieldImporter;
@@ -128,6 +129,12 @@ class SproutFields extends Plugin
             $e->fields[] = RegularExpression::class;
             $e->fields[] = Notes::class;
             $e->fields[] = Address::class;
+
+            $plugin = Craft::$app->getPlugins()->isPluginEnabled('sprout-seo');
+
+            if ($plugin) {
+                $e->fields[] = SproutSeoMetaData::class;
+            }
         });
     }
 }

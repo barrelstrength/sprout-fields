@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.3.0 - 2019-04-30
+
+### Changed
+- Updated icon
+
 ## 3.2.9 - 2019-04-20
 
 ### Changed

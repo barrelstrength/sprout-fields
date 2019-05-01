@@ -8,6 +8,9 @@ use craft\base\Field;
 use barrelstrength\sproutbasefields\web\assets\quill\QuillAsset;
 
 use craft\helpers\FileHelper;
+use Twig_Error_Loader;
+use yii\base\Exception;
+use yii\base\InvalidConfigException;
 
 /**
  *
@@ -53,9 +56,9 @@ class Notes extends Field
     /**
      * @inheritdoc
      *
-     * @throws \Twig_Error_Loader
-     * @throws \yii\base\Exception
-     * @throws \yii\base\InvalidConfigException
+     * @throws Twig_Error_Loader
+     * @throws Exception
+     * @throws InvalidConfigException
      */
     public function getSettingsHtml()
     {
@@ -75,8 +78,8 @@ class Notes extends Field
     /**
      * @inheritdoc
      *
-     * @throws \Twig_Error_Loader
-     * @throws \yii\base\Exception
+     * @throws Twig_Error_Loader
+     * @throws Exception
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
@@ -124,7 +127,7 @@ class Notes extends Field
      * @param string $dir The directory name within the config/ folder to look for the config file
      *
      * @return bool|string
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     private function _getConfig(string $dir = 'sproutnotes')
     {
@@ -147,7 +150,7 @@ class Notes extends Field
      * @param string $dir The directory name within the config/ folder to look for config files
      *
      * @return array
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     private function _getCustomStyleOptions(string $dir = 'sproutnotes'): array
     {

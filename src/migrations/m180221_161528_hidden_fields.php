@@ -34,7 +34,7 @@ class m180221_161528_hidden_fields extends Migration
 
         foreach ($hiddenFields as $hiddenField) {
             $settingsAsJson = Json::encode($newSettings);
-            $settings = Json::decode($hiddenField['settings'], true);
+            $settings = Json::decode($hiddenField['settings']);
             $instructions = $hiddenField['instructions'].' Hidden field pattern: '.$settings['value'] ?? '';
             $this->update('{{%fields}}', ['type' => PlainText::class, 'settings' => $settingsAsJson, 'instructions' => $instructions], ['id' => $hiddenField['id']], [], false);
         }

@@ -8,6 +8,9 @@ use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
+use Exception;
+use Throwable;
+use Twig_Error_Loader;
 use yii\db\Schema;
 
 /**
@@ -51,7 +54,7 @@ class Predefined extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      *
-     * @throws \Twig_Error_Loader
+     * @throws Twig_Error_Loader
      * @throws \yii\base\Exception
      */
     public function getSettingsHtml()
@@ -67,7 +70,7 @@ class Predefined extends Field implements PreviewableFieldInterface
      * @param ElementInterface|null $element
      *
      * @return string
-     * @throws \Twig_Error_Loader
+     * @throws Twig_Error_Loader
      * @throws \yii\base\Exception
      */
     public function getInputHtml($value, ElementInterface $element = null): string
@@ -83,9 +86,9 @@ class Predefined extends Field implements PreviewableFieldInterface
 
     /**
      * @param Element $element
-     * @param bool $isNew
+     * @param bool    $isNew
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function processFieldValues($element, $isNew)
     {
@@ -108,7 +111,7 @@ class Predefined extends Field implements PreviewableFieldInterface
                 ':siteId' => $element->siteId
             ])
                 ->execute();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             SproutBase::error($e->getMessage());
         }
     }

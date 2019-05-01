@@ -34,7 +34,7 @@ class m180221_161529_invisible_fields extends Migration
 
         foreach ($invisibleFields as $invisibleField) {
             $settingsAsJson = Json::encode($newSettings);
-            $settings = Json::decode($invisibleField['settings'], true);
+            $settings = Json::decode($invisibleField['settings']);
             $instructions = $invisibleField['instructions'].' Invisible field pattern: '.$settings['value'] ?? '';
             $this->update('{{%fields}}', ['type' => PlainText::class, 'settings' => $settingsAsJson, 'instructions' => $instructions], ['id' => $invisibleField['id']], [], false);
         }

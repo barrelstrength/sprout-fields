@@ -5,6 +5,8 @@ namespace barrelstrength\sproutfields\fields;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
+use Twig_Error_Loader;
+use yii\base\Exception;
 
 class Gender extends Field
 {
@@ -36,8 +38,8 @@ class Gender extends Field
     /**
      * @inheritdoc
      *
-     * @throws \Twig_Error_Loader
-     * @throws \yii\base\Exception
+     * @throws Twig_Error_Loader
+     * @throws Exception
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {

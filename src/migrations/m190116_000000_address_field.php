@@ -24,7 +24,7 @@ class m190116_000000_address_field extends Migration
             ->all();
 
         foreach ($fields as $field) {
-            $settings = Json::decode($field['settings'], true);
+            $settings = Json::decode($field['settings']);
             $settings['showCountryDropdown'] = $settings['hideCountryDropdown'] ?? '';
             if (isset($settings['hideCountryDropdown'])) {
                 unset($settings['hideCountryDropdown']);

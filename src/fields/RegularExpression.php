@@ -10,6 +10,9 @@ use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 
 use barrelstrength\sproutbasefields\web\assets\regularexpression\RegularExpressionFieldAsset;
+use Twig_Error_Loader;
+use yii\base\Exception;
+use yii\base\InvalidConfigException;
 
 /**
  *
@@ -44,8 +47,8 @@ class RegularExpression extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      *
-     * @throws \Twig_Error_Loader
-     * @throws \yii\base\Exception
+     * @throws Twig_Error_Loader
+     * @throws Exception
      */
     public function getSettingsHtml()
     {
@@ -60,9 +63,9 @@ class RegularExpression extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      *
-     * @throws \Twig_Error_Loader
-     * @throws \yii\base\Exception
-     * @throws \yii\base\InvalidConfigException
+     * @throws Twig_Error_Loader
+     * @throws Exception
+     * @throws InvalidConfigException
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {

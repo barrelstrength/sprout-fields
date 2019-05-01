@@ -70,7 +70,7 @@ class SproutFields extends Plugin
         SproutBaseFieldsHelper::registerModule();
 
         // Process all of our Predefined Fields after an Element is saved
-        Event::on(Elements::class, Elements::EVENT_AFTER_SAVE_ELEMENT, function(ElementEvent $event) {
+        Event::on(Elements::class, Elements::EVENT_AFTER_SAVE_ELEMENT, static function(ElementEvent $event) {
             /** @var Element $element */
             $element = $event->element;
             $isNew = $event->isNew;
@@ -87,7 +87,7 @@ class SproutFields extends Plugin
             }
         });
 
-        Event::on(Fields::class, Fields::EVENT_REGISTER_FIELD_TYPES, function(RegisterComponentTypesEvent $event) {
+        Event::on(Fields::class, Fields::EVENT_REGISTER_FIELD_TYPES, static function(RegisterComponentTypesEvent $event) {
             $event->types[] = AddressField::class;
             $event->types[] = EmailField::class;
             $event->types[] = GenderField::class;
@@ -99,7 +99,7 @@ class SproutFields extends Plugin
             $event->types[] = UrlField::class;
         });
 
-        Event::on(Importers::class, Importers::EVENT_REGISTER_IMPORTER_TYPES, function(RegisterComponentTypesEvent $event) {
+        Event::on(Importers::class, Importers::EVENT_REGISTER_IMPORTER_TYPES, static function(RegisterComponentTypesEvent $event) {
 
             $plugin = Craft::$app->getPlugins()->getPlugin('sprout-import');
 

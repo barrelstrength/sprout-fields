@@ -9,6 +9,8 @@ use craft\base\PreviewableFieldInterface;
 
 use barrelstrength\sproutbasefields\models\Name as NameModel;
 use craft\helpers\Json;
+use Twig_Error_Loader;
+use yii\base\Exception;
 
 /**
  *
@@ -44,8 +46,8 @@ class Name extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      *
-     * @throws \Twig_Error_Loader
-     * @throws \yii\base\Exception
+     * @throws Twig_Error_Loader
+     * @throws Exception
      */
     public function getSettingsHtml()
     {
@@ -59,8 +61,8 @@ class Name extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      *
-     * @throws \Twig_Error_Loader
-     * @throws \yii\base\Exception
+     * @throws Twig_Error_Loader
+     * @throws Exception
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
@@ -82,12 +84,12 @@ class Name extends Field implements PreviewableFieldInterface
     /**
      * Prepare our Name for use as an NameModel
      *
-     * @todo - move to helper as we can use this on both Sprout Forms and Sprout Fields
-     *
      * @param                       $value
      * @param ElementInterface|null $element
      *
      * @return NameModel|mixed
+     * @todo - move to helper as we can use this on both Sprout Forms and Sprout Fields
+     *
      */
     public function normalizeValue($value, ElementInterface $element = null)
     {
@@ -95,7 +97,7 @@ class Name extends Field implements PreviewableFieldInterface
 
         // String value when retrieved from db
         if (is_string($value)) {
-            $nameArray = Json::decode($value, true);
+            $nameArray = Json::decode($value);
             $nameModel->setAttributes($nameArray, false);
             return $nameModel;
         }
@@ -122,14 +124,14 @@ class Name extends Field implements PreviewableFieldInterface
     /**
      * Prepare the field value for the database.
      *
-     * @todo - move to helper as we can use this on both Sprout Forms and Sprout Fields
-     *
-     * We store the Name as JSON in the content column.
-     *
      * @param NameModel             $value
      * @param ElementInterface|null $element
      *
      * @return array|bool|mixed|null|string
+     * @todo - move to helper as we can use this on both Sprout Forms and Sprout Fields
+     *
+     * We store the Name as JSON in the content column.
+     *
      */
     public function serializeValue($value, ElementInterface $element = null)
     {

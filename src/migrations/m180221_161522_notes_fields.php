@@ -25,7 +25,7 @@ class m180221_161522_notes_fields extends Migration
             ->all();
 
         foreach ($notesFields as $noteField) {
-            $settings = Json::decode($noteField['settings'], true);
+            $settings = Json::decode($noteField['settings']);
             $settings['style'] = '';
             $settings['notes'] = $settings['instructions'] ?? '';
             unset($settings['instructions']);

@@ -8,8 +8,9 @@ use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use craft\helpers\Json;
 use libphonenumber\PhoneNumberUtil;
+use Twig_Error_Loader;
+use yii\base\Exception;
 use yii\db\Schema;
 
 use CommerceGuys\Intl\Country\CountryRepository;
@@ -67,8 +68,8 @@ class Phone extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      *
-     * @throws \Twig_Error_Loader
-     * @throws \yii\base\Exception
+     * @throws Twig_Error_Loader
+     * @throws Exception
      */
     public function getSettingsHtml()
     {
@@ -83,8 +84,8 @@ class Phone extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      *
-     * @throws \Twig_Error_Loader
-     * @throws \yii\base\Exception
+     * @throws Twig_Error_Loader
+     * @throws Exception
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
@@ -122,7 +123,7 @@ class Phone extends Field implements PreviewableFieldInterface
     {
         $phoneInfo = [];
 
-        if (is_array($value)) {
+        if (is_array($value) && $element) {
             $namespace = $element->getFieldParamNamespace();
             $namespace = $namespace.'.'.$this->handle;
             $phoneInfo = Craft::$app->getRequest()->getBodyParam($namespace);

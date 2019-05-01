@@ -42,6 +42,10 @@ class Phone extends Field implements FieldInterface
             $phone['phone'] = $feedData['phone/phone'];
         }
 
+        if (count($phone)  === 0 && !empty($this->fieldInfo['default'])) {
+            $phone = $this->fieldInfo['default'];
+        }
+
         return Json::encode($phone);
     }
 }

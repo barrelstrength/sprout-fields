@@ -37,8 +37,11 @@
 </tr>
 
 {% set nameLabel = "Country" %}
-{% set path = prefixPath %}
 
+{% set path = prefixPath %}
+{% set default = default ?? {
+    type: 'text',
+} %}
 {% embed 'feed-me/_includes/fields/_base' %}
     {% block additionalFieldSettings %}
         {% namespace 'fieldMapping[' ~ path | join('][') ~ ']' %}
@@ -49,11 +52,14 @@
     {% block fieldSettings %}
 
     {% endblock %}
+    {% block defaultSettings %}
+        <input type="text" name="default[country]" placeholder="US" value="{{ defaultValue.country ?? null }}">
+    {% endblock %}
 {% endembed %}
 
 {% set nameLabel = "Phone" %}
 {% set path = prefixPath %}
-
+{% set default = NULL %}
 {% embed 'feed-me/_includes/fields/_base' %}
     {% block additionalFieldSettings %}
         {% namespace 'fieldMapping[' ~ path | join('][') ~ ']' %}
@@ -63,6 +69,11 @@
 
     {% block fieldSettings %}
 
+    {% endblock %}
+
+    {% block defaultSettings %}
+        <input type="text" name="default[phone]" placeholder="754-3010"
+               value="{{ defaultValue.phone ?? null }}">
     {% endblock %}
 {% endembed %}
 

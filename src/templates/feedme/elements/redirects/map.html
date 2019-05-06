@@ -1,0 +1,40 @@
+{% import '_includes/forms' as forms %}
+{% import 'feed-me/_macros' as feedMeMacro %}
+
+{% set fields = [{
+    name: 'Old URL',
+    handle: 'oldUrl',
+    default: {
+        type: 'text',
+    }
+}, {
+    name: 'New URL',
+    handle: 'newUrl',
+    default: {
+        type: 'text'
+    }
+}, {
+    name: 'Method',
+    handle: 'method',
+    default: {
+        type: 'text'
+    }
+}] %}
+
+<h2>{{ 'Redirect Fields' | t('sprout-fields') }}</h2>
+
+<table class="feedme-mapping data fullwidth collapsible">
+    <thead>
+    <th>{{ 'Field' | t('feed-me') }}</th>
+    <th>{{ 'Feed Element' | t('feed-me') }}</th>
+    <th>{{ 'Default Value' | t('feed-me') }}</th>
+    </thead>
+    <tbody>
+    {% for field in fields %}
+    {% set template = field.type ?? 'default' %}
+    {% set variables = field | merge({ feed: feed, feedData: feedData, attribute: true }) %}
+
+    {% include 'feed-me/_includes/fields/' ~ template ignore missing with variables only %}
+    {% endfor %}
+    </tbody>
+</table>

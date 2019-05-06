@@ -37,6 +37,9 @@ use barrelstrength\sproutfields\integrations\feedme\Phone;
 use barrelstrength\sproutfields\integrations\feedme\Name;
 use barrelstrength\sproutfields\integrations\feedme\Address;
 
+use craft\feedme\events\RegisterFeedMeElementsEvent;
+use craft\feedme\services\Elements as ElementsService;
+
 /**
  *
  * @property array $settings
@@ -134,6 +137,12 @@ class SproutFields extends Plugin
                 $e->fields[] = SproutSeoMetaData::class;
             }
         });
+
+        Event::on(ElementsService::class, ElementsService::EVENT_REGISTER_FEED_ME_ELEMENTS, function(RegisterFeedMeElementsEvent $e) {;
+           $e->elements[] = \barrelstrength\sproutfields\integrations\feedme\elements\Redirect::class;
+        });
+
+        //$plugins = \craft\feedme\Plugin::$plugin->elements->getRegisteredElements();
     }
 }
 

@@ -1,25 +1,43 @@
 {% import '_includes/forms' as forms %}
 {% import 'feed-me/_macros' as feedMeMacro %}
 
-{% set fields = [{
+{% set fields = [
+{
     name: 'Old URL',
     handle: 'oldUrl',
     default: {
         type: 'text',
     }
-}, {
+},
+{
     name: 'New URL',
     handle: 'newUrl',
     default: {
         type: 'text'
     }
-}, {
+},
+{
     name: 'Method',
     handle: 'method',
     default: {
         type: 'text'
     }
-}] %}
+},
+{
+    name: 'Regex',
+    handle: 'regex',
+    default: {
+        type: 'text'
+    }
+},
+{
+    name: 'Count',
+    handle: 'count',
+    default: {
+        type: 'text'
+    }
+}
+] %}
 
 <h2>{{ 'Redirect Fields' | t('sprout-fields') }}</h2>
 
@@ -36,5 +54,6 @@
 
     {% include 'feed-me/_includes/fields/' ~ template ignore missing with variables only %}
     {% endfor %}
+    <input type="text" name="fieldUnique[newUrl]" value="1" />
     </tbody>
 </table>

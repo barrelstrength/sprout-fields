@@ -104,14 +104,20 @@ class Predefined extends Field implements PreviewableFieldInterface
             $fieldColumnPrefix = $element->getFieldColumnPrefix();
             $column = $fieldColumnPrefix.$this->handle;
 
-            Craft::$app->db->createCommand()->update($element->contentTable, [
-                $column => $value,
-            ], 'elementId=:elementId AND siteId=:siteId', [
-                ':elementId' => $element->id,
-                ':siteId' => $element->siteId
-            ])
+            Craft::$app->db->createCommand()
+                ->update(
+                    $element->contentTable,
+                    [$column => $value],
+                    ['and',
+                        ['elementId' => $element->id],
+                        ['siteId' => $element->siteId]
+                    ])
                 ->execute();
+
         } catch (Exception $e) {
+            Craft::$app->getSession()->setError(Craft::t('sprout-base-fields', 'Error processing Predefined Field: {name}.', [
+                'name' => $this->name
+            ]));
             SproutBase::error($e->getMessage());
         }
     }

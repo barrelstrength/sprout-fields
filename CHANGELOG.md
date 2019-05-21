@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.3.1 - 2019-05-21
+
+### Added 
+- Added Predefined Field setting to support Text and Date Data Types 
+
+### Changed
+- Updated barrelstrength/sprout-base-fields requirement v1.0.5
+
+### Fixed
+- Fixed bug where Name field could throw error on Entry edit page
+- Improved Postgres support
+
 ## 3.3.0 - 2019-04-30
 
 ### Changed

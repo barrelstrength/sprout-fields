@@ -8,8 +8,9 @@ use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use Twig_Error_Loader;
-use yii\base\Exception;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  *
@@ -51,8 +52,9 @@ class Email extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      *
-     * @throws Twig_Error_Loader
-     * @throws Exception
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function getSettingsHtml()
     {
@@ -67,8 +69,9 @@ class Email extends Field implements PreviewableFieldInterface
      * @param Element|ElementInterface|null $element
      *
      * @return string
-     * @throws Twig_Error_Loader
-     * @throws Exception
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {

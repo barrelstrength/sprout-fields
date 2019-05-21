@@ -8,11 +8,11 @@ use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use craft\db\Table;
-use craft\helpers\Db;
 use Exception;
 use Throwable;
-use Twig_Error_Loader;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 use yii\db\Schema;
 
 /**
@@ -61,8 +61,9 @@ class Predefined extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      *
-     * @throws Twig_Error_Loader
-     * @throws \yii\base\Exception
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function getSettingsHtml()
     {
@@ -89,8 +90,9 @@ class Predefined extends Field implements PreviewableFieldInterface
      * @param ElementInterface|null $element
      *
      * @return string
-     * @throws Twig_Error_Loader
-     * @throws \yii\base\Exception
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
@@ -127,12 +129,12 @@ class Predefined extends Field implements PreviewableFieldInterface
                 ->update(
                     $element->contentTable,
                     [$column => $value],
-                    ['and',
+                    [
+                        'and',
                         ['elementId' => $element->id],
                         ['siteId' => $element->siteId]
                     ])
                 ->execute();
-
         } catch (Exception $e) {
             Craft::$app->getSession()->setError(Craft::t('sprout-base-fields', 'Error processing Predefined Field: {name}.', [
                 'name' => $this->name

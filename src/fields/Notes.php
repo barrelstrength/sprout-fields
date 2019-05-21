@@ -8,7 +8,9 @@ use craft\base\Field;
 use barrelstrength\sproutbasefields\web\assets\quill\QuillAsset;
 
 use craft\helpers\FileHelper;
-use Twig_Error_Loader;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
 
@@ -56,9 +58,11 @@ class Notes extends Field
     /**
      * @inheritdoc
      *
-     * @throws Twig_Error_Loader
      * @throws Exception
      * @throws InvalidConfigException
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function getSettingsHtml()
     {
@@ -78,8 +82,15 @@ class Notes extends Field
     /**
      * @inheritdoc
      *
-     * @throws Twig_Error_Loader
+     * @param                       $value
+     * @param ElementInterface|null $element
+     *
+     * @return string
      * @throws Exception
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws \craft\errors\DeprecationException
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {

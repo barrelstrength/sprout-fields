@@ -8,6 +8,8 @@ use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
+use craft\db\Table;
+use craft\helpers\Db;
 use Exception;
 use Throwable;
 use Twig_Error_Loader;
@@ -36,6 +38,11 @@ class Predefined extends Field implements PreviewableFieldInterface
     public $outputTextarea;
 
     /**
+     * @var string
+     */
+    public $contentColumnType;
+
+    /**
      * @return string
      */
     public static function displayName(): string
@@ -48,7 +55,7 @@ class Predefined extends Field implements PreviewableFieldInterface
      */
     public function getContentColumnType(): string
     {
-        return Schema::TYPE_TEXT;
+        return $this->contentColumnType ?? Schema::TYPE_TEXT;
     }
 
     /**
@@ -59,9 +66,21 @@ class Predefined extends Field implements PreviewableFieldInterface
      */
     public function getSettingsHtml()
     {
+        $contentColumnOptions = [
+            [
+                'label' => 'Plain Text',
+                'value' => Schema::TYPE_TEXT
+            ],
+            [
+                'label' => 'Date',
+                'value' => Schema::TYPE_DATETIME
+            ]
+        ];
+
         return Craft::$app->getView()->renderTemplate('sprout-base-fields/_components/fields/formfields/predefined/settings',
             [
                 'field' => $this,
+                'contentColumnOptions' => $contentColumnOptions
             ]);
     }
 

@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.4.0 - 2019-05-24
+
+### Added 
+- Added dynamic rendering for the Predefined Field
+
+### Changed
+- Predefined Field Date data type has been moved to a separate Predefined Date Field
+- Updated barrelstrength/sprout-base-fields requirement v1.0.6
+
+### Fixed
+- Fixed bug in Predefined Date data type migration
+
 ## 3.3.1 - 2019-05-21
 
 ### Added 

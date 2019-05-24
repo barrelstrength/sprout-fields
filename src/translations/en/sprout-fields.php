@@ -43,5 +43,6 @@ return [
     'Email (Sprout Fields)' => 'Email (Sprout Fields)',
     'Last Name' => 'Last Name',
     'What the auto-generated field value should look like. You can include tags that output element properties, such as {myCustomField}.' => 'What the auto-generated field value should look like. You can include tags that output element properties, such as {myCustomField}.',
-    'Phone (Sprout Fields)' => 'Phone (Sprout Fields)'
+    'Phone (Sprout Fields)' => 'Phone (Sprout Fields)',
+    'Predefined Date (Sprout Fields)' => 'Predefined Date (Sprout Fields)'
 ];

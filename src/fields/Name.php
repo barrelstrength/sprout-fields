@@ -162,6 +162,7 @@ class Name extends Field implements PreviewableFieldInterface
         $html = '';
 
         if ($value) {
+            /** @var NameModel $value */
             $html = $value->getFullName();
         }
 

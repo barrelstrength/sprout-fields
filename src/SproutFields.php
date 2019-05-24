@@ -13,6 +13,7 @@ use barrelstrength\sproutfields\fields\Gender as GenderField;
 use barrelstrength\sproutfields\fields\Url as UrlField;
 use barrelstrength\sproutfields\fields\Notes as NotesField;
 use barrelstrength\sproutfields\fields\Predefined as PredefinedField;
+use barrelstrength\sproutfields\fields\PredefinedDate as PredefinedDateField;
 use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Email as EmailFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Gender as GenderFieldImporter;
@@ -79,7 +80,7 @@ class SproutFields extends Plugin
 
             if ($fieldLayout) {
                 foreach ($fieldLayout->getFields() as $field) {
-                    if ($field instanceof PredefinedField) {
+                    if ($field instanceof PredefinedField || $field instanceof PredefinedDateField) {
                         /** @var PredefinedField $field */
                         $field->processFieldValues($element, $isNew);
                     }
@@ -95,6 +96,7 @@ class SproutFields extends Plugin
             $event->types[] = NotesField::class;
             $event->types[] = PhoneField::class;
             $event->types[] = PredefinedField::class;
+            $event->types[] = PredefinedDateField::class;
             $event->types[] = RegularExpressionField::class;
             $event->types[] = UrlField::class;
         });

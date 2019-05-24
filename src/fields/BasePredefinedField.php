@@ -30,6 +30,20 @@ class BasePredefinedField extends Field implements PreviewableFieldInterface
     public $showField;
 
     /**
+     * @deprecated in v3.4.0. Remove at next $minVersionRequired update.
+     * Setting required so that Craft doesn't throw an error before it triggers
+     * the migration that removes this setting.
+     */
+    public $contentColumnType;
+
+    /**
+     * @deprecated in v3.4.0. Remove at next $minVersionRequired update.
+     * Setting required so that Craft doesn't throw an error before it triggers
+     * the migration that removes this setting.
+     */
+    public $outputTextarea;
+
+    /**
      * @param Element $element
      * @param bool    $isNew
      *

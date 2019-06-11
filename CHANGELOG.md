@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.4.1 - 2019-06-10
+
+### Changed
+- Updated barrelstrength/sprout-base-fields requirement v1.0.7
+
+### Fixed
+- Fixed JS error when using Notes Field ([#2][#2basefields])
+
+[#2basefields]: https://github.com/barrelstrength/craft-sprout-base-fields/issues/2
+
 ## 3.4.0 - 2019-05-24
 
 ### Added 

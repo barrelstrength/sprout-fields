@@ -21,7 +21,7 @@
     "email": "sprout@barrelstrengthdesign.com",
     "issues": "https://github.com/barrelstrength/sprout-fields/issues?state=open",
     "source": "https://github.com/barrelstrength/sprout-fields",
-    "docs": "https://sprout.barrelstrengthdesign.com/craft-plugins/fields/docs",
+    "docs": "https://sprout.barrelstrengthdesign.com/docs/fields",
     "rss": "https://github.com/barrelstrength/sprout-fields/commits/v2.atom"
   },
   "require": {
@@ -39,10 +39,7 @@
     "name": "Sprout Fields",
     "handle": "sprout-fields",
     "developer": "Barrel Strength",
-    "developerUrl": "https://barrelstrengthdesign.com",
-    "documentationUrl": "https://sprout.barrelstrengthdesign.com/craft-plugins/fields",
-    "changelogUrl": "https://raw.githubusercontent.com/BarrelStrength/sprout-fields/master/CHANGELOG.md",
-    "downloadUrl": "https://github.com/BarrelStrength/sprout-fields/archive/master.zip",
+    "documentationUrl": "https://sprout.barrelstrengthdesign.com/docs/fields",
     "class": "barrelstrength\\sproutfields\\SproutFields"
   }
 }

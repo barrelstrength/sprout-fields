@@ -1,86 +1,12 @@
 # Sprout Fields
 
-Sprout Fields adds several common field types to Craft CMS. Sprout Fields focuses on fields for an international community with a Craft-friendly user experience.  
+Sprout Fields adds several common field types to Craft CMS. Sprout Fields focuses on fields for an international community with a Craft-friendly user experience.
 
-- Address Field (International)
-- Email Field
-- Gender (Inclusive)
-- Name (International)
-- Notes
-- Phone Field (International)
-- Predefined
-- Regular Expression (Exclusive)
-- URL Field
-
-----
-
-## Front-end Usage
-
-``` twig
-{# Address #}
-{{ entry.addressField.country }}
-{{ entry.addressField.countryCode }}
-{{ entry.addressField.countryThreeLetterCode }}
-{{ entry.addressField.administrativeArea }}
-{{ entry.addressField.administrativeAreaCode }}
-{{ entry.addressField.locality }}
-{{ entry.addressField.dependentLocality }}
-{{ entry.addressField.sortingCode }}
-{{ entry.addressField.postalCode }}
-{{ entry.addressField.address1 }}
-{{ entry.addressField.address2 }}
-
-{{ entry.addressField.currencyCode }}
-{{ entry.addressField.locale }}
-
-{# Email Field #}
-{{ entry.emailField }}
-
-{# Gender #}
-{{ entry.genderField }}
-
-{# Name #}
-{{ entry.nameField.getFriendlyName() }}
-{{ entry.nameField.getFullName() }}
-{{ entry.nameField.getFullNameExtended() }}
-
-{{ entry.nameField.prefix }}
-{{ entry.nameField.firstName }}
-{{ entry.nameField.middleName }}
-{{ entry.nameField.lastName }}
-{{ entry.nameField.suffix }}
-
-{# Phone #}
-{{ entry.phoneField.international }}
-{{ entry.phoneField.national }}
-{{ entry.phoneField.E164 }}
-{{ entry.phoneField.RFC3966 }}
-
-{{ entry.phoneField.country }}
-{{ entry.phoneField.phone }}
-{{ entry.phoneField.code }}
-
-{# Predefined Field #}
-{{ entry.predefinedField }}
-
-{# Regular Expression Field #}
-{{ entry.regularExpressionField }}
-
-{# URL Field #}
-{{ entry.urlField }}
-```
-
-----
-
-## Documentation
-
-See the [Sprout Website](https://sprout.barrelstrengthdesign.com/craft-plugins/fields/docs) for documentation, guides, and additional resources. 
-
-## Support
-
-- [Send a Support Ticket](https://sprout.barrelstrengthdesign.com/craft-plugins/request/support) via the Sprout Website.
-- [Create an issue](https://github.com/barrelstrength/craft-sprout-fields/issues) on Github.
+- [Documentation](https://sprout.barrelstrengthdesign.com/docs/fields/)
+- [Craft Plugin Store](https://plugins.craftcms.com/sprout-fields)
+- [Open an Issue](https://github.com/barrelstrength/craft-sprout-fields/issues)
+- [Contact Support](https://sprout.barrelstrengthdesign.com/docs/support/support.html)
 
 <a href="https://sprout.barrelstrengthdesign.com" target="_blank">
-  <img src="https://s3.amazonaws.com/sprout.barrelstrengthdesign.com-assets/content/plugins/sprout-icon.svg" width="72" align="right">
+  <img src="https://s3.amazonaws.com/sprout.barrelstrengthdesign.com-assets/content/plugins/sprout-icon.svg" width="72" height="72" align="right">
 </a>

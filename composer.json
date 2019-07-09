@@ -1,7 +1,7 @@
 {
   "name": "barrelstrength/sprout-fields",
   "description": "International, Craft-friendly field types.",
-  "version": "3.4.1",
+  "version": "3.4.2",
   "type": "craft-plugin",
   "keywords": [
     "craft",
@@ -25,9 +25,9 @@
     "rss": "https://github.com/barrelstrength/sprout-fields/commits/v2.atom"
   },
   "require": {
-    "craftcms/cms": "^3.1.15",
+    "craftcms/cms": "^3.2.0",
     "barrelstrength/sprout-base": "^5.0.0",
-    "barrelstrength/sprout-base-fields": "^1.0.7",
+    "barrelstrength/sprout-base-fields": "^1.0.8",
     "barrelstrength/sprout-base-import": "^1.0.4"
   },
   "autoload": {

@@ -1,45 +1,45 @@
 {
-  "name": "barrelstrength/sprout-fields",
-  "description": "International, Craft-friendly field types.",
-  "version": "3.4.2",
-  "type": "craft-plugin",
-  "keywords": [
-    "craft",
-    "cms",
-    "craftcms",
-    "fields",
-    "sprout fields"
-  ],
-  "license": "proprietary",
-  "authors": [
-    {
-      "name": "Barrel Strength",
-      "homepage": "https://www.barrelstrengthdesign.com/"
+    "name": "barrelstrength/sprout-fields",
+    "description": "International, Craft-friendly field types.",
+    "version": "3.4.3",
+    "type": "craft-plugin",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "fields",
+        "sprout fields"
+    ],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Barrel Strength",
+            "homepage": "https://www.barrelstrengthdesign.com/"
+        }
+    ],
+    "support": {
+        "email": "sprout@barrelstrengthdesign.com",
+        "issues": "https://github.com/barrelstrength/sprout-fields/issues?state=open",
+        "source": "https://github.com/barrelstrength/sprout-fields",
+        "docs": "https://sprout.barrelstrengthdesign.com/docs/fields",
+        "rss": "https://github.com/barrelstrength/sprout-fields/commits/v2.atom"
+    },
+    "require": {
+        "craftcms/cms": "^3.2.0",
+        "barrelstrength/sprout-base": "^5.0.0",
+        "barrelstrength/sprout-base-fields": "^1.0.9",
+        "barrelstrength/sprout-base-import": "^1.0.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "barrelstrength\\sproutfields\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Sprout Fields",
+        "handle": "sprout-fields",
+        "developer": "Barrel Strength",
+        "documentationUrl": "https://sprout.barrelstrengthdesign.com/docs/fields",
+        "class": "barrelstrength\\sproutfields\\SproutFields"
     }
-  ],
-  "support": {
-    "email": "sprout@barrelstrengthdesign.com",
-    "issues": "https://github.com/barrelstrength/sprout-fields/issues?state=open",
-    "source": "https://github.com/barrelstrength/sprout-fields",
-    "docs": "https://sprout.barrelstrengthdesign.com/docs/fields",
-    "rss": "https://github.com/barrelstrength/sprout-fields/commits/v2.atom"
-  },
-  "require": {
-    "craftcms/cms": "^3.2.0",
-    "barrelstrength/sprout-base": "^5.0.0",
-    "barrelstrength/sprout-base-fields": "^1.0.8",
-    "barrelstrength/sprout-base-import": "^1.0.4"
-  },
-  "autoload": {
-    "psr-4": {
-      "barrelstrength\\sproutfields\\": "src/"
-    }
-  },
-  "extra": {
-    "name": "Sprout Fields",
-    "handle": "sprout-fields",
-    "developer": "Barrel Strength",
-    "documentationUrl": "https://sprout.barrelstrengthdesign.com/docs/fields",
-    "class": "barrelstrength\\sproutfields\\SproutFields"
-  }
 }

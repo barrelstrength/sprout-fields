@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.4.3 - UNRELEASED
+
+### Changed
+- Updated barrelstrength/sprout-base-fields requirement v1.0.9
+- Updated barrelstrength/sprout-base-import requirement v1.0.5
+
 ## 3.4.2 - 2019-07-09
 
 ### Added

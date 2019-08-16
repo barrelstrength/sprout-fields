@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.4.4 - 2019-08-14
+
+### Changed
+- Updated barrelstrength/sprout-base-fields requirement v1.1.0
+
+### Fixed
+- Fixed bug where unique email field setting did not exclude soft deleted entries
+
 ## 3.4.3 - 2019-07-14
 
 ### Changed

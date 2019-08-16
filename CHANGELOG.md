@@ -6,7 +6,9 @@
 - Updated barrelstrength/sprout-base-fields requirement v1.1.0
 
 ### Fixed
-- Fixed bug where unique email field setting did not exclude soft deleted entries
+- Fixed bug where unique email field setting did not exclude soft deleted entries ([#328][#328sproutforms])
+
+[#328sproutforms]: https://github.com/barrelstrength/craft-sprout-forms/issues/328
 
 ## 3.4.3 - 2019-07-14
 

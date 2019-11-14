@@ -8,9 +8,13 @@ use CommerceGuys\Addressing\Formatter\DefaultFormatter;
 use CommerceGuys\Addressing\Address as CommerceGuysAddress;
 use CommerceGuys\Addressing\Subdivision\SubdivisionRepository;
 use CommerceGuys\Addressing\Country\CountryRepository;
+use GraphQL\Type\Definition\Type;
+use GraphQL\Type\Definition\ObjectType;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
+use craft\gql\GqlEntityRegistry;
+use craft\gql\TypeLoader;
 use Craft;
 use yii\db\Schema;
 
@@ -75,4 +79,31 @@ class Address extends Field implements PreviewableFieldInterface
 
         return $html;
     }
+
+    /**
+     * @inheritdoc
+     * @since 3.3.0
+     */
+    public function getContentGqlType()
+    {
+        $typeName = $this->handle.'_SproutAddressField';
+
+        $addressType = GqlEntityRegistry::getEntity($typeName)
+            ?: GqlEntityRegistry::createEntity($typeName, new ObjectType([
+                'name'   => $typeName,
+                'fields' => [
+                    'countryCode' => Type::string(),
+                    'administrativeAreaCode' => Type::string(),
+                    'locality' => Type::string(),
+                    'postalCode' => Type::string(),
+                    'address1' => Type::string(),
+                    'address2' => Type::string(),
+                ],
+            ]));
+
+        TypeLoader::registerType($typeName, static function () use ($addressType) { return $addressType ;});
+
+        return $addressType;
+    }
+
 }

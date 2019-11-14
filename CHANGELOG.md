@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.4.5 - 2019-11-14
+
+### Added
+- Added native GraphQL support for Address, Notes and Predefined Date fields.
+
 ## 3.4.4 - 2019-08-14
 
 ### Changed

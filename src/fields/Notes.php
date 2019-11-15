@@ -8,6 +8,7 @@ use craft\base\Field;
 use barrelstrength\sproutbasefields\web\assets\quill\QuillAsset;
 
 use craft\helpers\FileHelper;
+use GraphQL\Type\Definition\Type;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -131,6 +132,22 @@ class Notes extends Field
             ]
         );
     }
+
+    /**
+     * @inheritdoc
+     * @since 3.3.0
+     */
+    public function getContentGqlType()
+    {
+        return [
+            'name' => $this->handle,
+            'type' => Type::string(),
+            'resolve' => function() {
+                return $this->notes;
+            },
+        ];
+    }
+
 
     /**
      * Returns a css style

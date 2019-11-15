@@ -5,7 +5,9 @@ namespace barrelstrength\sproutfields\fields;
 use Craft;
 use craft\base\ElementInterface;
 use craft\helpers\DateTimeHelper;
+use craft\gql\types\DateTime as GqlDateTimeType;
 use Exception;
+use GraphQL\Type\Definition\Type;
 use Throwable;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -82,4 +84,17 @@ class PredefinedDate extends BasePredefinedField
                 'value' => $value
             ]);
     }
+
+    /**
+     * @inheritdoc
+     * @since 3.3.0
+     */
+    public function getContentGqlType()
+    {
+        return [
+            'name' => $this->handle,
+            'type' => GqlDateTimeType::getType(),
+        ];
+    }
+
 }

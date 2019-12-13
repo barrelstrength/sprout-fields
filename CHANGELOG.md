@@ -1,5 +1,12 @@
 # Changelog
 
+## UNRELEASED
+
+### Changed
+- Updated commerceguys/addressing requirement v1.0.6
+- Updated commerceguys/intl requirement v1.0.5
+- Updated giggsey/libphonenumber-for-php requirement v8.11.1
+ 
 ## 3.4.4 - 2019-08-14
 
 ### Changed

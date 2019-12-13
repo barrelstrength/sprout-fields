@@ -14,7 +14,7 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use yii\db\Schema;
 
-use CommerceGuys\Intl\Country\CountryRepository;
+use CommerceGuys\Addressing\Country\CountryRepository;
 use barrelstrength\sproutbasefields\models\Phone as PhoneModel;
 
 /**

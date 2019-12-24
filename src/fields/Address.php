@@ -3,6 +3,8 @@
 namespace barrelstrength\sproutfields\fields;
 
 use barrelstrength\sproutbasefields\base\AddressFieldTrait;
+use barrelstrength\sproutbasefields\helpers\AddressFieldHelper;
+use barrelstrength\sproutbasefields\models\Address as AddressModel;
 use CommerceGuys\Addressing\AddressFormat\AddressFormatRepository;
 use CommerceGuys\Addressing\Formatter\DefaultFormatter;
 use CommerceGuys\Addressing\Address as CommerceGuysAddress;
@@ -12,13 +14,20 @@ use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 use Craft;
-use yii\db\Schema;
+use craft\errors\SiteNotFoundException;
+use Throwable;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use yii\db\Exception;
+use yii\db\StaleObjectException;
 
 /**
  * Class Address
  *
  * @package barrelstrength\sproutfields\fields
  *
+ * @property array  $elementValidationRules
  * @property string $contentColumnType
  */
 class Address extends Field implements PreviewableFieldInterface
@@ -29,6 +38,22 @@ class Address extends Field implements PreviewableFieldInterface
      * @var string|null
      */
     public $value;
+
+    public function init() {
+        parent::init();
+        $this->addressFieldHelper = new AddressFieldHelper();
+    }
+
+    public static function supportedTranslationMethods(): array
+    {
+        return [
+            self::TRANSLATION_METHOD_NONE,
+            self::TRANSLATION_METHOD_SITE,
+            self::TRANSLATION_METHOD_SITE_GROUP,
+            self::TRANSLATION_METHOD_LANGUAGE,
+            self::TRANSLATION_METHOD_CUSTOM,
+        ];
+    }
 
     /**
      * @inheritdoc
@@ -41,16 +66,92 @@ class Address extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getContentColumnType(): string
+    public static function hasContentColumn(): bool
     {
-        return Schema::TYPE_INTEGER;
+        return false;
+    }
+
+    /**
+     * @return string|null
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws SiteNotFoundException
+     */
+    public function getSettingsHtml()
+    {
+        return $this->addressFieldHelper->getSettingsHtml($this);
+    }
+
+    /**
+     * @param                       $value
+     * @param ElementInterface|null $element
+     *
+     * @return string
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function getInputHtml($value, ElementInterface $element = null): string
+    {
+        return $this->addressFieldHelper->getInputHtml($this, $value, $element);
+    }
+
+    /**
+     * How the field output will appear for Revisions
+     *
+     * @param                  $value
+     * @param ElementInterface $element
+     *
+     * @return string
+     */
+    public function getStaticHtml($value, ElementInterface $element): string
+    {
+        return $this->addressFieldHelper->getStaticHtml($this, $value, $element);
+    }
+
+    /**
+     * @param                       $value
+     * @param ElementInterface|null $element
+     *
+     * @return AddressModel|mixed|null
+     */
+    public function normalizeValue($value, ElementInterface $element = null)
+    {
+        return $this->addressFieldHelper->normalizeValue($this, $value, $element);
+    }
+
+    /**
+     * @param                       $value
+     * @param ElementInterface|null $element
+     *
+     * @return array|AddressModel|int|mixed|string|null
+     * @throws Throwable
+     */
+    public function serializeValue($value, ElementInterface $element = null)
+    {
+        return $this->addressFieldHelper->serializeValue($value, $element);
+    }
+
+    /**
+     * @param ElementInterface $element
+     * @param bool             $isNew
+     *
+     * @throws Throwable
+     * @throws Exception
+     * @throws StaleObjectException
+     */
+    public function afterElementSave(ElementInterface $element, bool $isNew)
+    {
+        $this->addressFieldHelper->afterElementSave($this, $element, $isNew);
+        parent::afterElementSave($element, $isNew);
     }
 
     /**
      * @inheritdoc
      */
-    public function getTableAttributeHtml($value, ElementInterface $element): string
-    {
+    public function getTableAttributeHtml($value, ElementInterface $element): string {
+
         if (!$value) {
             return '';
         }

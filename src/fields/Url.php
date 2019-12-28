@@ -80,11 +80,15 @@ class Url extends Field implements PreviewableFieldInterface
 
         $fieldContext = SproutBaseFields::$app->utilities->getFieldContext($this, $element);
 
+        // Set this to false for Quick Entry Dashboard Widget
+        $elementId = ($element != null) ? $element->id : false;
+
         return Craft::$app->getView()->renderTemplate('sprout-base-fields/_components/fields/formfields/url/input', [
                 'namespaceInputId' => $namespaceInputId,
                 'id' => $inputId,
                 'name' => $name,
                 'value' => $value,
+                'elementId' => $elementId,
                 'fieldContext' => $fieldContext,
                 'placeholder' => $this->placeholder
             ]

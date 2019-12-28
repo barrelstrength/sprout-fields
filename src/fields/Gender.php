@@ -5,6 +5,9 @@ namespace barrelstrength\sproutfields\fields;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class Gender extends Field
 {
@@ -40,9 +43,9 @@ class Gender extends Field
      * @param ElementInterface|null $element
      *
      * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {

@@ -9,7 +9,6 @@ use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 
 use barrelstrength\sproutbasefields\models\Name as NameModel;
-use craft\helpers\Json;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;

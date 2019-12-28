@@ -7,6 +7,7 @@ use craft\base\ElementInterface;
 use craft\base\Field;
 use barrelstrength\sproutbasefields\web\assets\quill\QuillAsset;
 
+use craft\errors\DeprecationException;
 use craft\helpers\FileHelper;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -90,7 +91,7 @@ class Notes extends Field
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws \craft\errors\DeprecationException
+     * @throws DeprecationException
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {

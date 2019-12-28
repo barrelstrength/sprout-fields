@@ -8,13 +8,11 @@ use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use libphonenumber\PhoneNumberUtil;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use yii\db\Schema;
 
-use CommerceGuys\Addressing\Country\CountryRepository;
 use barrelstrength\sproutbasefields\models\Phone as PhoneModel;
 
 /**
@@ -114,7 +112,7 @@ class Phone extends Field implements PreviewableFieldInterface
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-        return SproutBaseFields::$app->phoneField->getInputHtml($this, $value, $element);
+        return SproutBaseFields::$app->phoneField->getInputHtml($this, $value);
     }
 
     /**

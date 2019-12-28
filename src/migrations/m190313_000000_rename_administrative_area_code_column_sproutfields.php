@@ -4,6 +4,7 @@ namespace barrelstrength\sproutfields\migrations;
 
 use craft\db\Migration;
 use barrelstrength\sproutbasefields\migrations\m190313_000000_add_administrativeareacode_column;
+use yii\base\NotSupportedException;
 
 /**
  * m190313_000000_rename_administrative_area_code_column_sproutfields migration.
@@ -11,7 +12,8 @@ use barrelstrength\sproutbasefields\migrations\m190313_000000_add_administrative
 class m190313_000000_rename_administrative_area_code_column_sproutfields extends Migration
 {
     /**
-     * @inheritdoc
+     * @return bool
+     * @throws NotSupportedException
      */
     public function safeUp(): bool
     {

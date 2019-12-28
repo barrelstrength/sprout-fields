@@ -9,7 +9,6 @@ use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 
-use barrelstrength\sproutbasefields\web\assets\regularexpression\RegularExpressionFieldAsset;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;

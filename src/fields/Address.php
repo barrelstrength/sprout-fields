@@ -134,7 +134,8 @@ class Address extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getTableAttributeHtml($value, ElementInterface $element): string {
+    public function getTableAttributeHtml($value, ElementInterface $element): string
+    {
 
         if (!$value) {
             return '';

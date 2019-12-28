@@ -54,12 +54,7 @@ class RegularExpression extends Field implements PreviewableFieldInterface
      */
     public function getSettingsHtml()
     {
-        return Craft::$app->getView()->renderTemplate(
-            'sprout-base-fields/_components/fields/formfields/regularexpression/settings',
-            [
-                'field' => $this,
-            ]
-        );
+        return SproutBaseFields::$app->regularExpressionField->getSettingsHtml($this);
     }
 
     /**
@@ -76,26 +71,7 @@ class RegularExpression extends Field implements PreviewableFieldInterface
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-        $view = Craft::$app->getView();
-        $view->registerAssetBundle(RegularExpressionFieldAsset::class);
-
-        $name = $this->handle;
-        $inputId = Craft::$app->getView()->formatInputId($name);
-        $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
-
-        $fieldContext = SproutBaseFields::$app->utilities->getFieldContext($this, $element);
-
-        return Craft::$app->getView()->renderTemplate(
-            'sprout-base-fields/_components/fields/formfields/regularexpression/input',
-            [
-                'id' => $namespaceInputId,
-                'field' => $this,
-                'name' => $name,
-                'value' => $value,
-                'fieldContext' => $fieldContext,
-                'placeholder' => $this->placeholder
-            ]
-        );
+        return SproutBaseFields::$app->regularExpressionField->getInputHtml($this, $value, $element);
     }
 
     /**
@@ -123,10 +99,8 @@ class RegularExpression extends Field implements PreviewableFieldInterface
         $value = $element->getFieldValue($this->handle);
 
         if (!SproutBaseFields::$app->regularExpressionField->validate($value, $this)) {
-            $element->addError(
-                $this->handle,
-                SproutBaseFields::$app->regularExpressionField->getErrorMessage($this)
-            );
+            $message = SproutBaseFields::$app->regularExpressionField->getErrorMessage($this);
+            $element->addError($this->handle, $message);
         }
     }
 

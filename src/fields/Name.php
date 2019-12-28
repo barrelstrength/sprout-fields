@@ -99,7 +99,7 @@ class Name extends Field implements PreviewableFieldInterface
      */
     public function serializeValue($value, ElementInterface $element = null)
     {
-        return SproutBaseFields::$app->nameField->normalizeValue($value);
+        return SproutBaseFields::$app->nameField->serializeValue($value);
     }
 
     /**

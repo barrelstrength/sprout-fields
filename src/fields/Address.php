@@ -27,8 +27,9 @@ use yii\db\StaleObjectException;
  *
  * @package barrelstrength\sproutfields\fields
  *
- * @property array  $elementValidationRules
- * @property string $contentColumnType
+ * @property array       $elementValidationRules
+ * @property null|string $settingsHtml
+ * @property string      $contentColumnType
  */
 class Address extends Field implements PreviewableFieldInterface
 {

@@ -53,12 +53,7 @@ class Url extends Field implements PreviewableFieldInterface
      */
     public function getSettingsHtml()
     {
-        return Craft::$app->getView()->renderTemplate(
-            'sprout-base-fields/_components/fields/formfields/url/settings',
-            [
-                'field' => $this,
-            ]
-        );
+        return SproutBaseFields::$app->urlField->getSettingsHtml($this);
     }
 
     /**
@@ -74,25 +69,7 @@ class Url extends Field implements PreviewableFieldInterface
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-        $name = $this->handle;
-        $inputId = Craft::$app->getView()->formatInputId($name);
-        $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
-
-        $fieldContext = SproutBaseFields::$app->utilities->getFieldContext($this, $element);
-
-        // Set this to false for Quick Entry Dashboard Widget
-        $elementId = ($element != null) ? $element->id : false;
-
-        return Craft::$app->getView()->renderTemplate('sprout-base-fields/_components/fields/formfields/url/input', [
-                'namespaceInputId' => $namespaceInputId,
-                'id' => $inputId,
-                'name' => $name,
-                'value' => $value,
-                'elementId' => $elementId,
-                'fieldContext' => $fieldContext,
-                'placeholder' => $this->placeholder
-            ]
-        );
+        return SproutBaseFields::$app->urlField->getInputHtml($this, $value, $element);
     }
 
     /**
@@ -118,7 +95,12 @@ class Url extends Field implements PreviewableFieldInterface
     public function validateUrl(ElementInterface $element)
     {
         $value = $element->getFieldValue($this->handle);
-        SproutBaseFields::$app->urlField->validate($value, $this, $element);
+        $isValid = SproutBaseFields::$app->urlField->validate($value, $this);
+
+        if (!$isValid) {
+            $message = SproutBaseFields::$app->urlField->getErrorMessage($this);
+            $element->addError($this->handle, $message);
+        }
     }
 
     /**

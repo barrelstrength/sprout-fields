@@ -82,6 +82,10 @@ class Email extends Field implements PreviewableFieldInterface
         $rules = parent::getElementValidationRules();
         $rules[] = 'validateEmail';
 
+        if ($this->uniqueEmail) {
+            $rules[] = 'validateUniqueEmail';
+        }
+
         return $rules;
     }
 
@@ -97,7 +101,26 @@ class Email extends Field implements PreviewableFieldInterface
     public function validateEmail(ElementInterface $element)
     {
         $value = $element->getFieldValue($this->handle);
-        SproutBaseFields::$app->emailField->validate($value, $this, $element);
+        $isValid = SproutBaseFields::$app->emailField->validateEmail($value, $this);
+
+        if (!$isValid) {
+            $message = SproutBaseFields::$app->emailField->getErrorMessage($this);
+            $element->addError($this->handle, $message);
+        }
+    }
+
+    /**
+     * @param ElementInterface $element
+     */
+    public function validateUniqueEmail(ElementInterface $element)
+    {
+        $value = $element->getFieldValue($this->handle);
+        $isValid = SproutBaseFields::$app->emailField->validateUniqueEmail($value, $this, $element);
+
+        if (!$isValid) {
+            $message = Craft::t('sprout-base-fields', $this->name.' must be a unique email.');
+            $element->addError($this->handle, $message);
+        }
     }
 
     /**

@@ -117,18 +117,6 @@ class Address extends Field implements PreviewableFieldInterface
     }
 
     /**
-     * @param                       $value
-     * @param ElementInterface|null $element
-     *
-     * @return array|AddressModel|int|mixed|string|null
-     * @throws Throwable
-     */
-    public function serializeValue($value, ElementInterface $element = null)
-    {
-        return SproutBaseFields::$app->addressField->serializeValue($value, $element);
-    }
-
-    /**
      * @param ElementInterface $element
      * @param bool             $isNew
      *

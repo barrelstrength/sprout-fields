@@ -2,6 +2,7 @@
 
 namespace barrelstrength\sproutfields\fields;
 
+use barrelstrength\sproutbasefields\SproutBaseFields;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
@@ -53,11 +54,7 @@ class Name extends Field implements PreviewableFieldInterface
      */
     public function getSettingsHtml()
     {
-        return Craft::$app->getView()->renderTemplate(
-            'sprout-base-fields/_components/fields/formfields/name/settings',
-            [
-                'field' => $this,
-            ]);
+        return SproutBaseFields::$app->nameField->getSettingsHtml($this);
     }
 
     /**
@@ -73,19 +70,7 @@ class Name extends Field implements PreviewableFieldInterface
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-        $name = $this->handle;
-        $inputId = Craft::$app->getView()->formatInputId($name);
-        $namespaceInputId = Craft::$app->getView()->namespaceInputId($inputId);
-
-        return Craft::$app->getView()->renderTemplate(
-            'sprout-base-fields/_components/fields/formfields/name/input',
-            [
-                'namespaceInputId' => $namespaceInputId,
-                'id' => $inputId,
-                'name' => $name,
-                'value' => $value,
-                'field' => $this
-            ]);
+        return SproutBaseFields::$app->nameField->getInputHtml($this, $value, $element);
     }
 
     /**
@@ -95,37 +80,11 @@ class Name extends Field implements PreviewableFieldInterface
      * @param ElementInterface|null $element
      *
      * @return NameModel|mixed
-     * @todo - move to helper as we can use this on both Sprout Forms and Sprout Fields
      *
      */
     public function normalizeValue($value, ElementInterface $element = null)
     {
-        $nameModel = new NameModel();
-
-        // String value when retrieved from db
-        if (is_string($value)) {
-            $nameArray = Json::decode($value);
-            $nameModel->setAttributes($nameArray, false);
-            return $nameModel;
-        }
-
-        // Array value from post data
-        if (is_array($value) && isset($value['address'])) {
-
-            $nameModel->setAttributes($value['address'], false);
-
-            if ($fullNameShort = $value['address']['fullNameShort'] ?? null) {
-                $nameArray = explode(' ', trim($fullNameShort));
-
-                $nameModel->firstName = $nameArray[0] ?? $fullNameShort;
-                unset($nameArray[0]);
-
-                $nameModel->lastName = implode(' ', $nameArray);
-            }
-            return $nameModel;
-        }
-
-        return $value;
+        return SproutBaseFields::$app->nameField->normalizeValue($value);
     }
 
     /**
@@ -135,23 +94,12 @@ class Name extends Field implements PreviewableFieldInterface
      * @param ElementInterface|null $element
      *
      * @return array|bool|mixed|null|string
-     * @todo - move to helper as we can use this on both Sprout Forms and Sprout Fields
      *
      * We store the Name as JSON in the content column.
-     *
      */
     public function serializeValue($value, ElementInterface $element = null)
     {
-        if ($value === null) {
-            return false;
-        }
-
-        // Submitting an Element to be saved
-        if (is_object($value) && get_class($value) == NameModel::class) {
-            return Json::encode($value->getAttributes());
-        }
-
-        return $value;
+        return SproutBaseFields::$app->nameField->normalizeValue($value);
     }
 
     /**

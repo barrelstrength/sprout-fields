@@ -114,13 +114,7 @@ class Url extends Field implements PreviewableFieldInterface
     public function validateUrl(ElementInterface $element)
     {
         $value = $element->getFieldValue($this->handle);
-
-        if (!SproutBaseFields::$app->urlField->validate($value, $this)) {
-            $element->addError(
-                $this->handle,
-                SproutBaseFields::$app->urlField->getErrorMessage($this->name, $this)
-            );
-        }
+        SproutBaseFields::$app->urlField->validate($value, $this, $element);
     }
 
     /**

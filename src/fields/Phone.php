@@ -84,7 +84,8 @@ class Phone extends Field implements PreviewableFieldInterface
      */
     public function serializeValue($value, ElementInterface $element = null)
     {
-        return SproutBaseFields::$app->phoneField->serializeValue($this);
+        $value = SproutBaseFields::$app->phoneField->serializeValue($value);
+        return parent::serializeValue($value, $element);
     }
 
     /**
@@ -140,7 +141,7 @@ class Phone extends Field implements PreviewableFieldInterface
         $value = $element->getFieldValue($this->handle);
         $isValid = SproutBaseFields::$app->phoneField->validate($value);
 
-        if (!$isValid) {
+        if (!$isValid && $value->phone) {
             $message = SproutBaseFields::$app->phoneField->getErrorMessage($this, $value->country);
             $element->addError($this->handle, $message);
         }

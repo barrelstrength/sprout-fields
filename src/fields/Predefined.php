@@ -112,10 +112,10 @@ class Predefined extends BasePredefinedField
 
         return Craft::$app->getView()->renderTemplate('sprout-base-fields/_components/fields/formfields/predefined/input',
             [
+                'field' => $this,
                 'id' => $this->handle,
                 'name' => $this->handle,
                 'value' => $value,
-                'field' => $this
             ]);
     }
 }

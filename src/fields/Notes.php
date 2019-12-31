@@ -70,12 +70,11 @@ class Notes extends Field
         $view = Craft::$app->getView();
         $view->registerAssetBundle(QuillAsset::class);
 
-        return Craft::$app->getView()->renderTemplate(
-            'sprout-base-fields/_components/fields/formfields/notes/settings',
+        return Craft::$app->getView()->renderTemplate('sprout-base-fields/_components/fields/formfields/notes/settings',
             [
-                'styles' => $this->_getCustomStyleOptions(),
+                'field' => $this,
                 'options' => $this->getOptions(),
-                'field' => $this
+                'styles' => $this->_getCustomStyleOptions()
             ]
         );
     }
@@ -122,12 +121,11 @@ class Notes extends Field
             $this->notes = '';
         }
 
-        return Craft::$app->getView()->renderTemplate(
-            'sprout-base-fields/_components/fields/formfields/notes/input',
+        return Craft::$app->getView()->renderTemplate('sprout-base-fields/_components/fields/formfields/notes/input',
             [
+                'field' => $this,
                 'id' => $namespaceInputId,
                 'name' => $name,
-                'field' => $this,
                 'selectedStyleCss' => $selectedStyleCss
             ]
         );

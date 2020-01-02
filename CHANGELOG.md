@@ -11,6 +11,8 @@
 - Updated and standardized shared logic, validation, and response for fields Email, Name, Phone, Regular Expression, and Url 
 - Improved multi-site support for Addresses
 - Updated dynamic email validation to exclude check for unique email setting
+- Updated Phone field to save `null` instead of empty JSON blob
+- Updated Name field to save `null` instead of empty JSON blob
 - Addresses are now stored only in the `sproutfields_adddresses` table. Updated `barrelstrength\sproutfields\fields\Address::hasContentColumn` to return false.
 - Added `barrelstrength\sproutbasefields\models\Address::getCountryCode()`
 - Updated `barrelstrength\sproutbasefields\services\Address::deleteAddressById()` to require address ID
@@ -29,6 +31,8 @@
 - Updated `giggsey/libphonenumber-for-php` to v8.11.1
 
 ### Fixed
+- Fixed Phone validation bug on initial Drafts
+- Fixed Email Field unique email validation with Drafts
 - Fixed display issue with Gibraltar addresses
 - Fixed bug where Address input fields did not display in edit modal after Address was cleared
 
@@ -36,6 +40,7 @@
 - Removed `barrelstrength\sproutfields\fields\Address::serializeValue()`
 - Removed `barrelstrength\sproutbasefields\helpers\AddressHelper`
 - Removed `barrelstrength\sproutbasefields\controllers\actionDeleteAddress()`
+- Removed `barrelstrength\sproutbasefields\models\Name;:$fullName`
 - Removed `commerceguys/intl`
 
 ## 3.4.4 - 2019-08-14

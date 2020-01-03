@@ -1,0 +1,37 @@
+<?php
+
+namespace barrelstrength\sproutfields\migrations;
+
+use barrelstrength\sproutbasefields\migrations\m200102_000000_remove_address_field_content_column;
+use craft\db\Migration;
+use yii\base\NotSupportedException;
+
+/**
+ * m200102_000000_remove_address_field_content_column_sproutfields migration.
+ */
+class m200102_000000_remove_address_field_content_column_sproutfields extends Migration
+{
+    /**
+     * @return bool
+     * @throws NotSupportedException
+     */
+    public function safeUp(): bool
+    {
+        $migration = new m200102_000000_remove_address_field_content_column();
+
+        ob_start();
+        $migration->safeUp();
+        ob_end_clean();
+
+        return true;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function safeDown(): bool
+    {
+        echo "m200102_000000_remove_address_field_content_column_sproutfields cannot be reverted.\n";
+        return false;
+    }
+}

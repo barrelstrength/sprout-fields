@@ -40,7 +40,7 @@ class SproutFields extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '3.5.0';
+    public $schemaVersion = '3.5.1';
 
     /**
      * @var string

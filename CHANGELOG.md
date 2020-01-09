@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.5.1 - 2020-01-09
+
+### Updated
+- Updated `barrelstrength/sprout-base-fields` to v1.2.1
+
+### Fixed
+- Fixed scenario where address table updates may not get triggered in migrations
+ 
 ## 3.5.0 - 2020-01-09
 
 ### Added

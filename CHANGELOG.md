@@ -1,9 +1,9 @@
 # Changelog
 
-## UNRELEASED
+## 3.5.0 - 2020-01-09
 
 ### Added
-- Added support for displaying Address on Revisions using getStaticHtml
+- Added support for displaying Address on Revisions using `Field::getStaticHtml()`
 - Added `barrelstrength\sproutbasefields\services\Name`
 
 ### Changed

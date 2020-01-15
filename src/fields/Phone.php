@@ -139,9 +139,15 @@ class Phone extends Field implements PreviewableFieldInterface
     public function validatePhone(ElementInterface $element)
     {
         $value = $element->getFieldValue($this->handle);
+
+        // Don't run validation if a field is not required and has no value for the phone number
+        if (!$this->required && empty($value->phone)) {
+            return;
+        }
+
         $isValid = SproutBaseFields::$app->phoneField->validate($value);
 
-        if (!$isValid && $value->phone) {
+        if (!$isValid) {
             $message = SproutBaseFields::$app->phoneField->getErrorMessage($this, $value->country);
             $element->addError($this->handle, $message);
         }

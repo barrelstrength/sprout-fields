@@ -13,6 +13,9 @@
 ### Added
 - Added support for displaying Address on Revisions using `Field::getStaticHtml()`
 - Added `barrelstrength\sproutbasefields\services\Name`
+- Added `barrelstrength\sproutbasefields\services\Phone::getCountries()` 
+- Added `barrelstrength\sproutbasefields\models\Address::getCountryCode()`
+- Added `barrelstrength\sproutbasefields\events\OnSaveAddressEvent::$address`
 
 ### Changed
 - Updated how Address Fields are saved and retrieved to better handle Drafts, Revisions, and other integrations
@@ -22,13 +25,11 @@
 - Updated Phone field to save `null` instead of empty JSON blob
 - Updated Name field to save `null` instead of empty JSON blob
 - Addresses are now stored only in the `sproutfields_adddresses` table. Updated `barrelstrength\sproutfields\fields\Address::hasContentColumn` to return false.
-- Added `barrelstrength\sproutbasefields\models\Address::getCountryCode()`
 - Updated `barrelstrength\sproutbasefields\services\Address::deleteAddressById()` to require address ID
 - Improved fallbacks for Address Field's default country and language
 - Moved methods from `barrelstrength\sproutbasefields\helpers\AddressHelper` to `barrelstrength\sproutbasefields\services\Address`
 - Moved methods from `barrelstrength\sproutbasefields\helpers\AddressHelper` to `barrelstrength\sproutbasefields\services\AddressFormatter`
 - Updated `barrelstrength\sproutbasefields\helpers\AddressHelper` to `barrelstrength\sproutbasefields\services\AddressFormatter`
-- Added property `barrelstrength\sproutbasefields\events\OnSaveAddressEvent::$address`
 - Deprecated property `barrelstrength\sproutbasefields\events\OnSaveAddressEvent::$model`
 - Renamed `barrelstrength\sproutbasefields\services\Address::getAddress()` => `getAddressFromElement()`
 - Renamed data attribute `addressid` => `address-id`
@@ -45,6 +46,7 @@
 - Fixed bug where Address input fields did not display in edit modal after Address was cleared
 
 ### Removed
+- Removed `barrelstrength\sproutfields\fields\Phone::getCountries()`
 - Removed `barrelstrength\sproutfields\fields\Address::serializeValue()`
 - Removed `barrelstrength\sproutbasefields\helpers\AddressHelper`
 - Removed `barrelstrength\sproutbasefields\controllers\actionDeleteAddress()`

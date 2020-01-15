@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.5.2 - 2020-01-15
+
+### Fixed
+- Fixed bug where optional Phone field would not validate with blank value
+
 ## 3.5.1 - 2020-01-09
 
 ### Updated

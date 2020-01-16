@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.5.3 - 2020-01-15
+
+### Updated
+- Updated `barrelstrength/sprout-base-fields` to v1.2.2
+
+### Fixed 
+- Fixed error in address table migration ([#182][182-sproutseo])
+
+[182-sproutseo]: https://github.com/barrelstrength/craft-sprout-seo/issues/182
+
 ## 3.5.2 - 2020-01-15
 
 ### Fixed

@@ -45,6 +45,8 @@ class PredefinedDate extends BasePredefinedField
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws \yii\base\Exception
+     * @throws \yii\base\Exception
      */
     public function getSettingsHtml()
     {

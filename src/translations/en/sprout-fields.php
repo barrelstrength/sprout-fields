@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link https://sprout.barrelstrengthdesign.com
+ * @copyright Copyright (c) Barrel Strength Design LLC
+ * @license https://craftcms.github.io/license
+ */
 
 return [
     'First Name and Last Name are enabled by default. Fields will display in the order that they appear..' => 'First Name and Last Name are enabled by default. Fields will display in the order that they appear..',

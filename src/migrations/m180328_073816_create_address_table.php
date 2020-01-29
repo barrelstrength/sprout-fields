@@ -2,8 +2,8 @@
 
 namespace barrelstrength\sproutfields\migrations;
 
-use craft\db\Migration;
 use barrelstrength\sproutbasefields\migrations\Install as SproutBaseFieldsInstall;
+use craft\db\Migration;
 
 /**
  * m180328_073816_create_address_table migration.
@@ -30,6 +30,7 @@ class m180328_073816_create_address_table extends Migration
     public function safeDown(): bool
     {
         echo "m180328_073816_create_address_table cannot be reverted.\n";
+
         return false;
     }
 }

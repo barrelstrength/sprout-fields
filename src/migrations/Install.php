@@ -2,8 +2,8 @@
 
 namespace barrelstrength\sproutfields\migrations;
 
-use craft\db\Migration;
 use barrelstrength\sproutbasefields\migrations\Install as SproutBaseFieldsInstall;
+use craft\db\Migration;
 
 class Install extends Migration
 {

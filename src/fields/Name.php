@@ -2,13 +2,12 @@
 
 namespace barrelstrength\sproutfields\fields;
 
+use barrelstrength\sproutbasefields\models\Name as NameModel;
 use barrelstrength\sproutbasefields\SproutBaseFields;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-
-use barrelstrength\sproutbasefields\models\Name as NameModel;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -99,6 +98,7 @@ class Name extends Field implements PreviewableFieldInterface
     public function serializeValue($value, ElementInterface $element = null)
     {
         $value = SproutBaseFields::$app->nameField->serializeValue($value);
+
         return parent::serializeValue($value, $element);
     }
 

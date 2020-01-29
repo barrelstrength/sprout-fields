@@ -4,7 +4,6 @@ namespace barrelstrength\sproutfields\migrations;
 
 use barrelstrength\sproutbasefields\migrations\m200109_000000_update_address_tables;
 use craft\db\Migration;
-use yii\base\NotSupportedException;
 
 /**
  * m200109_000000_update_address_tables_sproutfields migration.
@@ -31,6 +30,7 @@ class m200109_000000_update_address_tables_sproutfields extends Migration
     public function safeDown(): bool
     {
         echo "m200109_000000_update_address_tables_sproutfields cannot be reverted.\n";
+
         return false;
     }
 }

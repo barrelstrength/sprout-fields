@@ -2,11 +2,10 @@
 
 namespace barrelstrength\sproutfields\fields;
 
+use barrelstrength\sproutbasefields\web\assets\quill\QuillAsset;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
-use barrelstrength\sproutbasefields\web\assets\quill\QuillAsset;
-
 use craft\errors\DeprecationException;
 use craft\helpers\FileHelper;
 use Twig\Error\LoaderError;

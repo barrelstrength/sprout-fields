@@ -2,6 +2,7 @@
 
 namespace barrelstrength\sproutfields\fields;
 
+use barrelstrength\sproutbasefields\models\Phone as PhoneModel;
 use barrelstrength\sproutbasefields\SproutBaseFields;
 use Craft;
 use craft\base\Element;
@@ -12,8 +13,6 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use yii\db\Schema;
-
-use barrelstrength\sproutbasefields\models\Phone as PhoneModel;
 
 /**
  *
@@ -48,7 +47,9 @@ class Phone extends Field implements PreviewableFieldInterface
      * @var string|null
      */
     public $customPatternToggle;
+
     public $mask;
+
     public $inputMask;
 
     public static function displayName(): string
@@ -85,6 +86,7 @@ class Phone extends Field implements PreviewableFieldInterface
     public function serializeValue($value, ElementInterface $element = null)
     {
         $value = SproutBaseFields::$app->phoneField->serializeValue($value);
+
         return parent::serializeValue($value, $element);
     }
 

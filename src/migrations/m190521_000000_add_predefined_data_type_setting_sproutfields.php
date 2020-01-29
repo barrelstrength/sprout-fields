@@ -30,6 +30,7 @@ class m190521_000000_add_predefined_data_type_setting_sproutfields extends Migra
     public function safeDown(): bool
     {
         echo "m190521_000000_add_predefined_data_type_setting_sproutfields cannot be reverted.\n";
+
         return false;
     }
 }

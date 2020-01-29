@@ -32,6 +32,7 @@ class m200102_000000_remove_address_field_content_column_sproutfields extends Mi
     public function safeDown(): bool
     {
         echo "m200102_000000_remove_address_field_content_column_sproutfields cannot be reverted.\n";
+
         return false;
     }
 }

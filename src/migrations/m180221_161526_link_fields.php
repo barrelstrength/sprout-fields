@@ -2,8 +2,8 @@
 
 namespace barrelstrength\sproutfields\migrations;
 
-use craft\db\Migration;
 use barrelstrength\sproutfields\fields\Url;
+use craft\db\Migration;
 
 /**
  * m180221_161526_link_fields migration.
@@ -31,6 +31,7 @@ class m180221_161526_link_fields extends Migration
     public function safeDown(): bool
     {
         echo "m180221_161526_link_fields cannot be reverted.\n";
+
         return false;
     }
 }

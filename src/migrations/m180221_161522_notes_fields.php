@@ -2,8 +2,8 @@
 
 namespace barrelstrength\sproutfields\migrations;
 
-use craft\db\Migration;
 use barrelstrength\sproutfields\fields\Notes;
+use craft\db\Migration;
 use craft\db\Query;
 use craft\helpers\Json;
 
@@ -33,6 +33,7 @@ class m180221_161522_notes_fields extends Migration
 
             $this->update('{{%fields}}', ['type' => Notes::class, 'settings' => $settingsAsJson], ['id' => $noteField['id']], [], false);
         }
+
         // end notes
         return true;
     }
@@ -43,6 +44,7 @@ class m180221_161522_notes_fields extends Migration
     public function safeDown(): bool
     {
         echo "m180221_161522_notes_fields cannot be reverted.\n";
+
         return false;
     }
 }

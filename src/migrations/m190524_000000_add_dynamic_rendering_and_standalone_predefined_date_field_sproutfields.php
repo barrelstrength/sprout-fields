@@ -30,6 +30,7 @@ class m190524_000000_add_dynamic_rendering_and_standalone_predefined_date_field_
     public function safeDown(): bool
     {
         echo "m190524_000000_add_dynamic_rendering_and_standalone_predefined_date_field_sproutfields cannot be reverted.\n";
+
         return false;
     }
 }

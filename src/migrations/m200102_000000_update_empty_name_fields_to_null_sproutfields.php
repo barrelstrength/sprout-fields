@@ -32,6 +32,7 @@ class m200102_000000_update_empty_name_fields_to_null_sproutfields extends Migra
     public function safeDown(): bool
     {
         echo "m200102_000000_update_empty_name_fields_to_null_sproutfields cannot be reverted.\n";
+
         return false;
     }
 }

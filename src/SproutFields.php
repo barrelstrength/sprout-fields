@@ -2,34 +2,34 @@
 
 namespace barrelstrength\sproutfields;
 
+use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutbasefields\SproutBaseFieldsHelper;
 use barrelstrength\sproutbaseimport\services\Importers;
-use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutfields\fields\Address as AddressField;
-use barrelstrength\sproutfields\fields\Name as NameField;
-use barrelstrength\sproutfields\fields\Phone as PhoneField;
 use barrelstrength\sproutfields\fields\Email as EmailField;
 use barrelstrength\sproutfields\fields\Gender as GenderField;
-use barrelstrength\sproutfields\fields\Url as UrlField;
+use barrelstrength\sproutfields\fields\Name as NameField;
 use barrelstrength\sproutfields\fields\Notes as NotesField;
+use barrelstrength\sproutfields\fields\Phone as PhoneField;
 use barrelstrength\sproutfields\fields\Predefined as PredefinedField;
 use barrelstrength\sproutfields\fields\PredefinedDate as PredefinedDateField;
 use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
+use barrelstrength\sproutfields\fields\Url as UrlField;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Email as EmailFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Gender as GenderFieldImporter;
-use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Url as UrlFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Notes as NotesFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Phone as PhoneFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Predefined as PredefinedFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\RegularExpression as RegularExpressionFieldImporter;
+use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Url as UrlFieldImporter;
 use Craft;
 use craft\base\Element;
 use craft\base\Plugin;
 use craft\events\ElementEvent;
-use craft\services\Elements;
-use yii\base\Event;
 use craft\events\RegisterComponentTypesEvent;
+use craft\services\Elements;
 use craft\services\Fields;
+use yii\base\Event;
 
 /**
  *

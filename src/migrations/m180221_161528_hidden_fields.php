@@ -3,8 +3,8 @@
 namespace barrelstrength\sproutfields\migrations;
 
 use craft\db\Migration;
-use craft\fields\PlainText;
 use craft\db\Query;
+use craft\fields\PlainText;
 use craft\helpers\Json;
 
 /**
@@ -48,6 +48,7 @@ class m180221_161528_hidden_fields extends Migration
     public function safeDown(): bool
     {
         echo "m180221_161528_hidden_fields cannot be reverted.\n";
+
         return false;
     }
 }

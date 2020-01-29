@@ -42,6 +42,7 @@ class m190116_000000_address_field extends Migration
     public function safeDown(): bool
     {
         echo "m190116_000000_address_field cannot be reverted.\n";
+
         return false;
     }
 }

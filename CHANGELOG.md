@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.6.0 - 2020-02-05
+
+### Changed
+- Updated models to use `defineRules()` method
+- Removed `EditableTable.js` file
+- Updated `barrelstrength/sprout-base-fields` requirement to v1.3.0
+- Updated `barrelstrength/sprout-base` requirement to v5.1.0
+
 ## 3.5.4 - 2020-01-15
 
 ### Updated

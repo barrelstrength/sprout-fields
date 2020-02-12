@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.6.1 - 2020-02-12
+
+## Added
+- Added the Template Field for selecting Twig Templates with Auto-suggest and Dropdown field style options
+
+### Changed
+- Updated `barrelstrength/sprout-base-fields` requirement to v1.3.1
+- Updated `barrelstrength/sprout-base` requirement to v5.1.1
+
 ## 3.6.0 - 2020-02-05
 
 ### Changed

@@ -2,7 +2,7 @@
 
 ## 3.6.1 - 2020-02-12
 
-## Added
+### Added
 - Added the Template Field for selecting Twig Templates with Auto-suggest and Dropdown field style options
 
 ### Changed

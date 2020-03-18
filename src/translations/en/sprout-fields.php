@@ -25,5 +25,6 @@ return [
     'Name (Sprout Fields)' => 'Name (Sprout Fields)',
     'Email (Sprout Fields)' => 'Email (Sprout Fields)',
     'Phone (Sprout Fields)' => 'Phone (Sprout Fields)',
-    'Predefined Date (Sprout Fields)' => 'Predefined Date (Sprout Fields)'
+    'Predefined Date (Sprout Fields)' => 'Predefined Date (Sprout Fields)',
+    'Template (Sprout Fields)' => 'Template (Sprout Fields)'
 ];

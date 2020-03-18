@@ -1,9 +1,4 @@
 <?php
-/**
- * @link https://sprout.barrelstrengthdesign.com
- * @copyright Copyright (c) Barrel Strength Design LLC
- * @license https://craftcms.github.io/license
- */
 
 namespace barrelstrength\sproutfields;
 
@@ -19,7 +14,6 @@ use barrelstrength\sproutfields\fields\Phone as PhoneField;
 use barrelstrength\sproutfields\fields\Predefined as PredefinedField;
 use barrelstrength\sproutfields\fields\PredefinedDate as PredefinedDateField;
 use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
-use barrelstrength\sproutfields\fields\Template as TemplateField;
 use barrelstrength\sproutfields\fields\Url as UrlField;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Email as EmailFieldImporter;
 use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Gender as GenderFieldImporter;
@@ -104,7 +98,6 @@ class SproutFields extends Plugin
             $event->types[] = PredefinedField::class;
             $event->types[] = PredefinedDateField::class;
             $event->types[] = RegularExpressionField::class;
-            $event->types[] = TemplateField::class;
             $event->types[] = UrlField::class;
         });
 

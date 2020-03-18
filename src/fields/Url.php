@@ -16,6 +16,7 @@ use craft\base\PreviewableFieldInterface;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
+use yii\base\Exception;
 
 /**
  *
@@ -50,11 +51,11 @@ class Url extends Field implements PreviewableFieldInterface
     }
 
     /**
-     * @inheritdoc
-     *
+     * @return string|null
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws Exception
      */
     public function getSettingsHtml()
     {
@@ -71,6 +72,7 @@ class Url extends Field implements PreviewableFieldInterface
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws Exception
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {

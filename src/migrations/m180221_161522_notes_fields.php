@@ -1,20 +1,11 @@
-<?php
-/**
- * @link https://sprout.barrelstrengthdesign.com
- * @copyright Copyright (c) Barrel Strength Design LLC
- * @license https://craftcms.github.io/license
- */
+<?php /** @noinspection ClassConstantCanBeUsedInspection */
 
 namespace barrelstrength\sproutfields\migrations;
 
-use barrelstrength\sproutfields\fields\Notes;
 use craft\db\Migration;
 use craft\db\Query;
 use craft\helpers\Json;
 
-/**
- * m180221_161522_notes_fields migration.
- */
 class m180221_161522_notes_fields extends Migration
 {
     /**
@@ -36,7 +27,12 @@ class m180221_161522_notes_fields extends Migration
             unset($settings['instructions']);
             $settingsAsJson = Json::encode($settings);
 
-            $this->update('{{%fields}}', ['type' => Notes::class, 'settings' => $settingsAsJson], ['id' => $noteField['id']], [], false);
+            $this->update('{{%fields}}', [
+                'type' => 'barrelstrength\sproutfields\fields\Notes',
+                'settings' => $settingsAsJson
+            ], [
+                'id' => $noteField['id']
+            ], [], false);
         }
 
         // end notes

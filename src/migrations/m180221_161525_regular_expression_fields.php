@@ -1,18 +1,9 @@
-<?php
-/**
- * @link https://sprout.barrelstrengthdesign.com
- * @copyright Copyright (c) Barrel Strength Design LLC
- * @license https://craftcms.github.io/license
- */
+<?php /** @noinspection ClassConstantCanBeUsedInspection */
 
 namespace barrelstrength\sproutfields\migrations;
 
-use barrelstrength\sproutfields\fields\RegularExpression;
 use craft\db\Migration;
 
-/**
- * m180221_161525_regular_expression_fields migration.
- */
 class m180221_161525_regular_expression_fields extends Migration
 {
     /**
@@ -22,7 +13,7 @@ class m180221_161525_regular_expression_fields extends Migration
     {
         // SproutFields_RegularExpression
         $this->update('{{%fields}}', [
-            'type' => RegularExpression::class
+            'type' => 'barrelstrength\sproutfields\fields\RegularExpression'
         ], [
             'type' => 'SproutFields_RegularExpression', 'context' => 'global'
         ], [], false);

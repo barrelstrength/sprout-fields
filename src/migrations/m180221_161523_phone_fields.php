@@ -1,15 +1,9 @@
-<?php
-/**
- * @link https://sprout.barrelstrengthdesign.com
- * @copyright Copyright (c) Barrel Strength Design LLC
- * @license https://craftcms.github.io/license
- */
+<?php /** @noinspection ClassConstantCanBeUsedInspection */
 
 namespace barrelstrength\sproutfields\migrations;
 
 use craft\db\Migration;
 use craft\db\Query;
-use craft\fields\PlainText;
 use craft\helpers\Json;
 
 /**
@@ -39,7 +33,12 @@ class m180221_161523_phone_fields extends Migration
 
         foreach ($phoneFields as $phoneField) {
             $settingsAsJson = Json::encode($newSettings);
-            $this->update('{{%fields}}', ['type' => PlainText::class, 'settings' => $settingsAsJson], ['id' => $phoneField['id']], [], false);
+            $this->update('{{%fields}}', [
+                'type' => 'craft\fields\PlainText',
+                'settings' => $settingsAsJson
+            ], [
+                'id' => $phoneField['id']
+            ], [], false);
         }
 
         return true;

@@ -1,20 +1,11 @@
-<?php
-/**
- * @link https://sprout.barrelstrengthdesign.com
- * @copyright Copyright (c) Barrel Strength Design LLC
- * @license https://craftcms.github.io/license
- */
+<?php /** @noinspection ClassConstantCanBeUsedInspection */
 
 namespace barrelstrength\sproutfields\migrations;
 
 use craft\db\Migration;
 use craft\db\Query;
-use craft\fields\Table;
 use craft\helpers\Json;
 
-/**
- * m180221_161524_email_select_fields migration.
- */
 class m180221_161524_email_select_fields extends Migration
 {
     /**
@@ -55,7 +46,12 @@ class m180221_161524_email_select_fields extends Migration
             $newSettings['columnType'] = 'text';
             $settingsAsJson = Json::encode($newSettings);
 
-            $this->update('{{%fields}}', ['type' => Table::class, 'settings' => $settingsAsJson], ['id' => $emailSelect['id']], [], false);
+            $this->update('{{%fields}}', [
+                'type' => 'craft\fields\Table',
+                'settings' => $settingsAsJson
+            ], [
+                'id' => $emailSelect['id']
+            ], [], false);
         }
 
         return true;

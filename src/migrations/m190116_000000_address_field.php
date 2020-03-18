@@ -1,20 +1,11 @@
-<?php
-/**
- * @link https://sprout.barrelstrengthdesign.com
- * @copyright Copyright (c) Barrel Strength Design LLC
- * @license https://craftcms.github.io/license
- */
+<?php /** @noinspection ClassConstantCanBeUsedInspection */
 
 namespace barrelstrength\sproutfields\migrations;
 
-use barrelstrength\sproutfields\fields\Address;
 use craft\db\Migration;
 use craft\db\Query;
 use craft\helpers\Json;
 
-/**
- * m190116_000000_address_field migration.
- */
 class m190116_000000_address_field extends Migration
 {
     /**
@@ -25,7 +16,7 @@ class m190116_000000_address_field extends Migration
         $fields = (new Query())
             ->select(['id', 'handle', 'settings'])
             ->from(['{{%fields}}'])
-            ->where(['type' => Address::class])
+            ->where(['type' => 'barrelstrength\sproutfields\fields\Address'])
             ->all();
 
         foreach ($fields as $field) {

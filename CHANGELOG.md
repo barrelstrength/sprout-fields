@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.6.2 - 2020-02-12
+
+### Changed
+- Updated `barrelstrength/sprout-base-fields` requirement to v1.3.4
+
+### Fixed
+- Fixed saving address in Postgres ([#101])
+
+[#101]: https://github.com/barrelstrength/craft-sprout-fields/issues/101
+
 ## 3.6.1 - 2020-02-12
 
 ### Added

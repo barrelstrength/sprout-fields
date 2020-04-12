@@ -82,7 +82,7 @@ class BasePredefinedField extends Field implements PreviewableFieldInterface
             Craft::$app->getSession()->setError(Craft::t('sprout-base-fields', 'Error processing Predefined Field: {name}.', [
                 'name' => $this->name
             ]));
-            SproutBase::error($e->getMessage());
+            Craft::error($e->getMessage(), __METHOD__);
         }
     }
 }

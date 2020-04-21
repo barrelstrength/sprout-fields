@@ -53,6 +53,7 @@ class SproutFields extends Plugin implements SproutDependencyInterface
 
     /**
      * @inheritdoc
+     * @deprecated - Remove in v4.0
      * This empty method is required to avoid an error related to the Project Config when migrating from Craft 2 to Craft 3
      */
     public function setSettings(array $settings)
@@ -61,6 +62,7 @@ class SproutFields extends Plugin implements SproutDependencyInterface
 
     /**
      * @inheritdoc
+     * @deprecated - Remove in v4.0
      */
     public function getSettings()
     {

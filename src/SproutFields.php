@@ -2,6 +2,8 @@
 
 namespace barrelstrength\sproutfields;
 
+use barrelstrength\sproutbase\base\SproutDependencyInterface;
+use barrelstrength\sproutbase\base\SproutDependencyTrait;
 use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutbasefields\SproutBaseFieldsHelper;
 use barrelstrength\sproutbaseimport\services\Importers;
@@ -32,11 +34,13 @@ use craft\services\Fields;
 use yii\base\Event;
 
 /**
- *
+ * @property array $sproutDependencies
  * @property array $settings
  */
-class SproutFields extends Plugin
+class SproutFields extends Plugin implements SproutDependencyInterface
 {
+    use SproutDependencyTrait;
+
     /**
      * @var string
      */
@@ -116,6 +120,18 @@ class SproutFields extends Plugin
                 $event->types[] = RegularExpressionFieldImporter::class;
             }
         });
+    }
+
+    /**
+     * @return array
+     */
+    public function getSproutDependencies(): array
+    {
+        return [
+            SproutDependencyInterface::SPROUT_BASE,
+            SproutDependencyInterface::SPROUT_BASE_FIELDS,
+            SproutDependencyInterface::SPROUT_BASE_IMPORT
+        ];
     }
 }
 

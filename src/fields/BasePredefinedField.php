@@ -1,13 +1,12 @@
 <?php
 /**
- * @link https://sprout.barrelstrengthdesign.com
+ * @link      https://sprout.barrelstrengthdesign.com
  * @copyright Copyright (c) Barrel Strength Design LLC
- * @license https://craftcms.github.io/license
+ * @license   https://craftcms.github.io/license
  */
 
 namespace barrelstrength\sproutfields\fields;
 
-use barrelstrength\sproutbase\SproutBase;
 use Craft;
 use craft\base\Element;
 use craft\base\Field;

@@ -14,13 +14,18 @@ use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 use craft\helpers\ArrayHelper;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use SplFileInfo;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
+use yii\base\Exception;
 
 /**
- * @property array $elementValidationRules
- * @property mixed $settingsHtml
+ * @property array      $elementValidationRules
+ * @property void|array $templateDirectories
+ * @property mixed      $settingsHtml
  */
 class Template extends Field implements PreviewableFieldInterface
 {
@@ -45,13 +50,6 @@ class Template extends Field implements PreviewableFieldInterface
      */
     public $templateFolder;
 
-    public function init() {
-        // Set the templateFolder to null if we don't need it
-        if ($this->suggestedTemplates !== 'folder') {
-            $this->templateFolder = null;
-        }
-    }
-
     /**
      * @return string
      */
@@ -60,8 +58,20 @@ class Template extends Field implements PreviewableFieldInterface
         return Craft::t('sprout-fields', 'Template (Sprout Fields)');
     }
 
+    public function init()
+    {
+        // Set the templateFolder to null if we don't need it
+        if ($this->suggestedTemplates !== 'folder') {
+            $this->templateFolder = null;
+        }
+    }
+
     /**
      * @return string|null
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws Exception
      */
     public function getSettingsHtml()
     {
@@ -75,10 +85,14 @@ class Template extends Field implements PreviewableFieldInterface
     }
 
     /**
-     * @param mixed                             $value
-     * @param \craft\base\ElementInterface|null $element
+     * @param mixed                 $value
+     * @param ElementInterface|null $element
      *
      * @return string
+     * @throws Exception
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
@@ -135,7 +149,7 @@ class Template extends Field implements PreviewableFieldInterface
      */
     public function validateTemplate(ElementInterface $element)
     {
-        $value = $element->getFieldValue($this->handle);
+//        $value = $element->getFieldValue($this->handle);
 
         // Confirm submitted value is an existing template within the scope defined in the settings
 
@@ -166,6 +180,7 @@ class Template extends Field implements PreviewableFieldInterface
      * Gets the available template directories as an options array
      *
      * @return array|void
+     * @throws Exception
      */
     public function getTemplateDirectories()
     {
@@ -176,11 +191,11 @@ class Template extends Field implements PreviewableFieldInterface
             return;
         }
 
-        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($root));
-        /** @var \SplFileInfo[] $files */
+        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root));
+        /** @var SplFileInfo[] $files */
         $dirs = [];
 
-        /** @var \SplFileInfo $file */
+        /** @var SplFileInfo $file */
         foreach ($iterator as $file) {
             // Prep directory list
             if ($file->isDir() && $file->getFilename() === '.') {
@@ -209,9 +224,11 @@ class Template extends Field implements PreviewableFieldInterface
     /**
      * Returns Dropdown field options or Auto-suggest field suggestions for templates
      *
+     * @param      $inputStyle
      * @param null $templatePath
      *
      * @return array
+     * @throws Exception
      */
     public function getTemplateOptions($inputStyle, $templatePath = null): array
     {
@@ -226,12 +243,12 @@ class Template extends Field implements PreviewableFieldInterface
             return [];
         }
 
-        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($root));
-        /** @var \SplFileInfo[] $files */
+        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root));
+        /** @var SplFileInfo[] $files */
         $files = [];
         $pathLengths = [];
 
-        /** @var \SplFileInfo $file */
+        /** @var SplFileInfo $file */
         foreach ($iterator as $file) {
             // Prep Template List
             if (!$file->isDir() && $file->getFilename()[0] !== '.') {
@@ -243,8 +260,8 @@ class Template extends Field implements PreviewableFieldInterface
         if ($inputStyle === 'dropdown') {
             uasort($files, static function($a, $b) {
                 /**
-                 * @var \SplFileInfo $a
-                 * @var \SplFileInfo $b
+                 * @var SplFileInfo $a
+                 * @var SplFileInfo $b
                  */
                 return $a->getPath() <=> $b->getPath();
             });
@@ -262,6 +279,8 @@ class Template extends Field implements PreviewableFieldInterface
         foreach (Craft::$app->getSites()->getAllSites() as $site) {
             $sites[$site->handle] = Craft::t('site', $site->name);
         }
+
+        $dropdownOptions = [];
 
         foreach ($files as $file) {
             $template = substr($file->getRealPath(), $rootLength + 1);

@@ -16,7 +16,6 @@ use barrelstrength\sproutfields\fields\Predefined as PredefinedField;
 use barrelstrength\sproutfields\fields\PredefinedDate as PredefinedDateField;
 use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
 use barrelstrength\sproutfields\fields\Url as UrlField;
-use Craft;
 use craft\base\Element;
 use craft\base\Plugin;
 use craft\events\ElementEvent;

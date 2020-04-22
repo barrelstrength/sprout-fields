@@ -6,7 +6,6 @@ use barrelstrength\sproutbase\base\SproutDependencyInterface;
 use barrelstrength\sproutbase\base\SproutDependencyTrait;
 use barrelstrength\sproutbase\SproutBaseHelper;
 use barrelstrength\sproutbasefields\SproutBaseFieldsHelper;
-use barrelstrength\sproutbaseimport\services\Importers;
 use barrelstrength\sproutfields\fields\Address as AddressField;
 use barrelstrength\sproutfields\fields\Email as EmailField;
 use barrelstrength\sproutfields\fields\Gender as GenderField;
@@ -17,13 +16,6 @@ use barrelstrength\sproutfields\fields\Predefined as PredefinedField;
 use barrelstrength\sproutfields\fields\PredefinedDate as PredefinedDateField;
 use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
 use barrelstrength\sproutfields\fields\Url as UrlField;
-use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Email as EmailFieldImporter;
-use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Gender as GenderFieldImporter;
-use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Notes as NotesFieldImporter;
-use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Phone as PhoneFieldImporter;
-use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Predefined as PredefinedFieldImporter;
-use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\RegularExpression as RegularExpressionFieldImporter;
-use barrelstrength\sproutfields\integrations\sproutimport\importers\fields\Url as UrlFieldImporter;
 use Craft;
 use craft\base\Element;
 use craft\base\Plugin;
@@ -106,22 +98,6 @@ class SproutFields extends Plugin implements SproutDependencyInterface
             $event->types[] = RegularExpressionField::class;
             $event->types[] = UrlField::class;
         });
-
-        Event::on(Importers::class, Importers::EVENT_REGISTER_IMPORTER_TYPES, static function(RegisterComponentTypesEvent $event) {
-
-            $plugin = Craft::$app->getPlugins()->getPlugin('sprout-import');
-
-            if ($plugin) {
-//            $event->types[] = AddressFieldImporter::class;
-                $event->types[] = EmailFieldImporter::class;
-                $event->types[] = GenderFieldImporter::class;
-                $event->types[] = UrlFieldImporter::class;
-                $event->types[] = NotesFieldImporter::class;
-                $event->types[] = PhoneFieldImporter::class;
-                $event->types[] = PredefinedFieldImporter::class;
-                $event->types[] = RegularExpressionFieldImporter::class;
-            }
-        });
     }
 
     /**
@@ -132,7 +108,6 @@ class SproutFields extends Plugin implements SproutDependencyInterface
         return [
             SproutDependencyInterface::SPROUT_BASE,
             SproutDependencyInterface::SPROUT_BASE_FIELDS,
-            SproutDependencyInterface::SPROUT_BASE_IMPORT
         ];
     }
 }

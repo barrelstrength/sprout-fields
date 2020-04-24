@@ -1,5 +1,27 @@
 # Changelog
 
+## 3.7.0 - UNRELEASED
+
+### Added
+- Added `barrelstrength\sproutbase\base\SproutDependencyTrait`
+- Added `barrelstrength\sproutbase\base\SproutDependencyInterface`
+- Added `barrelstrength\sproutbase\records\Settings`
+- Added `barrelstrength\sproutbase\migrations\Install::safeDown()`
+- Added support for config overrides in base settings models
+
+### Changed
+- Improved uninstall migration
+- Updated `barrelstrength/sprout-base-fields` requirement to v1.4.0
+- Updated `barrelstrength/sprout-base` requirement to v5.2.0
+
+### Fixed
+- Fixed Name Field html attributes relationships between labels and inputs
+
+### Removed
+- Removed `barrelstrength\sproutbase\services\Settings::getPluginSettings()`
+- Removed `barrelstrength\sproutbase\base\BaseSproutTrait`
+- Removed `barrelstrength/sprout-base-import` dependency
+
 ## 3.6.2 - 2020-02-12
 
 ### Changed

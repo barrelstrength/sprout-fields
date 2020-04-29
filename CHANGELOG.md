@@ -6,7 +6,10 @@
 - Updated `barrelstrength/sprout-base` requirement v6.0.0
 
 ### Fixed
+- Fixed Template Field registration ([#106]) 
 - Fixed migration issue when multiple Sprout plugins are installed
+
+[#106]: https://github.com/barrelstrength/craft-sprout-fields/issues/106
 
 ## 3.7.0 - 2020-04-27
 

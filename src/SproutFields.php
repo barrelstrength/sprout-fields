@@ -15,6 +15,7 @@ use barrelstrength\sproutfields\fields\Phone as PhoneField;
 use barrelstrength\sproutfields\fields\Predefined as PredefinedField;
 use barrelstrength\sproutfields\fields\PredefinedDate as PredefinedDateField;
 use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
+use barrelstrength\sproutfields\fields\Template as TemplateField;
 use barrelstrength\sproutfields\fields\Url as UrlField;
 use craft\base\Element;
 use craft\base\Plugin;
@@ -95,6 +96,7 @@ class SproutFields extends Plugin implements SproutDependencyInterface
             $event->types[] = PredefinedField::class;
             $event->types[] = PredefinedDateField::class;
             $event->types[] = RegularExpressionField::class;
+            $event->types[] = TemplateField::class;
             $event->types[] = UrlField::class;
         });
     }

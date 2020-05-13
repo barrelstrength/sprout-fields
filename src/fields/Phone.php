@@ -64,14 +64,6 @@ class Phone extends Field implements PreviewableFieldInterface
     }
 
     /**
-     * @inheritdoc
-     */
-    public function getContentColumnType(): string
-    {
-        return Schema::TYPE_TEXT;
-    }
-
-    /**
      * @param                       $value
      * @param ElementInterface|null $element
      *

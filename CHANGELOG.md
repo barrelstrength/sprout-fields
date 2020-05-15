@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.8.1 - 2020-05-15
+
+### Changed
+- Updated Phone Field column type to default to use varchar data type
+- Updated `barrelstrength/sprout-base-fields` requirement to v1.4.1
+- Updated `giggsey/libphonenumber-for-php` requirement to v8.12.3
+
+### Fixed
+- Added Matrix and Super Table support to address migration ([#103])
+- Updated Address field to maintain state on failed validation ([#100])
+
+[#100]: https://github.com/barrelstrength/craft-sprout-fields/issues/100
+[#103]: https://github.com/barrelstrength/craft-sprout-fields/issues/103
+
 ## 3.8.0 - 2020-04-28
 
 ### Changed

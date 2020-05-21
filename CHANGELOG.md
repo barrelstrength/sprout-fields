@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.8.2 - 2020-05-21
+
+### Changed
+- Updated `barrelstrength/sprout-base-fields` requirement to v1.4.2
+- Updated `giggsey/libphonenumber-for-php` requirement to v8.12.4
+
 ## 3.8.1 - 2020-05-15
 
 ### Changed

@@ -162,7 +162,7 @@ class Phone extends Field implements PreviewableFieldInterface
     {
         $html = '';
 
-        if ($value->international) {
+        if ($value !== null && $value->international) {
             $fullNumber = $value->international;
             $html = '<a href="tel:'.$fullNumber.'" target="_blank">'.$fullNumber.'</a>';
         }

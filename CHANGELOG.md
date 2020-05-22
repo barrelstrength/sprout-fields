@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.8.3 - 2020-05-21
+
+### Added
+- Added support for Predefined Date field in Element Index
+
+### Fixed
+ - Fixed error when displaying empty Phone field in Element Index column ([#108])
+
+[#108]: https://github.com/barrelstrength/craft-sprout-fields/issues/108
+
 ## 3.8.2 - 2020-05-21
 
 ### Changed

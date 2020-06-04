@@ -139,7 +139,7 @@
 - Updated dynamic email validation to exclude check for unique email setting
 - Updated Phone field to save `null` instead of empty JSON blob
 - Updated Name field to save `null` instead of empty JSON blob
-- Addresses are now stored only in the `sproutfields_adddresses` table. Updated `barrelstrength\sproutfields\fields\Address::hasContentColumn` to return false.
+- Addresses are now stored only in the `sproutfields_adddresses` table. Updated `barrelstrength\sproutbase\app\fields\Address::hasContentColumn` to return false.
 - Updated `barrelstrength\sproutbasefields\services\Address::deleteAddressById()` to require address ID
 - Improved fallbacks for Address Field's default country and language
 - Moved methods from `barrelstrength\sproutbasefields\helpers\AddressHelper` to `barrelstrength\sproutbasefields\services\Address`
@@ -161,8 +161,8 @@
 - Fixed bug where Address input fields did not display in edit modal after Address was cleared
 
 ### Removed
-- Removed `barrelstrength\sproutfields\fields\Phone::getCountries()`
-- Removed `barrelstrength\sproutfields\fields\Address::serializeValue()`
+- Removed `barrelstrength\sproutbase\app\fields\Phone::getCountries()`
+- Removed `barrelstrength\sproutbase\app\fields\Address::serializeValue()`
 - Removed `barrelstrength\sproutbasefields\helpers\AddressHelper`
 - Removed `barrelstrength\sproutbasefields\controllers\actionDeleteAddress()`
 - Removed `barrelstrength\sproutbasefields\models\Name;:$fullName`

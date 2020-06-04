@@ -2,21 +2,25 @@
 
 namespace barrelstrength\sproutfields;
 
-use barrelstrength\sproutbase\base\SproutDependencyInterface;
-use barrelstrength\sproutbase\base\SproutDependencyTrait;
+use barrelstrength\sproutbase\config\base\SproutCentralInterface;
+use barrelstrength\sproutbase\config\configs\CampaignsConfig;
+use barrelstrength\sproutbase\config\configs\EmailConfig;
+use barrelstrength\sproutbase\config\configs\FieldsConfig;
+use barrelstrength\sproutbase\config\configs\GeneralConfig;
+use barrelstrength\sproutbase\config\configs\ReportsConfig;
+use barrelstrength\sproutbase\config\configs\SentEmailConfig;
 use barrelstrength\sproutbase\SproutBaseHelper;
-use barrelstrength\sproutbasefields\SproutBaseFieldsHelper;
-use barrelstrength\sproutfields\fields\Address as AddressField;
-use barrelstrength\sproutfields\fields\Email as EmailField;
-use barrelstrength\sproutfields\fields\Gender as GenderField;
-use barrelstrength\sproutfields\fields\Name as NameField;
-use barrelstrength\sproutfields\fields\Notes as NotesField;
-use barrelstrength\sproutfields\fields\Phone as PhoneField;
-use barrelstrength\sproutfields\fields\Predefined as PredefinedField;
-use barrelstrength\sproutfields\fields\PredefinedDate as PredefinedDateField;
-use barrelstrength\sproutfields\fields\RegularExpression as RegularExpressionField;
-use barrelstrength\sproutfields\fields\Template as TemplateField;
-use barrelstrength\sproutfields\fields\Url as UrlField;
+use barrelstrength\sproutbase\app\fields\Address as AddressField;
+use barrelstrength\sproutbase\app\fields\Email as EmailField;
+use barrelstrength\sproutbase\app\fields\Gender as GenderField;
+use barrelstrength\sproutbase\app\fields\Name as NameField;
+use barrelstrength\sproutbase\app\fields\Notes as NotesField;
+use barrelstrength\sproutbase\app\fields\Phone as PhoneField;
+use barrelstrength\sproutbase\app\fields\Predefined as PredefinedField;
+use barrelstrength\sproutbase\app\fields\PredefinedDate as PredefinedDateField;
+use barrelstrength\sproutbase\app\fields\RegularExpression as RegularExpressionField;
+use barrelstrength\sproutbase\app\fields\Template as TemplateField;
+use barrelstrength\sproutbase\app\fields\Url as UrlField;
 use craft\base\Element;
 use craft\base\Plugin;
 use craft\events\ElementEvent;
@@ -29,10 +33,8 @@ use yii\base\Event;
  * @property array $sproutDependencies
  * @property array $settings
  */
-class SproutFields extends Plugin implements SproutDependencyInterface
+class SproutFields extends Plugin implements SproutCentralInterface
 {
-    use SproutDependencyTrait;
-
     /**
      * @var string
      */
@@ -43,22 +45,12 @@ class SproutFields extends Plugin implements SproutDependencyInterface
      */
     public $minVersionRequired = '2.1.3';
 
-    /**
-     * @inheritdoc
-     * @deprecated - Remove in v4.0
-     * This empty method is required to avoid an error related to the Project Config when migrating from Craft 2 to Craft 3
-     */
-    public function setSettings(array $settings)
+    public static function getSproutConfigs(): array
     {
-    }
-
-    /**
-     * @inheritdoc
-     * @deprecated - Remove in v4.0
-     */
-    public function getSettings()
-    {
-        return null;
+        return [
+            GeneralConfig::class,
+            FieldsConfig::class
+        ];
     }
 
     public function init()
@@ -66,7 +58,6 @@ class SproutFields extends Plugin implements SproutDependencyInterface
         parent::init();
 
         SproutBaseHelper::registerModule();
-        SproutBaseFieldsHelper::registerModule();
 
         // Process all of our Predefined Fields after an Element is saved
         Event::on(Elements::class, Elements::EVENT_AFTER_SAVE_ELEMENT, static function(ElementEvent $event) {
@@ -99,17 +90,6 @@ class SproutFields extends Plugin implements SproutDependencyInterface
             $event->types[] = TemplateField::class;
             $event->types[] = UrlField::class;
         });
-    }
-
-    /**
-     * @return array
-     */
-    public function getSproutDependencies(): array
-    {
-        return [
-            SproutDependencyInterface::SPROUT_BASE,
-            SproutDependencyInterface::SPROUT_BASE_FIELDS
-        ];
     }
 }
 

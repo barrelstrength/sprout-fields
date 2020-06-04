@@ -7,9 +7,10 @@
 
 namespace barrelstrength\sproutfields\migrations;
 
-use barrelstrength\sproutbase\base\SproutDependencyInterface;
+use barrelstrength\sproutbase\config\base\DependencyInterface;
 use barrelstrength\sproutbase\migrations\Install as SproutBaseInstall;
-use barrelstrength\sproutbasefields\migrations\Install as SproutBaseFieldsInstall;
+use barrelstrength\sproutbase\app\fields\migrations\Install as SproutBaseFieldsInstall;
+use barrelstrength\sproutbase\SproutBase;
 use barrelstrength\sproutfields\SproutFields;
 use craft\db\Migration;
 
@@ -20,11 +21,7 @@ class Install extends Migration
      */
     public function safeUp(): bool
     {
-        $migration = new SproutBaseFieldsInstall();
-
-        ob_start();
-        $migration->safeUp();
-        ob_end_clean();
+        SproutBase::$app->config->runInstallMigrations(SproutFields::getInstance());
 
         return true;
     }
@@ -34,27 +31,7 @@ class Install extends Migration
      */
     public function safeDown(): bool
     {
-        /** @var SproutFields $plugin */
-        $plugin = SproutFields::getInstance();
-
-        $sproutBaseFieldsInUse = $plugin->dependencyInUse(SproutDependencyInterface::SPROUT_BASE_FIELDS);
-        $sproutBaseInUse = $plugin->dependencyInUse(SproutDependencyInterface::SPROUT_BASE);
-
-        if (!$sproutBaseFieldsInUse) {
-            $migration = new SproutBaseFieldsInstall();
-
-            ob_start();
-            $migration->safeDown();
-            ob_end_clean();
-        }
-
-        if (!$sproutBaseInUse) {
-            $migration = new SproutBaseInstall();
-
-            ob_start();
-            $migration->safeDown();
-            ob_end_clean();
-        }
+        SproutBase::$app->config->runUninstallMigrations(SproutFields::getInstance());
 
         return true;
     }

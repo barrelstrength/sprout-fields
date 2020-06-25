@@ -2,27 +2,22 @@
 
 namespace barrelstrength\sproutfields;
 
-use barrelstrength\sproutbase\config\base\SproutCentralInterface;
-use barrelstrength\sproutbase\config\configs\CampaignsConfig;
-use barrelstrength\sproutbase\config\configs\EmailConfig;
+use barrelstrength\sproutbase\app\fields\fields\Address as AddressField;
+use barrelstrength\sproutbase\app\fields\fields\Email as EmailField;
+use barrelstrength\sproutbase\app\fields\fields\Gender as GenderField;
+use barrelstrength\sproutbase\app\fields\fields\Name as NameField;
+use barrelstrength\sproutbase\app\fields\fields\Notes as NotesField;
+use barrelstrength\sproutbase\app\fields\fields\Phone as PhoneField;
+use barrelstrength\sproutbase\app\fields\fields\Predefined as PredefinedField;
+use barrelstrength\sproutbase\app\fields\fields\PredefinedDate as PredefinedDateField;
+use barrelstrength\sproutbase\app\fields\fields\RegularExpression as RegularExpressionField;
+use barrelstrength\sproutbase\app\fields\fields\Template as TemplateField;
+use barrelstrength\sproutbase\app\fields\fields\Url as UrlField;
+use barrelstrength\sproutbase\config\base\SproutBasePlugin;
 use barrelstrength\sproutbase\config\configs\FieldsConfig;
-use barrelstrength\sproutbase\config\configs\GeneralConfig;
-use barrelstrength\sproutbase\config\configs\ReportsConfig;
-use barrelstrength\sproutbase\config\configs\SentEmailConfig;
+use barrelstrength\sproutbase\config\configs\ControlPanelConfig;
 use barrelstrength\sproutbase\SproutBaseHelper;
-use barrelstrength\sproutbase\app\fields\Address as AddressField;
-use barrelstrength\sproutbase\app\fields\Email as EmailField;
-use barrelstrength\sproutbase\app\fields\Gender as GenderField;
-use barrelstrength\sproutbase\app\fields\Name as NameField;
-use barrelstrength\sproutbase\app\fields\Notes as NotesField;
-use barrelstrength\sproutbase\app\fields\Phone as PhoneField;
-use barrelstrength\sproutbase\app\fields\Predefined as PredefinedField;
-use barrelstrength\sproutbase\app\fields\PredefinedDate as PredefinedDateField;
-use barrelstrength\sproutbase\app\fields\RegularExpression as RegularExpressionField;
-use barrelstrength\sproutbase\app\fields\Template as TemplateField;
-use barrelstrength\sproutbase\app\fields\Url as UrlField;
 use craft\base\Element;
-use craft\base\Plugin;
 use craft\events\ElementEvent;
 use craft\events\RegisterComponentTypesEvent;
 use craft\services\Elements;
@@ -33,7 +28,7 @@ use yii\base\Event;
  * @property array $sproutDependencies
  * @property array $settings
  */
-class SproutFields extends Plugin implements SproutCentralInterface
+class SproutFields extends SproutBasePlugin
 {
     /**
      * @var string
@@ -43,12 +38,11 @@ class SproutFields extends Plugin implements SproutCentralInterface
     /**
      * @var string
      */
-    public $minVersionRequired = '2.1.3';
+    public $minVersionRequired = '3.8.3';
 
     public static function getSproutConfigs(): array
     {
         return [
-            GeneralConfig::class,
             FieldsConfig::class
         ];
     }

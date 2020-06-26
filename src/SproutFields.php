@@ -22,12 +22,9 @@ use craft\events\ElementEvent;
 use craft\events\RegisterComponentTypesEvent;
 use craft\services\Elements;
 use craft\services\Fields;
+use Throwable;
 use yii\base\Event;
 
-/**
- * @property array $sproutDependencies
- * @property array $settings
- */
 class SproutFields extends SproutBasePlugin
 {
     /**
@@ -53,22 +50,8 @@ class SproutFields extends SproutBasePlugin
 
         SproutBaseHelper::registerModule();
 
-        // Process all of our Predefined Fields after an Element is saved
         Event::on(Elements::class, Elements::EVENT_AFTER_SAVE_ELEMENT, static function(ElementEvent $event) {
-            /** @var Element $element */
-            $element = $event->element;
-            $isNew = $event->isNew;
-
-            $fieldLayout = $element->getFieldLayout();
-
-            if ($fieldLayout) {
-                foreach ($fieldLayout->getFields() as $field) {
-                    if ($field instanceof PredefinedField || $field instanceof PredefinedDateField) {
-                        /** @var PredefinedField $field */
-                        $field->processFieldValues($element, $isNew);
-                    }
-                }
-            }
+            $this->handlePredefinedFields($event);
         });
 
         Event::on(Fields::class, Fields::EVENT_REGISTER_FIELD_TYPES, static function(RegisterComponentTypesEvent $event) {
@@ -84,6 +67,29 @@ class SproutFields extends SproutBasePlugin
             $event->types[] = TemplateField::class;
             $event->types[] = UrlField::class;
         });
+    }
+
+    /**
+     * @param ElementEvent $event
+     *
+     * @throws Throwable
+     */
+    private function handlePredefinedFields(ElementEvent $event)
+    {
+        /** @var Element $element */
+        $element = $event->element;
+        $isNew = $event->isNew;
+
+        $fieldLayout = $element->getFieldLayout();
+
+        if ($fieldLayout) {
+            foreach ($fieldLayout->getFields() as $field) {
+                if ($field instanceof PredefinedField || $field instanceof PredefinedDateField) {
+                    /** @var PredefinedField $field */
+                    $field->processFieldValues($element, $isNew);
+                }
+            }
+        }
     }
 }
 

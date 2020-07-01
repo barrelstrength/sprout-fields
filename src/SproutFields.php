@@ -51,7 +51,7 @@ class SproutFields extends SproutBasePlugin
         SproutBaseHelper::registerModule();
 
         Event::on(Elements::class, Elements::EVENT_AFTER_SAVE_ELEMENT, static function(ElementEvent $event) {
-            $this->handlePredefinedFields($event);
+            self::handlePredefinedFields($event);
         });
 
         Event::on(Fields::class, Fields::EVENT_REGISTER_FIELD_TYPES, static function(RegisterComponentTypesEvent $event) {
@@ -74,7 +74,7 @@ class SproutFields extends SproutBasePlugin
      *
      * @throws Throwable
      */
-    private function handlePredefinedFields(ElementEvent $event)
+    private static function handlePredefinedFields(ElementEvent $event)
     {
         /** @var Element $element */
         $element = $event->element;

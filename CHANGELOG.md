@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.0.0 - UNRELEASED
+
+## Added
+- Added support for using service layer in templates via `sprout.app`
+
+### Changed
+- Updated codebase to be managed in `barrelstrength/sprout-base`
+- Updated plugin translation category from `sprout-fields` => `sprout`
+- Updated Project Config settings from `sprout-fields` => `sprout`
+- Updated plugin to use `sprout` migration track
+- Updated undocumented template variables to use service layer directly
+- Updated `craftcms/cms` requirement v3.5.0
+- Updated `barrelstrength/sprout-base` requirement v7.0.0
+
 ## 3.8.3 - 2020-05-21
 
 ### Added

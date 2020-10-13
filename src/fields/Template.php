@@ -64,6 +64,8 @@ class Template extends Field implements PreviewableFieldInterface
         if ($this->suggestedTemplates !== 'folder') {
             $this->templateFolder = null;
         }
+
+        parent::init();
     }
 
     /**

@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.8.4 - 2020-10-13
+
+### Changed
+- Updated `barrelstrength/sprout-base-fields` requirement to v1.4.4
+
+### Fixed
+- Fixed Address Field display issue introduced in Craft 3.5 ([#114])
+- Updated initialization behavior changes in Address and Templates fields introduced in Craft 3.5
+
+[#114]: https://github.com/barrelstrength/craft-sprout-fields/issues/114
+
 ## 3.8.3 - 2020-05-21
 
 ### Added

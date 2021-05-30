@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.8.5 - 2021-05-30
+
+### Fixed
+- Fixed migrations when upgrading from Craft 2 to Craft 3 
+
 ## 3.8.4 - 2020-10-13
 
 ### Changed

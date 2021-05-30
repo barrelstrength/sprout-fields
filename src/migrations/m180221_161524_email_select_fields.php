@@ -30,7 +30,8 @@ class m180221_161524_email_select_fields extends Migration
         $emailSelects = (new Query())
             ->select(['id', 'handle', 'settings'])
             ->from(['{{%fields}}'])
-            ->where(['type' => 'SproutFields_EmailSelect', 'context' => 'global'])
+            ->where(['type' => 'SproutFields_EmailSelect'])
+            ->andWhere(['NOT REGEXP', 'context', 'sproutForms:.*'])
             ->all();
         $defaults = [];
         foreach ($emailSelects as $emailSelect) {

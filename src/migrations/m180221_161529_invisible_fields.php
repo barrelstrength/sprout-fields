@@ -17,7 +17,8 @@ class m180221_161529_invisible_fields extends Migration
         $invisibleFields = (new Query())
             ->select(['id', 'handle', 'instructions', 'settings'])
             ->from(['{{%fields}}'])
-            ->where(['type' => 'SproutFields_Invisible', 'context' => 'global'])
+            ->where(['type' => 'SproutFields_Invisible'])
+            ->andWhere(['NOT REGEXP', 'context', 'sproutForms:.*'])
             ->all();
 
         $newSettings = [

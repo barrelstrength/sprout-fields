@@ -28,7 +28,8 @@ class m180221_161523_phone_fields extends Migration
         $phoneFields = (new Query())
             ->select(['id', 'handle', 'settings'])
             ->from(['{{%fields}}'])
-            ->where(['type' => 'SproutFields_Phone', 'context' => 'global'])
+            ->where(['type' => 'SproutFields_Phone'])
+            ->andWhere(['NOT REGEXP', 'context', 'sproutForms:.*'])
             ->all();
 
         foreach ($phoneFields as $phoneField) {

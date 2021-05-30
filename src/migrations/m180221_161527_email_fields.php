@@ -11,6 +11,8 @@ class m180221_161527_email_fields extends Migration
      */
     public function safeUp(): bool
     {
+        // This migration will no longer get triggered. the update_type migration will handle this.
+        
         // Email
         $this->update('{{%fields}}', [
             'type' => 'barrelstrength\sproutfields\fields\Email'

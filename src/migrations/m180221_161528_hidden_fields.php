@@ -17,7 +17,8 @@ class m180221_161528_hidden_fields extends Migration
         $hiddenFields = (new Query())
             ->select(['id', 'handle', 'instructions', 'settings'])
             ->from(['{{%fields}}'])
-            ->where(['type' => 'SproutFields_Hidden', 'context' => 'global'])
+            ->where(['type' => 'SproutFields_Hidden'])
+            ->andWhere(['NOT REGEXP', 'context', 'sproutForms:.*'])
             ->all();
 
         $newSettings = [

@@ -11,6 +11,8 @@ class m180221_161526_link_fields extends Migration
      */
     public function safeUp(): bool
     {
+        // This migration will no longer get triggered. the update_type migration will handle this.
+        
         // Link to Url
         $this->update('{{%fields}}', [
             'type' => 'barrelstrength\sproutfields\fields\Url'

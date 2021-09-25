@@ -11,6 +11,7 @@ use Craft;
 use craft\base\Element;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
+use craft\helpers\ElementHelper;
 use Exception;
 use Throwable;
 
@@ -66,6 +67,10 @@ class BasePredefinedField extends Field implements PreviewableFieldInterface
 
             $fieldColumnPrefix = $element->getFieldColumnPrefix();
             $column = $fieldColumnPrefix.$this->handle;
+
+            if (version_compare(Craft::$app->version, '3.7.0', '>=')) {
+                $column = ElementHelper::fieldColumnFromField($this);
+            }
 
             Craft::$app->db->createCommand()
                 ->update(

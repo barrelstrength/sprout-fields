@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.8.6 - 2022-11-05
+
+### Changed
+- Updated `barrelstrength/sprout-base-fields` requirement to v1.4.6
+
 ## 3.8.5 - 2021-05-30
 
 ### Fixed
